@@ -1,4 +1,4 @@
-// file: test/flag-usage.cpp
+// file: test/compress-flag-version.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include <cstdlib>
@@ -9,13 +9,13 @@
 #include <memory>
 #include <stdexcept>
 
-#ifndef COPYRIGHT
-#define COPYRIGHT "not_defined"
+#ifndef PROJECT_VERSION
+#define PROJECT_VERSION "not_defined"
 #endif
 
 // Helper function to execute a command and capture stdout
 std::string exec(const char* cmd) {
-    std::array<char, 256> buffer;
+    std::array<char, 128> buffer;
     std::string result;
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
     if (!pipe) {
@@ -29,24 +29,23 @@ std::string exec(const char* cmd) {
 
 int main() {
     try {
-        const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
-        const std::string expectedUsageStart = "Usage: ./build/crsce --in <inputfile> --out <outputfile>\n";
-
-        std::string output = exec("./build/crsce");
-
-        if (output.find(expectedCopyright) == std::string::npos) {
-            std::cerr << "[FAIL] Missing or incorrect copyright.\n";
+        const std::string version = PROJECT_VERSION;
+        if (version == "not_defined") {
+            std::cout << "[FAIL] Cmake does not define PROJECT_VERSION. Got '"
+                      << PROJECT_VERSION <<"'" << std::endl;
             return EXIT_FAILURE;
         }
 
-        if (output.find(expectedUsageStart) == std::string::npos) {
-            std::cerr << "[FAIL] Usage text not found or incorrect.\n";
+        std::string expected = "CRSCE Compressor " PROJECT_VERSION;
+        std::string output = exec("./build/compress --version");
+
+        if (output.find(expected) != std::string::npos) {
+            std::cout << "[PASS] --version output correct: " << output;
+            return EXIT_SUCCESS;
+        } else {
+            std::cerr << "[FAIL] Expected '" << expected << "' but got: " << output;
             return EXIT_FAILURE;
         }
-
-        std::cout << "[PASS] --help output correct:\n" << output << std::endl;
-        return EXIT_SUCCESS;
-
     } catch (const std::exception& e) {
         std::cerr << "[ERROR] Exception occurred: " << e.what() << std::endl;
         return EXIT_FAILURE;
