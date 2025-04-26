@@ -3,10 +3,17 @@
 
 #include "utils/printUsage.h"
 
+#ifndef COPYRIGHT
+#define COPYRIGHT "not_defined"
+#endif
 
 void printUsage(const std::string& programName) {
-    std::cout << "Usage: " << programName << " --in <inputfile> --out <outputfile>" << std::endl;
-    std::cout << "Options:" << std::endl;
-    std::cout << "  --help        Show this help message" << std::endl;
-    std::cout << "  --version     Show program version" << std::endl;
+    std::cout << COPYRIGHT <<"\n"
+              << "Usage: " << programName << " --in <inputfile> --out <outputfile>\n"
+              << "Options:\n"
+              << "  --in <inputfile>     specify input file (required)\n"
+              << "  --out <outputfile>   specify output file (required)\n"
+              << "  --help        Show this help message\n"
+              << "  --version     Show program version\n"
+              << std::endl;
 }
