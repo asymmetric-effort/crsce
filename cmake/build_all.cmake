@@ -1,5 +1,6 @@
 # build_all.cmake
 # Build all enabled projects (see feature flags defined in CMakeLists.txt
+
 include(build_compress)
 include(build_decompress)
 # ToDo: add more command artifacts here
