@@ -1,5 +1,0 @@
-/Users/samcaldwell/git/cpp/crsce/build/CMakeFiles/compress.dir
-/Users/samcaldwell/git/cpp/crsce/build/CMakeFiles/decompress.dir
-/Users/samcaldwell/git/cpp/crsce/build/CMakeFiles/build_all.dir
-/Users/samcaldwell/git/cpp/crsce/build/CMakeFiles/edit_cache.dir
-/Users/samcaldwell/git/cpp/crsce/build/CMakeFiles/rebuild_cache.dir
