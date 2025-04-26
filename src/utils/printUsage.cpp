@@ -8,7 +8,7 @@
 #endif
 
 void printUsage(const std::string& programName) {
-    std::cout << COPYRIGHT <<"\n"
+    std::cout << "\n" << COPYRIGHT <<"\n"
               << "Usage: " << programName << " --in <inputfile> --out <outputfile>\n"
               << "Options:\n"
               << "  --in <inputfile>     specify input file (required)\n"
