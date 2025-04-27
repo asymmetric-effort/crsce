@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 
         CRSCE decompressor(inputFile, outputFile);
 
-        if (const int result = decompressor.compress();result == 0) {
+        if (const int result = decompressor.decompress();result == 0) {
             std::cout << "Deompression completed successfully." << std::endl;
             return EXIT_SUCCESS;
         } else {
