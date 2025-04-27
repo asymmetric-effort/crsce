@@ -23,10 +23,10 @@ int main(int argc, char* argv[]) {
         CRSCE decompressor(inputFile, outputFile);
 
         if (const int result = decompressor.compress();result == 0) {
-            std::cout << "Compression completed successfully." << std::endl;
+            std::cout << "Deompression completed successfully." << std::endl;
             return EXIT_SUCCESS;
         } else {
-            std::cerr << "Compression failed with error code " << result << "." << std::endl;
+            std::cerr << "Deompression failed with error code " << result << "." << std::endl;
             return EXIT_FAILURE;
         }
     } catch (const std::exception& e) {
