@@ -8,5 +8,5 @@
 #endif
 
 void printVersion() {
-    std::cout << "CRSCE Compressor " << PROJECT_VERSION << std::endl;
+    std::cout << "CRSCE "<< PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
 }

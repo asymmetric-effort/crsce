@@ -6,6 +6,8 @@ include(build_decompress)
 # ToDo: add more command artifacts here
 include(build_test_compress_flag_usage)
 include(build_test_compress_flag_version)
+include(build_test_decompress_flag_usage)
+include(build_test_decompress_flag_version)
 # ToDo: add more test artifacts here
 
 add_custom_target(build_all
@@ -14,6 +16,14 @@ add_custom_target(build_all
         ${CMAKE_COMMAND} --build build --target decompress
         ${CMAKE_COMMAND} --build build --target test_compress_flag_usage
         ${CMAKE_COMMAND} --build build --target test_compress_flag_version
-        DEPENDS compress decompress test_compress_flag_usage test_compress_flag_version
+        ${CMAKE_COMMAND} --build build --target test_decompress_flag_usage
+        ${CMAKE_COMMAND} --build build --target test_decompress_flag_version
+        DEPENDS
+            compress
+            decompress
+            test_compress_flag_usage
+            test_compress_flag_version
+            test_decompress_flag_usage
+            test_decompress_flag_version
         VERBATIM
 )

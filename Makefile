@@ -22,5 +22,14 @@ test_compress_flag_usage:
 test_compress_flag_version:
 	./build/test/test_compress_flag_version
 
+test_decompress_flag_usage:
+	./build/test/test_decompress_flag_usage
+
+test_decompress_flag_version:
+	./build/test/test_decompress_flag_version
+
 test: test_compress_flag_usage \
-	  test_compress_flag_version
+	  test_compress_flag_version \
+	  test_decompress_flag_usage \
+	  test_decompress_flag_version
+	  @echo 'ok'
