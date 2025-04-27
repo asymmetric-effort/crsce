@@ -3,6 +3,6 @@
 
 #include "CRSCE/LateralSumMatrix.h"
 
-LateralSumMatrix::increment(const CrossSumIndex r, const CrossSumIndex c) const {
-    data[transform(r,c)]++;
+LateralSumMatrix::increment(const CrossSumIndex r, const CrossSumIndex _) const {
+    data[r]++;
 }

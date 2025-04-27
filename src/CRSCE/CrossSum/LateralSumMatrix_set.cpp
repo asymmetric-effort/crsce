@@ -3,6 +3,6 @@
 
 #include "CRSCE/LateralSumMatrix.h"
 
-LateralSumMatrix::set(const CrossSumValue r, const CrossSumIndex c, const CrossSumValue v) const {
-    data[transform(r,c)]=v;
+LateralSumMatrix::set(const CrossSumValue r, const CrossSumIndex _, const CrossSumValue v) const {
+    data[r]=v;
 }
