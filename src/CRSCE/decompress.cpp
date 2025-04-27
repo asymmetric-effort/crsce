@@ -6,6 +6,6 @@
 
 
 int CRSCE::decompress() {
-    std::cout << "[CRSCE] Compressing..." << std::endl;
+    std::cout << "[CRSCE] Decompressing..." << std::endl;
     return 0; // Stub method
 }
