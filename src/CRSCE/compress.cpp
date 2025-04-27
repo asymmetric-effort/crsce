@@ -4,7 +4,6 @@
 #include <iostream>
 #include <stdexcept>
 
-
 int CRSCE::compress() {
     try {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
