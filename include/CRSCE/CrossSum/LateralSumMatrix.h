@@ -11,9 +11,9 @@ public:
     explicit LateralSumMatrix(const CrossSumValue size);
     ~LateralSumMatrix() override;
 
-    CrossSumValue get(CrossSumValue r, CrossSumValue c) const override;
-    void set(CrossSumValue r, CrossSumValue c, CrossSumValue value) override;
-    void increment(CrossSumValue r, CrossSumValue c) override;
+    CrossSumValue get(CrossSumValue r, CrossSumValue _) const override;
+    void set(CrossSumValue r, CrossSumValue _, CrossSumValue value) override;
+    void increment(CrossSumValue r, CrossSumValue _) override;
 };
 
 #endif // CRSCE_LATERAL_SUM_MATRIX_H

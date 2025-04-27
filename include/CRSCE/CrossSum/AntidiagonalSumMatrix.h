@@ -19,5 +19,4 @@ private:
     CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
 };
 
-
 #endif // CRSCE_ANTIDIAGONAL_SUM_MATRIX_H

@@ -11,9 +11,9 @@ public:
     explicit VerticalSumMatrix(const CrossSumValue size);
     ~VerticalSumMatrix() override;
 
-    CrossSumValue get(CrossSumValue r, CrossSumValue c) const override;
-    void set(CrossSumValue r, CrossSumValue c, CrossSumValue value) override;
-    void increment(CrossSumValue r, CrossSumValue c) override;
+    CrossSumValue get(CrossSumValue _, CrossSumValue c) const override;
+    void set(CrossSumValue _, CrossSumValue c, CrossSumValue value) override;
+    void increment(CrossSumValue _, CrossSumValue c) override;
 };
 
 #endif // CRSCE_VERTICAL_SUM_MATRIX_H
