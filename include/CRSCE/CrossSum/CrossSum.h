@@ -11,16 +11,23 @@
 
 class CrossSum {
 public:
+
     explicit CrossSum(const CrossSumIndex size,const CrossSumIndex width): s(size);
+
     ~CrossSum();
 
     virtual CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const;
+
     virtual void set(CrossSumValue r, CrossSumValue c, CrossSumValue value);
+
     virtual void increment(CrossSumValue r, CrossSumValue c);
 
 private:
+
     const CrossSumValue s;
+
     std::vector<CrossSumValue> data;
+
 };
 
 #endif // CRSCE_CROSSSUM_H

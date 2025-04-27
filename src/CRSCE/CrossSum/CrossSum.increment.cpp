@@ -1,7 +1,7 @@
 // file: include/CRSCE/CrossSum/CrossSum.increment.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/CrossSum.h"
+#include "CRSCE/CrossSum/CrossSum.h"
 
 void CrossSum::increment(unsigned int r, unsigned int c) {
     // Example: ++data[xsm(r, c, s)];

@@ -4,7 +4,7 @@
 #ifndef CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
 #define CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
 
-#include "CRSCE/CrossSum.h"
+#include "CRSCE/CrossSum/CrossSum.h"
 #include "utils/transformations/dsm.h"
 
 class AntidiagonalSumMatrix : public CrossSum {

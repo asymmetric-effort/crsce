@@ -4,6 +4,8 @@
 #ifndef CRSCE_CROSS_SUM_INDEX_H
 #define CRSCE_CROSS_SUM_INDEX_H
 
+#include <cstdint>
+
 // we should never have a cross sum index greater than s==512.
 using CrossSumIndex = uint16_t;
 

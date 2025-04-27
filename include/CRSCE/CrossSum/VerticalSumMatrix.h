@@ -4,7 +4,7 @@
 #ifndef CRSCE_VERTICAL_SUM_MATRIX_H
 #define CRSCE_VERTICAL_SUM_MATRIX_H
 
-#include "CRSCE/CrossSum.h"
+#include "CRSCE/CrossSum/CrossSum.h"
 
 class VerticalSumMatrix : public CrossSum {
 public:
