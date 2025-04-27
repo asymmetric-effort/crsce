@@ -16,6 +16,12 @@ configure:
 build: configure
 	@cmake --build build --target build_all
 
+build-compress: configure
+	@cmake --build build --target compress
+
+build-decompress: configure
+	@cmake --build build --target decompress
+
 test_compress_flag_usage:
 	./build/test/test_compress_flag_usage
 
