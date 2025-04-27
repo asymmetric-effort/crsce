@@ -1,4 +1,4 @@
-// file: src/CRSCE/constructor.cpp
+// file: src/CRSCE/CrossSum.constructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #include "CRSCE/CRSCE.h"
 #include <iostream>

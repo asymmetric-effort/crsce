@@ -9,6 +9,12 @@ int CRSCE::compress() {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
         std::vector<uint8_t> inputBuffer;
 
+        //ToDo: Create LSM[BLOCK_SIZE]
+        //ToDo: Create VSM[BLOCK_SIZE]
+        //ToDo: Create XSM[BLOCK_SIZE]
+        //ToDo: Create DSM[BLOCK_SIZE]
+        //ToDo: Create LHASH[BLOCK_SIZE]
+
         for(size_t sz=0;readInputBuffer(inputBuffer);sz+=inputBuffer.size()) {
 
             std::cout << "[CRSCE] Processing " << std::to_string(sz) << " bytes." << std::endl;

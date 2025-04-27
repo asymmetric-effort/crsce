@@ -1,4 +1,4 @@
-// file: include/CRSCE/Reader/constructor.cpp
+// file: include/CRSCE/Reader/CrossSum.constructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/Reader.h"

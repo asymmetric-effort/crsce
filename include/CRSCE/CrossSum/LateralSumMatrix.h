@@ -8,12 +8,12 @@
 
 class LateralSumMatrix : public CrossSum {
 public:
-    explicit LateralSumMatrix(const unsigned int size);
+    explicit LateralSumMatrix(const CrossSumValue size);
     ~LateralSumMatrix() override;
 
-    unsigned int get(unsigned int r, unsigned int c) const override;
-    void set(unsigned int r, unsigned int c, unsigned int value) override;
-    void increment(unsigned int r, unsigned int c) override;
+    CrossSumValue get(CrossSumValue r, CrossSumValue c) const override;
+    void set(CrossSumValue r, CrossSumValue c, CrossSumValue value) override;
+    void increment(CrossSumValue r, CrossSumValue c) override;
 };
 
 #endif // CRSCE_LATERAL_SUM_MATRIX_H

@@ -9,12 +9,15 @@
 
 class AntidiagonalSumMatrix : public CrossSum {
 public:
-    explicit AntidiagonalSumMatrix(const unsigned int size);
+    explicit AntidiagonalSumMatrix(const CrossSumValue size);
     ~AntidiagonalSumMatrix() override;
 
-    unsigned int get(unsigned int r, unsigned int c) const override;
-    void set(unsigned int r, unsigned int c, unsigned int value) override;
-    void increment(unsigned int r, unsigned int c) override;
+    CrossSumValue get(const CrossSumIndex r, const CrossSumIndex c) const override;
+    void set(const CrossSumIndex r, const CrossSumIndex c, const CrossSumValue v) override;
+    void increment(const CrossSumIndex r, const CrossSumIndex c) override;
+private:
+    CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
 };
+
 
 #endif // CRSCE_ANTIDIAGONAL_SUM_MATRIX_H

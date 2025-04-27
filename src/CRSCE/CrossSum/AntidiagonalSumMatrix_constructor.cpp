@@ -3,4 +3,4 @@
 
 #include "CRSCE/AntidiagonalSumsMatrix.h"
 
-AntidiagonalSumMatrix::AntidiagonalSumMatrix(const unsigned int size):CrossSum(size){/*noop*/}
+AntidiagonalSumMatrix::AntidiagonalSumMatrix(const CrossSumIndex size):CrossSum(size){/*noop*/}

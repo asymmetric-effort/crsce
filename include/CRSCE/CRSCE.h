@@ -23,7 +23,7 @@ protected:
     std::ifstream inputStream;
     std::ofstream outputStream;
 
-    static constexpr size_t BLOCK_SIZE = 512;
+    static constexpr size_t BLOCK_SIZE = 512; //BLOCK_SIZE represents the CRSCE s-value.
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 };
 

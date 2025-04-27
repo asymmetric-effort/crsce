@@ -1,4 +1,4 @@
-// file: include/CRSCE/CrossSum/increment.cpp
+// file: include/CRSCE/CrossSum/CrossSum.increment.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/CrossSum.h"
