@@ -1,13 +1,11 @@
 # file: cmake/glob_sources.cmake
+# (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-if(NOT DEFINED CRSCE_SOURCES)
+if (NOT DEFINED CRSCE_SOURCES)
     message(STATUS "Globbing sources...")
 
-    # 2. Then glob everything else (excluding utils if necessary)
-    file(GLOB_RECURSE CRSCE_OTHER_SOURCES "src/**/*.cpp")
+    file(GLOB_RECURSE CRSCE_SOURCES "src/**/*.cpp")
 
-    # 4. Combine in order
-    set(CRSCE_SOURCES ${CRSCE_UTILS_SOURCES} ${CRSCE_OTHER_SOURCES})
+    message(STATUS "SOURCES_GLOBBED: ${CRSCE_SOURCES}")
 
-    message(STATUS "SOURCES_GLOBBED_FINAL: ${CRSCE_SOURCES}")
-endif()
+endif ()

@@ -4,9 +4,9 @@
 #ifndef CRSCE_H
 #define CRSCE_H
 
+#include "CRSCE/ByteBuffer.h"
 #include <string>
 #include <fstream>
-#include <vector>
 #include <cstdint>
 
 class CRSCE {
@@ -17,14 +17,14 @@ public:
     int compress();
     int decompress();
 
-private:
+protected:
+    bool readInputBuffer(ByteBuffer& buffer);
+
     std::ifstream inputStream;
     std::ofstream outputStream;
 
     static constexpr size_t BLOCK_SIZE = 512;
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
-
-    bool readInputBuffer(std::vector<uint8_t>& buffer);
 };
 
 #endif // CRSCE_H
