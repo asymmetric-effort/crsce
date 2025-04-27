@@ -12,7 +12,7 @@
 class CrossSum {
 public:
 
-    explicit CrossSum(const CrossSumIndex size,const CrossSumIndex width): s(size);
+    explicit CrossSum(const CrossSumIndex size,const CrossSumIndex width);
 
     ~CrossSum();
 
@@ -22,7 +22,7 @@ public:
 
     virtual void increment(CrossSumValue r, CrossSumValue c);
 
-private:
+protected:
 
     const CrossSumValue s;
 

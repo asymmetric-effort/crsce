@@ -9,13 +9,19 @@
 
 class DiagonalSumMatrix : public CrossSum {
 public:
-    explicit DiagonalSumMatrix(const CrossSumValue size);
-    ~DiagonalSumMatrix() override;
 
-    CrossSumValue get(CrossSumValue r, CrossSumValue c) const override;
-    void set(CrossSumValue r, CrossSumValue c, CrossSumValue value) override;
-    void increment(CrossSumValue r, CrossSumValue c) override;
-private:
+    explicit DiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+
+    ~DiagonalSumMatrix();
+
+    CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const override;
+
+    void set(CrossSumIndex r, CrossSumIndex c, CrossSumValue value);
+
+    void increment(CrossSumIndex r, CrossSumIndex c);
+
+  private:
+
     CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
 };
 

@@ -5,17 +5,22 @@
 #define CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
 
 #include "CRSCE/CrossSum/CrossSum.h"
-#include "utils/transformations/dsm.h"
 
 class AntidiagonalSumMatrix : public CrossSum {
 public:
-    explicit AntidiagonalSumMatrix(const CrossSumValue size);
-    ~AntidiagonalSumMatrix() override;
+
+    explicit AntidiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+
+    ~AntidiagonalSumMatrix();
 
     CrossSumValue get(const CrossSumIndex r, const CrossSumIndex c) const override;
-    void set(const CrossSumIndex r, const CrossSumIndex c, const CrossSumValue v) override;
-    void increment(const CrossSumIndex r, const CrossSumIndex c) override;
-private:
+
+    void set(const CrossSumIndex r, const CrossSumIndex c, const CrossSumValue v);
+
+    void increment(const CrossSumIndex r, const CrossSumIndex c);
+
+  private:
+
     CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
 };
 

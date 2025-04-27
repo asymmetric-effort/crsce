@@ -3,6 +3,7 @@
 
 #include "CRSCE/CrossSum/VeritcalSumsMatrix.h"
 
-VeritcalSumsMatrix::VeritcalSumsMatrix(const CrossSumIndex size):CrossSum(size){
+VeritcalSumsMatrix::VeritcalSumsMatrix(const CrossSumIndex size,const CrossSumIndex width)
+    :CrossSum(size,width){
     /*noop*/
 }

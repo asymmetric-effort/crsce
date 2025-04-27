@@ -3,6 +3,7 @@
 
 #include "CRSCE/CrossSum/DiagonalSumMatrix.h"
 
-DiagonalSumMatrix::DiagonalSumMatrix(const CrossSumIndex size):CrossSum(size){
+DiagonalSumMatrix::DiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width)
+    :CrossSum(size,width){
     /*noop*/
 }

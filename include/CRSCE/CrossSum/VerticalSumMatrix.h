@@ -8,12 +8,17 @@
 
 class VerticalSumMatrix : public CrossSum {
 public:
-    explicit VerticalSumMatrix(const CrossSumValue size);
-    ~VerticalSumMatrix() override;
 
-    CrossSumValue get(CrossSumValue _, CrossSumValue c) const override;
-    void set(CrossSumValue _, CrossSumValue c, CrossSumValue value) override;
-    void increment(CrossSumValue _, CrossSumValue c) override;
+    explicit VerticalSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+
+    ~VerticalSumMatrix();
+
+    CrossSumValue get(CrossSumIndex _, CrossSumIndex c) const override;
+
+    void set(CrossSumIndex _, CrossSumIndex c, CrossSumValue value);
+
+    void increment(CrossSumIndex _, CrossSumIndex c);
+
 };
 
 #endif // CRSCE_VERTICAL_SUM_MATRIX_H
