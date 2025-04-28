@@ -14,7 +14,7 @@ configure:
 	@cmake -G Ninja -S . -B build
 
 build: configure
-	@cmake --build build --target build_all
+	@time cmake --build build --target build_all
 
 build-compress: configure
 	@cmake --build build --target compress
