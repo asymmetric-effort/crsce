@@ -18,6 +18,10 @@ int CRSCE::compress() {
         AntidiagonalSumMatrix DSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
 
         uint32_t bit_index = 0;
+        uint64_t block_count = 0;
+        //Write the file header (HEADER_LENGTH bytes)
+        outputStream.write(HEADER, HEADER_LENGTH);
+
         for(size_t sz=0;readInputBuffer(inputBuffer);sz+=inputBuffer.size()) {
 
             std::cout << "[CRSCE] Processing " << std::to_string(sz) << " bytes." << std::endl;
@@ -47,7 +51,16 @@ int CRSCE::compress() {
             VSM.serialize(outputStream);
             XSM.serialize(outputStream);
             DSM.serialize(outputStream);
-
+            outputStream.flush();
+            block_count++;
+        }
+        {
+            //Write the 128-bit file footer, consisting of BLOCK_SIZE (e.g. s=512) and block_count
+            uint64_t block_size_value = BLOCK_SIZE;
+            uint64_t block_count_value = block_count;
+            outputStream.write(reinterpret_cast<const char*>(&block_size_value), sizeof(block_size_value));
+            outputStream.write(reinterpret_cast<const char*>(&block_count_value), sizeof(block_count_value));
+            outputStream.flush();
         }
         return EXIT_SUCCESS;
     } catch (const std::exception& e) {
