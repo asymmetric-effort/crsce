@@ -12,15 +12,17 @@ public:
     CrossSumValue();
     explicit CrossSumValue(uint16_t value);
 
-    uint16_t to_uint() const;
+    uint16_t to_uint16() const;
 
     CrossSumValue operator+(uint16_t rhs) const;
+    CrossSumValue operator+(CrossSumValue rhs) const;
     CrossSumValue& operator++();      // Prefix ++
     CrossSumValue operator++(int);     // Postfix ++
 
 private:
-    static constexpr size_t WIDTH = 9;
-    std::bitset<WIDTH> bits;
+    //b - cross sum element width
+    static constexpr size_t b = 9;
+    std::bitset<b> bits;
 };
 
 #endif // CRSCE_CROSSSUM_VALUE_H
