@@ -10,11 +10,11 @@ int CRSCE::compress() {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
         FileBuffer inputBuffer;
 
+        LHashMatrix LHASH(BLOCK_SIZE);
         LateralSumMatrix LSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
         VerticalSumMatrix VSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
         DiagonalSumMatrix XSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
         AntidiagonalSumMatrix DSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
-        // ToDo: LHashMatrix LHASH(BLOCK_SIZE)
 
         uint64_t bit_index = 0;
         for(size_t sz=0;readInputBuffer(inputBuffer);sz+=inputBuffer.size()) {
@@ -31,22 +31,22 @@ int CRSCE::compress() {
                     uint32_t c = bit_index % BLOCK_SIZE;
 
                     if (bit_value) {
+                        LHASH.push(r,c,bit_value);
                         LSM.increment(r, c);
                         VSM.increment(r, c);
                         XSM.increment(r, c);
                         DSM.increment(r, c);
-                        //This should push bits and generate hash when rows are complete.
-                        //ToDo: LHASH.push(r,c,bit_value);
                     }
 
                     ++bit_index;
                 }
             }
+            //ToDo: LHASH.serialize(outputStream);
             LSM.serialize(outputStream);
             VSM.serialize(outputStream);
             XSM.serialize(outputStream);
             DSM.serialize(outputStream);
-            //ToDo: LHASH.serialize(outputStream);
+
         }
         return EXIT_SUCCESS;
     } catch (const std::exception& e) {

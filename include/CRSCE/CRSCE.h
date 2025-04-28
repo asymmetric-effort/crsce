@@ -5,6 +5,7 @@
 #define CRSCE_H
 
 #include "CRSCE/FileBuffer.h"
+#include "CRSCE/LHashMatrix.h"
 #include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
