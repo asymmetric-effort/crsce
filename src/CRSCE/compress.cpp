@@ -40,7 +40,8 @@ int CRSCE::compress() {
                     ++bit_index;
                 }
             }
-            outputStream.write(reinterpret_cast<char*>(inputBuffer.data()), inputBuffer.size());
+            // This is here pending proper cross sum serialization
+            // outputStream.write(reinterpret_cast<char*>(inputBuffer.data()), inputBuffer.size());
         }
         return EXIT_SUCCESS;
     } catch (const std::exception& e) {

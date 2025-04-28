@@ -22,12 +22,6 @@ public:
     int compress();
     int decompress();
 
-protected:
-    bool readInputBuffer(FileBuffer& buffer);
-
-    std::ifstream inputStream;
-    std::ofstream outputStream;
-
     //BLOCK_SIZE represents the CRSCE s-value.
     static constexpr size_t BLOCK_SIZE = 512;
 
@@ -35,8 +29,11 @@ protected:
     static constexpr size_t CROSS_SUM_WIDTH = 9;
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
-    CrossSumIndex get_r(uint64_t bit_index) const;
-    CrossSumIndex get_c(uint64_t bit_index) const;
+  protected:
+    bool readInputBuffer(FileBuffer& buffer);
+
+    std::ifstream inputStream;
+    std::ofstream outputStream;
 
 };
 

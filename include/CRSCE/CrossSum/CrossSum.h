@@ -22,6 +22,8 @@ public:
 
     virtual void increment(CrossSumIndex r, CrossSumIndex c);
 
+    void serialize(std::ostream& os) const;
+
 protected:
 
     const CrossSumIndex s;

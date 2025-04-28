@@ -6,6 +6,8 @@
 
 #include <vector>
 
+constexpr size_t FILE_BUFFER_WIDTH = 64;
+
 using FileBuffer = std::vector<uint64_t>;
 
 #endif //CRSCE_FILE_BUFFER_H
