@@ -2,6 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #include "CRSCE/CRSCE.h"
 #include "CRSCE/FileBuffer.h"
+#include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -27,8 +28,8 @@ int CRSCE::compress() {
 
                     std::cout << "bit index: " << bit_index << " value: " << std::to_string(bit_value) << std::endl;
 
-                    uint32_t r = bit_index / BLOCK_SIZE;
-                    uint32_t c = bit_index % BLOCK_SIZE;
+                    CrossSumIndex r = bit_index / BLOCK_SIZE;
+                    CrossSumIndex c = bit_index % BLOCK_SIZE;
 
                     if (bit_value) {
                         LHASH.push(r,c,bit_value);
