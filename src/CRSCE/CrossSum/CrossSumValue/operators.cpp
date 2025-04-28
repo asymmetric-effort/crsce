@@ -8,12 +8,15 @@ uint16_t CrossSumValue::to_uint16() const {
 }
 
 CrossSumValue CrossSumValue::operator+(uint16_t rhs) const {
-    return CrossSumValue(this->to_uint16() + rhs);
+    auto result= CrossSumValue(this->to_uint16() + rhs);
+    if(this->to_uint16() > max_value) throw std::overflow_error("CrossSumValue overflow");
+    return result;
 }
 
 // postfix
 CrossSumValue& CrossSumValue::operator++() {
     *this = *this + 1;
+    if(this->to_uint16() > max_value) throw std::overflow_error("CrossSumValue overflow");
     return *this;
 }
 
@@ -21,5 +24,6 @@ CrossSumValue& CrossSumValue::operator++() {
 CrossSumValue CrossSumValue::operator++(int) {
     CrossSumValue temp = *this;
     ++(*this);
+    if(this->to_uint16() > max_value) throw std::overflow_error("CrossSumValue overflow");
     return temp;
 }

@@ -6,6 +6,7 @@
 
 #include <bitset>
 #include <cstdint>
+#include <stdexcept>
 
 class CrossSumValue {
 public:
@@ -16,12 +17,13 @@ public:
 
     CrossSumValue operator+(uint16_t rhs) const;
     CrossSumValue operator+(CrossSumValue rhs) const;
-    CrossSumValue& operator++();       // Postfix++
-    CrossSumValue operator++(int);     // ++Prefix
+    CrossSumValue& operator++();
+    CrossSumValue operator++(int);
 
-private:
-    //b - cross sum element width
+    // b - number of bits needed to represent one cross sum (b = ceil(log2(s)))
     static constexpr size_t b = 9;
+    static constexpr uint16_t max_value = (1 << b) - 1; // 511 for 9 bits
+private:
     std::bitset<b> bits;
 };
 
