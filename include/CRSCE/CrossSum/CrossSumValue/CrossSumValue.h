@@ -16,8 +16,8 @@ public:
 
     CrossSumValue operator+(uint16_t rhs) const;
     CrossSumValue operator+(CrossSumValue rhs) const;
-    CrossSumValue& operator++();      // Prefix ++
-    CrossSumValue operator++(int);     // Postfix ++
+    CrossSumValue& operator++();       // Postfix++
+    CrossSumValue operator++(int);     // ++Prefix
 
 private:
     //b - cross sum element width
