@@ -6,6 +6,10 @@
 
 #include "CRSCE/FileBuffer.h"
 #include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
+#include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
+#include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
+#include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
+#include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 #include <string>
 #include <fstream>
 #include <cstdint>
@@ -24,13 +28,15 @@ protected:
     std::ifstream inputStream;
     std::ofstream outputStream;
 
-    static constexpr size_t BLOCK_SIZE = 512; //BLOCK_SIZE represents the CRSCE s-value.
+    //BLOCK_SIZE represents the CRSCE s-value.
+    static constexpr size_t BLOCK_SIZE = 512;
+
+    //CROSS_SUM_WIDTH represents the CRSCE b-value.  b=ciel(log2(s))
+    static constexpr size_t CROSS_SUM_WIDTH = 9;
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
     CrossSumIndex get_r(uint64_t bit_index) const;
     CrossSumIndex get_c(uint64_t bit_index) const;
-
-    BitBuffer bit_serializer(FileBuffer inputBuffer);
 
 };
 
