@@ -34,10 +34,14 @@ test_decompress_flag_usage:
 test_decompress_flag_version:
 	./build/test/test_decompress_flag_version
 
+test_cross_sum_value:
+	./build/test/test_CrossSumValue
+
 test: test_compress_flag_usage \
 	  test_compress_flag_version \
 	  test_decompress_flag_usage \
-	  test_decompress_flag_version
+	  test_decompress_flag_version \
+	  test_cross_sum_value
 	  @echo 'ok'
 
 compress:
