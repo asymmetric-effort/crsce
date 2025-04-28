@@ -17,7 +17,7 @@ int CRSCE::compress() {
         DiagonalSumMatrix XSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
         AntidiagonalSumMatrix DSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
 
-        uint64_t bit_index = 0;
+        uint32_t bit_index = 0;
         for(size_t sz=0;readInputBuffer(inputBuffer);sz+=inputBuffer.size()) {
 
             std::cout << "[CRSCE] Processing " << std::to_string(sz) << " bytes." << std::endl;
