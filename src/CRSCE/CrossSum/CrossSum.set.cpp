@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-void CrossSum::set(unsigned int r, unsigned int c, unsigned int value) {
-    return 0;
+void CrossSum::set(CrossSumIndex r,CrossSumIndex c, CrossSumValue value) {
+    /*noop*/
 }

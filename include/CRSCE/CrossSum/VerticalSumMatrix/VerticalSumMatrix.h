@@ -15,9 +15,9 @@ public:
 
     CrossSumValue get(CrossSumIndex _, CrossSumIndex c) const override;
 
-    void set(CrossSumIndex _, CrossSumIndex c, CrossSumValue value);
+    void set(CrossSumIndex _, CrossSumIndex c, CrossSumValue value) override;
 
-    void increment(CrossSumIndex _, CrossSumIndex c);
+    void increment(CrossSumIndex _, CrossSumIndex c) override;
 
 };
 

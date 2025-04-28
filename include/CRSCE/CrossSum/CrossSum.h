@@ -12,19 +12,20 @@
 class CrossSum {
 public:
 
-    explicit CrossSum(const CrossSumIndex size,const CrossSumIndex width);
+    explicit CrossSum(const CrossSumIndex cross_sum_size, const CrossSumIndex cross_sum_width);
 
     ~CrossSum();
 
     virtual CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const;
 
-    virtual void set(CrossSumValue r, CrossSumValue c, CrossSumValue value);
+    virtual void set(CrossSumIndex r, CrossSumIndex c, CrossSumValue value);
 
-    virtual void increment(CrossSumValue r, CrossSumValue c);
+    virtual void increment(CrossSumIndex r, CrossSumIndex c);
 
 protected:
 
-    const CrossSumValue s;
+    const CrossSumIndex s;
+    const CrossSumIndex b;
 
     std::vector<CrossSumValue> data;
 

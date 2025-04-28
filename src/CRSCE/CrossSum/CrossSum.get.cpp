@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-unsigned int CrossSum::get(unsigned int r, unsigned int c) const {
-    return 0;
+CrossSumValue CrossSum::get(CrossSumIndex r, CrossSumIndex c) const {
+    return CrossSumValue(0);
 }

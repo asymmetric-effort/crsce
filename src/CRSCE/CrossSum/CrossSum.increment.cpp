@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-void CrossSum::increment(unsigned int r, unsigned int c) {
-    return 0;
+void CrossSum::increment(CrossSumIndex r, CrossSumIndex c) {
+    /*noop*/
 }
