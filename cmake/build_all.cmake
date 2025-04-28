@@ -11,6 +11,7 @@ include(build_test_compress_flag_version)
 include(build_test_decompress_flag_usage)
 include(build_test_decompress_flag_version)
 include(build_test_file_readInputBuffer_verification)
+include(build_test_CrossSumValue)
 # ToDo: add more test artifacts here
 
 add_custom_target(build_all
@@ -23,5 +24,6 @@ add_custom_target(build_all
         test_decompress_flag_usage
         test_decompress_flag_version
         test_file_readInputBuffer_verification
+        test_CrossSumValue
         VERBATIM
 )
