@@ -7,6 +7,8 @@
 #include <cstdint>
 #include <stdexcept>
 
+constexpr uint16_t max_value=(1 << 9)-1; // all bits set
+
 /**
  * confirm that the default constructor initializes a zero-state.
  */
@@ -22,7 +24,6 @@ int test_default_constructor() {
 
 // confirm we can set an initial value from 0 to 2^b-1
 int test_initial_value(){
-    constexpr uint16_t max_value=(1 << 9) - 1; // all bits set
     for(uint16_t initial_value=0; initial_value < max_value; initial_value++){
         CrossSumValue value(initial_value);
         if (value.to_uint16() != initial_value) {
@@ -37,8 +38,9 @@ int test_initial_value(){
 
 // Test increment and expect overflow
 int test_increment(){
+     std::cout << "test_increment() [step 1]" << std::endl;
     // increment through the available numbers
-    constexpr uint16_t max_value=(1 << 9) - 1; // all bits set
+    constexpr uint16_t max_value=(1 << 9)-1; // all bits set
     // setup the test
     CrossSumValue value(0);
     for(uint16_t expected_value=0;expected_value<max_value;expected_value++){
@@ -55,7 +57,9 @@ int test_increment(){
     // increment beyond the limit and expect an overflow error
     try{
         value++;
-        std::cerr << "[FAIL] overflow_error expected.  not encountered" << std::endl;
+        std::cerr << "[FAIL] overflow_error expected(1).  not encountered.\n\t"
+                     "got:  " << std::to_string(value.to_uint16()) << "\n"
+                     "want: " << std::to_string(max_value) << std::endl;
         return EXIT_FAILURE;
     }catch(std::overflow_error const &e){
       return EXIT_SUCCESS;
@@ -63,13 +67,15 @@ int test_increment(){
 }
 
 int test_add_operator(){
-    constexpr uint16_t max_value=(1 << 9) - 1;
+    std::cout << "test_add_operator() [step 1]" << std::endl;
     {
         CrossSumValue value1(1);
         CrossSumValue value2(max_value);
         try {
             CrossSumValue value3(value1 + value2);
-            std::cerr << "[FAIL] overflow_error expected. not encountered" << std::endl;
+            std::cerr << "[FAIL] overflow_error expected(2).  not encountered.\n\t"
+                         "got:  " << std::to_string(value3.to_uint16()) << "\n"
+                         "want: " << std::to_string(max_value) << std::endl;
             return EXIT_FAILURE;
         } catch (const std::overflow_error& e) {
             // expected overflow
