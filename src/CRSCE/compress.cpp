@@ -14,16 +14,16 @@ int CRSCE::compress() {
         VerticalSumMatrix VSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
         DiagonalSumMatrix XSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
         AntidiagonalSumMatrix DSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
-        // ToDo: LHASH later
+        // ToDo: LHashMatrix LHASH(BLOCK_SIZE)
 
         uint64_t bit_index = 0;
         for(size_t sz=0;readInputBuffer(inputBuffer);sz+=inputBuffer.size()) {
 
             std::cout << "[CRSCE] Processing " << std::to_string(sz) << " bytes." << std::endl;
 
-            for (const auto& byte : inputBuffer) {
-                for (int bit = 7; bit >= 0; --bit) {
-                    bool bit_value = (byte >> bit) & 0x01;
+            for (const auto& word : inputBuffer) {
+                for (int bit = FILE_BUFFER_WIDTH-1; bit >= 0; --bit) {
+                    bool bit_value = (word >> bit) & 0x01;
 
                     std::cout << "bit index: " << bit_index << " value: " << std::to_string(bit_value) << std::endl;
 
@@ -35,13 +35,18 @@ int CRSCE::compress() {
                         VSM.increment(r, c);
                         XSM.increment(r, c);
                         DSM.increment(r, c);
+                        //This should push bits and generate hash when rows are complete.
+                        //ToDo: LHASH.push(r,c,bit_value);
                     }
 
                     ++bit_index;
                 }
             }
-            // This is here pending proper cross sum serialization
-            // outputStream.write(reinterpret_cast<char*>(inputBuffer.data()), inputBuffer.size());
+            LSM.serialize(outputStream);
+            VSM.serialize(outputStream);
+            XSM.serialize(outputStream);
+            DSM.serialize(outputStream);
+            //ToDo: LHASH.serialize(outputStream);
         }
         return EXIT_SUCCESS;
     } catch (const std::exception& e) {
