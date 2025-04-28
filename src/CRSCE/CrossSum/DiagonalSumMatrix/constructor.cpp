@@ -1,7 +1,7 @@
-// file: include/CRSCE/CrossSum/DiagonalSumMatrix_constructor.h
+// file: include/CRSCE/CrossSum/DiagonalSumMatrix/constructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/CrossSum/DiagonalSumMatrix.h"
+#include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
 
 DiagonalSumMatrix::DiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width)
     :CrossSum(size,width){

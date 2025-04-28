@@ -1,9 +1,9 @@
-// file: include/CRSCE/CrossSum/DiagonalSumMatrix_transform.h
+// file: include/CRSCE/CrossSum/DiagonalSumMatrix/transform.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/CrossSum/DiagonalSumMatrix.h"
+#include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
 
 //Translate 2D coordinates(r,c) into 1D linear address (D)
 CrossSumIndex DiagonalSumsMatrix::transform(const CrossSumIndex r, const CrossSumIndex c) const {
-    return (r + c) % s
+    return (r + c) % s;
 }

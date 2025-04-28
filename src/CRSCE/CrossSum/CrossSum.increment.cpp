@@ -4,6 +4,5 @@
 #include "CRSCE/CrossSum/CrossSum.h"
 
 void CrossSum::increment(unsigned int r, unsigned int c) {
-    // Example: ++data[xsm(r, c, s)];
     return 0;
 }

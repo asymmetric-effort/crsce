@@ -4,8 +4,8 @@
 #ifndef CRSCE_CROSSSUM_H
 #define CRSCE_CROSSSUM_H
 
-#include "CRSCE/CrossSum/CrossSumIndex.h"
-#include "CRSCE/CrossSum/CrossSumValue.h"
+#include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
+#include "CRSCE/CrossSum/CrossSumValue/CrossSumValue.h"
 #include <vector>
 #include <cstdint>
 

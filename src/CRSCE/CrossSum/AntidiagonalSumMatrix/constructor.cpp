@@ -1,7 +1,7 @@
-// file: include/CRSCE/CrossSum/AntidiagonalSumMatrix_constructor.h
+// file: include/CRSCE/CrossSum/AntidiagonalSumMatrix/constructor.h
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/CrossSum/AntidiagonalSumMatrix.h"
+#include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 
 AntidiagonalSumMatrix::AntidiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width)
     :CrossSum(size, width){

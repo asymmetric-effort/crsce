@@ -4,6 +4,5 @@
 #include "CRSCE/CrossSum/CrossSum.h"
 
 void CrossSum::set(unsigned int r, unsigned int c, unsigned int value) {
-    // example: data[xsm(r, c, s)] = value;
     return 0;
 }

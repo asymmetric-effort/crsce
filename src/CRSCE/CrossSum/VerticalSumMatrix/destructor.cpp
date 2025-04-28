@@ -1,7 +1,7 @@
-// file: include/CRSCE/CrossSum/VerticalSumMatrix_destructor.h
+// file: include/CRSCE/CrossSum/VerticalSumMatrix/destructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/CrossSum/VerticalSumMatrix.h"
+#include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
 VerticalSumMatrix::~VerticalSumMatrix(const CrossSumIndex size):CrossSum(size){
     /*noop*/
