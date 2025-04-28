@@ -1,5 +1,5 @@
 # file: Makefile
-.PHONY: build clean configure
+.PHONY: build clean configure test
 
 tree:
 	@tree > build/file_structure.txt
@@ -37,12 +37,18 @@ test_decompress_flag_version:
 test_cross_sum_value:
 	./build/test/test_CrossSumValue
 
-test: test_compress_flag_usage \
-	  test_compress_flag_version \
-	  test_decompress_flag_usage \
-	  test_decompress_flag_version \
-	  test_cross_sum_value
-	  @echo 'ok'
+test:
+	@echo "running tests"; \
+	for f in ./build/test/*; do \
+		echo "Running: $$f"; \
+		"$$f"; \
+		if [ $$? -ne 0 ]; then \
+			echo "[FAIL] Test $$f failed. Aborting."; \
+			exit 1; \
+		fi; \
+	done; \
+	echo "[PASS] All tests passed."
+
 
 compress:
 	@rm build/compress.crsce.out &> /dev/null || true
