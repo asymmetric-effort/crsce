@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
 
-void DiagonalSumMatrix::set(const CrossSumValue r, const CrossSumIndex c, const CrossSumValue v) {
+void DiagonalSumMatrix::set(const CrossSumIndex r, const CrossSumIndex c, const CrossSumValue v) {
     data[transform(r,c)]=v;
 }

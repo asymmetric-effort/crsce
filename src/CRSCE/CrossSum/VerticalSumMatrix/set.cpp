@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
-void VerticalSumMatrix::set(const CrossSumValue _, const CrossSumIndex c, const CrossSumValue v) {
+void VerticalSumMatrix::set(const CrossSumIndex _, const CrossSumIndex c, const CrossSumValue v) {
     data[c]=v;
 }

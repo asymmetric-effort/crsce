@@ -1,9 +1,9 @@
 // file: include/CRSCE/CrossSum/VerticalSumMatrix/constructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/CrossSum/VeritcalSumsMatrix/VeritcalSumsMatrix.h"
+#include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
-VeritcalSumsMatrix::VeritcalSumsMatrix(const CrossSumIndex size,const CrossSumIndex width)
-    :CrossSum(size,width){
+VerticalSumMatrix::VerticalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width)
+    :CrossSum(cross_sum_size, cross_sum_width){
     /*noop*/
 }

@@ -9,7 +9,7 @@
 class AntidiagonalSumMatrix : public CrossSum {
 public:
 
-    explicit AntidiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+    explicit AntidiagonalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
 
     ~AntidiagonalSumMatrix();
 

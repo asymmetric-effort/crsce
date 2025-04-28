@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 
-LateralSumMatrix::LateralSumMatrix::get(const CrossSumIndex r, const CrossSumIndex _) const {
-    return data[r)];
+CrossSumValue LateralSumMatrix::LateralSumMatrix::get(const CrossSumIndex r, const CrossSumIndex _) const {
+    return data[r];
 }

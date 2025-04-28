@@ -9,7 +9,7 @@
 class DiagonalSumMatrix : public CrossSum {
 public:
 
-    explicit DiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+    explicit DiagonalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
 
     ~DiagonalSumMatrix();
 

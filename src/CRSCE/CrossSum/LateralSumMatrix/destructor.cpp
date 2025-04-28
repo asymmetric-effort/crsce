@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 
-LateralSumMatrix::~LateralSumMatrix(const CrossSumIndex size):CrossSum(size){
+LateralSumMatrix::~LateralSumMatrix(){
     /*noop*/
 }

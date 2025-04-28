@@ -9,7 +9,7 @@
 class LateralSumMatrix : public CrossSum {
 public:
 
-    explicit LateralSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+    explicit LateralSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
 
     ~LateralSumMatrix();
 

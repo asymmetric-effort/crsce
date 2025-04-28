@@ -9,7 +9,7 @@
 class VerticalSumMatrix : public CrossSum {
 public:
 
-    explicit VerticalSumMatrix(const CrossSumIndex size,const CrossSumIndex width);
+    explicit VerticalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
 
     ~VerticalSumMatrix();
 

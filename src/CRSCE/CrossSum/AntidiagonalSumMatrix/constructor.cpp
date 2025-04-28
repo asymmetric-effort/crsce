@@ -3,7 +3,7 @@
 
 #include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 
-AntidiagonalSumMatrix::AntidiagonalSumMatrix(const CrossSumIndex size,const CrossSumIndex width)
-    :CrossSum(size, width){
+AntidiagonalSumMatrix::AntidiagonalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width)
+    :CrossSum(cross_sum_size, cross_sum_width){
     /*noop*/
 }

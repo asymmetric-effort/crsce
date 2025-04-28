@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
-VerticalSumMatrix::VerticalSumMatrix::get(const CrossSumIndex _, const CrossSumIndex c) const {
+CrossSumValue VerticalSumMatrix::VerticalSumMatrix::get(const CrossSumIndex _, const CrossSumIndex c) const {
     return data[c];
 }

@@ -3,6 +3,6 @@
 
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
-VerticalSumMatrix::~VerticalSumMatrix(const CrossSumIndex size):CrossSum(size){
+VerticalSumMatrix::~VerticalSumMatrix(){
     /*noop*/
 }
