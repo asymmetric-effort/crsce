@@ -23,7 +23,7 @@ int main() {
 
         {
             Reader testCompressor(input_test_file, output_test_file);
-            ByteBuffer buffer;
+            FileBuffer buffer;
             while (testCompressor.readFile(buffer)) {
                 testCompressor.write(buffer);
             }

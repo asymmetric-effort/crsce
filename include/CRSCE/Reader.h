@@ -10,8 +10,8 @@ class Reader : public CRSCE {
   public:
     Reader(const std::string& inputFile, const std::string& outputFile);
     ~Reader();
-    bool readFile(ByteBuffer& buffer);
-    void write(ByteBuffer& buffer);
+    bool readFile(FileBuffer& buffer);
+    void write(FileBuffer& buffer);
 };
 
 #endif //CRSCE_READER_H

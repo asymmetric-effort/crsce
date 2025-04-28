@@ -4,6 +4,6 @@
 #include "CRSCE/Reader.h"
 
 // exposed readFile() function for testing.
-bool Reader::readFile(ByteBuffer& buffer) {
+bool Reader::readFile(FileBuffer& buffer) {
     return CRSCE::readInputBuffer(buffer);
 }
