@@ -41,7 +41,7 @@ int CRSCE::compress() {
                     ++bit_index;
                 }
             }
-            //ToDo: LHASH.serialize(outputStream);
+            LHASH.serialize(outputStream);
             LSM.serialize(outputStream);
             VSM.serialize(outputStream);
             XSM.serialize(outputStream);
