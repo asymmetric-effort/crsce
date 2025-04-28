@@ -32,7 +32,7 @@ int CRSCE::compress() {
                     CrossSumIndex c = bit_index % BLOCK_SIZE;
 
                     if (bit_value) {
-                        LHASH.push(r,c,bit_value);
+                        LHASH.push(r, c, bit_value);
                         LSM.increment(r, c);
                         VSM.increment(r, c);
                         XSM.increment(r, c);
