@@ -5,7 +5,6 @@
 #define CRSCE_DIAGONAL_SUM_MATRIX_H
 
 #include "CRSCE/CrossSum/CrossSum.h"
-#include "utils/transformations/xsm.h"
 
 class DiagonalSumMatrix : public CrossSum {
 public:
