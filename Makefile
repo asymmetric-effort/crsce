@@ -11,7 +11,7 @@ clean:
 	@rm -rf ./build &> /dev/null || true
 
 configure:
-	@cmake -S . -B build
+	@cmake -G Ninja -S . -B build
 
 build: configure
 	@cmake --build build --target build_all

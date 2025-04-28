@@ -9,11 +9,16 @@ set(COPYRIGHT "(c) 2025 Asymmetric Effort, LLC.  All Rights Reserved.")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 set(CMAKE_CXX_EXTENSIONS NO)
+set(CMAKE_C_COMPILER_LAUNCHER ccache)
+set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 
 set(PROJECT_ROOT ${CMAKE_SOURCE_DIR})
 
-add_compile_definitions(COPYRIGHT="${COPYRIGHT}")
-add_compile_definitions(PROJECT_VERSION="v${PROJECT_VERSION}")
+add_compile_definitions(
+        COPYRIGHT="${COPYRIGHT}"
+        PROJECT_NAME="${PROJECT_NAME}"
+        PROJECT_VERSION="${PROJECT_VERSION}"
+)
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_ROOT}/cmake")
 

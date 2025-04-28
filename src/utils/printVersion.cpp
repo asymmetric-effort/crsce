@@ -1,12 +1,17 @@
-#include "utils/printUsage.h"
+// file: src/utils/printVersion.cpp
+// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-//
-// We should expect that PROJECT_VERSION is configured by cmake.
-//
+#include "utils/printUsage.h"
+#include <iostream>
+
+#ifndef PROJECT_NAME
+#define PROJECT_NAME "unknown"
+#endif
+
 #ifndef PROJECT_VERSION
 #define PROJECT_VERSION "not_defined"
 #endif
 
 void printVersion() {
-    std::cout << "CRSCE "<< PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
+    std::cout << "CRSCE " << PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
 }
