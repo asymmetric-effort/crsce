@@ -50,7 +50,11 @@ int verify_overlow_works(){
     LateralSumMatrix lsm(block_size, cross_sum_width);
     std::cout << "verify_overlow_works()" << std::endl;
     try{
-        lsm.set(0, 0,static_cast<CrossSumValue>(block_size));
+        for (uint16_t r = 0; r <= block_size; ++r) {
+            for(uint16_t c = 0; c <= block_size; ++c) {
+                lsm.increment(r, c); // set diagonal pattern
+            }
+        }
         std::cerr << "set oversize value should cause overflow." << std::endl;
         return EXIT_FAILURE;
     } catch (const std::overflow_error& e) {
