@@ -11,11 +11,11 @@ int CRSCE::compress() {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
         FileBuffer inputBuffer;
 
-        LHashMatrix LHASH();
-        LateralSumMatrix LSM();
-        VerticalSumMatrix VSM();
-        DiagonalSumMatrix XSM(s, b);
-        AntidiagonalSumMatrix DSM(s, b);
+        LHashMatrix LHASH;
+        LateralSumMatrix LSM;
+        VerticalSumMatrix VSM;
+        DiagonalSumMatrix XSM;
+        AntidiagonalSumMatrix DSM;
 
         uint32_t bit_index = 0;
         uint64_t block_count = 0;
