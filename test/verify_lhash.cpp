@@ -10,8 +10,7 @@
 
 int main() {
     try {
-        constexpr size_t block_size = 512;
-        LHashMatrix lhash(block_size);
+        LHashMatrix lhash;
 
         // Example fixed input - 64 bytes of known pattern
         uint8_t input[64];
@@ -20,7 +19,7 @@ int main() {
         }
 
         // Push 512 bits into row 0
-        for (uint32_t bit_index = 0; bit_index < block_size; ++bit_index) {
+        for (uint32_t bit_index = 0; bit_index < s; ++bit_index) {
             size_t byte_index = bit_index / 8;
             size_t bit_in_byte = 7 - (bit_index % 8);
             bool bit_value = (input[byte_index] >> bit_in_byte) & 0x01;

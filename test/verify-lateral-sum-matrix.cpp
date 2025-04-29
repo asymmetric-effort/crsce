@@ -1,21 +1,18 @@
 // file: test/verify-lateral-sum-matrix.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 #include <iostream>
 #include <cstdlib>
 #include <stdexcept>
 
-constexpr size_t block_size = 512;
-constexpr size_t cross_sum_width = 9;
-
 int verify_100pct_set() {
-    constexpr size_t limit = block_size - 1;
-    LateralSumMatrix lsm(block_size, cross_sum_width);
+    LateralSumMatrix lsm;
 
     try {
-        for (uint16_t r = 0; r < block_size; ++r)
-            for (uint16_t c = 0; c < limit; ++c){ // block_size-1
+        for (uint16_t r = 0; r < s; ++r)
+            for (uint16_t c = 0; c < s; ++c){ // s-1
                 lsm.increment(r, c);
                 std::cout << "("<<r<<","<<c<<")="<< lsm.get(r, c).to_uint16() << std::endl;
             }
@@ -25,12 +22,12 @@ int verify_100pct_set() {
     }
 
     try {
-        for (uint16_t r = 0; r < block_size; ++r) {
+        for (uint16_t r = 0; r < s; ++r) {
             uint16_t actual = lsm.get(r, r).to_uint16();
-            if (actual != limit) {
+            if (actual != s) {
                 std::cerr << "[FAIL] LSM[" << r << "] = "
                           << actual
-                          << " expected " << limit << std::endl;
+                          << " expected " << s << std::endl;
                 return EXIT_FAILURE;
             }
         }
@@ -43,11 +40,11 @@ int verify_100pct_set() {
 }
 
 int verify_1_bit_per_row_set() {
-    LateralSumMatrix lsm(block_size, cross_sum_width);
+    LateralSumMatrix lsm;
     std::cout << "verify_1_bit_per_row_set()" << std::endl;
-    for (uint16_t r = 0; r < block_size; ++r)
+    for (uint16_t r = 0; r < s; ++r)
       lsm.increment(r, r); // set diagonal pattern
-    for (uint16_t r = 0; r < block_size; ++r)
+    for (uint16_t r = 0; r < s; ++r)
         if (auto sum = lsm.get(r, r).to_uint16(); sum != 1) {
             std::cerr << "[FAIL] Verification(2): LSM value expects 1 value." << std::endl;
             return EXIT_FAILURE;
@@ -56,11 +53,11 @@ int verify_1_bit_per_row_set() {
 }
 
 int verify_overlow_works(){
-    LateralSumMatrix lsm(block_size, cross_sum_width);
+    LateralSumMatrix lsm;
     std::cout << "verify_overlow_works()" << std::endl;
     try{
-        for (uint16_t r = 0; r <= block_size; ++r)
-            for(uint16_t c = 0; c <= block_size; ++c)
+        for (uint16_t r = 0; r <= s; ++r)
+            for(uint16_t c = 0; c <= s; ++c)
                 lsm.increment(r, c); // set diagonal pattern
         std::cerr << "set oversize value should cause overflow." << std::endl;
         return EXIT_FAILURE;
