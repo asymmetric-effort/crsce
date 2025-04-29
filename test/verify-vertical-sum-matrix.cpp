@@ -28,31 +28,31 @@ int verify_100pct_set() {
 }
 
 int verify_1_bit_per_col_set() {
-//    VerticalSumMatrix vsm(block_size, cross_sum_width);
-//    std::cout << "verify_1_bit_per_col_set()" << std::endl;
-//    for (uint16_t c = 0; c < block_size; ++c)
-//        vsm.increment(c, c); // set diagonal pattern
-//
-//    for (uint16_t c = 0; c < block_size; ++c)
-//        if (auto sum = vsm.get(c, c).to_uint16(); sum != 1) {
-//            std::cerr << "[FAIL] Verification(2/3): VSM value expects 1 at column " << c << "." << std::endl;
-//            return EXIT_FAILURE;
-//        }
+    VerticalSumMatrix vsm(block_size, cross_sum_width);
+    std::cout << "verify_1_bit_per_col_set()" << std::endl;
+    for (uint16_t c = 0; c < block_size; ++c)
+        vsm.increment(c, c); // set diagonal pattern
+
+    for (uint16_t c = 0; c < block_size; ++c)
+        if (auto sum = vsm.get(c, c).to_uint16(); sum != 1) {
+            std::cerr << "[FAIL] Verification(2/3): VSM value expects 1 at column " << c << "." << std::endl;
+            return EXIT_FAILURE;
+        }
     return EXIT_SUCCESS;
 }
 
 int verify_overlow_works() {
-//    VerticalSumMatrix vsm(block_size, cross_sum_width);
-//    std::cout << "verify_overlow_works()" << std::endl;
-//    try {
-//        for (uint16_t r = 0; r <= block_size; ++r)
-//            for (uint16_t c = 0; c <= block_size; ++c)
-//                vsm.increment(r, c);
-//        std::cerr << "[FAIL] Overflow not detected when expected." << std::endl;
-//        return EXIT_FAILURE;
-//    } catch (const std::overflow_error& e) {
-//        return EXIT_SUCCESS;
-//    }
+    VerticalSumMatrix vsm(block_size, cross_sum_width);
+    std::cout << "verify_overlow_works()" << std::endl;
+    try {
+        for (uint16_t r = 0; r <= block_size; ++r)
+            for (uint16_t c = 0; c <= block_size; ++c)
+                vsm.increment(r, c);
+        std::cerr << "[FAIL] Overflow not detected when expected." << std::endl;
+        return EXIT_FAILURE;
+    } catch (const std::overflow_error& e) {
+        return EXIT_SUCCESS;
+    }
     return EXIT_SUCCESS;
 }
 
