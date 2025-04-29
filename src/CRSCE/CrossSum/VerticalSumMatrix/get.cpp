@@ -4,5 +4,6 @@
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
 CrossSumValue VerticalSumMatrix::VerticalSumMatrix::get(const CrossSumIndex _, const CrossSumIndex c) const {
+    bounds_check(c,s);
     return data[c];
 }

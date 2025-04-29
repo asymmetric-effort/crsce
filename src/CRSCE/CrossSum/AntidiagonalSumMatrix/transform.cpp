@@ -5,5 +5,7 @@
 
 //Translate 2D coordinates(r,c) into 1D linear address (x)
 CrossSumIndex AntidiagonalSumMatrix::transform(const CrossSumIndex r, const CrossSumIndex c) const {
+    bounds_check(r,s);
+    bounds_check(c,s);
     return (r - c) % s;
 }
