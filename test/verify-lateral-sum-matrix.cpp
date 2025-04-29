@@ -9,14 +9,19 @@ constexpr size_t block_size = 512;
 constexpr size_t cross_sum_width = 9;
 
 int verify_100pct_set(){
-    LateralSumMatrix lsm(block_size, cross_sum_width);
     std::cout << "verify_100pct_set()" << std::endl;
+    LateralSumMatrix lsm(block_size, cross_sum_width);
+    try{
     for (uint16_t r = 0; r < block_size; ++r)
-        for (uint16_t c = 0; c < block_size - 1; ++c) // 0..510
+        for (uint16_t c = 0; c < block_size; ++c) // 0..510
             lsm.increment(r, c);
+    }catch(std::overflow_error e){
+        std::cerr << "[FAIL] Verification(2/2): " << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
     for(uint16_t r = 0; r < block_size; r++)
         if(auto sum=lsm.get(r,r).to_uint16(); sum != (block_size-1)){
-            std::cerr << "[FAIL] Verification(1/3): LSM value expects full set value." << std::endl;
+            std::cerr << "[FAIL] Verification(1): LSM value expects full set value." << std::endl;
             return EXIT_FAILURE;
         }
     return EXIT_SUCCESS;
@@ -29,7 +34,7 @@ int verify_1_bit_per_row_set() {
       lsm.increment(r, r); // set diagonal pattern
     for (uint16_t r = 0; r < block_size; ++r)
         if (auto sum = lsm.get(r, r).to_uint16(); sum != 1) {
-            std::cerr << "[FAIL] Verification(1/3): LSM value expects 1 value." << std::endl;
+            std::cerr << "[FAIL] Verification(2): LSM value expects 1 value." << std::endl;
             return EXIT_FAILURE;
         }
     return EXIT_SUCCESS; // Must return success if all OK
