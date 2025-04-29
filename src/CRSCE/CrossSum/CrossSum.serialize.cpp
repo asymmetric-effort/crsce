@@ -19,7 +19,7 @@ void CrossSum::serialize(std::ostream &os) const {
 
         // Insert value_bits into LSB of bit_buffer
         bit_buffer |= (std::bitset<BIT_BUFFER_SIZE>(value_bits.to_ullong()) << bits_in_buffer);
-        bits_in_buffer += CrossSumValue::b; // b = 9
+        bits_in_buffer += b; // b = 9
 
         // While we have enough bits for a full uint64_t
         if (bits_in_buffer >= FILE_BUFFER_WIDTH) {

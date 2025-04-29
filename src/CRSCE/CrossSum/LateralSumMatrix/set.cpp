@@ -4,6 +4,6 @@
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 
 void LateralSumMatrix::set(const CrossSumIndex r, const CrossSumIndex _, const CrossSumValue v) {
-    bounds_check(r,s);
+    bounds_check(r);
     data[r]=v;
 }
