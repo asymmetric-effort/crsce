@@ -3,6 +3,8 @@
 #ifndef CSRCE_CONSTANTS_H
 #define CSRCE_CONSTANTS_H
 
+#include <cstddef>
+
 //Represents the CRSCE s-value.
 //  512-1 = 511 is the maximum number of rows and columns allowed when b=9
 //  This means our coordinates should always be 0...510 x 0...510.
