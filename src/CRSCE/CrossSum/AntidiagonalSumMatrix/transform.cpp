@@ -9,4 +9,3 @@ CrossSumIndex AntidiagonalSumMatrix::transform(const CrossSumIndex r, const Cros
     bounds_check(c);
     return (r - c) % s;
 }
-`
