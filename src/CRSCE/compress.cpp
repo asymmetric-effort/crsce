@@ -11,11 +11,11 @@ int CRSCE::compress() {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
         FileBuffer inputBuffer;
 
-        LHashMatrix LHASH(BLOCK_SIZE);
-        LateralSumMatrix LSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
-        VerticalSumMatrix VSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
-        DiagonalSumMatrix XSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
-        AntidiagonalSumMatrix DSM(BLOCK_SIZE, CROSS_SUM_WIDTH);
+        LHashMatrix LHASH();
+        LateralSumMatrix LSM();
+        VerticalSumMatrix VSM();
+        DiagonalSumMatrix XSM(s, b);
+        AntidiagonalSumMatrix DSM(s, b);
 
         uint32_t bit_index = 0;
         uint64_t block_count = 0;
@@ -32,8 +32,8 @@ int CRSCE::compress() {
 
                     std::cout << "bit index: " << bit_index << " value: " << std::to_string(bit_value) << std::endl;
 
-                    CrossSumIndex r = bit_index / BLOCK_SIZE;
-                    CrossSumIndex c = bit_index % BLOCK_SIZE;
+                    CrossSumIndex r = bit_index / s;
+                    CrossSumIndex c = bit_index % s;
 
                     if (bit_value) {
                         LHASH.push(r, c, bit_value);
@@ -56,7 +56,7 @@ int CRSCE::compress() {
         }
         {
             //Write the 128-bit file footer, consisting of BLOCK_SIZE (e.g. s=512) and block_count
-            uint64_t block_size_value = BLOCK_SIZE;
+            uint64_t block_size_value = s;
             uint64_t block_count_value = block_count;
             outputStream.write(reinterpret_cast<const char*>(&block_size_value), sizeof(block_size_value));
             outputStream.write(reinterpret_cast<const char*>(&block_count_value), sizeof(block_count_value));

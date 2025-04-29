@@ -3,11 +3,7 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-CrossSum::CrossSum(const CrossSumIndex cross_sum_size, const CrossSumIndex cross_sum_width)
-    : s(cross_sum_size),
-      b(cross_sum_width),
-      data(cross_sum_size) {
-
-      // Initialize vector with 'size' elements all zeroed.
-
+CrossSum::CrossSum()
+    : data(s) {
+      /* Initialize vector with 'size' (s) elements all zeroed. */
 }

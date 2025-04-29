@@ -3,7 +3,7 @@
 
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
-VerticalSumMatrix::VerticalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width)
-    :CrossSum(cross_sum_size, cross_sum_width){
+VerticalSumMatrix::VerticalSumMatrix()
+    :CrossSum(){
     /*noop*/
 }

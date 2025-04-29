@@ -3,7 +3,7 @@
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 
-LateralSumMatrix::LateralSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width)
-    :CrossSum(cross_sum_size,cross_sum_width){
+LateralSumMatrix::LateralSumMatrix()
+    :CrossSum(){
     /*noop*/
 }
