@@ -4,26 +4,41 @@
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 #include <iostream>
 #include <cstdlib>
+#include <stdexcept>
 
 constexpr size_t block_size = 512;
 constexpr size_t cross_sum_width = 9;
 
-int verify_100pct_set(){
-    std::cout << "verify_100pct_set()" << std::endl;
+int verify_100pct_set() {
+    constexpr size_t limit = block_size - 1;
     LateralSumMatrix lsm(block_size, cross_sum_width);
-    try{
-    for (uint16_t r = 0; r < block_size; ++r)
-        for (uint16_t c = 0; c < block_size; ++c) // 0..510
-            lsm.increment(r, c);
-    }catch(std::overflow_error e){
-        std::cerr << "[FAIL] Verification(2/2): " << e.what() << std::endl;
+
+    try {
+        for (uint16_t r = 0; r < block_size; ++r)
+            for (uint16_t c = 0; c < limit; ++c){ // block_size-1
+                lsm.increment(r, c);
+                std::cout << "("<<r<<","<<c<<")="<< lsm.get(r, c).to_uint16() << std::endl;
+            }
+    } catch (std::overflow_error& error) {
+        std::cerr << "verify_100pct_set() failed(1): " << error.what() << std::endl;
         return EXIT_FAILURE;
     }
-    for(uint16_t r = 0; r < block_size; r++)
-        if(auto sum=lsm.get(r,r).to_uint16(); sum != (block_size-1)){
-            std::cerr << "[FAIL] Verification(1): LSM value expects full set value." << std::endl;
-            return EXIT_FAILURE;
+
+    try {
+        for (uint16_t r = 0; r < block_size; ++r) {
+            uint16_t actual = lsm.get(r, r).to_uint16();
+            if (actual != limit) {
+                std::cerr << "[FAIL] LSM[" << r << "] = "
+                          << actual
+                          << " expected " << limit << std::endl;
+                return EXIT_FAILURE;
+            }
         }
+    } catch (std::overflow_error& error) {
+        std::cerr << "verify_100pct_set() failed(2): " << error.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+
     return EXIT_SUCCESS;
 }
 
