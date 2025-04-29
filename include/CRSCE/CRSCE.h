@@ -4,6 +4,7 @@
 #ifndef CRSCE_H
 #define CRSCE_H
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/FileBuffer.h"
 #include "CRSCE/LHashMatrix.h"
 #include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
@@ -23,11 +24,6 @@ public:
     int compress();
     int decompress();
 
-    //BLOCK_SIZE represents the CRSCE s-value.
-    static constexpr size_t BLOCK_SIZE = 512;
-
-    //CROSS_SUM_WIDTH represents the CRSCE b-value.  b=ciel(log2(s))
-    static constexpr size_t CROSS_SUM_WIDTH = 9;
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
     static constexpr size_t HEADER_LENGTH = 5;
     static constexpr char HEADER[HEADER_LENGTH+1] = "CRSCE"; // Magic bytes without null terminator.
