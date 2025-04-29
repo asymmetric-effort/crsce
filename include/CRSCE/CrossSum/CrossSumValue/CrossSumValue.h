@@ -4,6 +4,7 @@
 #ifndef CRSCE_CROSSSUM_VALUE_H
 #define CRSCE_CROSSSUM_VALUE_H
 
+#include "CRSCE/constants/constants.h"
 #include <bitset>
 #include <cstdint>
 #include <stdexcept>
@@ -20,9 +21,6 @@ public:
     CrossSumValue& operator++();
     CrossSumValue operator++(int);
 
-    // b - number of bits needed to represent one cross sum (b = ceil(log2(s)))
-    static constexpr size_t b = 9;
-    static constexpr uint16_t max_value = (1 << b) - 1; // 511 for 9 bits
 private:
     std::bitset<b> bits;
 };

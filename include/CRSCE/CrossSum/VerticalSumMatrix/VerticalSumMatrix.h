@@ -4,12 +4,13 @@
 #ifndef CRSCE_VERTICAL_SUM_MATRIX_H
 #define CRSCE_VERTICAL_SUM_MATRIX_H
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSum.h"
 
 class VerticalSumMatrix : public CrossSum {
 public:
 
-    explicit VerticalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
+    explicit VerticalSumMatrix();
 
     ~VerticalSumMatrix();
 

@@ -4,6 +4,7 @@
 #ifndef CRSCE_CROSSSUM_H
 #define CRSCE_CROSSSUM_H
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
 #include "CRSCE/CrossSum/CrossSumValue/CrossSumValue.h"
 #include <vector>
@@ -12,7 +13,8 @@
 class CrossSum {
 public:
 
-    explicit CrossSum(const CrossSumIndex cross_sum_size, const CrossSumIndex cross_sum_width);
+    //constructor : initialize a cross sum matrix with constants s and b.
+    explicit CrossSum();
 
     ~CrossSum();
 
@@ -25,9 +27,6 @@ public:
     void serialize(std::ostream& os) const;
 
 protected:
-
-    const CrossSumIndex s;
-    const CrossSumIndex b;
 
     std::vector<CrossSumValue> data;
 

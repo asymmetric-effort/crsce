@@ -4,12 +4,13 @@
 #ifndef CRSCE_LATERAL_SUM_MATRIX_H
 #define CRSCE_LATERAL_SUM_MATRIX_H
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSum.h"
 
 class LateralSumMatrix : public CrossSum {
 public:
 
-    explicit LateralSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
+    explicit LateralSumMatrix();
 
     ~LateralSumMatrix();
 

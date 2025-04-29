@@ -4,12 +4,13 @@
 #ifndef CRSCE_DIAGONAL_SUM_MATRIX_H
 #define CRSCE_DIAGONAL_SUM_MATRIX_H
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSum.h"
 
 class DiagonalSumMatrix : public CrossSum {
 public:
 
-    explicit DiagonalSumMatrix(const CrossSumIndex cross_sum_size,const CrossSumIndex cross_sum_width);
+    explicit DiagonalSumMatrix();
 
     ~DiagonalSumMatrix();
 
