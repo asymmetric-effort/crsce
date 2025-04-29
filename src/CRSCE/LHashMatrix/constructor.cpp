@@ -3,10 +3,10 @@
 
 #include "CRSCE/LHashMatrix.h"
 
-LHashMatrix::LHashMatrix(size_t block_size)
-    : block_size(block_size),
-      row_buffers(block_size, std::vector<bool>(block_size, false)),
-      row_hashes(block_size, "")
+LHashMatrix::LHashMatrix()
+    : block_size(s),
+      row_buffers(s, std::vector<bool>(s, false)),
+      row_hashes(s, "")
 {
     /* noop */
 }

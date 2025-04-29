@@ -4,6 +4,7 @@
 #ifndef CRSCE_LHASHMATRIX_H
 #define CRSCE_LHASHMATRIX_H
 
+#include "CRSCE/constants/constants.h"
 #include "CRSCE/FileBuffer.h"
 #include "CRSCE/crypto/SHA256.h"
 #include <bitset>
@@ -18,7 +19,7 @@
 class LHashMatrix {
 public:
     // class constructor.  Note default block_size represents CRSCE s-value BLOCK_SIZE (512).
-    explicit LHashMatrix(size_t block_size);
+    explicit LHashMatrix();
 
     ~LHashMatrix();
 
