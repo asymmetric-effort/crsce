@@ -4,7 +4,7 @@
 #include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
 
 void bounds_check(const CrossSumIndex index, const CrossSumIndex max_value){
-    if (index >= max_value-1) {
+    if (index > max_value) {
         throw std::overflow_error("Index out of bounds");
     }
 }
