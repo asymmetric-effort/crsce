@@ -18,8 +18,8 @@ uint16_t CrossSumValue::to_uint16() const {
 
 CrossSumValue CrossSumValue::operator+(uint16_t rhs) const {
   uint16_t lhs = this->to_uint16();
-  if (lhs > max_value || rhs > max_value || lhs + rhs > max_value) {
-    throw std::overflow_error("CrossSumValue overflow");
+  if (lhs > s || rhs > s || lhs + rhs > s) {
+    throw std::overflow_error("Value out of bounds");
   }
   return CrossSumValue(lhs + rhs);
 }
@@ -35,6 +35,6 @@ CrossSumValue& CrossSumValue::operator++() {
 
 CrossSumValue CrossSumValue::operator++(int) {
   CrossSumValue temp = *this;
-  ++(*this);
+  *this = *this + 1;
   return temp;
 }
