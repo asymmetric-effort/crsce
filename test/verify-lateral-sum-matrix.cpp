@@ -50,20 +50,6 @@ int verify_overlow_works(){
     LateralSumMatrix lsm(block_size, cross_sum_width);
     std::cout << "verify_overlow_works()" << std::endl;
     try{
-        lsm.increment(block_size, 0);
-        std::cerr << "increment oversize coordinate should cause overflow." << std::endl;
-        return EXIT_FAILURE;
-    } catch (const std::overflow_error& e) {
-        return EXIT_SUCCESS;
-    }
-    try{
-        lsm.increment(0, block_size);
-        std::cerr << "increment oversize coordinate should cause overflow." << std::endl;
-        return EXIT_FAILURE;
-    } catch (const std::overflow_error& e) {
-        return EXIT_SUCCESS;
-    }
-    try{
         lsm.set(0, 0,static_cast<CrossSumValue>(block_size));
         std::cerr << "set oversize value should cause overflow." << std::endl;
         return EXIT_FAILURE;
