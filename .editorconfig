@@ -1,0 +1,40 @@
+# .editorconfig
+# Author: Sam Caldwell
+# Description: EditorConfig rules for the smart-home C++ project
+
+# Top-most EditorConfig file
+root = true
+
+# Global defaults
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Indentation
+indent_style = space
+indent_size = 4
+
+# C++ source files
+[*.{cpp,h,cxx,hxx,cc,hh}]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Shell scripts
+[*.sh]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown
+[*.md]
+trim_trailing_whitespace = false
+
+# CMake
+[CMakeLists.txt]
+indent_style = space
+indent_size = 4
