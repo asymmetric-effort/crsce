@@ -7,17 +7,18 @@ void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
     bounds_check(r);
     bounds_check(c);
 
-    if (row_buffers[r].count() >= s) {
+    if (row_positions[r] >= s) {
         throw std::overflow_error(
-            "Row overflow: more than s bits pushed. sz=" +
-            std::to_string(row_buffers[r].count())
+            "Row overflow: more than s bits pushed. position=" +
+            std::to_string(row_positions[r])
         );
     }
 
     row_buffers[r].set(c, bit_value);
+    row_positions[r]++;  // ✅ track how many bits have been pushed
 
-    // Automatically hash and store once full
-    if (row_buffers[r].count() == s) {
+    // Automatically hash and store once row is full
+    if (row_positions[r] == s) {
         hash_and_store(r);
     }
 }

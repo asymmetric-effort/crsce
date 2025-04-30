@@ -6,7 +6,7 @@
 void LHashMatrix::serialize(std::ostream &os) const {
     for (CrossSumIndex r = 0; r < s; ++r) {
         // Finalize hash if row is full and hash has not been computed
-        if (row_buffers[r].count() == s && row_hashes[r].empty()) {
+        if (row_positions[r] == s && row_hashes[r].empty()) {
             const_cast<LHashMatrix*>(this)->hash_and_store(r);
         }
 
@@ -16,7 +16,7 @@ void LHashMatrix::serialize(std::ostream &os) const {
                 "LHashMatrix::serialize() - Invalid hash length: " + std::to_string(hash.size())
             );
         }
-
+        //write the hash (of a given size)...only the hash is written.
         os.write(hash.data(), hash.size());
     }
 }
