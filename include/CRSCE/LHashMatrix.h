@@ -27,7 +27,7 @@ public:
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;
 
-private:
+protected:
     // Bit buffer for each row
     std::array<std::bitset<s>, s> row_buffers;
 
