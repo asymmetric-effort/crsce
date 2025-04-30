@@ -1,4 +1,4 @@
-// file: src/CRSCE/CrossSum.destructor.cpp
+// file: src/CRSCE/CrossSum.CRSCE.destructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #include "CRSCE/CRSCE.h"
 #include <iostream>
