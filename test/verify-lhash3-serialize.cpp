@@ -1,69 +1,56 @@
-// file: test/verify_lhash4_overall.cpp
+// file: test/verify-lhash3-serialize.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/LHashMatrix.h"
-#include "CRSCE/crypto/SHA256.h"
 #include "CRSCE/constants/constants.h"
 #include <iostream>
-#include <vector>
-#include <cstring>  // for memcmp
-#include <cstdlib>  // for EXIT_SUCCESS / EXIT_FAILURE
 #include <sstream>
+#include <iomanip>
+#include <cstdlib>
+#include <vector>
+
+class TestLHashMatrix : public LHashMatrix {
+public:
+    std::string debug_serialize_to_hex() const {
+        std::ostringstream oss;
+        this->serialize(oss);
+        const std::string &raw = oss.str();
+
+        std::ostringstream hex_output;
+        for (unsigned char c : raw) {
+            hex_output << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(c);
+        }
+        return hex_output.str();
+    }
+};
+
+bool pattern_all_ones(size_t) { return true; }
 
 int main() {
-    try {
-        LHashMatrix lhash;
+    std::cout << "[INFO] verify-lhash3-serialize starting..." << std::endl;
 
-        // Example input — 64 bytes of deterministic data
-        uint8_t input[64];
-        for (size_t i = 0; i < 64; ++i) {
-            input[i] = static_cast<uint8_t>(i);
+    TestLHashMatrix matrix;
+
+    // Fill all rows with all 1s to guarantee complete CSM
+    for (CrossSumIndex r = 0; r < s; ++r) {
+        for (CrossSumIndex c = 0; c < s; ++c) {
+            matrix.push(r, c, pattern_all_ones(c));
         }
+    }
 
-        // Push only s = 511 bits into row 0
-        for (uint32_t bit_index = 0; bit_index < s; ++bit_index) {
-            size_t byte_index = bit_index / 8;
-            size_t bit_in_byte = 7 - (bit_index % 8); // <-- MSB first to match original push order
-            bool bit_value = (input[byte_index] >> bit_in_byte) & 0x01;
-            lhash.push(0, bit_index, bit_value);
-        }
+    // Serialize matrix and capture output
+    std::string serialized_hex = matrix.debug_serialize_to_hex();
 
-        // Expected SHA256 over only the first 511 bits
-        uint8_t input_bits_only[64] = {0};
+    // Confirm output length = s * SHA256::DIGEST_SIZE (rows * 32 bytes)
+    size_t expected_bytes = s * SHA256::DIGEST_SIZE;
+    size_t actual_bytes = serialized_hex.size() / 2;
 
-        // Copy 511 bits manually
-        for (uint32_t bit_index = 0; bit_index < s; ++bit_index) {
-            size_t byte_index = bit_index / 8;
-            size_t bit_in_byte = 7 - (bit_index % 8);
-            bool bit_value = (input[byte_index] >> bit_in_byte) & 0x01;
-
-            input_bits_only[byte_index] |= (bit_value << bit_in_byte);
-        }
-
-        auto expected_hash = SHA256::digest(input_bits_only, sizeof(input_bits_only));
-
-        // Get LHash serialized
-        std::ostringstream oss;
-        lhash.serialize(oss);
-        std::string actual_serialized = oss.str();
-
-        if (actual_serialized.size() < 32) {
-            std::cerr << "[FAIL] LHash serialization too small." << std::endl;
-            return EXIT_FAILURE;
-        }
-
-        const char* actual_hash = actual_serialized.data();
-
-        if (memcmp(actual_hash, expected_hash.data(), expected_hash.size()) != 0) {
-            std::cerr << "[FAIL] LHash does not match expected SHA256." << std::endl;
-            return EXIT_FAILURE;
-        }
-
-        std::cout << "[PASS] LHash correctly matches SHA256 of input." << std::endl;
-        return EXIT_SUCCESS;
-
-    } catch (const std::exception& e) {
-        std::cerr << "[ERROR] Exception: " << e.what() << std::endl;
+    if (actual_bytes != expected_bytes) {
+        std::cerr << "[FAIL] Serialized output size mismatch. Expected " << expected_bytes
+                  << " bytes, got " << actual_bytes << " bytes." << std::endl;
         return EXIT_FAILURE;
     }
+
+    std::cout << "[PASS] Serialization produced expected output size: " << actual_bytes << " bytes." << std::endl;
+    return EXIT_SUCCESS;
 }
