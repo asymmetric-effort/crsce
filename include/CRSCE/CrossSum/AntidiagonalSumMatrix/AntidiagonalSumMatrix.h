@@ -19,8 +19,6 @@ public:
 
     void increment(const CrossSumIndex r, const CrossSumIndex c) override;
 
-  private:
-
     CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
 };
 

@@ -7,5 +7,5 @@
 CrossSumIndex AntidiagonalSumMatrix::transform(const CrossSumIndex r, const CrossSumIndex c) const {
     bounds_check(r);
     bounds_check(c);
-    return (r - c) % s;
+    return (s + (r - c)) % s;
 }
