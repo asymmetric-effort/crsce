@@ -1,4 +1,4 @@
-// file: src/CRSCE/compress.cpp
+// file: src/CRSCE/CRSCE.compress.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #include "CRSCE/CRSCE.h"
 #include "CRSCE/FileBuffer.h"

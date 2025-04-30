@@ -1,4 +1,4 @@
-// file: src/CRSCE/readInputBuffer.cpp
+// file: src/CRSCE/CRSCE.readInputBuffer.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/CRSCE.h"
