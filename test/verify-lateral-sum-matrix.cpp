@@ -12,10 +12,8 @@ int verify_100pct_set() {
 
     try {
         for (uint16_t r = 0; r < s; ++r)
-            for (uint16_t c = 0; c < s; ++c){ // s-1
+            for (uint16_t c = 0; c < s; ++c) // s-1
                 lsm.increment(r, c);
-                std::cout << "("<<r<<","<<c<<")="<< lsm.get(r, c).to_uint16() << std::endl;
-            }
     } catch (std::overflow_error& error) {
         std::cerr << "verify_100pct_set() failed(1): " << error.what() << std::endl;
         return EXIT_FAILURE;
