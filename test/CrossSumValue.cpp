@@ -89,12 +89,46 @@ int test_add_operator(){
     return EXIT_SUCCESS;
 }
 
+int test_to_uint16() {
+    try {
+        // Valid values only
+        CrossSumValue val1(511);  // max
+        if (val1.to_uint16() != 511) {
+            std::cerr << "[FAIL] CrossSumValue(511).to_uint16() != 511, got "
+                      << val1.to_uint16() << std::endl;
+            return EXIT_FAILURE;
+        }
+
+        CrossSumValue val2(341);
+        if (val2.to_uint16() != 341) {
+            std::cerr << "[FAIL] CrossSumValue(341).to_uint16() != 341, got "
+                      << val2.to_uint16() << std::endl;
+            return EXIT_FAILURE;
+        }
+
+        CrossSumValue val3(0);
+        if (val3.to_uint16() != 0) {
+            std::cerr << "[FAIL] CrossSumValue(0).to_uint16() != 0, got "
+                      << val3.to_uint16() << std::endl;
+            return EXIT_FAILURE;
+        }
+
+        std::cout << "[PASS] CrossSumValue::to_uint16() passed all tests.\n";
+        return EXIT_SUCCESS;
+
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception in test_to_uint16: " << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+}
+
 int main() {
     try {
-      if(int exit=test_default_constructor();exit!=EXIT_SUCCESS) return exit;
-      if(int exit=test_initial_value();exit!=EXIT_SUCCESS) return exit;
-      if(int exit=test_increment();exit!=EXIT_SUCCESS) return exit;
-      if(int exit=test_add_operator();exit!=EXIT_SUCCESS) return exit;
+        if(int exit=test_default_constructor();exit!=EXIT_SUCCESS) return exit;
+        if(int exit=test_initial_value();exit!=EXIT_SUCCESS) return exit;
+        if(int exit=test_increment();exit!=EXIT_SUCCESS) return exit;
+        if(int exit=test_add_operator();exit!=EXIT_SUCCESS) return exit;
+        if(int exit=test_to_uint16();exit!=EXIT_SUCCESS) return exit;
         std::cout << "[PASS] All CrossSumValue tests passed." << std::endl;
         return EXIT_SUCCESS;
     } catch (const std::exception& e) {

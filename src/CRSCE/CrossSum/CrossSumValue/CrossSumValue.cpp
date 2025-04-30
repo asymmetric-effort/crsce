@@ -4,14 +4,18 @@
 #include "CRSCE/CrossSum/CrossSumValue/CrossSumValue.h"
 #include <stdexcept>
 
-CrossSumValue::CrossSumValue() : bits(0) {
-  /* noop */
+// Default constructor
+CrossSumValue::CrossSumValue() : bits(0) {}
+
+// Constructor with safety check.
+CrossSumValue::CrossSumValue(uint16_t value) {
+  if (value >= (1u << b)) {
+    throw std::out_of_range("CrossSumValue exceeds allowed bit width");
+  }
+  bits = std::bitset<b>(value);
 }
 
-CrossSumValue::CrossSumValue(uint16_t value) : bits(value) {
-  /* noop */
-}
-
+// return 16-bit unsigned integer representation of value state
 uint16_t CrossSumValue::to_uint16() const {
   return static_cast<uint16_t>(bits.to_ulong());
 }
