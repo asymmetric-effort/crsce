@@ -24,17 +24,17 @@ public:
     }
 };
 
-bool pattern_all_ones(size_t) { return true; }
+bool pattern_all_zeros(size_t, size_t) { return false; }
 
 int main() {
     std::cout << "[INFO] verify-lhash3-serialize starting..." << std::endl;
 
     TestLHashMatrix matrix;
 
-    // Fill all rows with all 1s to guarantee complete CSM
+    // Fill all rows with all 0s to guarantee complete CSM
     for (CrossSumIndex r = 0; r < s; ++r) {
         for (CrossSumIndex c = 0; c < s; ++c) {
-            matrix.push(r, c, pattern_all_ones(c));
+            matrix.push(r, c, pattern_all_zeros(r, c));
         }
     }
 
