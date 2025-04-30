@@ -7,35 +7,37 @@
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/FileBuffer.h"
 #include "CRSCE/crypto/SHA256.h"
+#include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
 #include <bitset>
 #include <cstdint>
 #include <iomanip>
 #include <ostream>
 #include <sstream>
 #include <string>
+#include <array>
 #include <vector>
 #include <stdexcept>
 
 class LHashMatrix {
 public:
-    // class constructor.  Note default block_size represents CRSCE s-value BLOCK_SIZE (512).
-    explicit LHashMatrix();
-
+    // Constructor assumes CRSCE s-value
+    LHashMatrix();
     ~LHashMatrix();
 
-    void push(uint32_t r, uint32_t c, bool bit_value);
-
+    void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;
 
 private:
+    // Bit buffer for each row
+    std::array<std::bitset<s>, s> row_buffers;
 
-    size_t block_size;
+    // Track current position in each row
+    std::array<size_t, s> row_positions;
 
-    std::vector<std::vector<bool>> row_buffers;   // Buffer for each row (before hash)
+    // SHA256 hashes per row
+    std::array<std::string, s> row_hashes;
 
-    std::vector<std::string> row_hashes;           // SHA256 hash result for each row
-
-    void hash_and_store(uint32_t row_index);
+    void hash_and_store(CrossSumIndex row_index);
 };
 
 #endif // CRSCE_LHASHMATRIX_H

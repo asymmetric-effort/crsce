@@ -9,32 +9,28 @@
 #include <ostream>
 
 void CrossSum::serialize(std::ostream &os) const {
-    static constexpr size_t BIT_BUFFER_MASK = 0xFFFFFFFFFFFFFFFF;
-    static constexpr size_t BIT_BUFFER_SIZE = b * 8;
-    std::bitset<BIT_BUFFER_SIZE> bit_buffer;
-    size_t bits_in_buffer = 0;
+    constexpr size_t total_bits = b * s;
+    std::bitset<total_bits> bits;
 
-    for (const auto& value : data) {
-        std::bitset<b> value_bits(value.to_uint16());
+    // Flatten each CrossSumValue into b-bit segments and place into bitset
+    for (size_t i = 0; i < s; ++i) {
+        CrossSumValue val = data[i];
+        std::bitset<b> val_bits(val.to_uint16());
 
-        // Insert value_bits into LSB of bit_buffer
-        bit_buffer |= (std::bitset<BIT_BUFFER_SIZE>(value_bits.to_ullong()) << bits_in_buffer);
-        bits_in_buffer += b; // b = 9
-
-        // While we have enough bits for a full uint64_t
-        if (bits_in_buffer >= FILE_BUFFER_WIDTH) {
-            uint64_t chunk = (bit_buffer & std::bitset<BIT_BUFFER_SIZE>(BIT_BUFFER_MASK)).to_ullong();
-            os.write(reinterpret_cast<const char*>(&chunk), sizeof(chunk));
-
-            // Shift leftover bits into lower positions
-            bit_buffer >>= FILE_BUFFER_WIDTH;
-            bits_in_buffer -= FILE_BUFFER_WIDTH;
+        for (size_t j = 0; j < b; ++j) {
+            bits[i * b + j] = val_bits[j];
         }
     }
 
-    // Write any remaining bits
-    if (bits_in_buffer > 0) {
-        uint64_t final_chunk = (bit_buffer & std::bitset<BIT_BUFFER_SIZE>(BIT_BUFFER_MASK)).to_ullong();
-        os.write(reinterpret_cast<const char*>(&final_chunk), sizeof(final_chunk));
+    // Output the entire bitset to the stream, one byte at a time (MSB-first)
+    for (size_t byte = 0; byte < (total_bits + 7) / 8; ++byte) {
+        uint8_t out = 0;
+        for (size_t bit = 0; bit < 8; ++bit) {
+            size_t index = byte * 8 + bit;
+            if (index < total_bits && bits[index]) {
+                out |= (1 << (7 - bit));
+            }
+        }
+        os.put(static_cast<char>(out));
     }
 }

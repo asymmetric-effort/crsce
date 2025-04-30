@@ -3,6 +3,4 @@
 
 #include "CRSCE/LHashMatrix.h"
 
-LHashMatrix::~LHashMatrix(){
-    /*noop*/
-}
+LHashMatrix::~LHashMatrix() = default;

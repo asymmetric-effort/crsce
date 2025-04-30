@@ -1,19 +1,23 @@
 // file: src/CRSCE/LHashMatrix/push.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "CRSCE/constants/constants.h"
 #include "CRSCE/LHashMatrix.h"
 
+void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
+    bounds_check(r);
+    bounds_check(c);
 
-void LHashMatrix::push(uint32_t r, uint32_t c, bool bit_value) {
-    if (r > max_index || c > max_index) {
-        throw std::out_of_range("LHashMatrix push out of bounds");
+    if (row_buffers[r].count() >= s) {
+        throw std::overflow_error(
+            "Row overflow: more than s bits pushed. sz=" +
+            std::to_string(row_buffers[r].count())
+        );
     }
 
-    row_buffers[r][c] = bit_value;
+    row_buffers[r].set(c, bit_value);
 
-    //We are at the end of the row.
-    if (c >= max_index) {
+    // Automatically hash and store once full
+    if (row_buffers[r].count() == s) {
         hash_and_store(r);
     }
 }
