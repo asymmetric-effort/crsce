@@ -25,8 +25,6 @@ public:
     int decompress();
 
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
-    static constexpr size_t HEADER_LENGTH = 5;
-    static constexpr char HEADER[HEADER_LENGTH+1] = "CRSCE"; // Magic bytes without null terminator.
 
   protected:
     bool readInputBuffer(FileBuffer& buffer);
