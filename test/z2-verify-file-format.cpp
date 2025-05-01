@@ -84,6 +84,25 @@ bool verify_footer(std::ifstream &in) {
     return true;
 }
 
+bool verify_structure(std::ifstream &in, std::streamsize actual_size, uint64_t block_count) {
+    constexpr size_t footer_bytes = 2 * sizeof(uint64_t);
+    constexpr size_t header_bytes = HEADER_LENGTH;
+    const size_t lateral_bits = 4 * s * b;
+    const size_t lateral_bytes = (lateral_bits + 7) / 8;
+    constexpr size_t lhash_bytes = s * 32;
+    constexpr size_t block_bytes = lateral_bytes + lhash_bytes;
+    size_t expected_size = static_cast<size_t>(std::ceil(static_cast<double>(header_bytes + block_count * block_bytes + footer_bytes)));
+
+    if (static_cast<std::size_t>(actual_size) != expected_size) {
+        std::cerr << "[FAIL] File size mismatch." << std::endl;
+        std::cerr << "        Actual:   " << actual_size << " bytes" << std::endl;
+        std::cerr << "        Expected: " << expected_size << " bytes" << std::endl;
+        return false;
+    }
+    std::cout << "[PASS] File size matches expected structure layout." << std::endl;
+    return true;
+}
+
 int main(int argc, char* argv[]) {
     std::string filepath;
     if (argc == 2) {
@@ -103,5 +122,15 @@ int main(int argc, char* argv[]) {
     bool header_ok = verify_header(infile);
     bool footer_ok = verify_footer(infile);
 
-    return (header_ok && footer_ok) ? EXIT_SUCCESS : EXIT_FAILURE;
+    infile.seekg(0, std::ios::end);
+    std::streamsize total_size = infile.tellg();
+    infile.seekg(-2 * sizeof(uint64_t), std::ios::end);
+    uint64_t block_size = 0;
+    uint64_t block_count = 0;
+    infile.read(reinterpret_cast<char*>(&block_size), sizeof(block_size));
+    infile.read(reinterpret_cast<char*>(&block_count), sizeof(block_count));
+
+    bool structure_ok = verify_structure(infile, total_size, block_count);
+
+    return (header_ok && footer_ok && structure_ok) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
