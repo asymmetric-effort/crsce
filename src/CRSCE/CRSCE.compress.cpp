@@ -27,11 +27,15 @@ int CRSCE::compress() {
             AntidiagonalSumMatrix DSM;
 
             uint32_t bit_index = 0;
+            bool block_done = false;
             constexpr uint32_t block_limit = s * s; // limit on bit_index to avoid overflow.
             for (const auto& word : inputBuffer) {
                 for (int bit = FILE_BUFFER_WIDTH - 1; bit >= 0; --bit) {
 
-                    if (bit_index >= block_limit) break;
+                    if (bit_index >= block_limit) {
+                        block_done = true;
+                        break;
+                    }
 
                     bool bit_value = (word >> bit) & 0x01;
                     CrossSumIndex r = bit_index / s;
@@ -56,6 +60,7 @@ int CRSCE::compress() {
                     }
                     ++bit_index;
                 }
+                if (block_done) break;
             }
             if (bit_index % s != 0) {
                 std::cout << "[CRSCE] adding padding bits..." << std::endl;
