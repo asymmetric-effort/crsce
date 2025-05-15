@@ -16,82 +16,85 @@ int CRSCE::compress() {
         outputStream.write(HEADER, HEADER_LENGTH);
 
         uint64_t block_count = 0;
-        for (size_t sz = 0; readInputBuffer(inputBuffer); sz += inputBuffer.size()) {
 
-            std::cout << "[CRSCE] Processing " << std::to_string(sz) << " bytes." << std::endl;
+        // Load the entire input stream into inputBuffer (may contain multiple blocks)
+        while (readInputBuffer(inputBuffer)) {
+            // total_bits: actual number of bits read (one byte = 8 bits)
+            size_t total_bits = inputBuffer.size() * 8;
+            std::cerr << "[CRSCE] Read " << inputBuffer.size()
+                      << " words (" << total_bits << " bits) into inputBuffer." << std::endl;
 
-            LHashMatrix LHASH;
-            LateralSumMatrix LSM;
-            VerticalSumMatrix VSM;
-            DiagonalSumMatrix XSM;
-            AntidiagonalSumMatrix DSM;
+            size_t buf_bit = 0;  // current bit index in inputBuffer
 
-            uint32_t bit_index = 0;
-            bool block_done = false;
-            constexpr uint32_t block_limit = s * s; // limit on bit_index to avoid overflow.
-            for (const auto& word : inputBuffer) {
-                for (int bit = FILE_BUFFER_WIDTH - 1; bit >= 0; --bit) {
+            // Process as many s×s-bit blocks as fit in inputBuffer
+            while (buf_bit < total_bits) {
+                std::cerr << "[CRSCE] Starting block " << block_count << std::endl;
 
-                    if (bit_index >= block_limit) {
-                        block_done = true;
-                        break;
+                // Initialize fresh matrices for this block
+                LHashMatrix LHASH;
+                LateralSumMatrix LSM;
+                VerticalSumMatrix VSM;
+                DiagonalSumMatrix XSM;
+                AntidiagonalSumMatrix DSM;
+
+                size_t block_bits = 0; // bits consumed in current block
+
+                // Fill block with up to s*s bits from inputBuffer
+                while (block_bits < s * s && buf_bit < total_bits) {
+                    // Determine which word and bit to read
+                    size_t word_idx = buf_bit / FILE_BUFFER_WIDTH;
+                    int bit_pos = FILE_BUFFER_WIDTH - 1 - (buf_bit % FILE_BUFFER_WIDTH);
+                    bool bit_value = (inputBuffer[word_idx] >> bit_pos) & 0x01;
+
+                    // Map flat bit index into row/col of the s×s matrix
+                    CrossSumIndex r = block_bits / s;
+                    CrossSumIndex c = block_bits % s;
+
+                    // Update cross-sum matrices
+                    if (bit_value) {
+                        LSM.increment(r, c);
+                        VSM.increment(r, c);
+                        XSM.increment(r, c);
+                        DSM.increment(r, c);
                     }
+                    LHASH.push(r, c, bit_value);
 
-                    bool bit_value = (word >> bit) & 0x01;
-                    CrossSumIndex r = bit_index / s;
-                    CrossSumIndex c = bit_index % s;
-                    std::cout << "bit index: " << bit_index << " ("
-                              << std::to_string(r) << ","
-                              << std::to_string(c) << ") "
-                              << "value: " << std::to_string(bit_value)
-                              << std::endl;
-
-                    try{
-                        if (bit_value) {
-                            LSM.increment(r, c);
-                            VSM.increment(r, c);
-                            XSM.increment(r, c);
-                            DSM.increment(r, c);
-                        }
-                        LHASH.push(r, c, bit_value);
-                    }catch(std::exception& e){
-                        std::cerr << "cross sum ::increment(r, c) error: " << e.what() << std::endl;
-                        return EXIT_FAILURE;
-                    }
-                    ++bit_index;
+                    ++block_bits;
+                    ++buf_bit;
                 }
-                if (block_done) break;
-            }
-            if (bit_index % s != 0) {
-                std::cout << "[CRSCE] adding padding bits..." << std::endl;
-                // Pad all remaining rows/cells in the block if EOF ends mid-block
-                const CrossSumIndex start_r = bit_index / s;
-                for (CrossSumIndex r = start_r; r < s; ++r) {
-                    const CrossSumIndex start_c = (r == start_r ? bit_index % s : 0);
-                    for (CrossSumIndex c = start_c; c < s; ++c) {
+
+                // If this block is incomplete, pad remaining bits with zeros
+                if (block_bits < s * s) {
+                    std::cerr << "[CRSCE] Padding block " << block_count
+                              << " from " << block_bits << " to " << (s*s) << " bits." << std::endl;
+                    for (size_t i = block_bits; i < s * s; ++i) {
+                        CrossSumIndex r = i / s;
+                        CrossSumIndex c = i % s;
                         LHASH.push(r, c, false);
                     }
                 }
-                std::cout << "[CRSCE] ...padding complete." << std::endl;
+
+                // Serialize all five matrices for this block
+                LHASH.serialize(outputStream);
+                LSM.serialize(outputStream);
+                VSM.serialize(outputStream);
+                XSM.serialize(outputStream);
+                DSM.serialize(outputStream);
+                outputStream.flush();
+
+                std::cerr << "[CRSCE] Finished writing block " << block_count << std::endl;
+                ++block_count;
             }
-            LHASH.serialize(outputStream);
-            LSM.serialize(outputStream);
-            VSM.serialize(outputStream);
-            XSM.serialize(outputStream);
-            DSM.serialize(outputStream);
-            outputStream.flush();
-            block_count++;
         }
 
-        // Write the 128-bit file footer
-        {
-            uint64_t block_size_value = s;
-            uint64_t block_count_value = block_count;
-            outputStream.write(reinterpret_cast<const char*>(&block_size_value), sizeof(block_size_value));
-            outputStream.write(reinterpret_cast<const char*>(&block_count_value), sizeof(block_count_value));
-            outputStream.flush();
-        }
+        // Write the 128-bit file footer: block size and block count
+        std::cerr << "[CRSCE] Writing footer. Total blocks: " << block_count << std::endl;
+        uint64_t block_size_value = s;
+        outputStream.write(reinterpret_cast<const char*>(&block_size_value), sizeof(block_size_value));
+        outputStream.write(reinterpret_cast<const char*>(&block_count), sizeof(block_count));
+        outputStream.flush();
 
+        std::cerr << "[CRSCE] Compression finished successfully." << std::endl;
         return EXIT_SUCCESS;
     } catch (const std::exception& e) {
         std::cerr << "[CRSCE] Compression failed: " << e.what() << std::endl;
