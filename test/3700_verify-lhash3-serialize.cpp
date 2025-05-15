@@ -1,4 +1,4 @@
-// file: test/verify-lhash3-serialize.cpp
+// file: test/3700_verify-lhash3-serialize.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/LHashMatrix.h"

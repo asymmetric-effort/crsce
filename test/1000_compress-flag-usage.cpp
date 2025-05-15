@@ -1,4 +1,4 @@
-// file: test/compress-flag-usage.cpp
+// file: test/1000_compress-flag-usage.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include <cstdlib>

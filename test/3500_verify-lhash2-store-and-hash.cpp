@@ -1,4 +1,4 @@
-// file: test/verify-lhash2-store-and-hash.cpp
+// file: test/3500_verify-lhash2-store-and-hash.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/LHashMatrix.h"
