@@ -2,9 +2,11 @@
 .PHONY: build clean configure test
 
 tree:
+	@echo 'create build/file_structure.txt'
 	@tree > build/file_structure.txt
 
-zip:
+zip: tree
+	@echo 'create build/project_files.zip'
 	zip -r build/project_files.zip .
 
 clean:
