@@ -1,6 +1,6 @@
+.DS_Store
 .idea/
-*.pyc
-.DS_Store/
-build/.DS_Store
-*.DS_Store
 build/
+
+*/\~\$*.docx
+*.log
