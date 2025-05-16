@@ -1,25 +1,6 @@
 Decompression Options
 =====================
 
-<script type="text/javascript"
-  src="https://asymmetric-effort.com/js/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']],
-      processEscapes: true},
-      jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
-      extensions: ["tex2jax.js","mml2jax.js","asciimath2jax.js","MathMenu.js","MathZoom.js","AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
-      TeX: {
-      extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
-      equationNumbers: {
-      autoNumber: "AMS"
-      }
-    }
-  });
-</script>
-
 <p>
 <a href="deterministic-elimination.md">"Deterministic Elimination"</a> is a pretty obvious first step in the process. 
 But Radditz Sieve and local search are inefficient, expensive (time and energy). We need better options.
@@ -76,9 +57,9 @@ Below is a table of options:
         knowledge among the rows from a single row-master thread.  This row-master then controls the solution of its 
         row asynchronously.
       </td>
-      <td>85%</td>
-      <td>90%</td>
-      <td>80%</td>
+      <td>99%</td>
+      <td>97%</td>
+      <td>93%</td>
     </tr>
     <tr>
       <td><a href="Path-Integral-QMC-on-GPU.md">Path-Integral QMC on GPU</a></td>
