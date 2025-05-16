@@ -12,9 +12,6 @@ Below is a table of options:
     <tr>
       <th>Option</th>
       <th>Description</th>
-      <th>Algorithmic Fit</th>
-      <th>GPU Maturity</th>
-      <th>Convergence</th>
     </tr>
   </thead>
   <tbody>
@@ -24,9 +21,6 @@ Below is a table of options:
         Deterministic elimination, massively parallel sieve on GPU, CPU-thread sift, and GPU SHA-256 verification 
         in one combined pipeline.  This is the original algorithm.
       </td>
-      <td>95%</td>
-      <td>90%</td>
-      <td>90%</td>
     </tr>
     <tr>
       <td><a href="./LoopyBp.md">Loopy Belief Propagation</a></td>
@@ -34,9 +28,6 @@ Below is a table of options:
         Loopy BP on the factor graph of row/column/diagonal/anti-diagonal constraints, with messages updated in 
         parallel on the GPU. Applying loopy belief propagation to CRSCE had mixed but interesting results.
       </td>
-      <td>80%</td>
-      <td>85%</td>
-      <td>70%</td>
     </tr>
     <tr>
       <td><a href="game-of-life-protocol.md">Game-of-Life Protocol</a></td>
@@ -44,9 +35,6 @@ Below is a table of options:
           until convergence. With GPU parallelism, GOLP was a weekend experiment that performed poorly at first. But
           it inspired some new thinking.
       </td>
-      <td>85%</td>
-      <td>85%</td>
-      <td>80%</td>
     </tr>
     <tr>
       <td><a href="game-of-beliefs-protocol.md">Game of Beliefs Protocol</a></td>
@@ -57,9 +45,6 @@ Below is a table of options:
         knowledge among the rows from a single row-master thread.  This row-master then controls the solution of its 
         row asynchronously.
       </td>
-      <td>99%</td>
-      <td>97%</td>
-      <td>93%</td>
     </tr>
     <tr>
       <td><a href="Path-Integral-QMC-on-GPU.md">Path-Integral QMC on GPU</a></td>
@@ -67,9 +52,6 @@ Below is a table of options:
         Suzuki–Trotter mapping of a transverse-field Ising QUBO, sampled via path-integral Monte Carlo 
         kernels on the GPU. This is a future opportunity to extend CRSCE into a quantum computing model.
       </td>
-      <td>90%</td>
-      <td>75%</td>
-      <td>80%</td>
     </tr>
 </tbody>
 </table>
