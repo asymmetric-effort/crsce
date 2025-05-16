@@ -60,7 +60,11 @@ make test
 ## 📄 Documentation
 
 * [Cross Sums Compression: A Structural Approach to Predictable, Lossless Binary Compression](./docs/theory/CRSCE-2025-v1.docx)
+* [Research: Decompression Options](./docs/theory/research/decompression-options.md)
+* [Project History](./docs/HISTORY.md)
+* [File structure](./docs/CRSCE_File_Structure.md)
 
+---
 © 1993-2025 Asymmetric Effort, LLC. All rights reserved.
 
 
