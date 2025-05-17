@@ -24,7 +24,6 @@ namespace Gpu {
         virtual bool readBuffer(void* dst, const void* src, std::size_t bytes) = 0;
 
         // Task dispatch
-        virtual bool launchTask(const std::function<void()>& task) = 0;
         virtual bool sync() = 0;
 
         // Factory
