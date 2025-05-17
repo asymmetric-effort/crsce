@@ -18,7 +18,7 @@ int main() {
     // Initialize emulator (spawns child process)
     bool initOk = gpu->init();
     tester.assertTrue(initOk, "GPU emulator init() failed");
-    std::cout << "[0100] init() succeeded. Emulator child running." << std::endl;
+    tester.debug("[0100] init() succeeded. Emulator child running.");
 
     // Test IPC by allocating a buffer on the emulator
     const char testVal = static_cast<char>(0x5A);
@@ -35,8 +35,7 @@ int main() {
     bool readOk = gpu->readBuffer(&readVal, devPtr, 1);
     tester.assertTrue(readOk, "readBuffer() failed");
     tester.assertTrue(readVal == testVal, "Round-trip value mismatch");
-    std::cout << "[0100] IPC round-trip succeeded: 0x"
-              << std::hex << static_cast<int>(readVal) << std::dec << std::endl;
+    tester.debug(std::format("IPC round-trip succeeded: 0x{:X}", static_cast<int>(readVal)));
 
     // Free the buffer
     bool freeOk = gpu->freeBuffer(devPtr);
@@ -45,7 +44,7 @@ int main() {
     // Shutdown and sync
     bool syncOk = gpu->sync();
     tester.assertTrue(syncOk, "sync() failed");
-    std::cout << "[0100] sync() succeeded. Emulator child terminated." << std::endl;
+    tester.debug("sync() succeeded. Emulator child terminated.");
 
     return 0;
 }
