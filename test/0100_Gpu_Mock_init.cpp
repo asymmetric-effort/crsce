@@ -7,16 +7,11 @@
 #include <iostream>
 
 int main() {
-#ifdef GPU_EMULATOR
     auto gpu = Gpu::Interface::create();
-    assert(gpu && "Failed to create Emulator instance");
+    assert(gpu && "[0100_Gpu_Mock_init] Failed to create Emulator instance");
 
     bool initialized = gpu->init();
-    assert(initialized && "Emulator initialization failed");
-    std::cout << "Emulator init test passed.\n";
+    assert(initialized && "[0100_Gpu_Mock_init] Emulator initialization failed");
+    std::cout << "[0100_Gpu_Mock_init] Emulator init test passed.\n";
     return 0;
-#else
-    std::cerr << "Error: GPU_EMULATOR flag not defined. Skipping test.\n";
-    return 1;
-#endif
 }
