@@ -1,3 +1,4 @@
+
 // file: src/Gpu/Gpu_create.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #include "Gpu/Interface.h"
@@ -5,9 +6,9 @@
 
 namespace Gpu {
 
-    std::unique_ptr<Interface> Gpu::create() {
+    std::unique_ptr<Interface> Interface::create() {
 #ifdef GPU_EMULATOR
-        return std::make_unique<Emulator::Mock::Emulator>();
+        return std::make_unique<Emulator>();
 #else
         // TODO: return real GPU implementation when available
         return nullptr;
@@ -15,3 +16,4 @@ namespace Gpu {
     }
 
 } // namespace Gpu
+

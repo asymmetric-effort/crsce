@@ -1,6 +1,6 @@
 // file: include/Gpu/Interface.h
+// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
-
 #include <memory>
 
 namespace Gpu {
@@ -8,10 +8,6 @@ namespace Gpu {
     class Interface {
     public:
 
-        // constructor
-        virtual Interface() = default;
-
-        // destructor
         virtual ~Interface() = default;
 
         // Initialize the GPU device or emulator
@@ -24,3 +20,4 @@ namespace Gpu {
     };
 
 } // namespace Gpu
+
