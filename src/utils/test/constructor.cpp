@@ -4,7 +4,7 @@
 #include "utils/test/Tester.h"
 
 // Construct with a test prefix
-Tester::Tester(const std::string& prefix) : prefix(prefix) {
+Tester::Tester(const std::string& prefix,bool terminateOnError) : prefix(prefix),terminateOnError(terminateOnError) {
 
     std::cerr << "[" << prefix << "] Tester Initialized: " << std::endl;
 

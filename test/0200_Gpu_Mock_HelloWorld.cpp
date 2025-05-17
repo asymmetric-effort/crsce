@@ -12,7 +12,7 @@ int main() {
 
     // Create and initialize GPU (emulator)
     auto gpu = Gpu::Interface::create();
-    tester.assertNotNull(gpu.get(), "Failed to create GPU emulator instance");
+    tester.assertNotNull(gpu, "Failed to create GPU emulator instance");
 
     bool initOk = gpu->init();
     tester.assertTrue(initOk, "GPU emulator init() failed");

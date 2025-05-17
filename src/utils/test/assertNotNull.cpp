@@ -12,6 +12,18 @@ void Tester::assertNotNull(const void* ptr, const std::string& message) {
     }
 }
 
+// unique_ptr<void> overload
+void Tester::assertNotNull(const std::unique_ptr<void>& ptr, const std::string& message) {
+    if (ptr.get()) pass();
+    else { std::cerr << '[' << prefix << "] Null unique_ptr<void> assertion failed: "
+                     << message << std::endl; fail(); }
+}
+
+// unique_ptr<Gpu::Interface> overload delegates to raw pointer
+void Tester::assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message) {
+    assertNotNull(ptr.get(), message);
+}
+
 // Overload for shared_ptr convertible to void
 void Tester::assertNotNull(const std::shared_ptr<void>& ptr, const std::string& message) {
     if (ptr.get()) {
@@ -21,6 +33,35 @@ void Tester::assertNotNull(const std::shared_ptr<void>& ptr, const std::string& 
         fail();
     }
 }
+
+
+// Overload for shared_ptr convertible to void
+void Tester::assertNotNull(const std::shared_ptr<int>& ptr, const std::string& message) {
+    assertNotNull(std::static_pointer_cast<void>(ptr), message);
+}
+
+
+// Overload for shared_ptr convertible to void
+void Tester::assertNotNull(const std::shared_ptr<unsigned>& ptr, const std::string& message) {
+    assertNotNull(std::static_pointer_cast<void>(ptr), message);
+}
+
+
+// Overload for shared_ptr convertible to void
+void Tester::assertNotNull(const std::shared_ptr<float>& ptr, const std::string& message) {
+    assertNotNull(std::static_pointer_cast<void>(ptr), message);
+}
+
+// Overload for shared_ptr convertible to void
+void Tester::assertNotNull(const std::shared_ptr<double>& ptr, const std::string& message) {
+    assertNotNull(std::static_pointer_cast<void>(ptr), message);
+}
+
+// Overload for shared_ptr convertible to void
+void Tester::assertNotNull(const std::shared_ptr<char>& ptr, const std::string& message) {
+    assertNotNull(std::static_pointer_cast<void>(ptr), message);
+}
+
 
 // Overload for std::weak_ptr via lock
 void Tester::assertNotNull(const std::weak_ptr<void>& ptr, const std::string& message) {

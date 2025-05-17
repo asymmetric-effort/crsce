@@ -2,14 +2,16 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
 
+#include "Gpu/Interface.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
 class Tester {
 public:
+    const static bool TerminateOnError = true;
     // Construct with a test prefix (e.g., "test/0100_Gpu_mock_init")
-    Tester(const std::string& prefix);
+    Tester(const std::string& prefix, bool terminateOnError=false);
     ~Tester();
 
     // debug: show a debug message
@@ -20,8 +22,19 @@ public:
 
     // assertNotNull passes only if ptr is not null.
     void assertNotNull(const void* ptr, const std::string& message);
+
+    void assertNotNull(const std::unique_ptr<void>& ptr, const std::string& message);
+    void assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message);
+
     void assertNotNull(const std::shared_ptr<void>& ptr, const std::string& message);
+    void assertNotNull(const std::shared_ptr<int>& ptr, const std::string& message);
+    void assertNotNull(const std::shared_ptr<unsigned>& ptr, const std::string& message);
+    void assertNotNull(const std::shared_ptr<float>& ptr, const std::string& message);
+    void assertNotNull(const std::shared_ptr<double>& ptr, const std::string& message);
+    void assertNotNull(const std::shared_ptr<char>& ptr, const std::string& message);
+
     void assertNotNull(const std::weak_ptr<void>& ptr, const std::string& message);
+
 
     // Assert two values are equal; on success counts as pass, on failure counts and logs
     void assertEqual(int a, int b, const std::string& message);
@@ -40,4 +53,5 @@ private:
     std::string prefix;
     unsigned int passScore=0;
     unsigned int failScore=0;
+    bool terminateOnError;
 };
