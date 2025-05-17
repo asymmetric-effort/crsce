@@ -5,8 +5,8 @@
 namespace Gpu {
 
     bool Emulator::writeBuffer(void* dst, const void* src, std::size_t bytes) {
-        if (!dst || !src) return false;
-        std::memcpy(dst, src, bytes);
+        IpcHeader hdr{CommandType::Write, bytes, reinterpret_cast<uint64_t>(dst)};
+        if (!sendCommand(hdr, src)) return false;
         return true;
     }
 

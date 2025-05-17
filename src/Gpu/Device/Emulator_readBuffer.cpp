@@ -5,9 +5,9 @@
 namespace Gpu {
 
     bool Emulator::readBuffer(void* dst, const void* src, std::size_t bytes) {
-        if (!dst || !src) return false;
-        std::memcpy(dst, src, bytes);
-        return true;
+        IpcHeader hdr{CommandType::Read, bytes, reinterpret_cast<uint64_t>(src)};
+        if (!sendCommand(hdr)) return false;
+        return receiveResponse(dst, bytes);
     }
 
 } // namespace Gpu

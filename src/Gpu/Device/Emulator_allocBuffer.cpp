@@ -5,10 +5,10 @@
 namespace Gpu {
 
     void* Emulator::allocBuffer(std::size_t bytes) {
-        void* ptr = std::malloc(bytes);
-        if (!ptr) {
-            std::cerr << "[Emulator] allocBuffer failed to allocate " << bytes << " bytes\n";
-        }
+        IpcHeader hdr{CommandType::Alloc, bytes, 0};
+        if (!sendCommand(hdr)) return nullptr;
+        void* ptr = nullptr;
+        if (!receiveResponse(&ptr, sizeof(ptr))) return nullptr;
         return ptr;
     }
 

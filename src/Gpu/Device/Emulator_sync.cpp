@@ -4,16 +4,18 @@
 
 namespace Gpu {
 
-bool Emulator::sync() {
-    for (pid_t pid : childPids_) {
-        int status = 0;
-        if (waitpid(pid, &status, 0) < 0) {
-            std::perror("[Emulator] waitpid failed");
-            return false;
+    bool Emulator::sync() {
+        if (!isChild_) {
+            // Parent waits for emulator
+            if (emulatorPid_ > 0) {
+                int status;
+                waitpid(emulatorPid_, &status, 0);
+                emulatorPid_ = -1;
+            }
+            return true;
         }
+        // Child: nothing to sync
+        return true;
     }
-    childPids_.clear();
-    return true;
-}
 
 } // namespace Gpu

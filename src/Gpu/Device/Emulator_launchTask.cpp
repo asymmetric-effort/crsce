@@ -4,20 +4,9 @@
 
 namespace Gpu {
 
-bool Emulator::launchTask(const std::function<void()>& task) {
-    pid_t pid = fork();
-    if (pid < 0) {
-        std::perror("[Emulator] fork failed");
-        return false;
+    bool Emulator::launchTask(const std::function<void()>&) {
+        // For now, no-op: tasks execution inside child occurs via commands
+        return true;
     }
-    if (pid == 0) {
-        // Child process: execute task and exit
-        task();
-        _exit(EXIT_SUCCESS);
-    }
-    // Parent process: record child PID
-    childPids_.push_back(pid);
-    return true;
-}
 
 } // namespace Gpu

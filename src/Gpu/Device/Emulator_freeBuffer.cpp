@@ -5,9 +5,8 @@
 namespace Gpu {
 
     bool Emulator::freeBuffer(void* ptr) {
-        if (!ptr) return false;
-        std::free(ptr);
-        return true;
+        IpcHeader hdr{CommandType::Free, 0, reinterpret_cast<uint64_t>(ptr)};
+        return sendCommand(hdr);
     }
 
 } // namespace Gpu
