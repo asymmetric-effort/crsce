@@ -4,6 +4,6 @@
 
 // increment fail score and terminate
 void Tester::fail(){
-    fail_score++;
+    failScore++;
     std::exit(EXIT_FAILURE);
 }

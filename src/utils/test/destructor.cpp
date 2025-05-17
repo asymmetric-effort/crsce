@@ -8,9 +8,9 @@ Tester::~Tester() {
 
     std::cerr <<
         "[" << prefix << "] Tester tear-down: " << std::endl
-        << " Pass: " << pass_score << std::endl
-        << " Fail: " << fail_score << std::endl
-        << "Total: " << (pass_score + fail_score) << std::endl
+        << " Pass: " << passScore << std::endl
+        << " Fail: " << failScore << std::endl
+        << "Total: " << (passScore + failScore) << std::endl
         << std::endl;
 
 }

@@ -4,5 +4,5 @@
 
 // increment pass score and terminate
 void Tester::pass(){
-    pass_score++;
+    passScore++;
 }
