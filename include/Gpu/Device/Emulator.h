@@ -44,7 +44,6 @@ namespace Gpu {
         bool writeBuffer(void* dst, const void* src, std::size_t bytes) override;
         bool readBuffer(void* dst, const void* src, std::size_t bytes) override;
 
-        bool launchTask(const std::function<void()>& task) override;
         bool sync() override;
 
     private:
