@@ -4,12 +4,10 @@
 
 namespace Gpu {
 
-bool Emulator::freeBuffer(void* ptr) {
-    if (!ptr) return false;
-    std::free(ptr);
-    return true;
-}
-
-
+    bool Emulator::freeBuffer(void* ptr) {
+        if (!ptr) return false;
+        std::free(ptr);
+        return true;
+    }
 
 } // namespace Gpu

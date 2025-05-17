@@ -7,7 +7,9 @@
 #include <iostream>
 
 namespace Gpu {
-
+    /**
+     * This class is the interface for graphics processor abstraction.
+     */
     class Interface {
     public:
         virtual ~Interface() = default;
@@ -21,14 +23,20 @@ namespace Gpu {
         // Free GPU memory previously allocated
         virtual bool freeBuffer(void* ptr) = 0;
 
-        // Copy `bytes` from host `src` into GPU memory at `dst`
+        // Copy `bytes` from host `src` into GPU memory (`dst`)
         virtual bool writeBuffer(void* dst, const void* src, std::size_t bytes) = 0;
 
-        // Copy `bytes` from GPU memory at `src` back to host `dst`
+        // Copy `bytes` from GPU memory (`src`) back into host memory (`dst`)
         virtual bool readBuffer(void* dst, const void* src, std::size_t bytes) = 0;
+
+        // Launch an asynchronous task (kernel) on the GPU or emulator
+        // The provided function will be invoked concurrently
+        virtual bool launchTask(const std::function<void()>& task) = 0;
+
+        // Block until all outstanding tasks have completed
+        virtual bool sync() = 0;
 
         // Factory: create concrete implementation based on compile-time flags
         static std::unique_ptr<Interface> create();
     };
-
 } // namespace Gpu

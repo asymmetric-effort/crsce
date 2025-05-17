@@ -4,11 +4,10 @@
 
 namespace Gpu {
 
-bool Emulator::writeBuffer(void* dst, const void* src, std::size_t bytes) {
-    if (!dst || !src) return false;
-    std::memcpy(dst, src, bytes);
-    return true;
-}
-
+    bool Emulator::writeBuffer(void* dst, const void* src, std::size_t bytes) {
+        if (!dst || !src) return false;
+        std::memcpy(dst, src, bytes);
+        return true;
+    }
 
 } // namespace Gpu

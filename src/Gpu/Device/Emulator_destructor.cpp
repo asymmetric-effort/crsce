@@ -6,6 +6,7 @@ namespace Gpu {
 
     Emulator::~Emulator() {
         std::cout << "[Emulator] teardown successful." << std::endl;
+        sync();
     }
 
 } // namespace Gpu

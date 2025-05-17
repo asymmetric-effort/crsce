@@ -4,13 +4,13 @@
 
 namespace Gpu {
 
-void* Emulator::allocBuffer(std::size_t bytes) {
-    void* ptr = std::malloc(bytes);
-    if (!ptr) {
-        std::cerr << "[Emulator] allocBuffer failed to allocate " << bytes << " bytes\n";
+    void* Emulator::allocBuffer(std::size_t bytes) {
+        void* ptr = std::malloc(bytes);
+        if (!ptr) {
+            std::cerr << "[Emulator] allocBuffer failed to allocate " << bytes << " bytes\n";
+        }
+        return ptr;
     }
-    return ptr;
-}
 
 } // namespace Gpu
 
