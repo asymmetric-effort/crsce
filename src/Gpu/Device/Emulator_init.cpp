@@ -5,7 +5,7 @@
 namespace Gpu {
 
     bool Emulator::init() {
-        std::cout <<"[Emulator::init] start";
+        std::cout <<"[Emulator::init] start" << std::endl;
         int pipeToChild[2], pipeFromChild[2];
         if (pipe(pipeToChild) < 0 || pipe(pipeFromChild) < 0) {
             std::perror("[Emulator::init] pipe creation failed");
@@ -24,19 +24,20 @@ namespace Gpu {
             fromChildFd_ = pipeFromChild[0];
             emulatorPid_ = pid;
             isChild_ = false;
-            std::perror("[Emulator::init] done (return:true");
+            std::perror("[Emulator::init] done (pid>0,return:true)");
             return true;
         }
+        std::cout << "[Emulator::init] fork success (launch child:"<<std::to_string(pid)<<")" << std::endl;
         // Child: setup fds and enter loop
         close(pipeToChild[1]);
         close(pipeFromChild[0]);
         toChildFd_   = pipeToChild[0];
         fromChildFd_ = pipeFromChild[1];
         isChild_ = true;
-        std::cout << "[Emulator::init] Child process started.\n";
+        std::cout << "[Emulator::init] Child process started." << std::endl;
         childProcessLoop();
         _exit(EXIT_SUCCESS);
-        std::cout << "[Emulator::init] Child process done.\n";
+        std::cout << "[Emulator::init] Child process done." << std::endl;
 
     }
 
