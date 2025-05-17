@@ -12,6 +12,9 @@ public:
     Tester(const std::string& prefix);
     ~Tester();
 
+    // debug: show a debug message
+    void debug(const std::string& msg);
+
     // assertTrue a condition; on failure, print message and terminate
     void assertTrue(bool condition, const std::string& message);
 
