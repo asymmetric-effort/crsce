@@ -60,9 +60,14 @@ Future GPU backends (e.g., NVIDIA CUDA, AMD ROCm, Apple Metal) should implement 
 - Add kernel dispatch methods, e.g., launchKernel(...), once basic memory operations are proven.
 
 ## File Locations
-- Headers: include/Gpu/Interface.h, include/Gpu/Device/Emulator.h
-- Source: src/Gpu/Gpu_create.cpp, src/Gpu/Device/Emulator.cpp
-- Tests: test/0200_Gpu_HelloWorld.cpp
+### Headers: 
+  - include/Gpu/Interface.h, 
+  - include/Gpu/Device/Emulator.h
+### Source: 
+  - src/Gpu/Gpu_create.cpp, 
+  - src/Gpu/Device/Emulator.cpp
+### Tests: 
+  - test/0200_Gpu_HelloWorld.cpp
 
 ---
 (c) 2025 Asymmetric Effort, LLC. scaldwell@asymmetric-effort.com
