@@ -9,9 +9,12 @@ implementation. It serves as a reference for developers integrating GPU capabili
 The GPU abstraction layer isolates platform- and vendor-specific GPU APIs behind a minimal, consistent interface.
 This allows:
 
-- Pluggable backends: Swap between real GPU drivers and a mock emulator via compile-time flags.
-- Simplified testing: Use the emulator to verify logic without requiring actual GPU hardware.
-- Incremental development: Begin with basic memory and data-transfer operations, extending to kernel dispatch as needed.
+- Pluggable backends: 
+  - Swap between real GPU drivers and a mock emulator via compile-time flags.
+- Simplified testing: 
+  - Use the emulator to verify logic without requiring actual GPU hardware.
+- Incremental development: 
+  - Begin with basic memory and data-transfer operations, extending to kernel dispatch as needed.
 
 ## Interface Methods
 
