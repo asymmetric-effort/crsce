@@ -6,7 +6,7 @@
 namespace Gpu {
 
     std::unique_ptr<Interface> Interface::create() {
-        std::cout << "[Interface::create] Gpu::Interface::create().\n";
+        std::cout << "[Interface::create] Gpu::Interface::create()." << std::endl;
         return std::make_unique<Emulator>();
     }
 
