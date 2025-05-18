@@ -1,4 +1,4 @@
-// file: test/0300_Gpu_Mock_UseThreads.cpp
+// file: test/0300_Gpu_Emulator_UseThreads.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #define GPU_EMULATOR
@@ -9,7 +9,7 @@
 #include <vector>
 
 int main() {
-    Tester tester("test/0300_Gpu_Mock_UseThreads");
+    Tester tester("test/0300_Gpu_Emulator_UseThreads");
 
     auto gpu = Gpu::Interface::create();
     tester.assertNotNull(gpu.get(), "Failed to create GPU emulator instance");

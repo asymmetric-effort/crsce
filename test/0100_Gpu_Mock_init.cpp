@@ -1,15 +1,15 @@
-// file: test/0100_Gpu_Mock_init.cpp
+// file: test/0100_Gpu_Emulator_init.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #define GPU_EMULATOR
 
-#include "Gpu/Interface.h"
+#include "Gpu/Device/Interface.h"
 #include "utils/test/Tester.h"
 #include <iostream>
 #include <cstring>
 
 int main() {
-    Tester tester("test/0100_Gpu_Mock_init");
+    Tester tester("test/0100_Gpu_Emulator_init");
 
     // Create GPU emulator instance
     auto gpu = Gpu::Interface::create();
