@@ -9,7 +9,7 @@
 #include <cstring>
 
 int main() {
-    Tester tester("test/0100_Gpu_Emulator_init");
+    Tester tester("test/0100_Gpu_Emulator_init", TerminateOnError);
 
     // Create GPU emulator instance
     auto gpu = Gpu::Interface::create();

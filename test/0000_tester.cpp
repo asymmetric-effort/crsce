@@ -6,7 +6,7 @@
 #include <string>
 
 int test1(){
-    Tester tester("test/0000_tester::test2", Tester::TerminateOnFailure);
+    Tester tester("test/0000_tester::test2", TerminateOnError);
     tester.assertTrue(true, "true should be true");
     return 0;
 }

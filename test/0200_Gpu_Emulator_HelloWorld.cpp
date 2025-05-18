@@ -8,7 +8,7 @@
 #include <cstring>
 
 int main() {
-    Tester tester("test/0200_Gpu_HelloWorld");
+    Tester tester("test/0200_Gpu_HelloWorld", TerminateOnError);
 
     // Create and initialize GPU (emulator)
     auto gpu = Gpu::Interface::create();
