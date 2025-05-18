@@ -7,10 +7,11 @@ tree:
 
 zip: tree
 	@echo 'create build/project_files.zip'
-	zip -r build/project_files.zip .
+	zip -r ./build/project.zip . -x ".git/*" "build/*"
 
 clean:
 	@rm -rf ./build &> /dev/null || true
+	@mkdir -p ./build &> /dev/null || true
 
 configure:
 	@cmake -G Ninja -S . -B build
