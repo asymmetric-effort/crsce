@@ -50,6 +50,9 @@ public:
     // mark pass
     void pass();
 
+    // skip test - terminates the test without error
+    void skip(const std::string& msg);
+
 private:
 
     void showStatistics();
@@ -57,5 +60,6 @@ private:
     std::string prefix;
     unsigned int passScore=0;
     unsigned int failScore=0;
+    unsigned int skipScore=0;
     ExitOnError onError;
 };
