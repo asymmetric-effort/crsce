@@ -4,9 +4,11 @@
 
 #include "Gpu/Device/Interface.h"
 #include "utils/test/ExitOnError.h"
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <thread>
 
 class Tester {
 public:

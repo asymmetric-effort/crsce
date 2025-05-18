@@ -9,10 +9,12 @@
  * @param t Time in seconds until forced termination (default 60s).
  */
 void Tester::deadline(unsigned t) {
-    std::thread([t, p = prefix]() {
+    // Launch a detached thread that enforces a test timeout
+    std::thread([t, self = this]() {
         std::this_thread::sleep_for(std::chrono::seconds(t));
-        std::cerr << '[' << p << "] Test deadline of " << t << " seconds reached. Exiting." << std::endl;
-        showStatistics();
-        std::exit(EXIT_FAILURE);
+        std::cerr << '[' << self->prefix << "] Test deadline of " << t << " seconds reached. Exiting." << std::endl;
+        // Show pass/fail statistics before exiting
+        self->showStatistics();
+        self->fail();
     }).detach();
 }
