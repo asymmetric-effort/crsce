@@ -53,6 +53,10 @@ public:
     // skip test - terminates the test without error
     void skip(const std::string& msg);
 
+    const int getSkipCount();
+    const int getPassCount();
+    const int getFailCount();
+
 private:
 
     void showStatistics();
