@@ -1,50 +1,72 @@
-// file: test/0100_Gpu_Emulator_init.cpp
+// file: test/0300_Gpu_Mock_UseThreads.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #define GPU_EMULATOR
 
 #include "Gpu/Device/Interface.h"
+#include "Gpu/common/KernelId.h"
 #include "utils/test/Tester.h"
-#include <iostream>
-#include <cstring>
+#include <vector>
+#include <string>
 
 int main() {
-    Tester tester("test/0100_Gpu_Emulator_init", TerminateOnError);
+    Tester tester("test/0300_Gpu_Mock_UseThreads");
 
-    // Create GPU emulator instance
+    // 1) Create and initialize GPU emulator Backend
     auto gpu = Gpu::Interface::create();
-    tester.assertNotNull(gpu, "Failed to create GPU emulator instance");
+    tester.assertNotNull(gpu.get(), "Failed to create GPU emulator instance");
+    tester.assertTrue(gpu->init(), "GPU emulator init() failed");
+    tester.debug("Emulator initialized");
 
-    // Initialize emulator (spawns child process)
-    bool initOk = gpu->init();
-    tester.assertTrue(initOk, "GPU emulator init() failed");
-    tester.debug("[0100] init() succeeded. Emulator child running.");
+    // 2) Prepare host buffer of zeros
+    const size_t count = 8;
+    std::vector<int> hostBuf(count, 0);
 
-    // Test IPC by allocating a buffer on the emulator
-    const char testVal = static_cast<char>(0x5A);
-    char* devPtr = static_cast<char*>(gpu->allocBuffer(1));
+    // 3) Allocate device buffer and copy zeros
+    void* devPtr = gpu->allocBuffer(count * sizeof(int));
     tester.assertNotNull(devPtr, "allocBuffer() returned nullptr");
+    tester.assertTrue(
+        gpu->writeBuffer(devPtr, hostBuf.data(), count * sizeof(int)),
+        "writeBuffer() failed"
+    );
+    tester.debug("Initial data uploaded to device");
 
-    // Write to emulator memory
-    char writeVal = testVal;
-    bool writeOk = gpu->writeBuffer(devPtr, &writeVal, 1);
-    tester.assertTrue(writeOk, "writeBuffer() failed");
+    // 4) Dispatch multiple independent increment kernels
+    const int numTasks = 4;
+    for (int i = 0; i < numTasks; ++i) {
+        bool launched = gpu->launchKernel(
+            Gpu::KernelId::Increment,
+            devPtr,
+            count
+        );
+        tester.assertTrue(launched, "launchKernel() failed");
+    }
+    tester.debug("Launched increment kernels");
 
-    // Read back from emulator memory
-    char readVal = 0;
-    bool readOk = gpu->readBuffer(&readVal, devPtr, 1);
-    tester.assertTrue(readOk, "readBuffer() failed");
-    tester.assertTrue(readVal == testVal, "Round-trip value mismatch");
-    tester.debug(std::format("IPC round-trip succeeded: 0x{:X}", static_cast<int>(readVal)));
+    // ** Read back results before shutdown and sync **
+    tester.assertTrue(
+        gpu->readBuffer(hostBuf.data(), devPtr, count * sizeof(int)),
+        "readBuffer() failed"
+    );
+    tester.debug("Device results read back to host");
 
-    // Free the buffer
-    bool freeOk = gpu->freeBuffer(devPtr);
-    tester.assertTrue(freeOk, "freeBuffer() failed");
+    // 5) Verify each element == numTasks (zero + numTasks increments)
+    for (size_t i = 0; i < count; ++i) {
+        tester.assertEqual(
+            hostBuf[i],
+            numTasks,
+            "Element at index " + std::to_string(i) + " incorrect"
+        );
+    }
+    tester.debug("All elements incremented correctly (" + std::to_string(numTasks) + ")");
 
-    // Shutdown and sync
-    bool syncOk = gpu->sync();
-    tester.assertTrue(syncOk, "sync() failed");
-    tester.debug("sync() succeeded. Emulator child terminated.");
+    // 6) Shutdown and sync
+    tester.assertTrue(gpu->sync(), "sync() failed");
+    tester.debug("sync() succeeded");
 
+    // 7) Cleanup
+    tester.assertTrue(gpu->freeBuffer(devPtr), "freeBuffer() failed");
+
+    tester.debug("Test complete");
     return 0;
 }
