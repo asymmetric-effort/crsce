@@ -5,6 +5,9 @@
 #include <cstddef>
 #include <functional>
 #include <memory>
+#include "Gpu/Device/Emulator.h"
+//ToDo: add more GPU/Device/*.h includes here.
+
 
 namespace Gpu {
 
