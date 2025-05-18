@@ -1,0 +1,18 @@
+// file: src/utils/test/deadline.cpp
+// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
+#include "utils/test/Tester.h"
+
+/**
+ * @brief Set a maximum duration (in seconds) for this test.
+ * If the deadline elapses before the test completes, the process exits.
+ * @param t Time in seconds until forced termination (default 60s).
+ */
+void Tester::deadline(unsigned t) {
+    std::thread([t, p = prefix]() {
+        std::this_thread::sleep_for(std::chrono::seconds(t));
+        std::cerr << '[' << p << "] Test deadline of " << t << " seconds reached. Exiting." << std::endl;
+        showStatistics();
+        std::exit(EXIT_FAILURE);
+    }).detach();
+}

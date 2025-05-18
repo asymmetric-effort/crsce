@@ -2,6 +2,6 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
 
-typedef bool ExitOnError;
+using ExitOnError = bool;
 constexpr ExitOnError TerminateOnError=true;
 constexpr ExitOnError NoTerminateOnError=false;

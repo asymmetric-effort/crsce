@@ -15,9 +15,6 @@ public:
     Tester(const std::string& prefix, ExitOnError onError=false);
     ~Tester();
 
-    // debug: show a debug message
-    void debug(const std::string& msg);
-
     // assertTrue a condition; on failure, print message and terminate
     void assertTrue(bool condition, const std::string& message);
 
@@ -53,9 +50,20 @@ public:
     // skip test - terminates the test without error
     void skip(const std::string& msg);
 
+    // getters...
     const int getSkipCount();
     const int getPassCount();
     const int getFailCount();
+
+    /**
+     * @brief Set a maximum duration (in seconds) for this test.
+     * If the deadline elapses before the test completes, the process exits.
+     * @param t Time in seconds until forced termination (default 60s).
+     */
+    void deadline(unsigned t = 60);
+
+    // debug: show a debug message
+    void debug(const std::string& msg);
 
 private:
 
