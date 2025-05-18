@@ -1,4 +1,4 @@
-// file: src/Gpu/Device/Emulator_reset.cpp
+// file: src/Gpu/Device/reset.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Device/Emulator/Emulator.h"
