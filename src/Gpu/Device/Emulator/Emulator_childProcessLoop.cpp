@@ -1,9 +1,10 @@
 // file: src/Gpu/Device/Emulator_childProcessLoop.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "Gpu/Device/Emulator.h"
-#include "Gpu/KernelRegistry.h"
-#include "Gpu/KernelId.h"
+#include "Gpu/Device/Emulator/Emulator.h"
+#include "Gpu/common/KernelRegistry.h"
+#include "Gpu/common/CommandType.h"
+#include "Gpu/common/KernelId.h"
 #include <vector>
 #include <cstring>
 #include <unistd.h>

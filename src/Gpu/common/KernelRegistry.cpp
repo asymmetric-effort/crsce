@@ -1,7 +1,7 @@
 // file: src/Gpu/KernelRegistry.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "Gpu/common/Kernel.h"
+#include "Gpu/common/KernelRegistry.h"
 
 namespace Gpu {
 
@@ -19,3 +19,5 @@ namespace Gpu {
         if (it != table_.end()) return it->second.get();
         return nullptr;
     }
+
+} // namespace Gpu

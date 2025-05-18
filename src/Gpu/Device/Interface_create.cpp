@@ -1,6 +1,8 @@
-// file: src/Gpu/Gpu_create.cpp
+// file: src/Gpu/Interface_create.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
 #include "Gpu/Device/Interface.h"
+#include "Gpu/Device/Emulator/Emulator.h"
 
 namespace Gpu {
 

@@ -2,11 +2,12 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
 
+#include "Gpu/common/KernelId.h"
 #include <cstddef>
+#include <cstdint>
 #include <functional>
+#include <iostream>
 #include <memory>
-#include "Gpu/Device/Emulator.h"
-//ToDo: add more GPU/Device/*.h includes here.
 
 
 namespace Gpu {
@@ -25,6 +26,8 @@ namespace Gpu {
         // Data transfer
         virtual bool writeBuffer(void* dst, const void* src, std::size_t bytes) = 0;
         virtual bool readBuffer(void* dst, const void* src, std::size_t bytes) = 0;
+
+        virtual bool launchKernel(KernelId id, void* buffer, std::size_t count) =0;
 
         // Task dispatch
         virtual bool sync() = 0;
