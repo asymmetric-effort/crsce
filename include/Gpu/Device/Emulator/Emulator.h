@@ -2,6 +2,8 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
 
+#include "Gpu/common/KernelRegistry.h"
+#include "Gpu/common/CommandType.h"
 #include "Gpu/Device/Interface.h"
 #include "Gpu/common/IpcHeader.h"
 #include "Gpu/common/KernelId.h"
