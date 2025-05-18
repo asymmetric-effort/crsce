@@ -59,6 +59,13 @@ int test2(){
     return 0;
 }
 
+int test3(){
+    Tester tester("test/0000_tester::test3", NoTerminateOnError);
+    tester.skip("testing skipper");
+    if (tester.getSkipCount()==0) return 1;
+    return 0;
+}
+
 int main() {
     if (auto exit_code=test1()) return exit_code;
     if (auto exit_code=test2()) return exit_code;
