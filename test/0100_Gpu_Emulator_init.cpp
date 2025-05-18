@@ -41,10 +41,10 @@ int main() {
     bool freeOk = gpu->freeBuffer(devPtr);
     tester.assertTrue(freeOk, "freeBuffer() failed");
 
-    // Shutdown and sync
-    bool syncOk = gpu->sync();
-    tester.assertTrue(syncOk, "sync() failed");
-    tester.debug("sync() succeeded. Emulator child terminated.");
+    // Shutdown and wait
+    bool waitOk = gpu->wait();
+    tester.assertTrue(waitOk, "wait() failed");
+    tester.debug("wait() succeeded. Emulator child terminated.");
 
     return 0;
 }
