@@ -3,7 +3,7 @@
 
 #define GPU_EMULATOR
 
-#include "Gpu/Interface.h"
+#include "Gpu/Device/Interface.h"
 #include "utils/test/Tester.h"
 #include <cstring>
 
