@@ -1,6 +1,5 @@
-// file: include/utils/getEnv/Integer.h
+// file: include/utils/getEnv/Integer.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-#pragma once
 
 #include <cstdlib>
 #include <string>
@@ -23,3 +22,6 @@ namespace getEnv {
             return defaultValue;
         }
     }
+
+} // namespace getEnv
+
