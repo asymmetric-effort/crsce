@@ -16,9 +16,13 @@ namespace Gpu {
 
 void Emulator::childProcessLoop() {
     while (true) {
+
         IpcHeader hdr;
+
         ssize_t n = read(toChildFd_, &hdr, sizeof(hdr));
+
         if (n != sizeof(hdr)) break;
+
         switch (hdr.type) {
             case CommandType::Alloc: {
                 void* ptr = std::malloc(hdr.size);
@@ -55,7 +59,14 @@ void Emulator::childProcessLoop() {
                 }
                 break;
             }
-            case CommandType::Shutdown:
+            case CommandType::Wait: {
+                // Respond to Wait: simply send an empty acknowledgement
+                // Writing zero bytes is fine; ensure sendCommand picks up completion
+                write(fromChildFd_, nullptr, 0);
+                break;
+            }
+            case CommandType::Reset:
+                //ToDo: Reset the GPU
                 return;
             default:
                 std::cerr << "[Emulator] Unknown command " << static_cast<int>(hdr.type) << std::endl;

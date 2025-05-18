@@ -35,22 +35,28 @@ namespace Gpu {
 
         bool launchKernel(KernelId id, void* buffer, std::size_t count) override;
 
-        bool sync() override;
+        /**
+         * @brief Block until all previously dispatched commands finish.
+         * @see docs/Gpu/Abstract/wait.md
+         * @return 0 on success, non-zero error code on failure.
+         */
+        int wait() override;
+
+        /**
+         * @brief Reset the device context, releasing all resources.
+         * @see docs/Gpu/Abstract/reset.md for details on cross-backend behavior.
+         */
+        void reset() override;
 
     private:
 
         int     toChildFd_   = -1;       // write commands to child
-
         int     fromChildFd_ = -1;       // read responses from child
-
         pid_t   emulatorPid_ = -1;       // PID of emulator process
-
         bool    isChild_     = false;    // flag for child context
 
         bool sendCommand(const IpcHeader& hdr, const void* payload = nullptr);
-
         bool receiveResponse(void* payload, size_t size);
-
         void childProcessLoop();
 
     };

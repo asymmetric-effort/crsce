@@ -2,6 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
 
+#include "Gpu/common/KernelId.h"
 #include <cstddef>
 #include <cstdint>
 #include <memory>
@@ -31,14 +32,14 @@ public:
 
     /**
      * @brief Block until all previously dispatched commands finish.
-     * See docs/Gpu/Abstract/wait.md for details on cross-backend behavior.
+     * @see docs/Gpu/Abstract/wait.md
      * @return 0 on success, non-zero error code on failure.
      */
     virtual int wait() = 0;
 
     /**
      * @brief Reset the device context, releasing all resources.
-     * See docs/Gpu/Abstract/reset.md for details on cross-backend behavior.
+     * @see docs/Gpu/Abstract/reset.md for details on cross-backend behavior.
      */
     virtual void reset() = 0;
 

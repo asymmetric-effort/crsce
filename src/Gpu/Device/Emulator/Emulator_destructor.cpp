@@ -8,7 +8,7 @@ namespace Gpu {
         std::cout << "[Emulator] teardown started." << std::endl;
         if (!isChild_ && emulatorPid_ > 0) {
             // Send shutdown command
-            IpcHeader hdr{CommandType::Shutdown,0,0};
+            IpcHeader hdr{CommandType::Reset,0,0};
             sendCommand(hdr);
             // Wait for child to exit
             int status;
