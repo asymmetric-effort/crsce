@@ -10,6 +10,7 @@
 
 int main() {
     Tester tester("test/0100_Gpu_Emulator_init", TerminateOnError);
+    tester.deadline(/*default 60s*/);
 
     // Create GPU emulator instance
     auto gpu = Gpu::Interface::create();
