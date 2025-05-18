@@ -2,16 +2,17 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 #pragma once
 
-#include "Gpu/Interface.h"
+#include "Gpu/Device/Interface.h"
+#include "utils/test/ExitOnError.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
 
 class Tester {
 public:
-    const static bool TerminateOnError = true;
+
     // Construct with a test prefix (e.g., "test/0100_Gpu_mock_init")
-    Tester(const std::string& prefix, bool terminateOnError=false);
+    Tester(const std::string& prefix, ExitOnError onError=false);
     ~Tester();
 
     // debug: show a debug message
@@ -50,8 +51,11 @@ public:
     void pass();
 
 private:
+
+    void showStatistics();
+
     std::string prefix;
     unsigned int passScore=0;
     unsigned int failScore=0;
-    bool terminateOnError;
+    ExitOnError onError;
 };
