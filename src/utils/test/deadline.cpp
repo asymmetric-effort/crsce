@@ -14,7 +14,6 @@ void Tester::deadline(unsigned t) {
         std::this_thread::sleep_for(std::chrono::seconds(t));
         std::cerr << '[' << self->prefix << "] Test deadline of " << t << " seconds reached. Exiting." << std::endl;
         // Show pass/fail statistics before exiting
-        self->showStatistics();
         self->fail();
     }).detach();
 }
