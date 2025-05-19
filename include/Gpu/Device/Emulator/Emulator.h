@@ -16,9 +16,11 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <unordered_set>
 #include <vector>
 
 namespace Gpu {
+
 
     class Emulator : public Interface {
     public:
@@ -36,6 +38,8 @@ namespace Gpu {
         bool readBuffer(void* dst, const void* src, std::size_t bytes) override;
 
         bool launchKernel(KernelId id, void* buffer, std::size_t count) override;
+
+        void shutdown() override;
 
         /**
          * @brief Block until all previously dispatched commands finish.
@@ -56,6 +60,9 @@ namespace Gpu {
         int     fromChildFd_ = -1;       // read responses from child
         pid_t   emulatorPid_ = -1;       // PID of emulator process
         bool    isChild_     = false;    // flag for child context
+        bool    childActive_ = false;
+
+        std::unordered_set<void*> allocations_;
 
         bool sendCommand(const IpcHeader& hdr, const void* payload = nullptr);
         bool receiveResponse(void* payload, size_t size);

@@ -32,6 +32,7 @@ namespace Gpu {
             fromChildFd_ = pipeFromChild[0];
             emulatorPid_ = pid;
             isChild_     = false;
+            childActive_ = true;
             return true;
         }
         // Child setup
@@ -39,6 +40,7 @@ namespace Gpu {
         close(pipeFromChild[0]);
         toChildFd_   = pipeToChild[0];
         fromChildFd_ = pipeFromChild[1];
+        childActive_ = true;
         isChild_     = true;
         std::cout << "[Emulator] Child process started.\n";
         childProcessLoop();

@@ -11,7 +11,6 @@
 int main() {
     Tester tester("test/0300_Gpu_Emulator_UseThreads", TerminateOnError);
     tester.deadline(/*default 60s*/);
-    tester.skip("disabled for debugging");
 
     auto gpu = Gpu::Interface::create();
     tester.assertNotNull(gpu.get(), "Failed to create GPU emulator instance");

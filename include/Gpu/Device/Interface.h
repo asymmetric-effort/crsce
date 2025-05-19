@@ -30,6 +30,8 @@ public:
     /// Dispatch a named kernel on the device
     virtual bool launchKernel(KernelId id, void* buffer, std::size_t count) = 0;
 
+    virtual void shutdown() = 0;
+
     /**
      * @brief Block until all previously dispatched commands finish.
      * @see docs/Gpu/Abstract/wait.md
