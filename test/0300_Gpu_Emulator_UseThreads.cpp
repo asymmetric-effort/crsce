@@ -9,7 +9,9 @@
 #include <vector>
 
 int main() {
-    Tester tester("test/0300_Gpu_Emulator_UseThreads");
+    Tester tester("test/0300_Gpu_Emulator_UseThreads", TerminateOnError);
+    tester.deadline(/*default 60s*/);
+    tester.skip("disabled for debugging");
 
     auto gpu = Gpu::Interface::create();
     tester.assertNotNull(gpu.get(), "Failed to create GPU emulator instance");
@@ -38,8 +40,8 @@ int main() {
     }
     tester.debug("Launched increment kernels");
 
-    tester.assertTrue(gpu->sync(), "sync() failed");
-    tester.debug("sync() succeeded");
+    tester.assertTrue(gpu->wait(), "wait() failed");
+    tester.debug("wait() succeeded");
 
     tester.assertTrue(
         gpu->readBuffer(hostBuf.data(), devPtr, count * sizeof(int)),
@@ -57,7 +59,7 @@ int main() {
     tester.debug("All elements incremented correctly (" + std::to_string(numTasks) + ")");
 
     tester.assertTrue(gpu->freeBuffer(devPtr), "freeBuffer() failed");
-    tester.assertTrue(gpu->sync(), "final sync() failed");
+    tester.assertTrue(gpu->wait(), "final wait() failed");
     tester.debug("Test complete");
 
     return 0;

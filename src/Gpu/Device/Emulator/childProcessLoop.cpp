@@ -53,7 +53,8 @@ void Emulator::childProcessLoop() {
             case CommandType::Wait: {
                 // Respond to Wait: simply send an empty acknowledgement
                 // Writing zero bytes is fine; ensure sendCommand picks up completion
-                write(fromChildFd_, nullptr, 0);
+                char ack = 0;  // dummy response
+                write(fromChildFd_, &ack, 1);
                 break;
             }
             case CommandType::Reset:

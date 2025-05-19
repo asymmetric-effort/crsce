@@ -10,7 +10,7 @@
 
 int main() {
     Tester tester("test/0100_Gpu_Emulator_init", TerminateOnError);
-    tester.deadline(/*default 60s*/);
+    tester.deadline(30);
 
     // Create GPU emulator instance
     auto gpu = Gpu::Interface::create();
@@ -43,8 +43,9 @@ int main() {
     tester.assertTrue(freeOk, "freeBuffer() failed");
 
     // Shutdown and wait
+    tester.debug("Waiting on threads");
     bool waitOk = gpu->wait();
-    tester.assertTrue(waitOk, "wait() failed");
+    tester.assertTrue(waitOk==1, "wait() failed");
     tester.debug("wait() succeeded. Emulator child terminated.");
 
     return 0;

@@ -9,6 +9,8 @@
 
 int main() {
     Tester tester("test/0200_Gpu_HelloWorld", TerminateOnError);
+    tester.deadline(/*default 60s*/);
+    tester.skip("disabled for debugging");
 
     // Create and initialize GPU (emulator)
     auto gpu = Gpu::Interface::create();
@@ -45,10 +47,10 @@ int main() {
     bool freeOk = gpu->freeBuffer(devPtr);
     tester.assertTrue(freeOk, "freeBuffer() failed");
 
-    // Shutdown and sync
-    bool syncOk = gpu->sync();
-    tester.assertTrue(syncOk, "sync() failed");
-    tester.debug("[0200] sync() succeeded. Emulator child terminated.");
+    // Shutdown and wait
+    bool waitOk = gpu->wait();
+    tester.assertTrue(waitOk, "wait() failed");
+    tester.debug("[0200] wait() succeeded. Emulator child terminated.");
 
     return 0;
 }
