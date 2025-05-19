@@ -10,7 +10,6 @@
 int main() {
     Tester tester("test/0200_Gpu_HelloWorld", TerminateOnError);
     tester.deadline(/*default 60s*/);
-    tester.skip("disabled for debugging");
 
     // Create and initialize GPU (emulator)
     auto gpu = Gpu::Interface::create();
