@@ -17,8 +17,9 @@ public:
     Tester(const std::string& prefix, ExitOnError onError=false);
     ~Tester();
 
-    // assertTrue a condition; on failure, print message and terminate
+    // assert<True|False> a condition; on failure, print message and terminate
     void assertTrue(bool condition, const std::string& message);
+    void assertFalse(bool condition, const std::string& message);
 
     // assertNotNull passes only if ptr is not null.
     void assertNotNull(const void* ptr, const std::string& message);
@@ -34,7 +35,6 @@ public:
     void assertNotNull(const std::shared_ptr<char>& ptr, const std::string& message);
 
     void assertNotNull(const std::weak_ptr<void>& ptr, const std::string& message);
-
 
     // Assert two values are equal; on success counts as pass, on failure counts and logs
     void assertEqual(int a, int b, const std::string& message);
