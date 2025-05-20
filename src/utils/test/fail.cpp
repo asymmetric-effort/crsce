@@ -10,3 +10,8 @@ void Tester::fail(){
         std::exit(EXIT_FAILURE);
     }
 }
+
+void Tester::fail(const std::string& msg){
+    debug(msg);
+    fail();
+}

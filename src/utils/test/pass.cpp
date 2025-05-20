@@ -6,3 +6,8 @@
 void Tester::pass(){
     passScore++;
 }
+
+void Tester::pass(const std::string& msg){
+    debug(msg);
+    pass();
+}
