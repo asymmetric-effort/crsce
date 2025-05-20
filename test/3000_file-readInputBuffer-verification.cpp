@@ -1,10 +1,11 @@
 // file: test/3000_file-readInputBuffer-verification.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include <string>
-#include "CRSCE/Reader.h"
-#include "utils/compareFiles.h"
 #include "utils/generateRandomFile.h"
+#include "utils/test/Tester.h"
+#include "utils/compareFiles.h"
+#include "CRSCE/Reader.h"
+#include <string>
 
 namespace fs = std::filesystem;
 
@@ -13,32 +14,18 @@ const std::string output_test_file = "build/file-readInputBuffer-verification.ou
 constexpr size_t test_file_size = 4 * 1024 * 1024; // 4 MiB
 
 int main() {
-    try {
+    Tester tester("test/3000_file-readInputBuffer-verification", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
 
-        std::cout << "Starting...\n"
-                  << "Generating random file."
-                  << std::endl;
+    tester.debug("Starting...\nGenerating random file.");
 
-        generateRandomFile(input_test_file,test_file_size);
+    generateRandomFile(input_test_file,test_file_size);
 
-        {
-            Reader testCompressor(input_test_file, output_test_file);
-            FileBuffer buffer;
-            while (testCompressor.readFile(buffer)) {
-                testCompressor.write(buffer);
-            }
-        }
+    Reader testCompressor(input_test_file, output_test_file);
+    FileBuffer buffer;
+    while (testCompressor.readFile(buffer))
+        testCompressor.write(buffer);
 
-        if (compareFiles(input_test_file, output_test_file)) {
-            std::cout << "[PASS] Files are identical." << std::endl;
-            return EXIT_SUCCESS;
-        } else {
-            std::cerr << "[FAIL] Files are different." << std::endl;
-            return EXIT_FAILURE;
-        }
-
-    } catch (const std::exception& e) {
-        std::cerr << "[ERROR] Exception occurred: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    }
+    tester.assertTrue(compareFiles(input_test_file, output_test_file),"Files should be identical");
 }
