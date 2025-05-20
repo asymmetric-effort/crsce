@@ -7,9 +7,12 @@ namespace Gpu {
 
     namespace Cpl {
 
-        void handleWait(int fromChildFd_) {
-            char ack = 0;
-            write(fromChildFd_, &ack, 1);
+        void handleReset(PointerTracker& allocations) {
+            for (void* ptr : allocations) {
+                std::free(ptr);
+            }
+            allocations.clear();
+            std::cerr << "[Emulator] All GPU buffers freed. Emulator reset.\n";
         }
 
     } // namespace Cpl

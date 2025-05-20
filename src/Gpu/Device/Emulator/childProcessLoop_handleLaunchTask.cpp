@@ -7,7 +7,7 @@ namespace Gpu {
 
     namespace Cpl {
 
-        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, const Gpu::PointerTracker& allocations) {
+        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, PointerTracker& allocations) {
             void* buffer = reinterpret_cast<void*>(hdr.ptr);
 
             if (allocations.find(buffer) == allocations.end()) {

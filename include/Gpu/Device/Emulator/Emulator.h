@@ -22,7 +22,6 @@
 
 namespace Gpu {
 
-
     class Emulator : public Interface {
     public:
         Emulator();
@@ -72,13 +71,13 @@ namespace Gpu {
     }; // class Emulator
 
     namespace Cpl {
-        void handleAlloc(const IpcHeader& hdr, int fromChildFd, Gpu::PointerTracker& allocations);
-        void handleFree(const IpcHeader& hdr, Gpu::PointerTracker& allocations);
-        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, const Gpu::PointerTracker& allocations);
-        void handleRead(int fromChildFd_, const IpcHeader& hdr, const Gpu::PointerTracker& allocations);
-        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, const Gpu::PointerTracker& allocations);
+        void handleAlloc(const IpcHeader& hdr, int fromChildFd, const PointerTracker& allocations);
+        void handleFree(const IpcHeader& hdr, const PointerTracker& allocations);
+        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, const PointerTracker& allocations);
+        void handleRead(int fromChildFd_, const IpcHeader& hdr, const PointerTracker& allocations);
+        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, const PointerTracker& allocations);
         void handleWait(int fromChildFd_);
-        void handleReset(Gpu::PointerTracker& allocations);
+        void handleReset(const PointerTracker& allocations);
     }
 
 } // namespace Gpu

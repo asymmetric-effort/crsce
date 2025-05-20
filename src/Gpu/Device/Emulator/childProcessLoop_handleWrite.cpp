@@ -6,7 +6,7 @@
 namespace Gpu {
 
     namespace Cpl {
-        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, const Gpu::PointerTracker& allocations) {
+        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations) {
             void* dst = reinterpret_cast<void*>(hdr.ptr);
 
             if (allocations.find(dst) == allocations.end()) {

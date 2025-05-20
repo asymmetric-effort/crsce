@@ -7,7 +7,7 @@ namespace Gpu {
 
     namespace Cpl {
 
-        void handleReset(Gpu::PointerTracker& allocations) {
+        void handleReset(PointerTracker& allocations) {
             for (void* ptr : allocations) {
                 std::free(ptr);
             }

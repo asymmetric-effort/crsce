@@ -7,7 +7,7 @@ namespace Gpu {
 
     namespace Cpl {
 
-        void handleAlloc(const IpcHeader& hdr, int fromChildFd, Gpu::PointerTracker& allocations) {
+        void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations) {
             void* ptr = std::malloc(hdr.size);
             if (ptr) allocations.insert(ptr);
             write(fromChildFd, &ptr, sizeof(ptr));  // Must send back pointer

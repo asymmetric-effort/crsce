@@ -6,7 +6,7 @@
 namespace Gpu {
 
     namespace Cpl {
-        void handleFree(const IpcHeader& hdr, Gpu::PointerTracker& allocations) {
+        void handleFree(const IpcHeader& hdr, PointerTracker& allocations) {
             void* ptr = reinterpret_cast<void*>(hdr.ptr);
             auto it = allocations.find(ptr);
             if (it != allocations.end()) {

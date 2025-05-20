@@ -6,5 +6,5 @@
 #include <unordered_set>
 
 namespace Gpu {
-    using PointerTracker = Gpu::PointerTracker;
+    using PointerTracker = std::unordered_set<void*>;
 }
