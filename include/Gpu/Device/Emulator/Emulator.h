@@ -65,7 +65,7 @@ namespace Gpu {
         Gpu::PointerTracker allocations_;
 
         bool sendCommand(const IpcHeader& hdr, const void* payload = nullptr);
-        bool receiveResponse(void* payload, size_t size);
+        bool receiveResponse(void* payload, size_t size) const;
         void childProcessLoop();
 
         // start: methods used by childProcessLoop

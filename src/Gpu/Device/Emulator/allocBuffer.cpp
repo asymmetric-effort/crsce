@@ -12,9 +12,11 @@ namespace Gpu {
             static_cast<uint64_t>(bytes), // size
             0                              // ptr unused for alloc
         };
-        if (!sendCommand(hdr)) return nullptr;
+        if (!sendCommand(hdr))
+            return nullptr;
         void* ptr = nullptr;
-        if (!receiveResponse(&ptr, sizeof(ptr))) return nullptr;
+        if (!receiveResponse(&ptr, sizeof(ptr)))
+            return nullptr;
         return ptr;
     }
 
