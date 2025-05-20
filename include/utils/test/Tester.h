@@ -43,6 +43,11 @@ public:
     void assertEqual(float a, float b, const std::string& message);
     void assertEqual(double a, double b, const std::string& message);
 
+    void assertNotEqual(int a, int b, const std::string& message);
+    void assertNotEqual(unsigned a, unsigned b, const std::string& message);
+    void assertNotEqual(char a, char b, const std::string& message);
+    void assertNotEqual(float a, float b, const std::string& message);
+    void assertNotEqual(double a, double b, const std::string& message);
     // mark failure
     void fail();
 
