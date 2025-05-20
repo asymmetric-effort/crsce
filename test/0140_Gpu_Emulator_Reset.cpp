@@ -31,6 +31,12 @@ int main() {
     // Post-reset: buffer should no longer be valid
     std::vector<int> zeroBuf(count, 0);
 
+    // Undefined GPU behavior should always be handled safely by our abstraction layer.
+    tester.assertFalse(
+        gpu->readBuffer(hostBuf.data(), devPtr, count * sizeof(int)),
+        "readBuffer() unexpectedly succeeded after reset"
+    );
+
     // Post-reset: new buffer should be allocatable and usable
     void* newDevPtr = gpu->allocBuffer(count * sizeof(int));
     tester.assertNotNull(newDevPtr, "allocBuffer() after reset returned nullptr");

@@ -27,7 +27,7 @@ int main() {
                 }
         }
 
-        tester.AssertNotEqual(
+        tester.assertNotEqual(
                 index_count.size(),
                 s,
                 std::format(
@@ -38,7 +38,7 @@ int main() {
         );
 
         for (const auto& [index, count] : index_count) {
-                tester.AssertNotEqual(
+                tester.assertNotEqual(
                         count,
                         s,
                         std::format(

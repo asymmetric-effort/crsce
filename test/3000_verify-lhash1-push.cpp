@@ -44,7 +44,8 @@ int main() {
         std::format(
             "Bit at ({},{}) was {}, expected {}",
             row, col, stored_value, value
-    ));
+        )
+    );
 
     // Verify row position incremented to 1
     size_t position = matrix.debug_get_row_position(row);
@@ -57,7 +58,7 @@ int main() {
             row,
             position
         )
-    )
+    );
 
     tester.pass("verify-lhash1-push completed successfully.");
     return EXIT_SUCCESS;
