@@ -5,19 +5,26 @@
 
 namespace Gpu {
 
-    void* Emulator::allocBuffer(const std::size_t bytes) {
-        const IpcHeader hdr{
+    void* Emulator::allocBuffer(std::size_t bytes) {
+        IpcHeader hdr{
             CommandType::Alloc,
-            0,                             // kernelId unused for alloc
-            static_cast<uint64_t>(bytes), // size
-            0                              // ptr unused for alloc
+            0,                              // kernelId not used
+            static_cast<uint64_t>(bytes),
+            0
         };
-        if (!sendCommand(hdr))
+
+        if (!sendCommand(hdr)) return nullptr;
+
+        try {
+            IpcResponseMsg msg = receiveResponseMsg();
+            if (msg.status != 0 || msg.size < sizeof(void*)) return nullptr;
+
+            return msg.as<void*>();
+
+        } catch (...) {
             return nullptr;
-        void* ptr = nullptr;
-        if (!receiveResponse(&ptr, sizeof(ptr)))
-            return nullptr;
-        return ptr;
+        }
     }
+
 
 } // namespace Gpu
