@@ -81,7 +81,7 @@ namespace Gpu {
                     handleWrite(toChildFd_, hdr);
                     break;
                 case CommandType::Read:
-                    handleRead(fromChildFd_, hdr);
+                    handleRead(fromChildFd_, hdr, allocations_);
                     break;
                 case CommandType::LaunchTask:
                     handleLaunchTask(hdr);

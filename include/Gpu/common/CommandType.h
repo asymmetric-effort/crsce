@@ -15,7 +15,8 @@ namespace Gpu {
         Read        = 4,
         LaunchTask  = 5,
         Reset       = 6,
-        Wait        = 7
+        Wait        = 7,
+        Shutdown    = 8
     };
 
 }; //namespace Gpu
