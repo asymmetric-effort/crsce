@@ -69,13 +69,13 @@ namespace Gpu {
         void childProcessLoop();
 
         // start: methods used by childProcessLoop
-        void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
-        void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
-        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
-        void handleRead(int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
-        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, PointerTracker& allocations);
-        void handleWait(int fromChildFd_);
-        void handleReset(PointerTracker& allocations);
+        static void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
+        static void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
+        static void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
+        static void handleRead(int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
+        static void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, PointerTracker& allocations);
+        static void handleWait(int fromChildFd_);
+        static void handleReset(PointerTracker& allocations);
         // end: methods used by childProcessLoop
 
 
