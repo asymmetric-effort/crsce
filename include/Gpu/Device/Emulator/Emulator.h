@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Gpu/common/KernelRegistry.h"
+#include "Gpu/common/PointerTracker.h"
 #include "Gpu/common/CommandType.h"
 #include "Gpu/Device/Interface.h"
 #include "Gpu/common/IpcHeader.h"
@@ -62,12 +63,22 @@ namespace Gpu {
         bool    isChild_     = false;    // flag for child context
         bool    childActive_ = false;
 
-        std::unordered_set<void*> allocations_;
+        Gpu::PointerTracker allocations_;
 
         bool sendCommand(const IpcHeader& hdr, const void* payload = nullptr);
         bool receiveResponse(void* payload, size_t size);
         void childProcessLoop();
 
-    };
+    }; // class Emulator
+
+    namespace Cpl {
+        void handleAlloc(const IpcHeader& hdr, int fromChildFd, Gpu::PointerTracker& allocations);
+        void handleFree(const IpcHeader& hdr, Gpu::PointerTracker& allocations);
+        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, const Gpu::PointerTracker& allocations);
+        void handleRead(int fromChildFd_, const IpcHeader& hdr, const Gpu::PointerTracker& allocations);
+        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, const Gpu::PointerTracker& allocations);
+        void handleWait(int fromChildFd_);
+        void handleReset(Gpu::PointerTracker& allocations);
+    }
 
 } // namespace Gpu
