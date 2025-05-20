@@ -1,23 +1,24 @@
-// file: src/Gpu/Device/childProcessLoop_handleRead.cpp
+// file: src/Gpu/Device/Emulator/handleRead.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Device/Emulator/Emulator.h"
+#include "Gpu/common/IpcResponseMsg.h"
+#include <unistd.h>
 
 namespace Gpu {
-    void Emulator::handleRead(int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations) {
-        void* src = reinterpret_cast<void*>(hdr.ptr);
 
-        if (allocations.find(src) == allocations.end()) {
-            std::cerr << "[Emulator] ReadBuffer failed: invalid or freed pointer\n";
-            char error = 1;
-            write(fromChildFd_, &error, 1);  // Send failure signal
+    void Emulator::handleRead(const IpcHeader& hdr, const int fromChildFd, const PointerTracker& allocations) {
+        const auto src = reinterpret_cast<void*>(hdr.ptr);
+        if (!allocations.contains(src)) {
+            const IpcResponseMsg failResponse(1, nullptr, 0);
+            const std::vector<uint8_t> buffer = failResponse.serialize();
+            write(fromChildFd, buffer.data(), buffer.size());
             return;
         }
 
-        std::vector<char> buf(hdr.size);
-        std::memcpy(buf.data(), src, hdr.size);
-        char success = 0;
-        write(fromChildFd_, &success, 1);            // Send OK signal
-        write(fromChildFd_, buf.data(), hdr.size);   // Send data
+        const IpcResponseMsg response(0, src, hdr.size);
+        const std::vector<uint8_t> buffer = response.serialize();
+        write(fromChildFd, buffer.data(), buffer.size());
     }
+
 } // namespace Gpu

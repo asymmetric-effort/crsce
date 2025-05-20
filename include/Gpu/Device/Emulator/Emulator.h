@@ -72,7 +72,7 @@ namespace Gpu {
         static void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
         static void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
         static void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
-        static void handleRead(int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
+        static void handleRead(const IpcHeader &hdr, int fromChildFd, const PointerTracker &allocations);
         static void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, PointerTracker& allocations);
         static void handleWait(int fromChildFd_);
         static void handleReset(PointerTracker& allocations);
