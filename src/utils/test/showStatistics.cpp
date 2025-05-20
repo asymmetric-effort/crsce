@@ -7,6 +7,7 @@ void Tester::showStatistics(){
         "[" << prefix << "] Tester tear-down: " << std::endl
         << " Pass: " << passScore << std::endl
         << " Fail: " << failScore << std::endl
+        << " Skip: " << skipScore << std::endl
         << "Total: " << (passScore + failScore) << std::endl
         << std::endl;
 }
