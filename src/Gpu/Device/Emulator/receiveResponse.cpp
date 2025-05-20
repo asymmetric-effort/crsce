@@ -6,7 +6,10 @@ namespace Gpu {
 
     bool Emulator::receiveResponse(void* payload, size_t size) {
         if (!isChild_) {
-            if (read(fromChildFd_, payload, size) != static_cast<ssize_t>(size)) return false;
+            char status = 1;
+            if (read(fromChildFd_, &status, 1) != 1 || status != 0) return false;
+            if (size > 0 && payload)
+                return read(fromChildFd_, payload, size) == static_cast<ssize_t>(size);
             return true;
         }
         return false;

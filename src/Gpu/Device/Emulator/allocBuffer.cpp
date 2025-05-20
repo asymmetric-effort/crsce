@@ -14,7 +14,7 @@ namespace Gpu {
         };
         if (!sendCommand(hdr)) return nullptr;
         void* ptr = nullptr;
-        receiveResponse(&ptr, sizeof(ptr));
+        if (!receiveResponse(&ptr, sizeof(ptr))) return nullptr;
         return ptr;
     }
 
