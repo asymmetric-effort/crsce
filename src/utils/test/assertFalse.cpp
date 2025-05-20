@@ -5,9 +5,8 @@
 // Assert a condition; on failure, print message and terminate
 void Tester::assertFalse(bool condition, const std::string& message) {
     if (!condition) {
-        Tester::pass();
+        pass(std::format("ok: {}", message));
     }else{
-        std::cerr << "[" << prefix << "](FAIL) Assertion failed: " << message << std::endl;
-        Tester::fail();
+        Tester::fail(std::format("assertFalse() failed: {}", message));
     }
 }

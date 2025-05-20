@@ -4,6 +4,7 @@
 
 #include "Gpu/Device/Interface.h"
 #include "utils/test/ExitOnError.h"
+#include "utils/test/TestException.h"
 #include <chrono>
 #include <cstdlib>
 #include <iostream>

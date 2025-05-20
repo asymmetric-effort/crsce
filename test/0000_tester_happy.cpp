@@ -5,22 +5,20 @@
 #include <memory>
 #include <string>
 
-int test1(){
-    Tester tester("test/0000_tester::test2", TerminateOnError);
+int main() {
+    // Caveat: Test Tester, but don't trust tester in a test of tester
+
+    Tester tester("test/0000_tester", TerminateOnError);
     tester.assertTrue(true, "true should be true");
-    return 0;
-}
-
-int test2(){
-    Tester tester("test/0000_tester::test1");
-
+    std::cerr << "tester.assertTrue() handles true ok" << std::endl;
     // assertTrue
-    tester.assertTrue(true, "true should be true");
     tester.assertTrue(1 + 1 == 2, "1+1 should equal 2");
+    std::cerr << "tester.assertTrue() handles true ok" << std::endl;
 
     // assertNotNull raw pointer
     int x = 42;
     tester.assertNotNull(&x, "Raw pointer &x should not be null");
+    std::cerr << "tester.assertNotNull() handles true ok" << std::endl;
 
     // assertNotNull shared_ptr<int>
     auto sp_int = std::make_shared<int>(7);
@@ -53,20 +51,5 @@ int test2(){
     // assertEqual double
     tester.assertEqual(2.718, 2.718, "2.718 should equal 2.718");
 
-    // debug message
-    tester.debug("All Tester assertions passed.");
-
-    return 0;
-}
-
-int test3(){
-    Tester tester("test/0000_tester::test3", NoTerminateOnError);
-    tester.skip("testing skipper");
     if (tester.getSkipCount()==0) return 1;
-    return 0;
-}
-
-int main() {
-    if (auto exit_code=test1()) return exit_code;
-    if (auto exit_code=test2()) return exit_code;
 }
