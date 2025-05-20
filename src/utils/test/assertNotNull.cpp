@@ -4,7 +4,7 @@
 
 // Overload for raw pointers
 void Tester::assertNotNull(const void* ptr, const std::string& message) {
-    if (ptr)
+    if (ptr==nullptr)
         fail(std::format("Null pointer assertion failed: {}", message));
     else
         pass(std::format("ok: {}", message));
@@ -12,7 +12,7 @@ void Tester::assertNotNull(const void* ptr, const std::string& message) {
 
 // unique_ptr<void> overload
 void Tester::assertNotNull(const std::unique_ptr<void>& ptr, const std::string& message) {
-    if (ptr.get())
+    if (ptr.get()==nullptr)
         fail(std::format("assertNotNull Failed: {}", message));
     else
         pass(std::format("ok: {}", message));
@@ -25,7 +25,7 @@ void Tester::assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std
 
 // Overload for shared_ptr convertible to void
 void Tester::assertNotNull(const std::shared_ptr<void>& ptr, const std::string& message) {
-    if (ptr.get())
+    if (ptr.get()==nullptr)
         fail(std::format("assertNotNull Failed: {}", message));
     else
         pass(std::format("ok: {}", message));
