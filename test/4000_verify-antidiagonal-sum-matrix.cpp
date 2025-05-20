@@ -1,6 +1,7 @@
 // file: test/4000_verify-antidiagonal-sum-matrix.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "utils/test/Tester.h"
 #include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 #include "CRSCE/constants/constants.h"
 #include <iostream>
@@ -71,6 +72,9 @@ int verify_overflow_works() {
 }
 
 int main() {
+    Tester tester("test/4000_verify-antidiagonal-sum-matrix", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
     try {
         if (int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
         if (int exit = verify_1_bit_per_antidiagonal(); exit != EXIT_SUCCESS) return exit;

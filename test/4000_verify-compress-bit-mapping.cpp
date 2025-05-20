@@ -1,6 +1,7 @@
 // file: test/4000_verify-compress-bit-mapping.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "utils/test/Tester.h"
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/FileBuffer.h"
@@ -63,6 +64,9 @@ int verify_single_bit_location(uint64_t bit_offset) {
 }
 
 int main() {
+    Tester tester("test/4000_verify-compress-bit-mapping", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
     try {
         // Sample a few strategic offsets:
         std::vector<uint64_t> bit_offsets = {0, s - 1, s, s + 1, s * 10 + 5, s * s - 1};

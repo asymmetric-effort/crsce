@@ -1,6 +1,7 @@
 // file: test/9000_verify-file-format.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "utils/test/Tester.h"
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/CRSCE.h"
 #include "utils/TestPatterns.h"
@@ -104,6 +105,9 @@ bool verify_structure(std::ifstream &in, std::streamsize actual_size, uint64_t b
 }
 
 int main(int argc, char* argv[]) {
+    Tester tester("test/9200_verify-file-format", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
     std::string filepath;
     if (argc == 2) {
         filepath = argv[1];

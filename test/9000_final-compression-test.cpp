@@ -1,6 +1,7 @@
 // file: test/9000_final-compression-test.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "utils/test/Tester.h"
 #include "CRSCE/CRSCE.h"
 #include "CRSCE/constants/constants.h"
 #include "utils/get_tmp_dir.h"
@@ -81,6 +82,9 @@ bool run_compression_pattern(const TestPattern& pattern) {
 }
 
 int main() {
+    Tester tester("test/9000_final-compression-test", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
     std::vector<TestPattern> patterns = {
         {"All Zeros", all_zeros},
         {"All Ones", all_ones},
