@@ -5,6 +5,7 @@
 #include "Gpu/Device/Interface.h"
 #include "utils/test/ExitOnError.h"
 #include "utils/test/TestException.h"
+#include <exception>
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
@@ -17,6 +18,9 @@ public:
     // Construct with a test prefix (e.g., "test/0100_Gpu_mock_init")
     Tester(const std::string& prefix, ExitOnError onError=false);
     ~Tester();
+
+    template<typename ExpectedExceptionClass, typename PayloadFunc>
+    void expectException(PayloadFunc&& func);
 
     // assert<True|False> a condition; on failure, print message and terminate
     void assertTrue(bool condition, const std::string& message);
@@ -87,3 +91,17 @@ private:
     unsigned int skipScore=0;
     ExitOnError onError;
 };
+
+template<typename ExpectedExceptionClass, typename PayloadFunc>
+void Tester::expectException(PayloadFunc&& func) {
+    try {
+        func();
+        fail("Expected exception of type " + std::string(typeid(ExpectedExceptionClass).name()) + " not thrown");
+    } catch (const ExpectedExceptionClass&) {
+        return; // expected
+    } catch (const std::exception& e) {
+        fail("Unexpected std::exception: " + std::string(e.what()));
+    } catch (...) {
+        fail("Unexpected non-standard exception in context");
+    }
+}

@@ -4,4 +4,4 @@
 
 using ExitOnError = bool;
 constexpr ExitOnError TerminateOnError=true;
-constexpr ExitOnError NoTerminateOnError=false;
+constexpr ExitOnError ThrowExceptionOnError=false;
