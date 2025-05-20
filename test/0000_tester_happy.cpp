@@ -18,7 +18,7 @@ int main() {
 
     // assertNotNull raw pointer
     int x = 42;
-    tester.assertNotNull(&x, "Raw pointer &x should not be null");
+    tester.assertNotNull(&x, "Raw pointer &x is not null");
     std::cerr << "tester.assertNotNull() handles true ok" << std::endl;
 
     // assertNotNull shared_ptr<int>
