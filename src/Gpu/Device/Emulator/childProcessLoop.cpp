@@ -14,28 +14,28 @@ namespace Gpu {
 
             switch (hdr.type) {
                 case CommandType::Alloc:
-                    Cpl::handleAlloc(hdr, fromChildFd_, allocations_);
+                    handleAlloc(hdr, fromChildFd_, allocations_);
                     break;
                 case CommandType::Free:
-                    Cpl::handleFree(hdr, allocations_);
+                    handleFree(hdr, allocations_);
                     break;
                 case CommandType::Write:
-                    Cpl::handleWrite(toChildFd_, fromChildFd_, hdr, allocations_);
+                    handleWrite(toChildFd_, fromChildFd_, hdr, allocations_);
                     break;
                 case CommandType::Read:
-                    Cpl::handleRead(fromChildFd_, hdr, allocations_);
+                    handleRead(fromChildFd_, hdr, allocations_);
                     break;
                 case CommandType::LaunchTask:
-                    Cpl::handleLaunchTask(hdr, fromChildFd_, allocations_);
+                    handleLaunchTask(hdr, fromChildFd_, allocations_);
                     break;
                 case CommandType::Wait:
-                    Cpl::handleWait(fromChildFd_);
+                    handleWait(fromChildFd_);
                     break;
                 case CommandType::Reset:
-                    Cpl::handleReset(allocations_);
+                    handleReset(allocations_);
                     break;
                 case CommandType::Shutdown:
-                    Cpl::handleReset(allocations_);
+                    handleReset(allocations_);
                     std::cerr << "[Emulator] Shutdown received. Exiting.\n";
                     return;
                 default:

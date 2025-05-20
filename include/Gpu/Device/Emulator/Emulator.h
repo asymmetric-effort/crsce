@@ -68,16 +68,17 @@ namespace Gpu {
         bool receiveResponse(void* payload, size_t size);
         void childProcessLoop();
 
-    }; // class Emulator
-
-    namespace Cpl {
-        void handleAlloc(const IpcHeader& hdr, int fromChildFd, const PointerTracker& allocations);
-        void handleFree(const IpcHeader& hdr, const PointerTracker& allocations);
-        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, const PointerTracker& allocations);
-        void handleRead(int fromChildFd_, const IpcHeader& hdr, const PointerTracker& allocations);
-        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, const PointerTracker& allocations);
+        // start: methods used by childProcessLoop
+        void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
+        void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
+        void handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
+        void handleRead(int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations);
+        void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, PointerTracker& allocations);
         void handleWait(int fromChildFd_);
-        void handleReset(const PointerTracker& allocations);
-    }
+        void handleReset(PointerTracker& allocations);
+        // end: methods used by childProcessLoop
+
+
+    }; // class Emulator
 
 } // namespace Gpu
