@@ -19,15 +19,7 @@ int main() {
     for (CrossSumIndex r = 0; r < s; ++r) {
         for (CrossSumIndex c = 0; c < s; ++c) {
             CrossSumIndex i = dsm.transform(r, c);
-            tester.assertTrue(
-                i>=s,
-                std::format(
-                    "transform({},{})={} out of bounds (max {})",
-                    r, c,
-                    i,
-                    s-1
-                )
-            );
+            tester.assertTrue( i>=s, std::format("transform({},{})={} out of bounds (max {})", r, c, i, (s-1) ) );
             index_count[i]++;
         }
     }

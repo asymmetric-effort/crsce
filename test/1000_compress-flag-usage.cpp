@@ -40,8 +40,8 @@ int main() {
 
         std::string output = exec(target_binary);
 
-        tester.assertEqual(expectedCopyright, std::string::npos,"Missing or incorrect copyright.");
-        tester.assertEqual(expectedUsageStart, std::string::npos,"Usage text not found or incorrect.");
+        tester.assertEqual(len(expectedCopyright)==std::string::npos,"Missing or incorrect copyright.");
+        tester.assertEqual(len(expectedUsageStart)==std::string::npos,"Usage text not found or incorrect.");
         tester.pass();
         std::cout << "[PASS] --help output correct:\n" << output << std::endl;
 

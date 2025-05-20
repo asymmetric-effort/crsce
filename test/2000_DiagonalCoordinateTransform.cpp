@@ -20,21 +20,16 @@ int main() {
                 for (CrossSumIndex c = 0; c < s; ++c) {
                         CrossSumIndex i = xsm.transform(r, c);
                         tester.AssertTrue(
-                                i >= s,
-                                std::format("transform({},{})={} out of bounds (max {})",r c, i, s - 1)
+                                (i >= s),
+                                std::format("transform({},{})={} out of bounds (max {})",r c, i, (s - 1))
                         );
                         index_count[i]++;
                 }
         }
 
         tester.assertNotEqual(
-                index_count.size(),
-                s,
-                std::format(
-                        "Diagonal index count map size is {} expected {}",
-                        index_count.size(),
-                        s
-                )
+                index_count.size(),s,
+                std::format("Diagonal index count map size is {} expected {}",index_count.size(),s)
         );
 
         for (const auto& [index, count] : index_count) {
