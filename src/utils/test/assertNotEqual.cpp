@@ -4,55 +4,40 @@
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(int a, int b, const std::string& message) {
-    if (a != b) {
+    if (a != b)
         pass();
-    } else {
-        std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
-                  << " (" << a << " != " << b << ")" << std::endl;
-        fail();
-    }
+    else
+        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(unsigned int a, unsigned int b, const std::string& message) {
-    if (a != b) {
+    if (a != b)
         pass();
-    } else {
-        std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
-                  << " (" << a << " != " << b << ")" << std::endl;
-        fail();
-    }
+    else
+        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(char a, char b, const std::string& message) {
-    if (a != b) {
+    if (a != b)
         pass();
-    } else {
-        std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
-                  << " ('" << a << "' != '" << b << "')" << std::endl;
-        fail();
-    }
+    else
+        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(float a, float b, const std::string& message) {
-    if (a != b) {
+    if (a != b)
         pass();
-    } else {
-        std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
-                  << " (" << a << " != " << b << ")" << std::endl;
-        fail();
-    }
+    else
+        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(double a, double b, const std::string& message) {
-    if (a != b) {
+    if (a != b)
         pass();
-    } else {
-        std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
-                  << " (" << a << " != " << b << ")" << std::endl;
-        fail();
-    }
+    else
+        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
 }
