@@ -20,7 +20,7 @@ namespace Gpu {
                     handleFree(hdr, allocations_);
                     break;
                 case CommandType::Write:
-                    handleWrite(toChildFd_, fromChildFd_, hdr, allocations_);
+                    handleWrite(hdr, fromChildFd_, toChildFd_, allocations_);
                     break;
                 case CommandType::Read:
                     handleRead(hdr, fromChildFd_, allocations_);

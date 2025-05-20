@@ -1,23 +1,33 @@
-// file: src/Gpu/Device/childProcessLoop_handleWrite.cpp
+// file: src/Gpu/Device/Emulator/handleWrite.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Device/Emulator/Emulator.h"
+#include "Gpu/common/IpcResponseMsg.h"
+#include <unistd.h>
+#include <vector>
 
 namespace Gpu {
-    void Emulator::handleWrite(int toChildFd_, int fromChildFd_, const IpcHeader& hdr, PointerTracker& allocations) {
-        void* dst = reinterpret_cast<void*>(hdr.ptr);
-
-        if (allocations.find(dst) == allocations.end()) {
-            std::cerr << "[Emulator] WriteBuffer failed: invalid or freed pointer\n";
-            char error = 1;
-            write(fromChildFd_, &error, 1);
+    void Emulator::handleWrite(const IpcHeader &hdr, const int fromChildFd, const int toChildFd, PointerTracker &allocations) {
+        const auto dst = reinterpret_cast<void *>(hdr.ptr);
+        if (!allocations.contains(dst)) {
+            const IpcResponseMsg failResponse(1, nullptr, 0);
+            const std::vector<uint8_t> buffer = failResponse.serialize();
+            write(fromChildFd, buffer.data(), buffer.size());
             return;
         }
 
-        std::vector<char> buf(hdr.size);
-        read(toChildFd_, buf.data(), hdr.size);
-        std::memcpy(dst, buf.data(), hdr.size);
-        char success = 0;
-        write(fromChildFd_, &success, 1);
+        std::vector<uint8_t> data(hdr.size);
+        if (read(toChildFd, data.data(), hdr.size) != static_cast<ssize_t>(hdr.size)) {
+            const IpcResponseMsg failResponse(2, nullptr, 0);
+            const std::vector<uint8_t> buffer = failResponse.serialize();
+            write(fromChildFd, buffer.data(), buffer.size());
+            return;
+        }
+
+        std::memcpy(dst, data.data(), hdr.size);
+
+        const IpcResponseMsg response(0, nullptr, 0); // write has no return payload
+        const std::vector<uint8_t> buffer = response.serialize();
+        write(fromChildFd, buffer.data(), buffer.size());
     }
 } // namespace Gpu
