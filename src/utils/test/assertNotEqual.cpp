@@ -4,7 +4,7 @@
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(int a, int b, const std::string& message) {
-    if (a == b) {
+    if (a != b) {
         pass();
     } else {
         std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
@@ -15,7 +15,7 @@ void Tester::assertNotEqual(int a, int b, const std::string& message) {
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(unsigned int a, unsigned int b, const std::string& message) {
-    if (a == b) {
+    if (a != b) {
         pass();
     } else {
         std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
@@ -26,7 +26,7 @@ void Tester::assertNotEqual(unsigned int a, unsigned int b, const std::string& m
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(char a, char b, const std::string& message) {
-    if (a == b) {
+    if (a != b) {
         pass();
     } else {
         std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
@@ -37,7 +37,7 @@ void Tester::assertNotEqual(char a, char b, const std::string& message) {
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(float a, float b, const std::string& message) {
-    if (a == b) {
+    if (a != b) {
         pass();
     } else {
         std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
@@ -48,7 +48,7 @@ void Tester::assertNotEqual(float a, float b, const std::string& message) {
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertNotEqual(double a, double b, const std::string& message) {
-    if (a == b) {
+    if (a != b) {
         pass();
     } else {
         std::cerr << '[' << prefix << "] assertNotEqual failed: " << message
