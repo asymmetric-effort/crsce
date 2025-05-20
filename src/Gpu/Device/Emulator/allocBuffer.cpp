@@ -6,7 +6,7 @@
 namespace Gpu {
 
     void* Emulator::allocBuffer(std::size_t bytes) {
-        IpcHeader hdr{
+        const IpcHeader hdr{
             CommandType::Alloc,
             0,                              // kernelId not used
             static_cast<uint64_t>(bytes),
@@ -16,7 +16,7 @@ namespace Gpu {
         if (!sendCommand(hdr)) return nullptr;
 
         try {
-            IpcResponseMsg msg = receiveResponseMsg();
+            const IpcResponseMsg msg = receiveResponseMsg();
             if (msg.status != 0 || msg.size < sizeof(void*)) return nullptr;
 
             return msg.as<void*>();
