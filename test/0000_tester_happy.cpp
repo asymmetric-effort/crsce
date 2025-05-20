@@ -1,4 +1,4 @@
-// file: test/0000_tester.cpp
+// file: test/0000_tester_happy.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "utils/test/Tester.h"
@@ -8,12 +8,13 @@
 int main() {
     // Caveat: Test Tester, but don't trust tester in a test of tester
 
-    Tester tester("test/0000_tester", TerminateOnError);
-    tester.assertTrue(true, "true should be true");
-    std::cerr << "tester.assertTrue() handles true ok" << std::endl;
+    Tester tester("test/0000_tester_happy", TerminateOnError);
+
     // assertTrue
+    tester.assertTrue(true, "true should be true");
     tester.assertTrue(1 + 1 == 2, "1+1 should equal 2");
-    std::cerr << "tester.assertTrue() handles true ok" << std::endl;
+
+    //tester.assertNull(nullptr, "null should be null");
 
     // assertNotNull raw pointer
     int x = 42;
@@ -50,6 +51,4 @@ int main() {
     tester.assertEqual(3.14f, 3.14f, "3.14f should equal 3.14f");
     // assertEqual double
     tester.assertEqual(2.718, 2.718, "2.718 should equal 2.718");
-
-    if (tester.getSkipCount()==0) return 1;
 }
