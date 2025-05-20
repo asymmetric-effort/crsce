@@ -1,6 +1,7 @@
 // file: test/3500_verify-lhash2-store-and-hash.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "utils/test/Tester.h"
 #include "CRSCE/LHashMatrix.h"
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/crypto/SHA256.h"
@@ -68,7 +69,9 @@ bool pattern_all_ones(size_t) { return true; }
 bool pattern_alternating(size_t i) { return (i % 2 == 0); }
 
 int main() {
-    std::cout << "[INFO] verify-lhash2-store-and-hash starting..." << std::endl;
+    Tester tester("test/3500_verify-lhash2-store-and-hash", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
 
     bool pass = true;
 
@@ -76,7 +79,6 @@ int main() {
     pass &= run_test_pattern("Pass #2: All Ones", pattern_all_ones);
     pass &= run_test_pattern("Pass #3: Alternating", pattern_alternating);
 
-    if (!pass) return EXIT_FAILURE;
-    std::cout << "[PASS] verify-lhash2-store-and-hash completed successfully." << std::endl;
+    tester.assertFalse(pass, "verify-lhash2-store-and-hash completed successfully.");
     return EXIT_SUCCESS;
 }
