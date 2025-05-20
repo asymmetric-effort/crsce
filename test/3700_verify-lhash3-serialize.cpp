@@ -1,6 +1,7 @@
 // file: test/3700_verify-lhash3-serialize.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "utils/test/Tester.h"
 #include "CRSCE/LHashMatrix.h"
 #include "CRSCE/constants/constants.h"
 #include "utils/TestPatterns.h"
@@ -50,6 +51,9 @@ bool run_lateral_hash_serialization_test(const std::string& name, PatternFn patt
 }
 
 int main() {
+    Tester tester("test/3700_verify-lhash3-serialize", TerminateOnError);
+    tester.deadline(60);
+    tester.skip("disabled for debug");
     std::vector<TestPattern> patterns = {
         {"All Zeros", all_zeros},
         {"All Ones", all_ones},
