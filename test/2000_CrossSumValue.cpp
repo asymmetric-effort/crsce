@@ -15,14 +15,7 @@
 void test_default_constructor(Tester &tester) {
     tester.debug("test_default_constructor() start");
     CrossSumValue value;
-    tester.NotEqual(
-        value.to_uint16(),
-        0,
-        std.format(
-            "Initial value is not 0 ({})",
-            value.to_uint16()
-        )
-    );
+    tester.NotEqual(value.to_uint16(), 0, std::format("Initial value is not 0 ({})", value.to_uint16() ) );
 }
 
 // confirm we can set an initial value from 0 to 2^b-1
@@ -64,7 +57,7 @@ void test_increment(Tester &tester){
         tester.debug(
             std::format(
                 "overflow_error expected(1) not encountered. got:{} want:{}",
-                std::to_string(value.to_uint16())
+                std::to_string(value.to_uint16()),
                 std::to_string(s)
             )
         );
@@ -79,7 +72,7 @@ void test_add_operator_and_overflow(Tester &tester){
     try {
         CrossSumValue lhs(1);
         CrossSumValue rhs(s);
-        CrossSumValue answer(value1 + value2);
+        CrossSumValue answer(lhs + rhs);
         tester.debug(
             std::format(
                 "overflow_error expected(2).  not encountered. got:{} want:{}",
@@ -88,7 +81,7 @@ void test_add_operator_and_overflow(Tester &tester){
             )
         );
     } catch (const std::overflow_error& e) {
-        // expected overflow
+        tester.pass();
     }
 }
 
@@ -111,33 +104,33 @@ void test_add_operator_ok(Tester &tester){
 
 void test_to_uint16(Tester &tester) {
     tester.debug("test_to_uint16()");
-    try {
-        // Valid values only
-        CrossSumValue val1(511);  // max
-        tester.assertNotEqual(
-            val1.to_uint16(),
-            511,
-            std::format(
-                "CrossSumValue(511).to_uint16() != 511, got {}",
-                val1.to_uint16()
-            )
-        );
+    // Valid values only
+    CrossSumValue val1(511);  // max
+    tester.assertNotEqual(
+        val1.to_uint16(),
+        511,
+        std::format(
+            "CrossSumValue(511).to_uint16() != 511, got {}",
+            val1.to_uint16()
+        )
+    );
 
-        CrossSumValue val2(341);
-        tester.assertNotEqual(
-            val2.to_uint16(),
-            341,
-            std::format("CrossSumValue(341).to_uint16() != 341, got {}",val2.to_uint16())
-        );
+    CrossSumValue val2(341);
+    tester.assertNotEqual(
+        val2.to_uint16(),
+        341,
+        std::format("CrossSumValue(341).to_uint16() != 341, got {}",val2.to_uint16())
+    );
 
-        CrossSumValue val3(0);
-        tester.assertNotEqual(
-            val3.to_uint16(),
-            0,
-            std::format(
-                "CrossSumValue(0).to_uint16() != 0, got {}",
-                val3.to_uint16()
-            );
+    CrossSumValue val3(0);
+    tester.assertNotEqual(
+        val3.to_uint16(),
+        0,
+        std::format(
+            "CrossSumValue(0).to_uint16() != 0, got {}",
+            val3.to_uint16()
+        )
+    );
 }
 
 int main() {

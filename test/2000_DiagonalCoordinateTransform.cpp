@@ -19,10 +19,7 @@ int main() {
         for (CrossSumIndex r = 0; r < s; ++r) {
                 for (CrossSumIndex c = 0; c < s; ++c) {
                         CrossSumIndex i = xsm.transform(r, c);
-                        tester.AssertTrue(
-                                (i >= s),
-                                std::format("transform({},{})={} out of bounds (max {})",r c, i, (s - 1))
-                        );
+                        tester.assertTrue( (i >= s), std::format("transform({},{})={} out of bounds (max {})", r, c, i, (s - 1) ) );
                         index_count[i]++;
                 }
         }
@@ -33,13 +30,6 @@ int main() {
         );
 
         for (const auto& [index, count] : index_count) {
-                tester.assertNotEqual(
-                        count,
-                        s,
-                        std::format(
-                                "Diagonal index {} occurred {} times, expected {}",
-                                index, count, s
-                        )
-                );
+                tester.assertNotEqual(count,int(s),std::format("Diagonal index {} occurred {} times, expected {}",index,count,s));
         }
 }
