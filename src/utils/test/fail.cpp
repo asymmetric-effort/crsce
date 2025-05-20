@@ -17,6 +17,7 @@ void Tester::fail(const std::string& msg){
     failScore++;
     if (onError) {
         showStatistics();
+        debug(msg);
         std::exit(EXIT_FAILURE);
     }else{
         throw TestException(msg);
