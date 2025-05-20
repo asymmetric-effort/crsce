@@ -44,6 +44,8 @@ public:
     // Assert two values are equal; on success counts as pass, on failure counts and logs
     void assertEqual(int a, int b, const std::string& message);
     void assertEqual(size_t a, size_t b, const std::string& message);
+    void assertEqual(uint16_t a, uint16_t b, const std::string& message);
+    void assertEqual(uint64_t a, uint64_t b, const std::string& message);
     void assertEqual(unsigned a, unsigned b, const std::string& message);
     void assertEqual(char a, char b, const std::string& message);
     void assertEqual(float a, float b, const std::string& message);
@@ -51,6 +53,8 @@ public:
 
     void assertNotEqual(int a, int b, const std::string& message);
     void assertNotEqual(size_t a, size_t b, const std::string& message);
+    void assertNotEqual(uint16_t a, uint16_t b, const std::string& message);
+    void assertNotEqual(uint64_t a, uint64_t b, const std::string& message);
     void assertNotEqual(unsigned a, unsigned b, const std::string& message);
     void assertNotEqual(char a, char b, const std::string& message);
     void assertNotEqual(float a, float b, const std::string& message);
