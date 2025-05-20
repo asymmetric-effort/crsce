@@ -1,7 +1,6 @@
 // file: test/1000_compress-flag-version.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "utils/test/Tester.h"
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -31,9 +30,6 @@ std::string exec(const char* cmd) {
 }
 
 int main() {
-    Tester tester("test/1000_decompress-flag-version", TerminateOnError);
-    tester.deadline(60);
-    tester.skip("disabled for debug");
     try {
         const std::string version = PROJECT_VERSION;
         if (version == "not_defined") {

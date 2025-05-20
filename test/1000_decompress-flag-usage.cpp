@@ -1,7 +1,6 @@
 // file: test/1000_compress-flag-usage.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "utils/test/Tester.h"
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -31,9 +30,6 @@ std::string exec(const char* cmd) {
 }
 
 int main() {
-    Tester tester("test/1000_decompress-flag-usage", TerminateOnError);
-    tester.deadline(60);
-    tester.skip("disabled for debug");
     try {
         const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
         const std::string expectedUsageStart = "Usage: "+std::string(target_binary)+" --in <inputfile> --out <outputfile>\n";

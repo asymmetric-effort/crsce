@@ -1,7 +1,6 @@
 // file: test/3000_verify-lhash1-push.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "utils/test/Tester.h"
 #include "CRSCE/LHashMatrix.h"
 #include "CRSCE/constants/constants.h"
 #include <iostream>
@@ -23,9 +22,7 @@ public:
 };
 
 int main() {
-    Tester tester("test/3000_verify-lhash1-push", TerminateOnError);
-    tester.deadline(60);
-    tester.skip("disabled for debug");
+    std::cout << "[INFO] verify-lhash1-push starting..." << std::endl;
 
     TestLHashMatrix matrix;
 
@@ -34,24 +31,22 @@ int main() {
     bool value = true;
 
     matrix.push(row, col, value);
-    tester.debug(std::format("Pushed bit at ({},{})={}",row,col,value));
+    std::cout << "[INFO] Pushed bit at (" << row << ", " << col << ") = " << value << std::endl;
 
     // Verify bit value
     bool stored_value = matrix.debug_get_bit(row, col);
-    tester.assertNotEqual(
-        stored_value,
-        value,
-        std::format(
-            "Bit at ({},{}) was {}, expected {}",
-            row, col, stored_value, value
-        )
-    );
+    if (stored_value != value) {
+        std::cerr << "[FAIL] Bit at (" << row << ", " << col << ") was " << stored_value << ", expected " << value << std::endl;
+        return EXIT_FAILURE;
+    }
 
     // Verify row position incremented to 1
     size_t position = matrix.debug_get_row_position(row);
+    if (position != 1) {
+        std::cerr << "[FAIL] Row position for row " << row << " is " << position << ", expected 1" << std::endl;
+        return EXIT_FAILURE;
+    }
 
-    tester.assertEqual(position,size_t(1),std::format("Row position for row {} is {} expected 1",row,position));
-
-    tester.pass("verify-lhash1-push completed successfully.");
+    std::cout << "[PASS] verify-lhash1-push completed successfully." << std::endl;
     return EXIT_SUCCESS;
 }

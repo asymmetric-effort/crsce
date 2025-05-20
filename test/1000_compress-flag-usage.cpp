@@ -1,7 +1,6 @@
 // file: test/1000_compress-flag-usage.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "utils/test/Tester.h"
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -31,23 +30,27 @@ std::string exec(const char* cmd) {
 }
 
 int main() {
-    Tester tester("test/1000_compress-flag-usage", TerminateOnError);
-    tester.deadline(60);
-    tester.skip("disabled for debug");
     try {
         const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
         const std::string expectedUsageStart = "Usage: "+std::string(target_binary)+" --in <inputfile> --out <outputfile>\n";
 
         std::string output = exec(target_binary);
 
-        tester.assertEqual(len(expectedCopyright)==std::string::npos,"Missing or incorrect copyright.");
-        tester.assertEqual(len(expectedUsageStart)==std::string::npos,"Usage text not found or incorrect.");
-        tester.pass();
+        if (output.find(expectedCopyright) == std::string::npos) {
+            std::cerr << "[FAIL] Missing or incorrect copyright.\n";
+            return EXIT_FAILURE;
+        }
+
+        if (output.find(expectedUsageStart) == std::string::npos) {
+            std::cerr << "[FAIL] Usage text not found or incorrect.\n";
+            return EXIT_FAILURE;
+        }
+
         std::cout << "[PASS] --help output correct:\n" << output << std::endl;
+        return EXIT_SUCCESS;
 
     } catch (const std::exception& e) {
-        tester.debug(std::format("[ERROR] Exception occurred: {}", e.what());
+        std::cerr << "[ERROR] Exception occurred: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }
-    return EXIT_SUCCESS;
 }

@@ -1,4 +1,4 @@
-// file: test/9400_verify-multi-block-compression.cpp
+// file: test/9600_verify-multi-block-compression.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "CRSCE/CRSCE.h"

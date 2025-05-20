@@ -1,7 +1,6 @@
 // file: test/verify-crosssum-serialize.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "utils/test/Tester.h"
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 #include "CRSCE/constants/constants.h"
 #include <iostream>
@@ -65,9 +64,6 @@ bool validate_matrix(const LateralSumMatrix &matrix) {
 }
 
 int main() {
-    Tester tester("test/4000_verify-crosssum-serialize", TerminateOnError);
-    tester.deadline(60);
-    tester.skip("disabled for debug");
     LateralSumMatrix original;
     create_alternating_pattern(original);
 
