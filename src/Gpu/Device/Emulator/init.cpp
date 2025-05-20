@@ -19,7 +19,7 @@ namespace Gpu {
             std::perror("[Emulator] pipe creation failed");
             return false;
         }
-        pid_t pid = fork();
+        const pid_t pid = fork();
         if (pid < 0) {
             std::perror("[Emulator] fork failed in init");
             return false;

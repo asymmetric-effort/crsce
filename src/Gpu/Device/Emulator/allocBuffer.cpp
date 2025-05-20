@@ -5,7 +5,7 @@
 
 namespace Gpu {
 
-    void* Emulator::allocBuffer(std::size_t bytes) {
+    void* Emulator::allocBuffer(const std::size_t bytes) {
         const IpcHeader hdr{
             CommandType::Alloc,
             0,                             // kernelId unused for alloc

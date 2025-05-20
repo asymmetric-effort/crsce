@@ -7,7 +7,8 @@
 #include <vector>
 
 namespace Gpu {
-    void Emulator::handleWrite(const IpcHeader &hdr, const int fromChildFd, const int toChildFd, PointerTracker &allocations) {
+
+    void Emulator::handleWrite(const IpcHeader &hdr, const int fromChildFd, const int toChildFd, const PointerTracker &allocations) {
         const auto dst = reinterpret_cast<void *>(hdr.ptr);
         if (!allocations.contains(dst)) {
             const IpcResponseMsg failResponse(1, nullptr, 0);
@@ -30,4 +31,5 @@ namespace Gpu {
         const std::vector<uint8_t> buffer = response.serialize();
         write(fromChildFd, buffer.data(), buffer.size());
     }
+
 } // namespace Gpu

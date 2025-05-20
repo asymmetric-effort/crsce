@@ -4,8 +4,10 @@
 #include "Gpu/Device/Emulator/Emulator.h"
 
 namespace Gpu {
-    void Emulator::handleWait(int fromChildFd_) {
-        char ack = 0;
+
+    void Emulator::handleWait(const int fromChildFd_) {
+        constexpr char ack = 0;
         write(fromChildFd_, &ack, 1);
     }
+
 } // namespace Gpu

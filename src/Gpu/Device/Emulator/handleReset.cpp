@@ -4,11 +4,11 @@
 #include "Gpu/Device/Emulator/Emulator.h"
 
 namespace Gpu {
+
     void Emulator::handleReset(PointerTracker& allocations) {
-        for (void* ptr : allocations) {
-            std::free(ptr);
-        }
+        for (void* ptr : allocations) std::free(ptr);
         allocations.clear();
         std::cerr << "[Emulator] All GPU buffers freed. Emulator reset.\n";
     }
+
 } // namespace Gpu

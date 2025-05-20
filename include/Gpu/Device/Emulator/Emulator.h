@@ -20,6 +20,8 @@
 #include <unordered_set>
 #include <vector>
 
+#include "Gpu/common/IpcResponseMsg.h"
+
 namespace Gpu {
 
     class Emulator : public Interface {
@@ -54,6 +56,8 @@ namespace Gpu {
          */
         void reset() override;
 
+        [[nodiscard]] IpcResponseMsg receiveResponseMsg() const;
+
     private:
 
         int     toChildFd_   = -1;       // write commands to child
@@ -65,15 +69,14 @@ namespace Gpu {
         Gpu::PointerTracker allocations_;
 
         bool sendCommand(const IpcHeader& hdr, const void* payload = nullptr);
-        bool receiveResponse(void* payload, size_t size) const;
         void childProcessLoop();
 
         // start: methods used by childProcessLoop
         static void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
         static void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
-        static void handleWrite(const IpcHeader &hdr, int fromChildFd, int toChildFd, PointerTracker &allocations);
+        static void handleWrite(const IpcHeader &hdr, int fromChildFd, int toChildFd, const PointerTracker &allocations);
         static void handleRead(const IpcHeader &hdr, int fromChildFd, const PointerTracker &allocations);
-        static void handleLaunchTask(const IpcHeader& hdr, int fromChildFd_, PointerTracker& allocations);
+        static void handleLaunchTask(const IpcHeader &hdr, int fromChildFd, const PointerTracker &allocations);
         static void handleWait(int fromChildFd_);
         static void handleReset(PointerTracker& allocations);
         // end: methods used by childProcessLoop

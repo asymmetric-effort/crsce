@@ -7,7 +7,7 @@ namespace Gpu {
 
     bool Emulator::launchKernel(KernelId id, void* buffer, std::size_t count) {
         if (isChild_) return false;
-        IpcHeader hdr{
+        const IpcHeader hdr{
             CommandType::LaunchTask,
             static_cast<uint32_t>(id),         // kernelId
             static_cast<uint64_t>(count),      // size = element count

@@ -3,17 +3,26 @@
 #include "Gpu/Device/Emulator/Emulator.h"
 
 namespace Gpu {
-
-    bool Emulator::readBuffer(void* dst, const void* src, std::size_t bytes) {
-        IpcHeader hdr{
+    bool Emulator::readBuffer(void *dst, const void *src, std::size_t bytes) {
+        const IpcHeader hdr{
             CommandType::Read,
-            0,                                // kernelId unused for read
-            static_cast<uint64_t>(bytes),    // size
-            reinterpret_cast<uint64_t>(src)  // ptr = device address
+            0, // kernelId unused for Read
+            static_cast<uint64_t>(bytes),
+            reinterpret_cast<uint64_t>(src)
         };
+
         if (!sendCommand(hdr)) return false;
-        return receiveResponse(dst, bytes);
+
+        try {
+            const IpcResponseMsg msg = receiveResponseMsg();
+
+            if ((msg.status != 0) || (msg.size < bytes)) return false;
+
+            std::memcpy(dst, msg.data.data(), bytes);
+            return true;
+        } catch (const std::exception &e) {
+            // Optional: log e.what() to diagnostics stream
+            return false;
+        }
     }
-
 } // namespace Gpu
-

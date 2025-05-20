@@ -5,9 +5,8 @@
 
 namespace Gpu {
     void Emulator::handleFree(const IpcHeader& hdr, PointerTracker& allocations) {
-        void* ptr = reinterpret_cast<void*>(hdr.ptr);
-        auto it = allocations.find(ptr);
-        if (it != allocations.end()) {
+        const auto ptr = reinterpret_cast<void*>(hdr.ptr);
+        if (const auto it = allocations.find(ptr); it != allocations.end()) {
             std::free(ptr);
             allocations.erase(it);
         }
