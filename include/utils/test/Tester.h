@@ -50,9 +50,11 @@ public:
     void assertNotEqual(double a, double b, const std::string& message);
     // mark failure
     void fail();
+    void fail(const std::string& message);
 
     // mark pass
     void pass();
+    void pass(const std::string& message);
 
     // skip test - terminates the test without error
     void skip(const std::string& msg);
