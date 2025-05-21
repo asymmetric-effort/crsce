@@ -4,14 +4,16 @@
 #pragma once
 
 #include "Gpu/Ipc/Result.h"
+#include "Gpu/Ipc/Message.h"
+#include "Gpu/Ipc/Response.h"
 #include <atomic>
 #include <cstdint>
 #include <unistd.h>
+#include <vector>
 
 namespace Gpu::Ipc {
 
-    class IpcMessage;
-    class IpcResponse;
+    class Response;
 
     /**
      * @class Communications
@@ -38,10 +40,10 @@ namespace Gpu::Ipc {
          */
         ~Communications();
 
-        Result parentSend(const IpcMessage& msg);
-        Result parentRecv(IpcResponse& response);
-        Result childSend(const IpcResponse& response);
-        Result childRecv(IpcMessage& msg);
+        Result parentSend(const Message& msg);
+        Result parentRecv(Response& response);
+        Result childSend(const Response& response);
+        Result childRecv(Message& msg);
 
     private:
 
