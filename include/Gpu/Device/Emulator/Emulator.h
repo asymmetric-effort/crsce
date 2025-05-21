@@ -1,88 +1,99 @@
 // file: include/Gpu/Device/Emulator.h
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
 #pragma once
 
-#include "Gpu/common/KernelRegistry.h"
+#include "Gpu/Ipc/Communications.h"
 #include "Gpu/common/PointerTracker.h"
-#include "Gpu/common/CommandType.h"
-#include "Gpu/Device/Interface.h"
-#include "Gpu/common/IpcHeader.h"
-#include "Gpu/common/KernelId.h"
-#include <cstddef>
-#include <cstdint>
-#include <cstdlib>
-#include <cstring>
-#include <functional>
-#include <iostream>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <unordered_set>
+
+#include <memory>
+#include <unordered_map>
 #include <vector>
+#include <cstdint>
+#include <sys/types.h>
 
-#include "Gpu/common/IpcResponseMsg.h"
+namespace Gpu::Device {
 
-namespace Gpu {
-
-    class Emulator final : public Interface {
+    /**
+     * @class Emulator
+     * @brief Front-end controller for a forked GPU emulator child process.
+     *
+     * This class owns and manages all IPC and memory tracking for the emulated GPU backend.
+     * It launches a child process via fork() in `init()`, establishes IPC pipes, manages
+     * memory via pointer tracking, and supports GPU task lifecycle operations.
+     */
+    class Emulator {
     public:
         Emulator();
-        ~Emulator() override;
-
-        bool init() override;
-
-        void* allocBuffer(std::size_t bytes) override;
-
-        bool freeBuffer(void* ptr) override;
-
-        bool writeBuffer(void* dst, const void* src, std::size_t bytes) override;
-
-        bool readBuffer(void* dst, const void* src, std::size_t bytes) override;
-
-        bool launchKernel(KernelId id, void* buffer, std::size_t count) override;
-
-        void shutdown() override;
+        ~Emulator();
 
         /**
-         * @brief Block until all previously dispatched commands finish.
-         * @see docs/Gpu/Abstract/wait.md
-         * @return 0 on success, non-zero error code on failure.
+         * @brief Initialize the emulator. Must be called before other methods.
+         * This will fork the child process and establish IPC via Communications.
          */
-        int wait() override;
+        bool init();
 
         /**
-         * @brief Reset the device context, releasing all resources.
-         * @see docs/Gpu/Abstract/reset.md for details on cross-backend behavior.
+         * @brief Gracefully shut down the emulator and clean up resources.
          */
-        void reset() override;
+        void shutdown();
 
-        [[nodiscard]] IpcResponseMsg receiveResponseMsg() const;
+        /**
+         * @brief Allocate a buffer on the emulated GPU.
+         * @param bytes The number of bytes to allocate.
+         * @return A valid device pointer on success, nullptr on failure.
+         */
+        void* allocBuffer(std::size_t bytes);
+
+        /**
+         * @brief Free a previously allocated buffer.
+         * @param ptr The device pointer to free.
+         */
+        void freeBuffer(void* ptr);
+
+        /**
+         * @brief Write data to a device buffer.
+         * @param ptr Device pointer.
+         * @param src Source buffer.
+         * @param size Number of bytes to copy.
+         * @return true on success.
+         */
+        bool writeBuffer(void* ptr, const void* src, std::size_t size);
+
+        /**
+         * @brief Read data from a device buffer.
+         * @param dst Destination buffer.
+         * @param ptr Device pointer.
+         * @param size Number of bytes to copy.
+         * @return true on success.
+         */
+        bool readBuffer(void* dst, const void* ptr, std::size_t size);
+
+        /**
+         * @brief Register a kernel for future launch.
+         * @param kernelId ID to assign to the kernel.
+         * @param binary Kernel binary blob.
+         */
+        void registerKernel(uint32_t kernelId, const std::vector<uint8_t>& binary);
+
+        /**
+         * @brief Launch a previously registered kernel task.
+         * @param kernelId The kernel to launch.
+         * @param args Optional argument payload.
+         * @return true on success.
+         */
+        bool launchTask(uint32_t kernelId, const std::vector<uint8_t>& args = {});
+
+        /**
+         * @brief Reset the device, clearing all allocations.
+         */
+        void reset();
 
     private:
+        pid_t childPid_ = -1;
+        std::unique_ptr<Ipc::Communications> comm_;
+        PointerTracker tracker_;
+        bool initialized_ = false;
+    };
 
-        int     toChildFd_   = -1;       // write commands to child
-        int     fromChildFd_ = -1;       // read responses from child
-        pid_t   emulatorPid_ = -1;       // PID of emulator process
-        bool    isChild_     = false;    // flag for child context
-        bool    childActive_ = false;
-
-        Gpu::PointerTracker allocations_;
-
-        bool sendCommand(const IpcHeader& hdr, const void* payload = nullptr);
-        void childProcessLoop();
-
-        // start: methods used by childProcessLoop
-        static void handleInit(const int toParentFd);
-        static void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
-        static void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
-        static void handleWrite(const IpcHeader &hdr, int fromChildFd, int toChildFd, const PointerTracker &allocations);
-        static void handleRead(const IpcHeader &hdr, int fromChildFd, const PointerTracker &allocations);
-        static void handleLaunchTask(const IpcHeader &hdr, int fromChildFd, const PointerTracker &allocations);
-        static void handleWait(int fromChildFd_);
-        static void handleReset(PointerTracker& allocations);
-        // end: methods used by childProcessLoop
-
-
-    }; // class Emulator
-
-} // namespace Gpu
+} // namespace Gpu::Device
