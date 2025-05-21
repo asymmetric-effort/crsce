@@ -45,8 +45,8 @@ fromChildFd_ = pipeFromChild[1];  // write-end
 
 - Parent sends a serialized IpcHeader to toChildFd_.
 - Child reads the IpcHeader, dispatches to the matching handler.
-- Handler optionally sends an IpcResponseMsg to fromChildFd_.
-- Parent reads and deserializes the IpcResponseMsg.
+- Handler optionally sends an ResponseMsg to fromChildFd_.
+- Parent reads and deserializes the ResponseMsg.
 
 ## Command Header Format (IpcHeader)
 
@@ -61,7 +61,7 @@ struct IpcHeader {
 
 This structure is sent raw using `write(toChildFd_, &hdr, sizeof(hdr))`
 
-## Response Format (IpcResponseMsg)
+## Response Format (ResponseMsg)
 
 All responses use a strict binary format:
 
@@ -72,14 +72,14 @@ All responses use a strict binary format:
 ## Structure
 
 ```c++
-class IpcResponseMsg {
+class ResponseMsg {
 public:
 uint8_t status = 1;  // 0 = success, nonzero = error code
 uint64_t size = 0;   // size of payload
 std::vector<uint8_t> data;
-    // IpcResponseMsg(uint8_t status, const void* payload, uint64_t size);
+    // ResponseMsg(uint8_t status, const void* payload, uint64_t size);
     std::vector<uint8_t> serialize() const;
-    static IpcResponseMsg deserialize(const uint8_t* buffer, size_t length);
+    static ResponseMsg deserialize(const uint8_t* buffer, size_t length);
 };
 ```
 
@@ -109,7 +109,7 @@ Each handler:
 
 * Reads from `hdr`
 * Accesses or updates PointerTracker
-* Sends a response via `toParentFd_` using `IpcResponseMsg::serialize()`
+* Sends a response via `toParentFd_` using `ResponseMsg::serialize()`
 
 ### Response Expectations by Command
 
@@ -125,7 +125,7 @@ Each handler:
 | `Shutdown` | Optional          | None (may be silent) |
 
 ## Error Handling
-* Handlers return IpcResponseMsg(status=1, nullptr, 0) to indicate failure
+* Handlers return ResponseMsg(status=1, nullptr, 0) to indicate failure
 * `receiveResponseMsg()` retries short reads and throws if deserialization fails
 
 ## Alignment with `PointerTracker`
