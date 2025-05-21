@@ -39,24 +39,24 @@ int main() {
     }
 
     try {
-        auto [type, kernelId, size, ptr] = Message::deserialize(buffer.data(), buffer.size());
+        const Message result = Message::deserialize(buffer.data(), buffer.size());
 
-        if (type != original.type) {
+        if (result.type != original.type) {
             std::cerr << "[FAIL] type mismatch\n";
             ++failures;
         }
 
-        if (kernelId != original.kernelId) {
+        if (result.kernelId != original.kernelId) {
             std::cerr << "[FAIL] kernelId mismatch\n";
             ++failures;
         }
 
-        if (size != original.size) {
+        if (result.size != original.size) {
             std::cerr << "[FAIL] size mismatch\n";
             ++failures;
         }
 
-        if (ptr != original.ptr) {
+        if (result.ptr != original.ptr) {
             std::cerr << "[FAIL] ptr mismatch\n";
             ++failures;
         }
