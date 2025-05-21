@@ -58,7 +58,7 @@ namespace Gpu::Device {
          * @param size Number of bytes to copy.
          * @return true on success.
          */
-        bool writeBuffer(void* ptr, const void* src, std::size_t size);
+        bool write(void* ptr, const void* src, std::size_t size);
 
         /**
          * @brief Read data from a device buffer.
@@ -67,7 +67,7 @@ namespace Gpu::Device {
          * @param size Number of bytes to copy.
          * @return true on success.
          */
-        bool readBuffer(void* dst, const void* ptr, std::size_t size);
+        bool read(void* dst, const void* ptr, std::size_t size);
 
         /**
          * @brief Register a kernel for future launch.
