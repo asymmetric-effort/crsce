@@ -9,14 +9,15 @@ namespace Gpu {
 
     //IpcCommand Message Types we send to a GPU
     enum class CommandType : uint32_t {
-        Alloc       = 1,
-        Free        = 2,
-        Write       = 3,
-        Read        = 4,
-        LaunchTask  = 5,
-        Reset       = 6,
-        Wait        = 7,
-        Shutdown    = 8
+        Init        = 0x01,
+        Alloc       = 0x02,
+        Free        = 0x03,
+        Write       = 0x04,
+        Read        = 0x05,
+        LaunchTask  = 0x06,
+        Reset       = 0x07,
+        Wait        = 0x08,
+        Shutdown    = 0x09
     };
 
 }; //namespace Gpu
