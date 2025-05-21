@@ -4,6 +4,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 
 namespace Gpu::Ipc {
 
@@ -28,5 +29,19 @@ namespace Gpu::Ipc {
         Shutdown = 3,  ///< IPC channel is shut down
         Error = 4      ///< System-level or internal error
     };
+
+    /**
+     * @name resultToString
+     * @param r a result value
+     * @return std::string
+     */
+    std::string resultToString(const Result r);
+    /**
+     * @brief Stream output operator for Result enum.
+     * @param os The output stream.
+     * @param r The Result value.
+     * @return The stream, after writing the string representation.
+     */
+    std::ostream& operator<<(std::ostream& os, Result r);
 
 } // namespace Gpu::Ipc
