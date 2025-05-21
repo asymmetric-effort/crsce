@@ -1,6 +1,25 @@
 // file: test/0010_ipc_communications_result.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+/**
+ * @file
+ * @brief Unit test for Gpu::Ipc::Result to-string conversion.
+ *
+ * This test validates the behavior of `resultToString(Result)` for each
+ * enumerated value in the Gpu::Ipc::Result enum. The function is expected
+ * to return a stable and correct human-readable string for each Result value.
+ *
+ * The test checks:
+ * - Success
+ * - Empty
+ * - Blocked
+ * - Shutdown
+ * - Error
+ *
+ * Failures are logged to stderr with both expected and actual output.
+ * A summary result is printed to stdout.
+ */
+
 #include "Gpu/Ipc/Result.h"
 #include <iostream>
 #include <string>
