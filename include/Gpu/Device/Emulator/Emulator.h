@@ -43,13 +43,13 @@ namespace Gpu::Device {
          * @param bytes The number of bytes to allocate.
          * @return A valid device pointer on success, nullptr on failure.
          */
-        void* allocBuffer(std::size_t bytes);
+        void* alloc(std::size_t bytes);
 
         /**
          * @brief Free a previously allocated buffer.
          * @param ptr The device pointer to free.
          */
-        void freeBuffer(void* ptr);
+        void free(void* ptr);
 
         /**
          * @brief Write data to a device buffer.

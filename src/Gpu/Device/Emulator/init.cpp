@@ -14,7 +14,7 @@ namespace Gpu::Device {
             return true;
         }
 
-        pid_t forkResult = fork();
+        const pid_t forkResult = fork();
         if (forkResult < 0) {
             std::cerr << "[Emulator::init] fork() failed\n";
             return false;
