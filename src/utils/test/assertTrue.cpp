@@ -3,7 +3,7 @@
 #include "utils/test/Tester.h"
 
 // Assert a condition; on failure, print message and terminate
-void Tester::assertTrue(bool condition, const std::string& message) {
+void Tester::assertTrue(const bool condition, const std::string& message) {
     if (condition) {
         pass(std::format("ok: {}", message));
     }else{

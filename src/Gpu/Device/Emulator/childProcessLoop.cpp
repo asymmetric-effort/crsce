@@ -6,13 +6,15 @@
 namespace Gpu {
 
     void Emulator::childProcessLoop() {
-
         while (true) {
             IpcHeader hdr;
-            ssize_t n = read(toChildFd_, &hdr, sizeof(hdr));
-            if (n != sizeof(hdr)) break;
+            if (const ssize_t n = read(toChildFd_, &hdr, sizeof(hdr)); n != sizeof(hdr))
+                break;
 
             switch (hdr.type) {
+                case CommandType::Init:
+                    handleInit(fromChildFd_);
+                    break;
                 case CommandType::Alloc:
                     handleAlloc(hdr, fromChildFd_, allocations_);
                     break;
@@ -36,10 +38,8 @@ namespace Gpu {
                     break;
                 case CommandType::Shutdown:
                     handleReset(allocations_);
-                    std::cerr << "[Emulator] Shutdown received. Exiting.\n";
                     return;
                 default:
-                    std::cerr << "[Emulator] Unknown command " << static_cast<int>(hdr.type) << std::endl;
                     break;
             }
         }

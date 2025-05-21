@@ -24,7 +24,7 @@
 
 namespace Gpu {
 
-    class Emulator : public Interface {
+    class Emulator final : public Interface {
     public:
         Emulator();
         ~Emulator() override;
@@ -72,6 +72,7 @@ namespace Gpu {
         void childProcessLoop();
 
         // start: methods used by childProcessLoop
+        static void handleInit(const int toParentFd);
         static void handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations);
         static void handleFree(const IpcHeader& hdr, PointerTracker& allocations);
         static void handleWrite(const IpcHeader &hdr, int fromChildFd, int toChildFd, const PointerTracker &allocations);

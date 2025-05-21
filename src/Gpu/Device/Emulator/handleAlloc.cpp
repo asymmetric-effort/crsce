@@ -7,7 +7,7 @@
 
 namespace Gpu {
 
-    void Emulator::handleAlloc(const IpcHeader& hdr, int fromChildFd, PointerTracker& allocations) {
+    void Emulator::handleAlloc(const IpcHeader& hdr, const int fromChildFd, PointerTracker& allocations) {
         void* ptr = std::malloc(hdr.size);
         if (ptr) allocations.insert(ptr);
 

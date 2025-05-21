@@ -8,24 +8,32 @@
 
 namespace Gpu {
 
+
     bool Emulator::init() {
         // Register built-in kernels for this backend
-        KernelRegistry::instance().registerKernel(KernelId::Increment,new IncrementKernel());
-        // ToDo: Add more registration steps here.
+        KernelRegistry::instance().registerKernel(KernelId::Increment, new IncrementKernel());
 
-        // Existing init logic: fork child, set up IPC, etc.
         int pipeToChild[2], pipeFromChild[2];
-        if (pipe(pipeToChild) < 0 || pipe(pipeFromChild) < 0) {
-            std::perror("[Emulator] pipe creation failed");
+
+        if (pipe(pipeToChild) < 0) {
             return false;
         }
+
+        if (pipe(pipeFromChild) < 0) {
+            close(pipeToChild[0]);
+            close(pipeToChild[1]);
+            return false;
+        }
+
         const pid_t pid = fork();
         if (pid < 0) {
-            std::perror("[Emulator] fork failed in init");
+            close(pipeToChild[0]); close(pipeToChild[1]);
+            close(pipeFromChild[0]); close(pipeFromChild[1]);
             return false;
         }
+
         if (pid > 0) {
-            // Parent setup
+            // Parent process setup
             close(pipeToChild[0]);
             close(pipeFromChild[1]);
             toChildFd_   = pipeToChild[1];
@@ -33,16 +41,37 @@ namespace Gpu {
             emulatorPid_ = pid;
             isChild_     = false;
             childActive_ = true;
+
+            IpcHeader initHdr{
+                .type     = CommandType::Init,
+                .kernelId = 0,
+                .size     = 0,
+                .ptr      = 0
+            };
+
+            if (!sendCommand(initHdr)) {
+                return false;
+            }
+
+            try {
+                const IpcResponseMsg msg = receiveResponseMsg();
+                if (msg.status != 0) return false;
+            } catch (...) {
+                return false;
+            }
+
             return true;
         }
-        // Child setup
+
+        // Child process setup
         close(pipeToChild[1]);
         close(pipeFromChild[0]);
+
         toChildFd_   = pipeToChild[0];
         fromChildFd_ = pipeFromChild[1];
-        childActive_ = true;
         isChild_     = true;
-        std::cout << "[Emulator] Child process started.\n";
+        childActive_ = true;
+
         childProcessLoop();
         _exit(EXIT_SUCCESS);
     }
