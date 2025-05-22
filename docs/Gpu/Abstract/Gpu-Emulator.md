@@ -87,41 +87,45 @@ debugging and testing as well as development of GPU-enabled projects.
 
 | Scope    | Method                                                             | Description                                 |
 |----------|--------------------------------------------------------------------|---------------------------------------------|
-| `public` | `void registerKernel(KernelId id, const Common::Buffer8& binary);` | register a binary blob with a given GPU     |
+| `public` | `bool registerKernel(KernelId id, const Common::Buffer8& binary);` | register a binary blob with a given GPU     |
 | `public` | `bool launchTask(KernelId id, const Common::Buffer8& args = {});`  | launch a task using a pre-registered kernel |
 
 ### Notes:
 
-* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+* Return true on success or false on error.
+* If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
 
 ## Matrix Math & Vector Operations
 
 | Scope    | Method                                                                                             | Description           |
 |----------|----------------------------------------------------------------------------------------------------|-----------------------|
-| `public` | `void dot(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`  | calculate dot product |
-| `public` | `void addv(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs+rhs      |
-| `public` | `void subv(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
-| `public` | `void mulm(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
-| `public` | `void transpose(Common::Buffer64& result, const Gpu::Math::Matrix& mat);`                          | transpose mat         |
-| `public` | `void reduce(Common::Buffer64& result, const Gpu::Math::Matrix& mat, bool rowwise);`               | reduce mat            |
+| `public` | `bool dot(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | calculate dot product |
+| `public` | `bool add(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs+rhs      |
+| `public` | `bool sub(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
+| `public` | `bool mul(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
+| `public` | `bool transpose(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat);`                         | transpose mat         |
+| `public` | `bool reduce(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat, bool rowwise);`              | reduce mat            |
 
 ### Notes:
 
-* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+* Return true on success or false on error.
+* These math operations should transfer the `Gpu::Math::Matrix` to the GPU, perform the operation and return the result
+* If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
 
 ## Synchronization
 
 | Scope    | Method                         | Description                                                                                                               |
 |----------|--------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| `public` | `void barrier();`              | Ensures running GPU threads reach the same execution point before any can proceed.                                        |
-| `public` | `void memfence();`             | Provide memory-ordering guarantees by flushing pending memory writes to global/shared memory before continuing execution. |
-| `public` | `void yield();`                | This method hints to the runtime that the current kernel or task may yield control.                                       |
-| `public` | `void wait(unsigned deadline)` | Block until all kernel tasks complete or the deadline (in milliseconds) is reached.                                       |                                                                     |
+| `public` | `bool barrier();`              | Ensures running GPU threads reach the same execution point before any can proceed.                                        |
+| `public` | `bool memfence();`             | Provide memory-ordering guarantees by flushing pending memory writes to global/shared memory before continuing execution. |
+| `public` | `bool yield();`                | This method hints to the runtime that the current kernel or task may yield control.                                       |
+| `public` | `bool wait(unsigned deadline)` | Block until all kernel tasks complete or the deadline (in milliseconds) is reached.                                       |                                                                     |
 
 ### Notes:
 
-* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+* Return true on success or false on error.
+* If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
 
