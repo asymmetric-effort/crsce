@@ -60,14 +60,14 @@ debugging and testing as well as development of GPU-enabled projects.
 
 ## Memory Management
 
-| Scope    | Method                                                          | Description                                              |
-|----------|-----------------------------------------------------------------|----------------------------------------------------------|
-| `public` | `AbstractPtr* alloc(std::size_t bytes);`                        | Allocate device memory in the MemoryTracker table        |
-| `public` | `bool free(Common::AbstractPtr& ptr);`                          | Frees device memory previously allocated using `alloc()` |
-| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
-| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
-| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
-| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
+| Scope    | Method                                                           | Description                                              |
+|----------|------------------------------------------------------------------|----------------------------------------------------------|
+| `public` | `AbstractPtr* alloc(std::size_t bytes);`                         | Allocate device memory in the MemoryTracker table        |
+| `public` | `bool free(Common::AbstractPtr& ptr);`                           | Frees device memory previously allocated using `alloc()` |
+| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);`  | write `source` buffer to the `destination`               |
+| `public` | `bool write(Common::Buffer64& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
+| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`   | read the `source` from the `destination` reference       |
+| `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
 
 ### Notes:
 
@@ -111,7 +111,7 @@ debugging and testing as well as development of GPU-enabled projects.
 | `public` | `void barrier();`              | Ensures running GPU threads reach the same execution point before any can proceed.                                        |
 | `public` | `void memfence();`             | Provide memory-ordering guarantees by flushing pending memory writes to global/shared memory before continuing execution. |
 | `public` | `void yield();`                | This method hints to the runtime that the current kernel or task may yield control.                                       |
-| `public` | `void wait(unsigned deadline)` | wait a specified deadline (ms) for all tasks to sync.                                                                     |
+| `public` | `void wait(unsigned deadline)` | Block until all kernel tasks complete or the deadline (in milliseconds) is reached.                                       |                                                                     |
 
 ### Notes:
 
