@@ -6,7 +6,7 @@
 A concrete implementation of `Gpu::Device::Interface` class. The `Gpu::Device::Emulator` class creates a mock GPU for
 debugging and testing as well as development of GPU-enabled projects.
 
-### Dependencies
+## Dependencies
 
 * [`Common::AbstractPtr](./Common-AbstractPtr.md)
 * [`Gpu::Ipc::CommandType`](./Gpu-Ipc-CommandType.md)
@@ -14,8 +14,9 @@ debugging and testing as well as development of GPU-enabled projects.
 * [`Gpu::Ipc::FailureCodes`](./Gpu-Ipc-FailureCodes.md)
 * [`Common::Buffer8](./Common-Buffer8.md)
 * [`Common::Buffer64](./Common-Buffer64.md)
+* [`Gpu::Math::Matrix`](./Gpu-Math-Matrix.md)
 
-#### Properties
+## Properties
 
 | Property      | Type                                   | Description                                      |
 |---------------|----------------------------------------|--------------------------------------------------|
@@ -24,25 +25,25 @@ debugging and testing as well as development of GPU-enabled projects.
 | `tracker`     | `Gpu::Ipc::MemoryTracker`              | memory allocation tracker                        |
 | `initialized` | `bool`                                 | indicates whether `Gpu::Emulator` is initialized |
 
-### Constructor
+## Constructor
 
 * Initialize the target GPU internal state. For the emulator this means launching the child process which
   emulates the hardware GPU.
 * The constructor will detect the current process PID (parentPid) and launch a child process as the GPU emulator.
   These PIDs will be used to setup IPC Communications between parent and child.
 
-### Destructor
+## Destructor
 
 * Safely shutdown and clean up GPU state. For the emulator this will terminate the child process clean.
 
-#### Parent/Child IPC Access Validation
+## Parent/Child IPC Access Validation
 
 | Scope     | Method                        | Description                                           |
 |-----------|-------------------------------|-------------------------------------------------------|
 | `private` | `bool validateParentAccess()` | verify send/recv permission based on parent/child pid |
 | `private` | `bool validateChildAccess()`  | verify send/recv permission based on parent/child pid |
 
-### Lifecycle
+## Lifecycle
 
 | Scope    | Method             | Description                                  |
 |----------|--------------------|----------------------------------------------|
@@ -50,44 +51,70 @@ debugging and testing as well as development of GPU-enabled projects.
 | `public` | `void shutdown();` | reset the mock GPU state                     |
 | `public` | `void reset();`    | shutdown the mock GPU and all of its threads |
 
-### Memory Management
+### Notes:
 
-| Scope    | Method                                                            | Description                                              |
-|----------|-------------------------------------------------------------------|----------------------------------------------------------|
-| `public` | `AbstractPtr* alloc(std::size_t bytes);`                          | Allocate device memory in the MemoryTracker table        |
-| `public` | `bool free(Common::AbstractPtr& ptr);`                            | Frees device memory previously allocated using `alloc()` |
-| `public` | `bool write(Common::AbstractPtr& dst, Common::Buffer8& source);`  | write `source` buffer to the `destination`               |
-| `public` | `bool write(Common::AbstractPtr& dst, Common::Buffer64& source);` | write `source` buffer to the `destination`               |
-| `public` | `bool read(Common::AbstractPtr& dst, Common::Buffer8& source);`   | read the `source` from teh `destination` reference       |
-| `public` | `bool read(Common::AbstractPtr& dst, Common::Buffer64& source);`  | read the `source` from teh `destination` reference       |
+* if `shutdown()` is called before `init()`, no operation will be performed, no error will occur.
+* if `reset()` is called before `init()`, no operation will be performed, no error will occur.
+* if `init()` or `reset()` are called after `shutdown()` and exception will be thrown because `shutdown()` is final.
+* if `init()` is called after `reset()` no error will occur as this is normal.
 
-### Kernel Control
+## Memory Management
+
+| Scope    | Method                                                          | Description                                              |
+|----------|-----------------------------------------------------------------|----------------------------------------------------------|
+| `public` | `AbstractPtr* alloc(std::size_t bytes);`                        | Allocate device memory in the MemoryTracker table        |
+| `public` | `bool free(Common::AbstractPtr& ptr);`                          | Frees device memory previously allocated using `alloc()` |
+| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
+| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
+| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
+| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
+
+### Notes:
+
+* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+  using `Gpu::Exception::DeviceNotReady`.
+
+## Kernel Control
 
 (`Gpu::KernelId` is a `uint64_t`)
 
-| Scope    | Method                                                             | Description                              |
-|----------|--------------------------------------------------------------------|------------------------------------------|
-| `public` | `void registerKernel(KernelId id, const Common::Buffer8& binary);` | register a binary blob with a given GPU  |
-| `public` | `bool launchTask(KernelId id, const Common::Buffer8& args = {});`  | launch a task using a pre-registered GPU |
+| Scope    | Method                                                             | Description                                 |
+|----------|--------------------------------------------------------------------|---------------------------------------------|
+| `public` | `void registerKernel(KernelId id, const Common::Buffer8& binary);` | register a binary blob with a given GPU     |
+| `public` | `bool launchTask(KernelId id, const Common::Buffer8& args = {});`  | launch a task using a pre-registered kernel |
 
-### Matrix Math & Vector Operations
+### Notes:
 
-ToDo: fix all this...
+* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+  using `Gpu::Exception::DeviceNotReady`.
 
-| Scope    | Method                                                                       | Description           |
-|----------|------------------------------------------------------------------------------|-----------------------|
-| `public` | `void dot(Common::Buffer64& result, const Matrix& lhs, const Matrix& rhs);`  | calculate dot product |
-| `public` | `void addv(Common::Buffer64& result, const Matrix& lhs, const Matrix& rhs);` | result = lhs+rhs      |
-| `public` | `void subv(Common::Buffer64& result, const Matrix& lhs, const Matrix& rhs);` | result = lhs-rhs      |
-| `public` | `void mulm(Common::Buffer64& result, const Matrix& lhs, const Matrix& rhs);` | result = lhs*rhs      |
-| `public` | `void transpose(Common::Buffer64& result, const Matrix& mat);`               | transpose mat         |
-| `public` | `void reduce(Common::Buffer64& result, const Matrix& mat, bool rowwise);`    | reduce mat            |
+## Matrix Math & Vector Operations
 
-### Synchronization
+| Scope    | Method                                                                                             | Description           |
+|----------|----------------------------------------------------------------------------------------------------|-----------------------|
+| `public` | `void dot(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`  | calculate dot product |
+| `public` | `void addv(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs+rhs      |
+| `public` | `void subv(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
+| `public` | `void mulm(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
+| `public` | `void transpose(Common::Buffer64& result, const Gpu::Math::Matrix& mat);`                          | transpose mat         |
+| `public` | `void reduce(Common::Buffer64& result, const Gpu::Math::Matrix& mat, bool rowwise);`               | reduce mat            |
 
-| Scope    | Method                     | Description                                                                                                               |
-|----------|----------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| `public` | `virtual void barrier();`  | Ensures running GPU threads reach the same execution point before any can proceed.                                        |
-| `public` | `virtual void memfence();` | Provide memory-ordering guarantees by flushing pending memory writes to global/shared memory before continuing execution. |
-| `public` | `virtual void yield();`    | This method hints to the runtime that the current kernel or task may yield control.                                       |
+### Notes:
+
+* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+  using `Gpu::Exception::DeviceNotReady`.
+
+## Synchronization
+
+| Scope    | Method                         | Description                                                                                                               |
+|----------|--------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| `public` | `void barrier();`              | Ensures running GPU threads reach the same execution point before any can proceed.                                        |
+| `public` | `void memfence();`             | Provide memory-ordering guarantees by flushing pending memory writes to global/shared memory before continuing execution. |
+| `public` | `void yield();`                | This method hints to the runtime that the current kernel or task may yield control.                                       |
+| `public` | `void wait(unsigned deadline)` | wait a specified deadline (ms) for all tasks to sync.                                                                     |
+
+### Notes:
+
+* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+  using `Gpu::Exception::DeviceNotReady`.
 
