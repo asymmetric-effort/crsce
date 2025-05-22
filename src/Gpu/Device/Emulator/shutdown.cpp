@@ -21,8 +21,7 @@ namespace Gpu::Device {
         msg.size = 0;
         msg.ptr = 0;
 
-        const Ipc::Result result = comm_->parentSend(msg);
-        if (result != Ipc::Result::Success) {
+        if (const Ipc::Result result = comm_->parentSend(msg); result != Ipc::Result::Success) {
             std::cerr << "[Emulator::shutdown] Warning: failed to send shutdown message. Result: " << result << "\n";
         }
 
