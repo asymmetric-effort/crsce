@@ -67,7 +67,7 @@ namespace Gpu::Device {
          * @param size Number of bytes to copy.
          * @return true on success.
          */
-        bool read(void* dst, const void* ptr, std::size_t size);
+        bool read(void *dst, void *ptr, std::size_t size) const;
 
         /**
          * @brief Register a kernel for future launch.

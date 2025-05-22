@@ -10,7 +10,7 @@
 
 namespace Gpu::Device {
 
-    bool Emulator::read(void* dst, const void* ptr, const std::size_t size) {
+    bool Emulator::read(void *dst, void *const ptr, const std::size_t size) const {
         if (!comm_ || !initialized_ || !tracker_.contains(ptr) || !dst || size == 0) {
             return false;
         }
