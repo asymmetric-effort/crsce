@@ -9,31 +9,32 @@ Purpose
 algebra and decompression workloads. It is the core data type used in vector and matrix operations invoked
 by `Gpu::Interface` methods, including `dot()`, `add()`, `subtract()`, `multiply()`, `transpose()`, and `reduce()`.
 
-This type also serves as the canonical memory layout for representing CRSCE decompression factors and row-column
-solving matrices.
-
 ## Dependencies
 
 N/A
 
 #### Properties
 
-| Name | Type             | Description                       |
-|------|------------------|-----------------------------------|
-| rows | `std::size_t`    | Number of matrix rows             |
-| cols | `std::size_t`    | Number of matrix columns          |
-| data | `std::vector<T>` | Row-major flattened matrix values |
+| Name | Type                  | Description                                              |
+|------|-----------------------|----------------------------------------------------------|
+| rows | `std::size_t`         | Number of matrix rows                                    |
+| cols | `std::size_t`         | Number of matrix columns                                 |
+| data | `Common::AbstractPtr` | Reference to the GPU memory where the matrix is located. |
 
 ### Constructor
 
-| Scope    | Method                                                                                    | Description                 |
-|----------|-------------------------------------------------------------------------------------------|-----------------------------|
-| `public` | `Matrix(std::size_t rows, std::size_t cols);`                                             |                             |
-| `public` | `Matrix(std::size_t rows, std::size_t cols, std::vector<uint64_t>& values);`              | size must equal rows × cols |
-| `public` | `Matrix(std::size_t rows, std::size_t cols, std::vector<std::vector<uint64_t>>& values);` | size must equal rows × cols |
-| `public` | `Matrix(std::size_t rows, std::size_t cols, std::vector<std::vector<int>>& values);`      | size must equal rows × cols |
-| `public` | `Matrix(std::size_t rows, std::size_t cols, std::vector<std::vector<float>>& values);`    | size must equal rows × cols |
-| `public` | `Matrix(std::size_t rows, std::size_t cols, std::vector<std::vector<double>>& values);`   | size must equal rows × cols |
+| Scope    | Method                                                                                                         | Description                 |
+|----------|----------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `public` | `Matrix(Gpu::Interface& gpu, std::size_t rows, std::size_t cols);`                                             |                             |
+| `public` | `Matrix(Gpu::Interface& gpu, std::size_t rows, std::size_t cols, std::vector<uint64_t>& values);`              | size must equal rows × cols |
+| `public` | `Matrix(Gpu::Interface& gpu, std::size_t rows, std::size_t cols, std::vector<std::vector<uint64_t>>& values);` | size must equal rows × cols |
+| `public` | `Matrix(Gpu::Interface& gpu, std::size_t rows, std::size_t cols, std::vector<std::vector<int>>& values);`      | size must equal rows × cols |
+| `public` | `Matrix(Gpu::Interface& gpu, std::size_t rows, std::size_t cols, std::vector<std::vector<float>>& values);`    | size must equal rows × cols |
+| `public` | `Matrix(Gpu::Interface& gpu, std::size_t rows, std::size_t cols, std::vector<std::vector<double>>& values);`   | size must equal rows × cols |
+
+### Notes
+
+* The constructor will use `Gpu::Interface` to invoke `alloc()` and `write()` to store the matrix on the GPU.
 
 ## Destructor
 
@@ -41,18 +42,22 @@ Automatically releases matrix-owned memory (i.e., clears internal vector).
 
 ## Math Functions
 
-| Scope    | Method                                                                                                  | Description           |
-|----------|---------------------------------------------------------------------------------------------------------|-----------------------|
-| `public` | `bool dot(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`      | calculate dot product |
-| `public` | `bool add(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`      | result = lhs+rhs      |
-| `public` | `bool subtract(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
-| `public` | `bool multiply(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
-| `public` | `bool transpose(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat);`                              | transpose mat         |
-| `public` | `bool reduce(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat, bool rowwise);`                   | reduce mat            |
+| Scope    | Method                                                                       | Description           |
+|----------|------------------------------------------------------------------------------|-----------------------|
+| `public` | `bool dot(const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`      | calculate dot product |
+| `public` | `bool add(const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`      | result = lhs+rhs      |
+| `public` | `bool subtract(const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
+| `public` | `bool multiply(const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
+| `public` | `bool transpose(const Gpu::Math::Matrix& mat);`                              | transpose mat         |
+| `public` | `bool reduce(const Gpu::Math::Matrix& mat, const bool rowwise);`             | reduce mat            |
 
 ### Notes
 
 * These methods return `true` on success and `false` on error.
+* When a math operation between two matrices are performed--
+  * The invoking matrix object represents the result (e.g., result = lhs + rhs)
+  * The invoking matrix will obtain the opaque GPU memory references needed from the operad(s)
+  * The invoking matrix will use `Gpu::Interface` go perform the math operation on the GPU.
 
 ## Operators
 
