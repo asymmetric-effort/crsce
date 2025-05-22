@@ -13,9 +13,8 @@ implementations to use at runtime.
 * [`Gpu::Device::Cuda`](./Gpu-Cuda.md)
 * [`Gpu::Device::Roc`](./Gpu-AmdRoc.md)
 * [`Gpu::Device::Metal`](./Gpu-AppleMetal.md)
-* [`Gpu::Math::Matrix`](./Gpu-Math-Matrix.md)
 
-#### Properties
+## Properties
 
 | Property      | Type                                   | Description                                      |
 |---------------|----------------------------------------|--------------------------------------------------|
@@ -37,8 +36,8 @@ implementations to use at runtime.
 | Scope    | Method             | Description                                                       |
 |----------|--------------------|-------------------------------------------------------------------|
 | `public` | `bool init();`     | re-initialize mock GPU state. returns true=success, false=failure |
-| `public` | `void shutdown();` | reset the mock GPU state                                          |
-| `public` | `void reset();`    | shutdown the mock GPU and all of its threads                      |
+| `public` | `bool shutdown();` | reset the mock GPU state                                          |
+| `public` | `bool reset();`    | shutdown the mock GPU and all of its threads                      |
 
 ### Notes:
 
@@ -46,7 +45,7 @@ implementations to use at runtime.
 * If `reset()` is called before `init()`, no operation will be performed, no error will occur.
 * If `init()` or `reset()` are called after `shutdown()` and exception will be thrown because `shutdown()` is final.
 * If `init()` is called after `reset()` no error will occur as this is normal.
-* The `init()` returns true for success or false on error.
+* These methods return true for success or false on error.
 
 ## Memory Management
 
@@ -84,12 +83,12 @@ implementations to use at runtime.
 
 | Scope    | Method                                                                                             | Description           |
 |----------|----------------------------------------------------------------------------------------------------|-----------------------|
-| `public` | `void dot(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);`  | calculate dot product |
-| `public` | `void addv(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs+rhs      |
-| `public` | `void subv(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
-| `public` | `void mulm(Common::Buffer64& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
-| `public` | `void transpose(Common::Buffer64& result, const Gpu::Math::Matrix& mat);`                          | transpose mat         |
-| `public` | `void reduce(Common::Buffer64& result, const Gpu::Math::Matrix& mat, bool rowwise);`               | reduce mat            |
+| `public` | `bool dot(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | calculate dot product |
+| `public` | `bool add(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs+rhs      |
+| `public` | `bool sub(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs-rhs      |
+| `public` | `bool mul(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& lhs, const Gpu::Math::Matrix& rhs);` | result = lhs*rhs      |
+| `public` | `bool transpose(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat);`                         | transpose mat         |
+| `public` | `bool reduce(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat, bool rowwise);`              | reduce mat            |
 
 ### Notes:
 
