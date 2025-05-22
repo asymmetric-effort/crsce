@@ -1,9 +1,9 @@
 `Common::AbstractPtr`
 =====================
 
-## Purpose 
-Provides an abstract pointer reference in `PointerTracker` map which maps `Common::AbstractPtr` to avoid direct memory
-access.
+## Purpose
+The `Common::AbstractPtr` type is a `uint64_t` numeric value representing one of many pseudo-random memory references
+in the `Gpu::Ipc::MemoryTracker` table.
 
-## Dependencies
-...`PointerTracker`
+## Definition
+`using Common::AbstractPtr = uint64_t;`
