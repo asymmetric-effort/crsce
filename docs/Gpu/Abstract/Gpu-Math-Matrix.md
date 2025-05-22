@@ -38,7 +38,7 @@ N/A
 
 ## Destructor
 
-Automatically releases matrix-owned memory (i.e., clears internal vector).
+All allocated resources are freed and cleaned up
 
 ## Math Functions
 
