@@ -44,6 +44,7 @@ debugging and testing as well as development of GPU-enabled projects.
 | `private` | `bool validateChildAccess()`  | verify send/recv permission based on parent/child pid |
 
 ### Notes
+
 * These methods return `true` if permission is granted or `false` if not.
 
 ## Lifecycle
@@ -64,14 +65,14 @@ debugging and testing as well as development of GPU-enabled projects.
 
 ## Memory Management
 
-| Scope    | Method                                                          | Description                                              |
-|----------|-----------------------------------------------------------------|----------------------------------------------------------|
-| `public` | `AbstractPtr alloc(std::size_t bytes);`                         | Allocate device memory in the MemoryTracker table        |
-| `public` | `bool free(Common::AbstractPtr& ptr);`                          | Frees device memory previously allocated using `alloc()` |
-| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
+| Scope    | Method                                                           | Description                                              |
+|----------|------------------------------------------------------------------|----------------------------------------------------------|
+| `public` | `AbstractPtr alloc(std::size_t bytes);`                          | Allocate device memory in the MemoryTracker table        |
+| `public` | `bool free(Common::AbstractPtr& ptr);`                           | Frees device memory previously allocated using `alloc()` |
+| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);`  | write `source` buffer to the `destination`               |
 | `public` | `bool write(Common::Buffer64& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
-| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
-| `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);` | read the `source` from the `destination` reference       |
+| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`   | read the `source` from the `destination` reference       |
+| `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
 
 ## Notes:
 
