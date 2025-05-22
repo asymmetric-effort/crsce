@@ -4,7 +4,10 @@
 ## Purpose
 
 A concrete implementation of `Gpu::Device::Interface` class. The `Gpu::Device::Emulator` class creates a mock GPU for
-debugging and testing as well as development of GPU-enabled projects.
+debugging and testing as well as development of GPU-enabled projects. The `Gpu::Device::Emulator` class instance
+represents a front-end for a mock graphics processor unit.  This emulator spawns a child process which represents the
+mock GPU (`Gpu::Device::MockGpu`).  Communication between `Gpu::Device::Emulator` and `Gpu::Device::MockGpu` is
+facilitated by `Gpu::Ipc::Communications`.
 
 ## Dependencies
 
@@ -22,7 +25,7 @@ debugging and testing as well as development of GPU-enabled projects.
 |---------------|----------------------------------------|--------------------------------------------------|
 | `childPid`    | `pid_t`                                | Process Id                                       |
 | `ipcChannel`  | `std::unique_ptr<Ipc::Communications>` | IPC Communication channel                        |
-| `tracker`     | `Gpu::Ipc::MemoryTracker`              | memory allocation tracker                        |
+| `tracker`     | `Gpu::Ipc::MemoryTracker`              | RAII compliant memory allocation tracker         |
 | `initialized` | `bool`                                 | indicates whether `Gpu::Emulator` is initialized |
 
 ## Constructor
@@ -30,7 +33,7 @@ debugging and testing as well as development of GPU-enabled projects.
 * Initialize the target GPU internal state. For the emulator this means launching the child process which
   emulates the hardware GPU.
 * The constructor will detect the current process PID (parentPid) and launch a child process as the GPU emulator.
-  These PIDs will be used to setup IPC Communications between parent and child.
+  These PIDs will be used to set up IPC Communications between parent and child.
 
 ## Destructor
 
