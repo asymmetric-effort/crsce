@@ -7,3 +7,7 @@ in the `Gpu::Ipc::MemoryTracker` table.
 
 ## Definition
 `using Common::AbstractPtr = uint64_t;`
+
+## Notes
+* `0` represents `nullptr` (no memory reference).
+* non-zero represents an address reference.

@@ -43,36 +43,42 @@ debugging and testing as well as development of GPU-enabled projects.
 | `private` | `bool validateParentAccess()` | verify send/recv permission based on parent/child pid |
 | `private` | `bool validateChildAccess()`  | verify send/recv permission based on parent/child pid |
 
+### Notes
+* These methods return `true` if permission is granted or `false` if not.
+
 ## Lifecycle
 
-| Scope    | Method             | Description                                  |
-|----------|--------------------|----------------------------------------------|
-| `public` | `bool init();`     | re-initialize mock GPU state                 |
-| `public` | `void shutdown();` | reset the mock GPU state                     |
-| `public` | `void reset();`    | shutdown the mock GPU and all of its threads |
+| Scope    | Method             | Description                                                       |
+|----------|--------------------|-------------------------------------------------------------------|
+| `public` | `bool init();`     | re-initialize mock GPU state. returns true=success, false=failure |
+| `public` | `void shutdown();` | reset the mock GPU state                                          |
+| `public` | `void reset();`    | shutdown the mock GPU and all of its threads                      |
 
 ### Notes:
 
-* if `shutdown()` is called before `init()`, no operation will be performed, no error will occur.
-* if `reset()` is called before `init()`, no operation will be performed, no error will occur.
-* if `init()` or `reset()` are called after `shutdown()` and exception will be thrown because `shutdown()` is final.
-* if `init()` is called after `reset()` no error will occur as this is normal.
+* If `shutdown()` is called before `init()`, no operation will be performed, no error will occur.
+* If `reset()` is called before `init()`, no operation will be performed, no error will occur.
+* If `init()` or `reset()` are called after `shutdown()` and exception will be thrown because `shutdown()` is final.
+* If `init()` is called after `reset()` no error will occur as this is normal.
+* The `init()` returns true for success or false on error.
 
 ## Memory Management
 
-| Scope    | Method                                                           | Description                                              |
-|----------|------------------------------------------------------------------|----------------------------------------------------------|
-| `public` | `AbstractPtr* alloc(std::size_t bytes);`                         | Allocate device memory in the MemoryTracker table        |
-| `public` | `bool free(Common::AbstractPtr& ptr);`                           | Frees device memory previously allocated using `alloc()` |
-| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);`  | write `source` buffer to the `destination`               |
+| Scope    | Method                                                          | Description                                              |
+|----------|-----------------------------------------------------------------|----------------------------------------------------------|
+| `public` | `AbstractPtr alloc(std::size_t bytes);`                         | Allocate device memory in the MemoryTracker table        |
+| `public` | `bool free(Common::AbstractPtr& ptr);`                          | Frees device memory previously allocated using `alloc()` |
+| `public` | `bool write(Common::Buffer8& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
 | `public` | `bool write(Common::Buffer64& source,Common::AbstractPtr& dst);` | write `source` buffer to the `destination`               |
-| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`   | read the `source` from the `destination` reference       |
-| `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
+| `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
+| `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);` | read the `source` from the `destination` reference       |
 
-### Notes:
+## Notes:
 
-* if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
+* If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
+* The methods `free()`, `write()`, `read()` return true on success and false on error
+* The `alloc()` returns `0` if no memory is allocated or non-zero referencing a memory object.
 
 ## Kernel Control
 
