@@ -1,1 +1,0 @@
-placeholder for NVIDIA CUDA declaration
