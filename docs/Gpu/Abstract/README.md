@@ -83,9 +83,9 @@ The emulator architecture includes:
 
 ### Execution Runtime
 
--[`Gpu::RuntimeManager`](./Gpu-RuntimeManager.md)
--[`Gpu::ThreadRegistry`](./Gpu-ThreadRegistry.md)
--[`Gpu::ThreadRuntime`](./Gpu-ThreadRuntime.md)
--[`Gpu::KernelManager`](./Gpu-KernelManager.md)
--[`Gpu::Device::MockGpu`](./Gpu-Device-MockGpu.md)
--[`Kernel Blob Format`](./Kernel-Binary-Blob-Format.md)
+- [`Gpu::RuntimeManager`](./Gpu-RuntimeManager.md)
+- [`Gpu::ThreadRegistry`](./Gpu-ThreadRegistry.md)
+- [`Gpu::ThreadRuntime`](./Gpu-ThreadRuntime.md)
+- [`Gpu::KernelManager`](./Gpu-KernelManager.md)
+- [`Gpu::Device::MockGpu`](./Gpu-Device-MockGpu.md)
+- [`Kernel Blob Format`](./Kernel-Binary-Blob-Format.md)
