@@ -24,7 +24,7 @@ execution. It is invoked by the `Gpu::RuntimeManager` within a detached thread c
 ## Dependencies
 
 * `Common::Buffer8` (`std::vector<uint8_t>`)
-* [`Kernel Binary Blob Format`](./Kernel-Binary-Blob-Format.md)
+* [`Kernel Binary Blob Format`](Kernel-Binary-Blob-Format.md)
 
 ## Properties
 

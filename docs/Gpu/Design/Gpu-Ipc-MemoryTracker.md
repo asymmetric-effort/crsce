@@ -11,7 +11,7 @@ memory objects (address and size)
 
 ## Dependencies
 
-* [`Common::AbstractPtr`](./Common-AbstractPtr.md)
+* [`Common::AbstractPtr`](Common-AbstractPtr.md)
 
 ## Properties
 

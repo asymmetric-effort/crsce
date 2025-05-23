@@ -13,11 +13,11 @@ The `Gpu::RuntimeManager` class is responsible for executing all GPU emulation c
 
 ## Dependencies
 
-* [`Gpu::Ipc::MemoryTracker`](./Gpu-Ipc-MemoryTracker.md)
-* [`Gpu::ThreadRegistry`](./Gpu-ThreadRegistry.md)
-* [`Gpu::KernelManager`](./Gpu-KernelManager.md)
-* [`Gpu::Ipc::Message`](./Gpu-Ipc-Message.md)
-* [`Gpu::Ipc::Response`](./Gpu-Ipc-Response.md)
+* [`Gpu::Ipc::MemoryTracker`](Gpu-Ipc-MemoryTracker.md)
+* [`Gpu::ThreadRegistry`](Gpu-ThreadRegistry.md)
+* [`Gpu::KernelManager`](Gpu-KernelManager.md)
+* [`Gpu::Ipc::Message`](Gpu-Ipc-Message.md)
+* [`Gpu::Ipc::Response`](Gpu-Ipc-Response.md)
 
 ## Properties
 

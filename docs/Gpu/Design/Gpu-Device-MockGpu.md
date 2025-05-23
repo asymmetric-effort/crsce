@@ -16,10 +16,10 @@ memory management and concurrent kernel execution.
 
 ## Dependencies
 
-* [`Gpu::Ipc::Message`](./Gpu-Ipc-Message.md)
-* [`Gpu::Ipc::Response`](./Gpu-Ipc-Response.md)
-* [`Gpu::Ipc::Communications`](./Gpu-Ipc-Communications.md)
-* [`Gpu::RuntimeManager`](./Gpu-RuntimeManager.md)
+* [`Gpu::Ipc::Message`](Gpu-Ipc-Message.md)
+* [`Gpu::Ipc::Response`](Gpu-Ipc-Response.md)
+* [`Gpu::Ipc::Communications`](Gpu-Ipc-Communications.md)
+* [`Gpu::RuntimeManager`](Gpu-RuntimeManager.md)
 
 ## Properties
 

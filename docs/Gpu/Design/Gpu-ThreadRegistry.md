@@ -21,7 +21,7 @@ orderly shutdown.
 
 ## Dependencies
 
-* [`Kernel Binary Blob Format`](./Kernel-Binary-Blob-Format.md)
+* [`Kernel Binary Blob Format`](Kernel-Binary-Blob-Format.md)
 
 ## Properties
 
