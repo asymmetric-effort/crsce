@@ -3,7 +3,9 @@
 
 ## Purpose
 
-The `Gpu::ThreadRegistry` class tracks the lifecycle of GPU kernel execution threads in the CRSCE emulator backend. It provides a thread-safe registry for inserting, joining, and clearing threads, enabling safe concurrent execution and orderly shutdown.
+The `Gpu::ThreadRegistry` class tracks the lifecycle of GPU kernel execution threads in the CRSCE emulator backend. It
+provides a thread-safe registry for inserting, joining, and clearing threads, enabling safe concurrent execution and
+orderly shutdown.
 
 ## Role in Architecture
 
@@ -19,17 +21,14 @@ The `Gpu::ThreadRegistry` class tracks the lifecycle of GPU kernel execution thr
 
 ## Dependencies
 
-* `<thread>`
-* `<unordered_map>`
-* `<mutex>`
-* `<atomic>`
+* [`Kernel Binary Blob Format`](./Kernel-Binary-Blob-Format.md)
 
 ## Properties
 
-| Property    | Type                                            | Description                              |
-|-------------|--------------------------------------------------|------------------------------------------|
-| `threads`   | `std::unordered_map<uint32_t, std::thread>`     | Map of launch ID → thread                |
-| `mutex`     | `std::mutex`                                    | Guards all access to internal map        |
+| Property  | Type                                        | Description                       |
+|-----------|---------------------------------------------|-----------------------------------|
+| `threads` | `std::unordered_map<uint32_t, std::thread>` | Map of launch ID → thread         |
+| `mutex`   | `std::mutex`                                | Guards all access to internal map |
 
 ---
 
@@ -38,11 +37,13 @@ The `Gpu::ThreadRegistry` class tracks the lifecycle of GPU kernel execution thr
 ### `void insert(uint32_t launchId, std::thread&& t)`
 
 Inserts a new thread into the registry.
+
 - Launch ID must be unique; overwriting is forbidden.
 - Acquires mutex lock for map insertion.
 - Thread must not be `joinable()` after this point (transfer of ownership).
 
 #### Failure Mode:
+
 - If `launchId` already exists, abort (or assert in debug builds).
 
 ---
@@ -50,11 +51,13 @@ Inserts a new thread into the registry.
 ### `void joinAll()`
 
 Joins all registered threads.
+
 - Acquires lock.
 - For each thread: if `joinable()`, invoke `join()`.
 - Clears `threads` map after all joins complete.
 
 #### Notes:
+
 - Safe to call multiple times.
 - Must not be called concurrently with `insert()`.
 
@@ -63,6 +66,7 @@ Joins all registered threads.
 ### `void clear()`
 
 Clears all entries from the map without joining.
+
 - Used for emergency reset when thread state is no longer needed or safe to join.
 - Assumes all threads are already joined (or discarded).
 
@@ -77,7 +81,8 @@ Returns `true` if no threads are currently registered.
 ## Thread Safety
 
 - All methods are **fully mutex-guarded**.
-- Safe to call `insert()` from multiple launching threads, but external serialization is recommended for kernel coordination.
+- Safe to call `insert()` from multiple launching threads, but external serialization is recommended for kernel
+  coordination.
 - `joinAll()` and `clear()` must be called only once at shutdown/reset.
 
 ---

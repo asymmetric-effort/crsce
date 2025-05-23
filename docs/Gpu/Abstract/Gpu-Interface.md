@@ -13,6 +13,7 @@ implementations to use at runtime.
 * [`Gpu::Device::Cuda`](./Gpu-Cuda.md)
 * [`Gpu::Device::Roc`](./Gpu-AmdRoc.md)
 * [`Gpu::Device::Metal`](./Gpu-AppleMetal.md)
+* [`Gpu::KernelManager`](./Gpu-Kernel-Manager.md)
 
 ## Properties
 

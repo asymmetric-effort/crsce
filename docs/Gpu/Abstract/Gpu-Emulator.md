@@ -18,6 +18,7 @@ facilitated by `Gpu::Ipc::Communications`.
 * [`Common::Buffer8](./Common-Buffer8.md)
 * [`Common::Buffer64](./Common-Buffer64.md)
 * [`Gpu::Math::Matrix`](./Gpu-Math-Matrix.md)
+* [`Gpu::KernelManager`](./Gpu-Kernel-Manager.md)
 
 ## Properties
 
