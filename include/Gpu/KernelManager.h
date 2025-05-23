@@ -20,10 +20,13 @@ namespace Gpu {
     public:
         using KernelId = uint64_t;
 
+        KernelManager()=default;
+        ~KernelManager()=default;
+
         bool registerKernel(KernelId id, const Common::Buffer8& binary);
         bool has(KernelId id) const;
         const Common::Buffer8& get(KernelId id) const;
-        bool erase(KernelId id);
+        bool erase(const KernelId id);
         bool clear();
 
     private:
