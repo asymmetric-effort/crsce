@@ -6,7 +6,13 @@
 #include <string>
 
 namespace Gpu::Exceptions {
-
+    /**
+     * @name Gpu::Exceptions::DeviceNotReady
+     * @brief Thrown when any GPU operation is invoked before `init()` or after `shutdown()`.
+     *        Ensures correct lifecycle. This derives from std::runtime_error.
+     * @exception Gpu::Exception::DeviceNotReady
+     * @ref docs/Gpu/Design/Gpu-Exceptions.md
+     */
     class DeviceNotReady final : public std::runtime_error {
     public:
         explicit DeviceNotReady(const std::string& what_arg)
