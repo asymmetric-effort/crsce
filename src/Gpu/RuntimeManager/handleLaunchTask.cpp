@@ -1,0 +1,27 @@
+// file: src/Gpu/RuntimeManager/handleLaunchTask.cpp
+// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
+#include "Gpu/RuntimeManager.h"
+#include "Gpu/ThreadRuntime.h"
+#include <thread>
+
+namespace Gpu {
+
+    Ipc::Response RuntimeManager::handleLaunchTask(const Ipc::Message& msg, const Common::Buffer8& args) {
+        if (!kernels_.has(msg.kernelId))
+            return {Ipc::FailureCodes::KernelNotFound, 0, {}};
+
+        const auto& blob = kernels_.get(msg.kernelId);
+        try {
+            threads_.insert(static_cast<uint32_t>(msg.kernelId),
+                std::thread([blob, args] {
+                    ThreadRuntime rt(blob, args);
+                    rt.run();
+                }));
+            return {Ipc::FailureCodes::Success, 0, {}};
+        } catch (...) {
+            return {Ipc::FailureCodes::ThreadLaunchFailure, 0, {}};
+        }
+    }
+
+}
