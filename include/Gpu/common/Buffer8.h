@@ -1,4 +1,4 @@
-// file: include/Common/Buffer8.h
+// file: include/Gpu/Common/Buffer8.h
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #pragma once
