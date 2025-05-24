@@ -16,15 +16,16 @@ class format of the IPC Message along with methods to facilitate serialization a
 | `ptr`      | `uint64_t`              | Device memory address or handle                       |
 
 ### Notes
-* Struct must not contain padding, and implementation must enforce correct alignment or use #pragma pack 
+
+* Struct must not contain padding, and implementation must enforce correct alignment or use #pragma pack
   or static_assert(sizeof(...)) checks.
 * Endianness must be explicitly little-endian in implementation, matching platform pipes and memory format.
 * The properties are serialized as `type``kernelId``size``ptr`
 
 ## Methods:
 
-| Method        | Returns                | Arguments                        | Description                                     |
-|---------------|------------------------|----------------------------------|-------------------------------------------------|
-| `serialize`   | `std::vector<uint8_t>` | None                             | serialize class data to a binary blob           |
-| `deserialize` | `Message`              | `uint8_t* data`, `size_t length` | deserialize a binary buffer into internal state |
+| Method        | Returns           | Arguments               | Description                                     |
+|---------------|-------------------|-------------------------|-------------------------------------------------|
+| `serialize`   | `Common::Buffer8` | None                    | serialize class data to a binary blob           |
+| `deserialize` | `void`            | `Common::Buffer8& data` | deserialize a binary buffer into internal state |
 

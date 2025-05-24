@@ -4,28 +4,20 @@
 #include "Gpu/Ipc/Message.h"
 #include <stdexcept>
 
+#include "Gpu/Exceptions/DeviceNotReady.h"
+#include "Gpu/Exceptions/InvalidIpcMessage.h"
+
 namespace Gpu::Ipc {
 
-    Message Message::deserialize(const uint8_t* data, std::size_t length) {
-        if (length < 24)
-            throw std::runtime_error("Gpu::Ipc::Message::deserialize(): insufficient input length");
+    void Message::deserialize(const Common::Buffer8& buffer) {
+        if (buffer.size() != 24)
+            throw Gpu::Exceptions::InvalidIpcMessage("deserialization expects 24-byte buffer");
 
-        Message m;
-        m.type = static_cast<CommandType>(data[0]);
-
-        m.kernelId = 0;
-        for (int i = 0; i < 4; ++i)
-            m.kernelId |= static_cast<uint32_t>(data[1 + i]) << (i * 8);
-
-        m.size = 0;
-        for (int i = 0; i < 8; ++i)
-            m.size |= static_cast<uint64_t>(data[5 + i]) << (i * 8);
-
-        m.ptr = 0;
-        for (int i = 0; i < 8; ++i)
-            m.ptr |= static_cast<Common::AbstractPtr>(data[13 + i]) << (i * 8);
-
-        return m;
+        const uint8_t* data = buffer.data();
+        type     = static_cast<CommandType>(data[0] | (data[1] << 8) | (data[2] << 16) | (data[3] << 24));
+        kernelId = *reinterpret_cast<const uint32_t*>(data + 4);
+        size     = *reinterpret_cast<const uint64_t*>(data + 8);
+        ptr      = *reinterpret_cast<const uint64_t*>(data + 16);
     }
 
 }

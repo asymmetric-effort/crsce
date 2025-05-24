@@ -2,7 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #pragma once
-#include <cstdint>
+#include "Gpu/Common/Buffer8.h"
 #include "Gpu/Ipc/CommandType.h"
 #include "Gpu/Common/AbstractPtr.h"
 
@@ -25,12 +25,12 @@ namespace Gpu::Ipc {
         /**
          * Serialize this message to a binary payload (fixed 24 bytes).
          */
-        std::vector<uint8_t> serialize() const;
+        Common::Buffer8 serialize() const;
 
         /**
          * Deserialize a message from binary data (must be 24 bytes).
          */
-        static Message deserialize(const uint8_t* data, std::size_t length);
+        void deserialize(const Common::Buffer8& data);
     };
 
 } // namespace Gpu::Ipc
