@@ -38,7 +38,6 @@ test:
 	done; \
 	echo "[PASS] All tests passed."
 
-
 compress:
 	@rm build/compress.crsce.out &> /dev/null || true
 	./build/bin/compress --in build/bin/compress --out build/compress.crsce.out
