@@ -4,7 +4,7 @@
 #pragma once
 #include "Gpu/Common/Buffer8.h"
 
-namespace Gpu {
+namespace Gpu::Device {
 
     /**
      * @name Gpu::ThreadRuntime

@@ -4,11 +4,11 @@
 #pragma once
 #include <memory>
 #include <sys/types.h>
-#include "Gpu/Device/Interface.h"
-#include "Gpu/Ipc/Communications.h"
 #include "Gpu/Ipc/Result.h"
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
+#include "Gpu/Device/Interface.h"
+#include "Gpu/Ipc/Communications.h"
 
 namespace Gpu::Device {
 
@@ -34,7 +34,7 @@ namespace Gpu::Device {
         bool read(Common::Buffer64& source, Common::AbstractPtr& dst) override;
 
         bool registerKernel(KernelId id, const Common::Buffer8& binary) override;
-        bool launchTask(KernelId id, const Common::Buffer8& args = {}) override;
+        bool launchTask(KernelId id, const Common::Buffer8& args) override;
 
         bool dot(Math::Matrix& result, const Math::Matrix& lhs, const Math::Matrix& rhs) override;
         bool add(Math::Matrix& result, const Math::Matrix& lhs, const Math::Matrix& rhs) override;
@@ -52,6 +52,7 @@ namespace Gpu::Device {
         pid_t childPid_ = 0;
         std::unique_ptr<Ipc::Communications> ipc_;
         bool initialized_ = false;
+        bool shutdown_ = false;
     };
 
 } // namespace Gpu::Device

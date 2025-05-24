@@ -1,9 +1,9 @@
 // file: src/Gpu/ThreadRegistry/clear.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "../../../include/Gpu/Device/Emulator/ThreadRegistry.h"
+#include "Gpu/Device/Emulator/ThreadRegistry.h"
 
-namespace Gpu {
+namespace Gpu::Device {
 
     void ThreadRegistry::clear() {
         std::lock_guard lock(mutex_);

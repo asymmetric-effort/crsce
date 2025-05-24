@@ -1,7 +1,7 @@
 // file: src/Gpu/KernelManager/has.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "Gpu/KernelManager.h"
+#include "../../../include/Gpu/Common/KernelManager.h"
 
 namespace Gpu {
 

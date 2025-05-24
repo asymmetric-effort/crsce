@@ -6,18 +6,19 @@
 #include <unistd.h>
 
 namespace Gpu::Device {
-
     void Emulator::shutdown() {
         if (!initialized_) return;
 
+        shutdown_ = true;
         Ipc::Message shutdownMsg;
         shutdownMsg.type = Ipc::CommandType::Shutdown;
-        ipc_->send(shutdownMsg);
+
+        if (const auto result = ipc_->send(shutdownMsg);result != Ipc::Result::Success)
+            throw Gpu::Exceptions::IpcSendFailed(result);
 
         waitpid(childPid_, nullptr, 0);
         ipc_.reset();
         childPid_ = 0;
         initialized_ = false;
     }
-
 }

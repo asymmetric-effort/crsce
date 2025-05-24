@@ -1,11 +1,11 @@
 // file: src/Gpu/RuntimeManager/handleLaunchTask.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "Gpu/RuntimeManager.h"
-#include "../../../include/Gpu/Device/Emulator/ThreadRuntime.h"
+#include "Gpu/Device/Emulator/RuntimeManager.h"
+#include "Gpu/Device/Emulator/ThreadRuntime.h"
 #include <thread>
 
-namespace Gpu {
+namespace Gpu::Device {
 
     Ipc::Response RuntimeManager::handleLaunchTask(const Ipc::Message& msg, const Common::Buffer8& args) {
         if (!kernels_.has(msg.kernelId))
@@ -15,7 +15,7 @@ namespace Gpu {
         try {
             threads_.insert(static_cast<uint32_t>(msg.kernelId),
                 std::thread([blob, args] {
-                    ThreadRuntime rt(blob, args);
+                    const ThreadRuntime rt(blob, args);
                     rt.run();
                 }));
             return {Ipc::FailureCodes::Success, 0, {}};

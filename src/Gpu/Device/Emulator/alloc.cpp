@@ -13,10 +13,13 @@ namespace Gpu::Device {
         msg.type = Ipc::CommandType::Alloc;
         msg.size = bytes;
 
-        ipc_->send(msg);
+        if (const auto result = ipc_->send(msg);result!=Ipc::Result::Success)
+            return 0;
+
 
         Ipc::Response res;
-        ipc_->recv(res);
+        if (const auto result = ipc_->recv(res);result!=Ipc::Result::Success)
+            return 0;
 
         if (res.status != Ipc::FailureCodes::Success || res.size != sizeof(Common::AbstractPtr)) return 0;
 

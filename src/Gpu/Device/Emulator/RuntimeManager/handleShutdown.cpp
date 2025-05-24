@@ -1,9 +1,9 @@
 // file: src/Gpu/RuntimeManager/handleShutdown.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "../../../include/Gpu/Device/Emulator/RuntimeManager.h"
+#include "Gpu/Device/Emulator/RuntimeManager.h"
 
-namespace Gpu {
+namespace Gpu::Device {
 
     Ipc::Response RuntimeManager::handleShutdown() {
         shutdown_ = true;

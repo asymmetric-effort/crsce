@@ -52,7 +52,6 @@ namespace Gpu::Device {
                     res = { Ipc::FailureCodes::UnknownError, 0, {} };
                     break;
             }
-
             ipc_.send(res);
         }
     }

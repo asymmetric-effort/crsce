@@ -7,7 +7,7 @@
 #include <mutex>
 #include <cstdint>
 
-namespace Gpu {
+namespace Gpu::Device {
 
     /**
      * @name Gpu::ThreadRegistry

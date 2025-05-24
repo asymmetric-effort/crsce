@@ -3,16 +3,23 @@
 
 #include <ranges>
 
-#include "../../../include/Gpu/Device/Emulator/ThreadRegistry.h"
+#include "Gpu/Device/Emulator/ThreadRegistry.h"
 
-namespace Gpu {
+namespace Gpu::Device {
 
     void ThreadRegistry::joinAll() {
+
         std::lock_guard lock(mutex_);
+
         for (auto &thread: table_ | std::views::values) {
-            if (thread.joinable()) thread.join();
+
+            if (thread.joinable())
+                thread.join();
+
         }
+
         table_.clear();
+
     }
 
 }

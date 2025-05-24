@@ -3,6 +3,7 @@
 
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Device/Emulator/MockGpu.h"
+#include "Gpu/Exceptions/DeviceNotReady.h"
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -10,7 +11,9 @@
 namespace Gpu::Device {
 
     bool Emulator::init() {
-        if (initialized_) return false;
+        if (shutdown_) throw Gpu::Exceptions::DeviceNotReady("init() after shutdown");
+        if (initialized_) return true;
+
 
         int ptc[2], ctp[2];
         if (pipe(ptc) < 0 || pipe(ctp) < 0) return false;

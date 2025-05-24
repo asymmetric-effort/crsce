@@ -1,10 +1,10 @@
 // file: src/Gpu/ThreadRegistry/insert.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "../../../include/Gpu/Device/Emulator/ThreadRegistry.h"
+#include "Gpu/Device/Emulator/ThreadRegistry.h"
 #include <stdexcept>
 
-namespace Gpu {
+namespace Gpu::Device {
 
     void ThreadRegistry::insert(const LaunchId id, std::thread&& t) {
         std::lock_guard lock(mutex_);
