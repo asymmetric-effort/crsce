@@ -2,25 +2,25 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Ipc/Message.h"
-#include <vector>
+#include <cstring>
 
 namespace Gpu::Ipc {
 
-    std::vector<uint8_t> Message::serialize() const {
-        std::vector<uint8_t> out;
-        out.reserve(24);
-        out.push_back(static_cast<uint8_t>(type));
+    Common::Buffer8 Message::serialize() const {
+        Common::Buffer8 buffer(24, 0);
 
-        for (int i = 0; i < 4; ++i)
-            out.push_back(static_cast<uint8_t>((kernelId >> (i * 8)) & 0xFF));
+        // CommandType as uint32_t (little endian)
+        const uint32_t type_int = static_cast<uint32_t>(type);
+        buffer[0] = static_cast<uint8_t>(type_int & 0xFF);
+        buffer[1] = static_cast<uint8_t>((type_int >> 8) & 0xFF);
+        buffer[2] = static_cast<uint8_t>((type_int >> 16) & 0xFF);
+        buffer[3] = static_cast<uint8_t>((type_int >> 24) & 0xFF);
 
-        for (int i = 0; i < 8; ++i)
-            out.push_back(static_cast<uint8_t>((size >> (i * 8)) & 0xFF));
+        std::memcpy(buffer.data() + 4,  &kernelId, sizeof(kernelId));
+        std::memcpy(buffer.data() + 8,  &size,     sizeof(size));
+        std::memcpy(buffer.data() + 16, &ptr,      sizeof(ptr));
 
-        for (int i = 0; i < 8; ++i)
-            out.push_back(static_cast<uint8_t>((ptr >> (i * 8)) & 0xFF));
-
-        return out;
+        return buffer;
     }
 
 }

@@ -2,6 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Ipc/Message.h"
+#include <cstring>
 #include <stdexcept>
 
 #include "Gpu/Exceptions/DeviceNotReady.h"
@@ -14,10 +15,17 @@ namespace Gpu::Ipc {
             throw Gpu::Exceptions::InvalidIpcMessage("deserialization expects 24-byte buffer");
 
         const uint8_t* data = buffer.data();
-        type     = static_cast<CommandType>(data[0] | (data[1] << 8) | (data[2] << 16) | (data[3] << 24));
-        kernelId = *reinterpret_cast<const uint32_t*>(data + 4);
-        size     = *reinterpret_cast<const uint64_t*>(data + 8);
-        ptr      = *reinterpret_cast<const uint64_t*>(data + 16);
+
+        type = static_cast<CommandType>(
+            static_cast<uint32_t>(data[0]) |
+            (static_cast<uint32_t>(data[1]) << 8) |
+            (static_cast<uint32_t>(data[2]) << 16) |
+            (static_cast<uint32_t>(data[3]) << 24)
+        );
+
+        std::memcpy(&kernelId, data + 4, sizeof(kernelId));
+        std::memcpy(&size,     data + 8, sizeof(size));
+        std::memcpy(&ptr,      data + 16, sizeof(ptr));
     }
 
 }
