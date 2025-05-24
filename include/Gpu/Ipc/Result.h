@@ -2,7 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #pragma once
-#include <cstdint>
+#include <string>
 
 namespace Gpu::Ipc {
 
@@ -26,5 +26,7 @@ namespace Gpu::Ipc {
         IOError     = 0x02, ///< A read or write error occurred at the OS level
         InvalidRole = 0x03  ///< An access attempt was made from the wrong process side (parent vs. child)
     };
+
+    const std::string to_string(const Result result);
 
 }
