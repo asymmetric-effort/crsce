@@ -35,9 +35,16 @@ namespace Gpu::Math {
          * @return size_t
          */
         std::size_t cols() const noexcept;
-
         /**
-         * @name at
+         * @name at (mutable)
+         * @brief return the value at position r,c
+         * @param r
+         * @param c
+         * @return const double
+         */
+        double& at(std::size_t r, std::size_t c);
+        /**
+         * @name at (constant)
          * @brief return the value at position r,c
          * @param r
          * @param c
