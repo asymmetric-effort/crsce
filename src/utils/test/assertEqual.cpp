@@ -9,7 +9,6 @@ void Tester::assertEqual(int a, int b, const std::string& message) {
     else
         fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
 }
-
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertEqual(size_t a, size_t b, const std::string& message) {
     if (a == b)
@@ -43,7 +42,7 @@ void Tester::assertEqual(unsigned int a, unsigned int b, const std::string& mess
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(char a, char b, const std::string& message) {
+void Tester::assertEqual(uint8_t a, uint8_t b, const std::string& message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -64,4 +63,8 @@ void Tester::assertEqual(double a, double b, const std::string& message) {
         pass(std::format("ok: {}", message));
     else
         fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
+}
+
+void Tester::assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string& message) {
+    assertEqual(static_cast<uint8_t>(a), static_cast<uint8_t>(b), message);
 }

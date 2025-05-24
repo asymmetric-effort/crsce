@@ -4,7 +4,7 @@
 
 #include "Gpu/Device/Interface.h"
 #include "utils/test/ExitOnError.h"
-#include "utils/test/TestException.h"
+#include "Gpu/Ipc/Result.h"
 #include <exception>
 #include <chrono>
 #include <cstdlib>
@@ -16,7 +16,7 @@ class Tester {
 public:
 
     // Construct with a test prefix (e.g., "test/0100_Gpu_mock_init")
-    Tester(const std::string& prefix, ExitOnError onError=false);
+    explicit Tester(const std::string& prefix, ExitOnError onError=false);
     ~Tester();
 
     template<typename ExpectedExceptionClass, typename PayloadFunc>
@@ -30,7 +30,7 @@ public:
     void assertNotNull(const void* ptr, const std::string& message);
 
     void assertNotNull(const std::unique_ptr<void>& ptr, const std::string& message);
-    void assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message);
+    // void assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message);
 
     void assertNotNull(const std::shared_ptr<void>& ptr, const std::string& message);
     void assertNotNull(const std::shared_ptr<int>& ptr, const std::string& message);
@@ -47,9 +47,10 @@ public:
     void assertEqual(uint16_t a, uint16_t b, const std::string& message);
     void assertEqual(uint64_t a, uint64_t b, const std::string& message);
     void assertEqual(unsigned a, unsigned b, const std::string& message);
-    void assertEqual(char a, char b, const std::string& message);
+    void assertEqual(uint8_t a, uint8_t b, const std::string& message);
     void assertEqual(float a, float b, const std::string& message);
     void assertEqual(double a, double b, const std::string& message);
+    void assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string& message);
 
     void assertNotEqual(int a, int b, const std::string& message);
     void assertNotEqual(size_t a, size_t b, const std::string& message);
