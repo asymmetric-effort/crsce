@@ -6,11 +6,11 @@
 
 namespace Gpu::Ipc {
 
-    Result Communications::send(const Response& res) {
+    Result Communications::send(const Response& res) const {
         if (!validateChildAccess()) return Result::InvalidRole;
 
-        auto buffer = res.serialize();
-        ssize_t written = write(childToParentFd[1], buffer.data(), buffer.size());
+        const auto buffer = res.serialize();
+        const ssize_t written = write(childToParentFd[1], buffer.data(), buffer.size());
         if (written == static_cast<ssize_t>(buffer.size())) return Result::Success;
         if (written == 0) return Result::Closed;
         return Result::IOError;
