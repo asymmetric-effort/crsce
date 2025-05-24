@@ -3,14 +3,7 @@
 #include "utils/test/Tester.h"
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(int a, int b, const std::string& message) {
-    if (a == b)
-        pass(std::format("ok: {}", message));
-    else
-        fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
-}
-// Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(size_t a, size_t b, const std::string& message) {
+void Tester::assertEqual(int a, int b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -18,7 +11,7 @@ void Tester::assertEqual(size_t a, size_t b, const std::string& message) {
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(uint16_t a, uint16_t b, const std::string& message) {
+void Tester::assertEqual(size_t a, size_t b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -26,7 +19,7 @@ void Tester::assertEqual(uint16_t a, uint16_t b, const std::string& message) {
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(uint64_t a, uint64_t b, const std::string& message) {
+void Tester::assertEqual(uint16_t a, uint16_t b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -34,7 +27,7 @@ void Tester::assertEqual(uint64_t a, uint64_t b, const std::string& message) {
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(unsigned int a, unsigned int b, const std::string& message) {
+void Tester::assertEqual(uint64_t a, uint64_t b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -42,7 +35,7 @@ void Tester::assertEqual(unsigned int a, unsigned int b, const std::string& mess
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(uint8_t a, uint8_t b, const std::string& message) {
+void Tester::assertEqual(unsigned int a, unsigned int b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -50,7 +43,7 @@ void Tester::assertEqual(uint8_t a, uint8_t b, const std::string& message) {
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(float a, float b, const std::string& message) {
+void Tester::assertEqual(uint8_t a, uint8_t b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
@@ -58,18 +51,26 @@ void Tester::assertEqual(float a, float b, const std::string& message) {
 }
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(double a, double b, const std::string& message) {
+void Tester::assertEqual(float a, float b, const std::string &message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else
         fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
 }
 
-void Tester::assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string& message) {
+// Assert two values are equal; on success counts as pass, on failure counts and logs
+void Tester::assertEqual(double a, double b, const std::string &message) {
+    if (a == b)
+        pass(std::format("ok: {}", message));
+    else
+        fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
+}
+
+void Tester::assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string &message) {
     assertEqual(static_cast<uint8_t>(a), static_cast<uint8_t>(b), message);
 }
 
-void Tester::assertEqual(const Common::Buffer8& a, const Common::Buffer8& b, const std::string& msg) {
+void Tester::assertEqual(const Common::Buffer8 &a, const Common::Buffer8 &b, const std::string &msg) {
     if (a.size() != b.size()) {
         std::ostringstream oss;
         oss << msg << " [size mismatch: " << a.size() << " != " << b.size() << "]";
@@ -80,14 +81,14 @@ void Tester::assertEqual(const Common::Buffer8& a, const Common::Buffer8& b, con
         if (a[i] != b[i]) {
             std::ostringstream oss;
             oss << msg << " [mismatch at byte " << i << ": "
-                << std::hex << static_cast<int>(a[i])
-                << " != " << static_cast<int>(b[i]) << "]";
+                    << std::hex << static_cast<int>(a[i])
+                    << " != " << static_cast<int>(b[i]) << "]";
             fail(oss.str());
         }
     }
 }
 
-void Tester::assertEqual(const Common::Buffer64& a, const Common::Buffer64& b, const std::string& msg) {
+void Tester::assertEqual(const Common::Buffer64 &a, const Common::Buffer64 &b, const std::string &msg) {
     if (a.size() != b.size()) {
         std::ostringstream oss;
         oss << msg << " [size mismatch: " << a.size() << " != " << b.size() << "]";
@@ -98,9 +99,29 @@ void Tester::assertEqual(const Common::Buffer64& a, const Common::Buffer64& b, c
         if (a[i] != b[i]) {
             std::ostringstream oss;
             oss << msg << " [mismatch at byte " << i << ": "
-                << std::hex << static_cast<int>(a[i])
-                << " != " << static_cast<int>(b[i]) << "]";
+                    << std::hex << static_cast<int>(a[i])
+                    << " != " << static_cast<int>(b[i]) << "]";
             fail(oss.str());
+        }
+    }
+}
+
+void Tester::assertEqual(const Gpu::Math::Matrix &a, const Gpu::Math::Matrix &b, const std::string &msg) {
+    if (a.rows() != b.rows() || a.cols() != b.cols()) {
+        std::ostringstream oss;
+        oss << msg << " [shape mismatch: " << a.rows() << "x" << a.cols()
+                << " != " << b.rows() << "x" << b.cols() << "]";
+        fail(oss.str());
+    }
+
+    for (std::size_t r = 0; r < a.rows(); ++r) {
+        for (std::size_t c = 0; c < a.cols(); ++c) {
+            if (a.at(r, c) != b.at(r, c)) {
+                std::ostringstream oss;
+                oss << msg << " [mismatch at (" << r << "," << c << "): "
+                        << a.at(r, c) << " != " << b.at(r, c) << "]";
+                fail(oss.str());
+            }
         }
     }
 }
