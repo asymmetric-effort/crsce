@@ -51,6 +51,8 @@ public:
     void assertEqual(float a, float b, const std::string& message);
     void assertEqual(double a, double b, const std::string& message);
     void assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string& message);
+    void assertEqual(const Common::Buffer8& a, const Common::Buffer8& b, const std::string& msg);
+    void assertEqual(const Common::Buffer64& a, const Common::Buffer64& b, const std::string& msg)
 
     void assertNotEqual(int a, int b, const std::string& message);
     void assertNotEqual(size_t a, size_t b, const std::string& message);

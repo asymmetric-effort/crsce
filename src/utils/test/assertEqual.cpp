@@ -68,3 +68,39 @@ void Tester::assertEqual(double a, double b, const std::string& message) {
 void Tester::assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string& message) {
     assertEqual(static_cast<uint8_t>(a), static_cast<uint8_t>(b), message);
 }
+
+void Tester::assertEqual(const Common::Buffer8& a, const Common::Buffer8& b, const std::string& msg) {
+    if (a.size() != b.size()) {
+        std::ostringstream oss;
+        oss << msg << " [size mismatch: " << a.size() << " != " << b.size() << "]";
+        fail(oss.str());
+    }
+
+    for (std::size_t i = 0; i < a.size(); ++i) {
+        if (a[i] != b[i]) {
+            std::ostringstream oss;
+            oss << msg << " [mismatch at byte " << i << ": "
+                << std::hex << static_cast<int>(a[i])
+                << " != " << static_cast<int>(b[i]) << "]";
+            fail(oss.str());
+        }
+    }
+}
+
+void Tester::assertEqual(const Common::Buffer64& a, const Common::Buffer64& b, const std::string& msg) {
+    if (a.size() != b.size()) {
+        std::ostringstream oss;
+        oss << msg << " [size mismatch: " << a.size() << " != " << b.size() << "]";
+        fail(oss.str());
+    }
+
+    for (std::size_t i = 0; i < a.size(); ++i) {
+        if (a[i] != b[i]) {
+            std::ostringstream oss;
+            oss << msg << " [mismatch at byte " << i << ": "
+                << std::hex << static_cast<int>(a[i])
+                << " != " << static_cast<int>(b[i]) << "]";
+            fail(oss.str());
+        }
+    }
+}
