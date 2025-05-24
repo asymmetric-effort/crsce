@@ -3,7 +3,7 @@
 
 #include <ranges>
 
-#include "Gpu/ThreadRegistry.h"
+#include "../../../include/Gpu/Device/Emulator/ThreadRegistry.h"
 
 namespace Gpu {
 

@@ -1,7 +1,7 @@
 // file: src/Gpu/ThreadRuntime/run.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "Gpu/ThreadRuntime.h"
+#include "../../../include/Gpu/Device/Emulator/ThreadRuntime.h"
 #include <stdexcept>
 
 namespace Gpu {

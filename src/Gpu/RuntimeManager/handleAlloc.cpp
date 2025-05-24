@@ -1,7 +1,7 @@
 // file: src/Gpu/RuntimeManager/handleAlloc.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#include "Gpu/RuntimeManager.h"
+#include "../../../include/Gpu/Device/Emulator/RuntimeManager.h"
 
 namespace Gpu {
 

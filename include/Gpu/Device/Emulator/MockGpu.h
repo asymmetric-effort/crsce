@@ -3,7 +3,7 @@
 
 #pragma once
 #include "Gpu/Ipc/Communications.h"
-#include "Gpu/RuntimeManager.h"
+#include "RuntimeManager.h"
 
 namespace Gpu::Device {
 
