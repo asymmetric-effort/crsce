@@ -3,19 +3,27 @@
 
 #include "Gpu/Ipc/Communications.h"
 #include <unistd.h>
+#include <vector>
 
 namespace Gpu::Ipc {
 
-    Result Communications::recv(Message& msg) {
+    Result Communications::recv(Message& msg) const {
         if (!validateChildAccess()) return Result::InvalidRole;
 
-        uint8_t buffer[24] = {};
-        ssize_t read_bytes = read(parentToChildFd[0], buffer, 24);
-        if (read_bytes == 24) {
-            msg = Message::deserialize(buffer, 24);
-            return Result::Success;
+        uint8_t raw[24] = {};
+        ssize_t n = read(parentToChildFd[0], raw, 24);
+
+        if (n == 24) {
+            Common::Buffer8 buffer(raw, raw + 24);
+            try {
+                msg.deserialize(buffer);
+                return Result::Success;
+            } catch (...) {
+                return Result::IOError;
+            }
         }
-        if (read_bytes == 0) return Result::Closed;
+
+        if (n == 0) return Result::Closed;
         return Result::IOError;
     }
 

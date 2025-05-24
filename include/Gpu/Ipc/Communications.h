@@ -20,10 +20,10 @@ namespace Gpu::Ipc {
         Communications(int parentToChild[2], int childToParent[2], bool isParentProcess);
         ~Communications();
 
-        Result send(const Message& msg);
+        Result send(const Message& msg) const;
         Result send(const Response& res);
 
-        Result recv(Message& msg);
+        Result recv(Message& msg) const;
         Result recv(Response& res);
 
         bool validateParentAccess() const;
