@@ -1,17 +1,18 @@
 // file: src/Gpu/Ipc/Result/to_string.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
+#include "Gpu/Exceptions/InvalidIpcResult.h"
 #include "Gpu/Ipc/Result.h"
 
-const std::string to_string(const Result& result) {
+const std::string to_string(const Gpu::Ipc::Result& result) {
     switch (result) {
-        case Success: return "Success";
+        case Gpu::Ipc::Result::Success: return "Success";
             break;
-        case Closed: return "Closed";
+        case Gpu::Ipc::Result::Closed: return "Closed";
             break;
-        case IOError: return "IOError";
+        case Gpu::Ipc::Result::IOError: return "IOError";
             break;
-        case InvalidRole: return "InvalidRole";
+        case Gpu::Ipc::Result::InvalidRole: return "InvalidRole";
             break;
         default:
             throw Gpu::Exceptions::InvalidIpcResult(result);
