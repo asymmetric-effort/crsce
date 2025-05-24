@@ -39,6 +39,7 @@ public:
     void assertNotNull(const std::shared_ptr<float>& ptr, const std::string& message);
     void assertNotNull(const std::shared_ptr<double>& ptr, const std::string& message);
     void assertNotNull(const std::shared_ptr<char>& ptr, const std::string& message);
+    void assertNotNull(const std::unique_ptr<Gpu::Device::Interface>& ptr, const std::string& message);
 
     void assertNotNull(const std::weak_ptr<void>& ptr, const std::string& message);
 

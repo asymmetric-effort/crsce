@@ -2,7 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "utils/test/Tester.h"
-#include <exception>
+#include "utils/test/TestException.h"
 #include <memory>
 #include <string>
 

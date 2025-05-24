@@ -19,7 +19,7 @@ void Tester::assertNotNull(const std::unique_ptr<void>& ptr, const std::string& 
 }
 
 // unique_ptr<Gpu::Interface> overload delegates to raw pointer
-void Tester::assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::unique_ptr<Gpu::Device::Interface>& ptr, const std::string& message) {
     assertNotNull(ptr.get(), message);
 }
 

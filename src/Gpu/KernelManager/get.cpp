@@ -2,6 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/KernelManager.h"
+#include "Gpu/Exceptions/KernelNotFound.h"
 #include <stdexcept>
 
 namespace Gpu {
@@ -10,7 +11,7 @@ namespace Gpu {
         std::lock_guard lock(mutex_);
         const auto it = table_.find(id);
         if (it == table_.end()) {
-            throw Exceptions::KernelNotFound("ID " + std::to_string(id));
+            throw Gpu::Exceptions::KernelNotFound("ID " + std::to_string(id));
         }
         return it->second;
     }

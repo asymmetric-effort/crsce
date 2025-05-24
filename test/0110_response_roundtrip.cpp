@@ -4,14 +4,6 @@
 /**
  * @file 0110_response_roundtrip.cpp
  * @brief Unit test for Gpu::Ipc::Response serialization/deserialization round-trip.
- *
- * This test verifies that a Gpu::Ipc::Response object can be serialized to a binary
- * representation and then deserialized back without loss of fidelity. The test checks:
- *   - Correct size of serialized output (header + payload)
- *   - Matching status code, payload size, and data buffer contents
- *   - Byte-for-byte integrity of serialized content
- *
- * This ensures compliance with the IPC protocol format used between Emulator and MockGpu.
  */
 
 #include "utils/test/Tester.h"
@@ -33,7 +25,7 @@ int main() {
     tester.assertEqual(serialized.size(), 9u + original.data.size(), "Serialized size check");
 
     Response roundtrip;
-    roundtrip = Response::deserialize(serialized.data(), serialized.size());
+    roundtrip.deserialize(serialized);
 
     tester.assertEqual(static_cast<uint8_t>(roundtrip.status), static_cast<uint8_t>(original.status), "Status match");
     tester.assertEqual(roundtrip.size, original.size, "Payload size match");

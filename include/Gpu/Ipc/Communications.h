@@ -96,8 +96,8 @@ namespace Gpu::Ipc {
         [[nodiscard]] bool isShutdown() const noexcept ;
 
         //Constants to use in read/write fd indexes
-        constexpr int readEndpoint=0;
-        constexpr int writeEndpoint=1;
+        static constexpr int readEndpoint=0;
+        static constexpr int writeEndpoint=1;
 
     private:
         int parentToChildFd[2];

@@ -1,34 +1,11 @@
-// file: include/Gpu/Math/Matrix.h
+// file: src/Gpu/Math/Matrix/constructor.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
-#pragma once
-#include <vector>
-#include <cstddef>
-#include <cstdint>
+#include "Gpu/Math/Matrix.h"
 
 namespace Gpu::Math {
 
-    /**
-     * @name Gpu::Math::Matrix
-     * @brief Represents a dense 2D matrix of 64-bit values stored in row-major order.
-     * @ref docs/Gpu/Design/Gpu-Math-Matrix.md
-     */
-    class Matrix {
-    public:
-        Matrix(std::size_t rows, std::size_t cols);
-        std::size_t rows() const noexcept;
-        std::size_t cols() const noexcept;
+    Matrix::Matrix(const std::size_t rows, const std::size_t cols)
+        : rows_(rows), cols_(cols), buffer_(rows * cols, 0) {}
 
-        const uint64_t& at(std::size_t r, std::size_t c) const;
-        uint64_t& at(std::size_t r, std::size_t c);
-
-        const std::vector<uint64_t>& data() const noexcept;
-        std::vector<uint64_t>& data() noexcept;
-
-    private:
-        std::size_t rows_;
-        std::size_t cols_;
-        std::vector<uint64_t> buffer_;
-    };
-
-} // namespace Gpu::Math
+}
