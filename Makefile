@@ -3,7 +3,8 @@
 
 tree:
 	@echo 'create build/file_structure.txt'
-	@tree > build/file_structure.txt
+	@treehash > build/file_structure.txt
+	#@tree > build/file_structure.txt
 
 zip: tree
 	@echo 'create build/project_files.zip'
