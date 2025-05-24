@@ -40,28 +40,28 @@ its own `.cpp` file for modularity and traceability.
 
 ## Matrix and Math (0130)
 
-| Test File                   | Description                                                             |
-|-----------------------------|-------------------------------------------------------------------------|
-| `0130_matrix_shape.cpp`     | Constructor, `rows()`, `cols()`                                         |
-| `0131_matrix_at.cpp`        | `at()` value assignment, indexing, bounds checking                      |
-| `0131_matrix_data.cpp`      | `data()` round-trip consistency                                         |
-| `0132_matrix_device_io.cpp` | Matrix written to emulator and re-read correctly via `write()`/`read()` |
+| Test File               | Description                                        |
+|-------------------------|----------------------------------------------------|
+| `0130_matrix_shape.cpp` | Constructor, `rows()`, `cols()`                    |
+| `0131_matrix_at.cpp`    | `at()` value assignment, indexing, bounds checking |
+| `0131_matrix_data.cpp`  | `data()` round-trip consistency                    |
 
 ---
 
 ## Emulator Infrastructure (0140)
 
-| Test File                          | Description                                                  |
-|------------------------------------|--------------------------------------------------------------|
-| `0140_emulator_basic.cpp`          | Instantiate `Gpu::Device::Emulator` class without error      |
-| `0140_emulator_lifecycle.cpp`      | `init()`, `shutdown()`, `reset()`, and safe reuse            |
-| `0141_emulator_alloc_io.cpp`       | `alloc()`, `free()`, `read()`, `write()` verified end-to-end |
-| `0142_emulator_kernel.cpp`         | Register kernel, launch task, validate IPC thread            |
-| `0143_emulator_shutdown_guard.cpp` | `shutdown()` multiple times, or after `reset()`              |
-| `0144_mockgpu_dispatch.cpp`        | Loop dispatch for known commands                             |
-| `0145_mockgpu_invalid_command.cpp` | Unknown `CommandType` behavior                               |
-| `0146_runtimemanager_dispatch.cpp` | Each handler tested with a valid message                     |
-| `0147_runtimemanager_invalid.cpp`  | Missing kernel ID, allocation failure, etc.                  |
+| Test File                          | Description                                                             |
+|------------------------------------|-------------------------------------------------------------------------|
+| `0140_emulator_basic.cpp`          | Instantiate `Gpu::Device::Emulator` class without error                 |
+| `0140_emulator_lifecycle.cpp`      | `init()`, `shutdown()`, `reset()`, and safe reuse                       |
+| `0141_emulator_alloc_io.cpp`       | `alloc()`, `free()`, `read()`, `write()` verified end-to-end            |
+| `0142_emulator_kernel.cpp`         | Register kernel, launch task, validate IPC thread                       |
+| `0143_emulator_shutdown_guard.cpp` | `shutdown()` multiple times, or after `reset()`                         |
+| `0144_mockgpu_dispatch.cpp`        | Loop dispatch for known commands                                        |
+| `0145_mockgpu_invalid_command.cpp` | Unknown `CommandType` behavior                                          |
+| `0146_runtimemanager_dispatch.cpp` | Each handler tested with a valid message                                |
+| `0147_runtimemanager_invalid.cpp`  | Missing kernel ID, allocation failure, etc.                             |
+| `0148_matrix_device_io.cpp`        | Matrix written to emulator and re-read correctly via `write()`/`read()` |
 
 ---
 
