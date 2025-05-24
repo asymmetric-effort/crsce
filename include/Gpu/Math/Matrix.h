@@ -4,31 +4,26 @@
 #pragma once
 #include <vector>
 #include <cstddef>
-#include <cstdint>
 
 namespace Gpu::Math {
 
     /**
      * @name Gpu::Math::Matrix
-     * @brief Represents a dense 2D matrix of 64-bit values stored in row-major order.
+     * @brief Abstract base class for matrix-like structures.
      * @ref docs/Gpu/Design/Gpu-Math-Matrix.md
      */
     class Matrix {
     public:
-        Matrix(std::size_t rows, std::size_t cols);
-        std::size_t rows() const noexcept;
-        std::size_t cols() const noexcept;
+        virtual ~Matrix() = default;
 
-        const uint64_t& at(std::size_t r, std::size_t c) const;
-        uint64_t& at(std::size_t r, std::size_t c);
+        virtual std::size_t rows() const noexcept = 0;
+        virtual std::size_t cols() const noexcept = 0;
 
-        const std::vector<uint64_t>& data() const noexcept;
-        std::vector<uint64_t>& data() noexcept;
+        virtual const double& at(std::size_t r, std::size_t c) const = 0;
+        virtual double& at(std::size_t r, std::size_t c) = 0;
 
-    private:
-        std::size_t rows_;
-        std::size_t cols_;
-        std::vector<uint64_t> buffer_;
+        virtual const std::vector<double>& data() const noexcept = 0;
+        virtual std::vector<double>& data() noexcept = 0;
     };
 
 } // namespace Gpu::Math
