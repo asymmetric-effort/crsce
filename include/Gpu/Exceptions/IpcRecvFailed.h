@@ -5,6 +5,7 @@
 #include "Gpu/Ipc/Result.h"
 #include <stdexcept>
 #include <string>
+#include <format>
 
 namespace Gpu::Exceptions {
     /**

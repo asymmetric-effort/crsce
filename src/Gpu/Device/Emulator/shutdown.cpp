@@ -2,6 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Device/Emulator/Emulator.h"
+#include "Gpu/Exceptions/IpcSendFailed.h"
 #include <sys/wait.h>
 #include <unistd.h>
 
