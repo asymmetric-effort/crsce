@@ -52,7 +52,13 @@ namespace Gpu::Math {
          */
         const double& at(std::size_t r, std::size_t c) const;
         /**
-         * @name data
+         * @name data (mutable)
+         * @brief serialize the matrix as a vector of double values
+         * @return const vector<double>
+         */
+        std::vector<double>& data() noexcept;
+        /**
+         * @name data (const)
          * @brief serialize the matrix as a vector of double values
          * @return const vector<double>
          */

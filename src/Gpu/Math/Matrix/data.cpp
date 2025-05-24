@@ -9,4 +9,8 @@ namespace Gpu::Math {
         return buffer_;
     }
 
+    std::vector<double>& Matrix::data() noexcept {
+        return buffer_;
+    }
+
 }
