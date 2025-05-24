@@ -13,7 +13,7 @@
 #define COPYRIGHT "not_defined"
 #endif
 
-constexpr const char* target_binary = "build/bin/compress";
+constexpr auto target_binary = "build/bin/compress";
 
 // Helper function to execute a command and capture stdout
 std::string exec(const char* cmd) {
