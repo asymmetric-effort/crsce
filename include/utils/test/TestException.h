@@ -5,7 +5,7 @@
 #include <exception>
 #include <string>
 
-class TestException : public std::exception {
+class TestException final : public std::exception {
 public:
     explicit TestException(): message_(""){}
     explicit TestException(std::string message): message_(std::move(message)) {}
