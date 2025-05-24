@@ -5,11 +5,11 @@
 
 namespace Gpu::Math {
 
-    const std::vector<uint64_t>& Matrix::data() const noexcept {
+    const std::vector<double>& Matrix::data() const noexcept {
         return buffer_;
     }
 
-    std::vector<uint64_t>& Matrix::data() noexcept {
+    std::vector<double>& Matrix::data() noexcept {
         return buffer_;
     }
 

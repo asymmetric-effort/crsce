@@ -4,8 +4,9 @@
 #include "Gpu/Math/Matrix.h"
 
 namespace Gpu::Math {
-
     Matrix::Matrix(const std::size_t rows, const std::size_t cols)
-        : rows_(rows), cols_(cols), buffer_(rows * cols, 0) {}
-
+        : rows_(rows),
+          cols_(cols),
+          buffer_(rows * cols, 0) {
+    }
 }

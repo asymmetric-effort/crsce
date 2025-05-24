@@ -5,7 +5,6 @@
 
 namespace Gpu::Math {
 
-
     std::size_t Matrix::rows() const noexcept {
         return rows_;
     }
