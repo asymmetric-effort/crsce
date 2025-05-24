@@ -45,25 +45,11 @@ namespace Gpu::Math {
          */
         const double& at(std::size_t r, std::size_t c) const;
         /**
-         * @name at
-         * @brief return the value at position r,c
-         * @param r
-         * @param c
-         * @return double
-         */
-        double& at(std::size_t r, std::size_t c);
-        /**
          * @name data
          * @brief serialize the matrix as a vector of double values
          * @return const vector<double>
          */
         const std::vector<double>& data() const noexcept;
-        /**
-         * @name data
-         * @brief serialize the matrix as a vector of double values
-         * @return vector<double>
-         */
-        std::vector<double>& data() noexcept;
 
     private:
         std::size_t rows_;

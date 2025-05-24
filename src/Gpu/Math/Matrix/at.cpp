@@ -3,17 +3,10 @@
 
 #include "Gpu/Math/Matrix.h"
 #include "Gpu/Exceptions/MatrixOutOfRange.h"
-#include <stdexcept>
 
 namespace Gpu::Math {
 
     const double& Matrix::at(const std::size_t r, const std::size_t c) const {
-        if (r >= rows_ || c >= cols_)
-            throw Gpu::Exceptions::MatrixOutOfRange("index out of bounds");
-        return buffer_[r * cols_ + c];
-    }
-
-    double& Matrix::at(const std::size_t r, const std::size_t c) {
         if (r >= rows_ || c >= cols_)
             throw Gpu::Exceptions::MatrixOutOfRange("index out of bounds");
         return buffer_[r * cols_ + c];
