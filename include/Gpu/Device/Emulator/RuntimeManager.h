@@ -5,7 +5,7 @@
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/MemoryTracker.h"
-#include "Gpu/ThreadRegistry.h"
+#include "ThreadRegistry.h"
 #include "Gpu/KernelManager.h"
 
 namespace Gpu {
