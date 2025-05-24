@@ -23,12 +23,16 @@ namespace Gpu::Ipc {
         Common::AbstractPtr ptr = 0;
 
         /**
-         * Serialize this message to a binary payload (fixed 24 bytes).
+         * @name serialize
+         * @brief Serialize this message to a binary payload (fixed 24 bytes).
+         * @return Common::Buffer8
          */
         Common::Buffer8 serialize() const;
 
         /**
-         * Deserialize a message from binary data (must be 24 bytes).
+         * @name deserialize
+         * @brief Deserialize a message from binary data (must be 24 bytes).
+         * @throws Gpu::Exceptions::InvalidIpcMessage
          */
         void deserialize(const Common::Buffer8& data);
     };

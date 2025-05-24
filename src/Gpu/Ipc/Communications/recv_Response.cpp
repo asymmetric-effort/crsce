@@ -3,6 +3,7 @@
 
 #include "Gpu/Ipc/Communications.h"
 #include <unistd.h>
+#include <algorithm>
 
 namespace Gpu::Ipc {
 
@@ -10,7 +11,8 @@ namespace Gpu::Ipc {
         if (!validateParentAccess()) return Result::InvalidRole;
 
         uint8_t header[9] = {};
-        if (const ssize_t read_header = read(childToParentFd[0], header, 9); read_header != 9) return (read_header == 0 ? Result::Closed : Result::IOError);
+        if (const ssize_t read_header = read(childToParentFd[readEndpoint], header, 9); read_header != 9)
+            return (read_header == 0 ? Result::Closed : Result::IOError);
 
         uint64_t payload_size = 0;
         for (int i = 0; i < 8; ++i)
@@ -20,12 +22,16 @@ namespace Gpu::Ipc {
         std::copy_n(header, 9, full.begin());
 
         if (payload_size > 0) {
-            if (const ssize_t read_payload = read(childToParentFd[0], full.data() + 9, payload_size); read_payload != static_cast<ssize_t>(payload_size))
+            if (const ssize_t read_payload = read(childToParentFd[readEndpoint], full.data() + 9, payload_size); read_payload != static_cast<ssize_t>(payload_size))
                 return (read_payload == 0 ? Result::Closed : Result::IOError);
         }
 
-        res = Response::deserialize(full.data(), full.size());
-        return Result::Success;
+        try {
+            res.deserialize(full);
+            return Result::Success;
+        } catch (...) {
+            return Result::IOError;
+        }
     }
 
 }

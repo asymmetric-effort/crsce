@@ -23,15 +23,18 @@ namespace Gpu::Ipc {
         Common::Buffer8 data;                        ///< Optional binary result data
 
         /**
-         * Serialize this Response into a binary buffer for IPC transport.
+         * @name serialize
+         * @brief Serialize this Response into a binary buffer for IPC transport.
+         * @return Common::Buffer8
          */
         Common::Buffer8 serialize() const;
 
         /**
-         * Deserialize binary data into a Response object.
-         * Throws std::runtime_error on invalid or undersized input.
+         * @name deserialize
+         * @brief Deserialize binary data into a Response object.
+         * @throws Gpu::Exceptions::InvalidIpcResponse
          */
-        static Response deserialize(const uint8_t* buffer, std::size_t length);
+        void deserialize(const Common::Buffer8& data);
     };
 
 } // namespace Gpu::Ipc

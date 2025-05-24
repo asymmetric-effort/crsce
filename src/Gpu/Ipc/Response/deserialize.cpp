@@ -2,26 +2,24 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 #include "Gpu/Ipc/Response.h"
-#include <stdexcept>
+#include "Gpu/Exceptions/InvalidIpcResponse.h"
 
 namespace Gpu::Ipc {
 
-    Response Response::deserialize(const uint8_t* buffer, std::size_t length) {
-        if (length < 9)
-            throw std::runtime_error("Response::deserialize(): buffer too small");
+    void Response::deserialize(const Common::Buffer8& data) {
+        if (data.size() < 9)
+            throw Exceptions::InvalidIpcResponse("deserialize: buffer too small");
 
-        Response out;
-        out.status = static_cast<FailureCodes>(buffer[0]);
+        status = static_cast<FailureCodes>(data[0]);
 
-        out.size = 0;
+        size = 0;
         for (int i = 0; i < 8; ++i)
-            out.size |= static_cast<uint64_t>(buffer[1 + i]) << (i * 8);
+            size |= static_cast<uint64_t>(data[1 + i]) << (i * 8);
 
-        if (length < 9 + out.size)
-            throw std::runtime_error("Response::deserialize(): payload size mismatch");
+        if (data.size() < 9 + size)
+            throw Exceptions::InvalidIpcResponse("deserialize: payload size mismatch");
 
-        out.data = Common::Buffer8(buffer + 9, buffer + 9 + out.size);
-        return out;
+        this->data.assign(data.begin() + 9, data.begin() + 9 + size);
     }
 
 }
