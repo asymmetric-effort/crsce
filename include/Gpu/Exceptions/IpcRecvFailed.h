@@ -15,8 +15,8 @@ namespace Gpu::Exceptions {
      */
     class IpcRecvFailed final : public std::runtime_error {
     public:
-        explicit IpcRecvFailed(const Gpu::Ipc::Result &result)
-            : std::runtime_error(std::format("IpcRecvFailed: {}", result)) {
+        explicit IpcRecvFailed(const Gpu::Ipc::Result result)
+            : std::runtime_error("IpcRecvFailed: " + Gpu::Ipc::to_string(result)) {
         }
 
         explicit IpcRecvFailed(const std::string &what_arg)

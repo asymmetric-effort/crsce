@@ -4,17 +4,15 @@
 #include "Gpu/Exceptions/InvalidIpcResult.h"
 #include "Gpu/Ipc/Result.h"
 
-const std::string to_string(const Gpu::Ipc::Result& result) {
-    switch (result) {
-        case Gpu::Ipc::Result::Success: return "Success";
-            break;
-        case Gpu::Ipc::Result::Closed: return "Closed";
-            break;
-        case Gpu::Ipc::Result::IOError: return "IOError";
-            break;
-        case Gpu::Ipc::Result::InvalidRole: return "InvalidRole";
-            break;
-        default:
-            throw Gpu::Exceptions::InvalidIpcResult(result);
+namespace Gpu::Ipc {
+    std::string to_string(const Gpu::Ipc::Result result) {
+        switch (result) {
+            case Gpu::Ipc::Result::Success: return "Success";
+            case Gpu::Ipc::Result::Closed: return "Closed";
+            case Gpu::Ipc::Result::IOError: return "IOError";
+            case Gpu::Ipc::Result::InvalidRole: return "InvalidRole";
+            default:
+                throw Gpu::Exceptions::InvalidIpcResult(result);
+        }
     }
 }

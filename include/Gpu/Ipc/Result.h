@@ -5,7 +5,6 @@
 #include <string>
 
 namespace Gpu::Ipc {
-
     /**
      * @name Gpu::Ipc::Result
      * @brief Describes the status of a low-level IPC pipe operation (send or recv).
@@ -21,12 +20,16 @@ namespace Gpu::Ipc {
      *  }
      */
     enum class Result : uint8_t {
-        Success     = 0x00, ///< The pipe operation completed successfully
-        Closed      = 0x01, ///< The pipe is closed (broken pipe, EOF, etc.)
-        IOError     = 0x02, ///< A read or write error occurred at the OS level
-        InvalidRole = 0x03  ///< An access attempt was made from the wrong process side (parent vs. child)
+        Success = 0x00, ///< The pipe operation completed successfully
+        Closed = 0x01, ///< The pipe is closed (broken pipe, EOF, etc.)
+        IOError = 0x02, ///< A read or write error occurred at the OS level
+        InvalidRole = 0x03 ///< An access attempt was made from the wrong process side (parent vs. child)
     };
 
-    const std::string to_string(const Result result);
-
+    /**
+     * @name to_string
+     * @param result
+     * @return std::string
+     */
+    std::string to_string(const Gpu::Ipc::Result result);
 }

@@ -10,16 +10,23 @@ namespace Gpu::Device {
     void Emulator::shutdown() {
         if (!initialized_) return;
 
+        if (shutdown_) return;
+
         shutdown_ = true;
+
         Ipc::Message shutdownMsg;
+
         shutdownMsg.type = Ipc::CommandType::Shutdown;
 
-        if (const auto result = ipc_->send(shutdownMsg);result != Ipc::Result::Success)
+        if (const auto result = ipc_->send(shutdownMsg); result != Ipc::Result::Success)
             throw Gpu::Exceptions::IpcSendFailed(result);
 
         waitpid(childPid_, nullptr, 0);
+
         ipc_.reset();
+
         childPid_ = 0;
+
         initialized_ = false;
     }
 }
