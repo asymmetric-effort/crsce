@@ -6,8 +6,6 @@
 void Tester::skip(const std::string& msg){
     std::cerr << "[" << prefix << "] Tester::skip() " << msg << std::endl;
     skipScore++;
-    if (onError) {
-        showStatistics();
-        std::exit(EXIT_SUCCESS);
-    }
+    showStatistics();
+    std::exit(EXIT_SUCCESS);
 }
