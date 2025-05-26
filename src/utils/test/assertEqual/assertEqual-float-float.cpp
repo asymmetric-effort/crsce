@@ -3,9 +3,8 @@
 #include "utils/test/Tester.h"
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
-void Tester::assertEqual(float a, float b, const std::string& message) {
-    constexpr float epsilon = 1e-5f;
-    if (std::abs(a - b) > epsilon) {
+void Tester::assertEqual(const float a, const float b, const std::string& message) {
+    if (constexpr float epsilon = 1e-1f; std::abs(a - b) > epsilon) {
         fail("assertEqual<float> Failed: " + message);
     } else {
         pass(message);

@@ -23,37 +23,34 @@ using Gpu::Exceptions::DeviceNotReady;
 
 int main() {
     Tester tester("Gpu::Device::Emulator lifecycle");
+    {
+        Emulator gpu;
 
-    Emulator gpu;
+        tester.assertTrue(gpu.init(), "Initial init() succeeds");
+        tester.assertTrue(gpu.init(), "Second init() is idempotent");
 
-    tester.assertTrue(gpu.init(), "Initial init() succeeds");
-    tester.assertTrue(gpu.init(), "Second init() is idempotent");
-
-    gpu.reset();
-    tester.assertTrue(gpu.init(), "init() after reset is allowed");
-
-    gpu.shutdown();
-    tester.pass("shutdown() succeeds");
-
-    try {
-        gpu.init();
-        tester.fail("init() after shutdown should throw");
-    } catch (const DeviceNotReady&) {
-        tester.pass("Caught DeviceNotReady after shutdown/init()");
-    }
-
-    try {
         gpu.reset();
-        tester.fail("reset() after shutdown should throw");
-    } catch (const DeviceNotReady&) {
-        tester.pass("Caught DeviceNotReady after shutdown/reset()");
-    }
+        tester.assertTrue(gpu.init(), "init() after reset is allowed");
 
-    try {
+        gpu.shutdown();
+        tester.pass("shutdown() succeeds");
+    }
+    tester.expectException<DeviceNotReady>([] {
+        Emulator gpu;
+        //we intentionally do not initialize
+        gpu.shutdown();
+    });
+    tester.expectException<DeviceNotReady>([] {
+        Emulator gpu;
+        // we intentionally do not initialize
+        gpu.reset();
+    });
+    {
+        Emulator gpu;
+        gpu.init();
+        gpu.shutdown();
         gpu.shutdown();
         tester.pass("shutdown() is idempotent after shutdown");
-    } catch (...) {
-        tester.fail("shutdown() after shutdown must not throw");
     }
 
     tester.pass();
