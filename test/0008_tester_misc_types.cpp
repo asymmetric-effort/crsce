@@ -1,5 +1,9 @@
 // file: test/0008_tester_misc_types.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0008_tester_misc_types.cpp
+ * @brief Verifies unsigned, float, double, and char overloads in Tester::assertEqual/assertNotEqual.
+ */
 
 #include "utils/test/Tester.h"
 #include "utils/test/TestException.h"

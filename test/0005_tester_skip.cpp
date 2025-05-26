@@ -1,5 +1,9 @@
 // file: test/0005_tester_skip.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0005_tester_skip.cpp
+ * @brief Verifies that Tester::skip terminates the test immediately without executing further assertions.
+ */
 
 #include "utils/test/Tester.h"
 #include <cstdlib>

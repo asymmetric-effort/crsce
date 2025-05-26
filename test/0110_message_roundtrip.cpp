@@ -1,5 +1,10 @@
-// file: test/0110_response_roundtrip.cpp
+// file: test/0110_message_roundtrip.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
+/**
+ * @file 0110_message_roundtrip.cpp
+ * @brief Unit test for Gpu::Ipc::Message serialization/deserialization round‐trip (type, kernelId, size, ptr).
+ */
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Response.h"
@@ -12,7 +17,7 @@ using Gpu::Ipc::FailureCodes;
 using Common::Buffer8;
 
 int main() {
-    Tester tester("0110_response_roundtrip.cpp",true);
+    Tester tester("0110_message_roundtrip.cpp",true);
 
     // Construct a response with error code, payload size, and data
     Response original;

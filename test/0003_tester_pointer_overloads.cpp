@@ -1,5 +1,9 @@
 // file: test/0003_tester_pointer_overloads.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0003_tester_pointer_overloads.cpp
+ * @brief Verifies Tester::assertNotNull overloads for raw pointers, unique_ptr, shared_ptr, and weak_ptr (including Gpu::Device::Interface).
+ */
 
 #include "utils/test/Tester.h"
 #include "utils/test/TestException.h"

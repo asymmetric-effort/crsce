@@ -1,5 +1,9 @@
 // file: test/0007_tester_assert_bool.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0007_tester_assert_bool.cpp
+ * @brief Verifies Tester::assertTrue and Tester::assertFalse behavior on both passing and failing conditions.
+ */
 
 #include "utils/test/Tester.h"
 #include "utils/test/TestException.h"

@@ -3,8 +3,9 @@
 
 /**
  * @file 0110_response_roundtrip.cpp
- * @brief Unit test for Gpu::Ipc::Response serialization/deserialization round-trip.
+ * @brief Unit test for Gpu::Ipc::Response serialization/deserialization round‐trip (status, size, payload).
  */
+
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Response.h"

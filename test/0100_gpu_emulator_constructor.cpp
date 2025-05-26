@@ -2,7 +2,7 @@
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 /**
- * @file
+ * @file 0100_gpu_emulator_constructor.cpp
  * @brief Constructor and destructor sanity check for Gpu::Device::Emulator.
  *
  * This test ensures that the Emulator class can be instantiated and destroyed

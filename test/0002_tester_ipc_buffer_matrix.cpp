@@ -1,5 +1,9 @@
 // file: test/0002_tester_ipc_buffer_matrix.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0002_tester_ipc_buffer_matrix.cpp
+ * @brief Verifies Gpu::Ipc::Result, Common::Buffer8, Common::Buffer64, and Gpu::Math::Matrix comparisons via Tester assertions.
+ */
 
 #include "utils/test/Tester.h"
 #include "utils/test/TestException.h"
