@@ -1,5 +1,9 @@
-// file: include/CRSCE/CRSCE.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CRSCE.h
+ * @brief declare the CRSCE compression algorithm as a unit (with compress() and decompress() features).  This is
+ *        the top-level class we should expose as a library.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_H
 #define CRSCE_H

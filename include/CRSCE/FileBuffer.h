@@ -1,5 +1,8 @@
-// file: include/CRSCE/FileBuffer.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/FileBuffer.h
+ * @brief Declare a FileBuffer as a vector of 64-bit values.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_FILE_BUFFER_H
 #define CRSCE_FILE_BUFFER_H

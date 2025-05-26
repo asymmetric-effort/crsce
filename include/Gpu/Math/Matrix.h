@@ -1,5 +1,9 @@
-// file: include/Gpu/Math/Matrix.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Math/Matrix.h
+ * @brief Declare a concrete two-dimensional matrix of double-precision floats where operations are performed on
+ *        the GPU.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include <vector>

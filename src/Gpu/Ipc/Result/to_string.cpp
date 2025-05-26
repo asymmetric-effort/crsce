@@ -1,5 +1,7 @@
-// file: src/Gpu/Ipc/Result/to_string.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/Ipc/Result/to_string.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "Gpu/Exceptions/InvalidIpcResult.h"
 #include "Gpu/Ipc/Result.h"

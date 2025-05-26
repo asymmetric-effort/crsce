@@ -1,15 +1,13 @@
-// file: test/0110_message_roundtrip.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-
 /**
  * @file 0110_message_roundtrip.cpp
  * @brief Unit test for Gpu::Ipc::Message serialization/deserialization round‐trip (type, kernelId, size, ptr).
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/FailureCodes.h"
-#include "Gpu/Common/Buffer8.h"
+#include "Common/Buffer8.h"
 #include <cstdlib>
 
 using Gpu::Ipc::Response;

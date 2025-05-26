@@ -1,5 +1,8 @@
-// file: include/CRSCE/crypto/SHA256.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/crypto/SHA256.h
+ * @brief declare a class representing a SHA256 hash as a vector of uint8_t (byte) values.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_CRYPTO_SHA256_H
 #define CRSCE_CRYPTO_SHA256_H

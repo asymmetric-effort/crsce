@@ -1,5 +1,7 @@
-// file: src/Gpu/ThreadRegistry/joinAll.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/ThreadRegistry/joinAll.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include <ranges>
 

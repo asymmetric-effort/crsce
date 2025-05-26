@@ -1,3 +1,8 @@
+/**
+ * @file include/CRSCE/constants/constants.h
+ * @brief defines CRSCE constants
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 #ifndef CRSCE_CONSTANTS_H
 #define CRSCE_CONSTANTS_H
 

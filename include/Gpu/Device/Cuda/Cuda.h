@@ -1,5 +1,8 @@
-// file: include/Gpu/Device/Cuda/Cuda.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Device/Cuda/Cuda.h
+ * @brief Declare the interface for an nVidia CUDA GPU
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include "Gpu/Device/Interface.h"

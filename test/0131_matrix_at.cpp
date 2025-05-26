@@ -1,5 +1,7 @@
-// file: test/0131_matrix_at.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0131_matrix_at.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 /**
  * @file 0131_matrix_at.cpp

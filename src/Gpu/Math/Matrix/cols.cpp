@@ -1,5 +1,7 @@
-// file: src/Gpu/Math/Matrix/cols.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/Math/Matrix/cols.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "Gpu/Math/Matrix.h"
 

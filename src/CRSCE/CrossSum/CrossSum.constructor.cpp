@@ -1,5 +1,7 @@
-// file: include/CRSCE/CrossSum/CrossSum.CrossSumValue.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSum/CrossSum.CrossSumValue.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CrossSum/CrossSum.h"
 

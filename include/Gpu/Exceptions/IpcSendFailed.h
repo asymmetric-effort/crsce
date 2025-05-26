@@ -1,5 +1,8 @@
-// file: include/Gpu/Exceptions/IpcSendFailed.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Exceptions/IpcSendFailed.h
+ * @brief Declare a GPU Abstraction Layer Interface.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include "Gpu/Ipc/Result.h"

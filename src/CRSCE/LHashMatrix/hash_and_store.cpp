@@ -1,5 +1,7 @@
-// file: src/CRSCE/LHashMatrix/hash_and_store.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/CRSCE/LHashMatrix/hash_and_store.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/LHashMatrix.h"
 

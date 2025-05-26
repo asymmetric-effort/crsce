@@ -1,5 +1,7 @@
-// file: include/CRSCE/CrossSum/AntidiagonalSumMatrix/get.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSum/AntidiagonalSumMatrix/get.h
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 

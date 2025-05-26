@@ -1,5 +1,7 @@
-// file: test/verify-diagonal-sum-matrix.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file verify-diagonal-sum-matrix.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
 #include "CRSCE/constants/constants.h"

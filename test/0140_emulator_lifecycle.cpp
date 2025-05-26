@@ -1,5 +1,7 @@
-// file: test/0140_emulator_lifecycle.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0140_emulator_lifecycle.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 /**
  * @file 0140_emulator_lifecycle.cpp

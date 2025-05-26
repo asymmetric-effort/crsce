@@ -1,5 +1,7 @@
-// file: test/9000_final-compression-test.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 9000_final-compression-test.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CRSCE.h"
 #include "CRSCE/constants/constants.h"

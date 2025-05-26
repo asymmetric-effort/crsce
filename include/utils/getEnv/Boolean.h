@@ -1,5 +1,8 @@
-// file: include/utils/getEnv/Boolean.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/utils/getEnv/Boolean.h
+ * @brief Declare getEnv::Boolean to retrieve and validate a boolean environment variable.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 #pragma once
 
 #include <cstdlib>

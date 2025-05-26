@@ -1,5 +1,7 @@
-// file: src/Gpu/Ipc/MemoryTracker/clear.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/Ipc/MemoryTracker/clear.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "Gpu/Ipc/MemoryTracker.h"
 

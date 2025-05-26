@@ -1,5 +1,8 @@
-// file: include/Gpu/Device/Metal.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Device/Metal.h
+ * @brief Declare a class representing the Apple Metal Interface
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include "Gpu/Device/Interface.h"

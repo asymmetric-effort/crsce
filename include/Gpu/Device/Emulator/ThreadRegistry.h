@@ -1,5 +1,8 @@
-// file: include/Gpu/ThreadRegistry.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/ThreadRegistry.h
+ * @brief Declare the class that tracks lifecycle of detached kernel threads for concurrent GPU emulation.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include <unordered_map>

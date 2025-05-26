@@ -1,8 +1,7 @@
-// file: test/0004_tester_control.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 /**
  * @file 0004_tester_control.cpp
  * @brief Exercises Tester::pass, Tester::fail, Tester::recoverFail and Tester::debug, and validates the internal pass/fail/skip counters.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "utils/test/Tester.h"

@@ -1,5 +1,8 @@
-// file: include/CRSCE/CrossSum.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSum.h
+ * @brief Declare the pure virtual CrossSum parent class for LSM, VSM, DSM and XSM.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_CROSSSUM_H
 #define CRSCE_CROSSSUM_H
@@ -16,7 +19,7 @@ public:
     //constructor : initialize a cross sum matrix with constants s and b.
     explicit CrossSum();
 
-    ~CrossSum();
+    virtual ~CrossSum();
 
     virtual CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const;
 

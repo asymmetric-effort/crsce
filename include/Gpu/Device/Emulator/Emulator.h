@@ -1,5 +1,7 @@
-// file: include/Gpu/Device/Emulator/Emulator.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Device/Emulator/Emulator.h
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include <memory>

@@ -1,5 +1,7 @@
-// file: test/0142_emulator_kernel.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0142_emulator_kernel.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 /**
  * @file 0142_emulator_kernel.cpp
@@ -14,8 +16,8 @@
 #include "utils/test/Tester.h"
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"
-#include "Gpu/Common/KernelManager.h"
-#include "Gpu/Common/Buffer8.h"
+#include "Common/KernelManager.h"
+#include "Common/Buffer8.h"
 
 using Gpu::Device::Emulator;
 using Gpu::Exceptions::DeviceNotReady;

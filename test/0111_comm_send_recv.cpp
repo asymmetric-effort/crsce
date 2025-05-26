@@ -1,5 +1,7 @@
-// file: test/0111_comm_send_recv.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0111_comm_send_recv.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Message.h"

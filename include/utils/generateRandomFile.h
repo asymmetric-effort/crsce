@@ -1,3 +1,10 @@
+/**
+ * @file utils/generateRandomFile.h
+ * @brief generate a file with a given name and size and random content.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
+#pragma once
+
 #include <fstream>
 #include <iostream>
 #include <random>
@@ -5,5 +12,10 @@
 #include <cstring>
 #include <filesystem>
 
-// Generate a random file of a given size in bytes
+/**
+ * @name generateRandomFile
+ * @brief generate a file with a given name and size and random content.
+ * @param filename
+ * @param file_size
+ */
 void generateRandomFile(const std::string& filename, const int file_size);

@@ -1,8 +1,12 @@
-// file: include/Gpu/ThreadRuntime.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/ThreadRuntime.h
+ * @brief Declare the runtime wrapper for Gpu::Device::Emulator which will facilitate execution of user-defined
+ *        Gpu kernel blobs.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
-#include "Gpu/Common/Buffer8.h"
+#include "Common/Buffer8.h"
 
 namespace Gpu::Device {
 

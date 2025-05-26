@@ -1,5 +1,8 @@
-// file: include/Gpu/Ipc/MemoryTracker.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Ipc/MemoryTracker.h
+ * @brief Declare types supporting the InterProcess Communication (IPC) mechanism
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include <unordered_map>
@@ -7,8 +10,8 @@
 #include <cstdint>
 #include <mutex>
 #include <random>
-#include "Gpu/Common/AbstractPtr.h"
-#include "Gpu/Common/Buffer8.h"
+#include "Common/AbstractPtr.h"
+#include "Common/Buffer8.h"
 
 namespace Gpu::Ipc {
 

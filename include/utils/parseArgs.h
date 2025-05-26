@@ -1,5 +1,7 @@
-// file: include/utils/parseArgs.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/utils/parseArgs.h
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef UTILS_PARSEARGS_H
 #define UTILS_PARSEARGS_H

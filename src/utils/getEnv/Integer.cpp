@@ -1,5 +1,7 @@
-// file: include/utils/getEnv/Integer.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/utils/getEnv/Integer.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include <cstdlib>
 #include <string>

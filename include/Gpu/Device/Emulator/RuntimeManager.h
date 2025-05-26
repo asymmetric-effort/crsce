@@ -1,12 +1,15 @@
-// file: include/Gpu/RuntimeManager.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/RuntimeManager.h
+ * @brief Declare a RuntimeManager class which runs inside the MockGpu class to manage various kernel runtimes.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/MemoryTracker.h"
 #include "ThreadRegistry.h"
-#include "Gpu/Common/KernelManager.h"
+#include "Common/KernelManager.h"
 
 namespace Gpu::Device {
     /**

@@ -1,9 +1,18 @@
-// file: utils/compareFiles.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file utils/compareFiles.cpp
+ * @brief compare two files.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "utils/compareFiles.h"
 
-// compare two files at a byte level.
+/**
+ * @name compareFiles
+ * @brief byte-level comparison of two files
+ * @param file1
+ * @param file2
+ * @return bool
+ */
 bool compareFiles(const std::string& file1, const std::string& file2) {
     std::ifstream ifs1(file1, std::ios::binary);
     std::ifstream ifs2(file2, std::ios::binary);

@@ -1,5 +1,7 @@
-// file: src/cmd/decompress.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file decompress.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 #include "CRSCE/CRSCE.h"
 #include "utils/printUsage.h"
 #include "utils/printVersion.h"
@@ -23,10 +25,10 @@ int main(int argc, char* argv[]) {
         CRSCE decompressor(inputFile, outputFile);
 
         if (const int result = decompressor.decompress();result == 0) {
-            std::cout << "Deompression completed successfully." << std::endl;
+            std::cout << "Decompression completed successfully." << std::endl;
             return EXIT_SUCCESS;
         } else {
-            std::cerr << "Deompression failed with error code " << result << "." << std::endl;
+            std::cerr << "Decompression failed with error code " << result << "." << std::endl;
             return EXIT_FAILURE;
         }
     } catch (const std::exception& e) {

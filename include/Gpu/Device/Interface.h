@@ -1,11 +1,14 @@
-// file: include/Gpu/Device/Interface.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Device/Interface.h
+ * @brief declare the pure virtual interface class for all GPU devices.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include <cstddef>
-#include "Gpu/Common/AbstractPtr.h"
-#include "Gpu/Common/Buffer8.h"
-#include "Gpu/Common/Buffer64.h"
+#include "Common/AbstractPtr.h"
+#include "Common/Buffer8.h"
+#include "Common/Buffer64.h"
 
 namespace Gpu::Math { class Matrix; }
 

@@ -1,5 +1,7 @@
-// file: src/Gpu/RuntimeManager/handleWrite.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/RuntimeManager/handleWrite.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "Gpu/Device/Emulator/RuntimeManager.h"
 

@@ -1,5 +1,7 @@
-// file: include/CRSCE/CrossSum/LateralSumMatrix/get.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSum/LateralSumMatrix/get.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 

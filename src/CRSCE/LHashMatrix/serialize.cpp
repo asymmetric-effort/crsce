@@ -1,5 +1,7 @@
-// file: src/CRSCE/LHashMatrix/serialize.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/CRSCE/LHashMatrix/serialize.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/LHashMatrix.h"
 

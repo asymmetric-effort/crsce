@@ -1,5 +1,12 @@
-// file: include/CRSCE/LHashMatrix.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/LHashMatrix.h
+ * @brief declare a lateral hash matrix of s-hashes, where this class will allow
+ *        data to be acquired over time and when each row is filled, a hash is calculated.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ * @todo Consider implementing a streaming SHA256 hash where we can feed data directly into
+ *       the hashing algorithm as it is received rather than buffer a row.  This should then
+ *       allow the row-termination point to finalize the remaining calculation.
+ */
 
 #ifndef CRSCE_LHASHMATRIX_H
 #define CRSCE_LHASHMATRIX_H

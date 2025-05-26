@@ -1,10 +1,18 @@
-// file: include/utils/test/TestException.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/utils/test/TestException.h
+ * @brief Declare the TestException class representing a test assertion failure.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 #pragma once
 
 #include <exception>
 #include <string>
 
+/**
+ * @name TestException
+ * @class TestException
+ * @brief An exception representing a test failure.
+ */
 class TestException final : public std::exception {
 public:
     explicit TestException() = default;

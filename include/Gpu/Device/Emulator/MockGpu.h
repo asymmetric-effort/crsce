@@ -1,5 +1,9 @@
-// file: include/Gpu/Device/Emulator/MockGpu.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Device/Emulator/MockGpu.h
+ * @brief Declare the class representing a child class which emulates the behavior of a GPU for development and
+ *        testing.  This class is used by the Gpu::Device::Emulator class.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include "Gpu/Ipc/Communications.h"

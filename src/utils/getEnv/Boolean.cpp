@@ -1,5 +1,7 @@
-// file: src/utils/getEnv/Boolean.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/utils/getEnv/Boolean.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include <cstdlib>
 #include <string>

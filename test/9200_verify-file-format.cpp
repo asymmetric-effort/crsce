@@ -1,5 +1,7 @@
-// file: test/9000_verify-file-format.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 9000_verify-file-format.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/CRSCE.h"

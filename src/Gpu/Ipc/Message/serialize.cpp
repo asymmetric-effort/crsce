@@ -1,5 +1,7 @@
-// file: src/Gpu/Ipc/Message/serialize.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/Ipc/Message/serialize.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "Gpu/Ipc/Message.h"
 #include <cstring>

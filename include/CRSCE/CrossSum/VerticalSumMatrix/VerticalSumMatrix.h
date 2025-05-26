@@ -1,5 +1,8 @@
-// file: include/CRSCE/CrossSumValueVerticalSumMatrix.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSumValueVerticalSumMatrix.h
+ * @brief declare the Diagonal (dsm) matrix class
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_VERTICAL_SUM_MATRIX_H
 #define CRSCE_VERTICAL_SUM_MATRIX_H
@@ -7,12 +10,12 @@
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSum.h"
 
-class VerticalSumMatrix : public CrossSum {
+class VerticalSumMatrix final : public CrossSum {
 public:
 
     explicit VerticalSumMatrix();
 
-    ~VerticalSumMatrix();
+    ~VerticalSumMatrix() override;
 
     CrossSumValue get(CrossSumIndex _, CrossSumIndex c) const override;
 

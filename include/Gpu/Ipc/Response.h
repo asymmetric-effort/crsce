@@ -1,11 +1,14 @@
-// file: include/Gpu/Ipc/Response.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Ipc/Response.h
+ * @brief Declare types supporting the InterProcess Communication (IPC) mechanism
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include <vector>
 #include <cstdint>
 #include "Gpu/Ipc/FailureCodes.h"
-#include "Gpu/Common/Buffer8.h"
+#include "Common/Buffer8.h"
 
 namespace Gpu::Ipc {
 

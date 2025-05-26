@@ -1,8 +1,17 @@
-// file: test/generateRandomFile.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file generateRandomFile.cpp
+ * @brief generate a file with a given name and size and random content.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "utils/generateRandomFile.h"
 
+/**
+ * @name generateRandomFile
+ * @brief generate a file with a given name and size and random content.
+ * @param filename
+ * @param file_size
+ */
 void generateRandomFile(const std::string& filename, const int file_size) {
 
     std::ofstream ofs(filename, std::ios::binary);

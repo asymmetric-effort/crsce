@@ -1,9 +1,15 @@
-// file: src/utils/test/fail.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/utils/test/fail.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 #include "utils/test/Tester.h"
 #include "utils/test/TestException.h"
 
-// increment fail score and terminate
+/**
+ * @name fail
+ * @brief update stats and throw a message exception.  OnError (true) terminates execution.
+ * @throw TestException
+ */
 void Tester::fail() {
     failScore++;
     if (onError) {
@@ -14,13 +20,19 @@ void Tester::fail() {
     }
 }
 
-void Tester::fail(const std::string &msg) {
+/**
+ * @name fail
+ * @brief record message, update stats and throw a message exception.  OnError (true) terminates execution.
+ * @param message std::string
+ * @throw TestException
+ */
+void Tester::fail(const std::string &message) {
     failScore++;
     if (onError) {
         showStatistics();
-        debug(msg);
+        debug(message);
         std::exit(EXIT_FAILURE);
     } else {
-        throw TestException(msg);
+        throw TestException(message);
     }
 }

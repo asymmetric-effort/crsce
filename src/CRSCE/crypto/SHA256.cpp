@@ -1,5 +1,7 @@
-// file: src/CRSCE/crypto/SHA256.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/CRSCE/crypto/SHA256.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/crypto/SHA256.h"
 #include <vector>

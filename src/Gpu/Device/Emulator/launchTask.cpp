@@ -1,5 +1,7 @@
-// file: src/Gpu/Device/Emulator/launchTask.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/Device/Emulator/launchTask.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"

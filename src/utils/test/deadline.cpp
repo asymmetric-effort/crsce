@@ -1,5 +1,7 @@
-// file: src/utils/test/deadline.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/utils/test/deadline.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "utils/test/Tester.h"
 #include <thread>

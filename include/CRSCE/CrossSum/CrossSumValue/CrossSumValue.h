@@ -1,5 +1,8 @@
-// file: include/CRSCE/CrossSumValue.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSumValue.h
+ * @brief Declare the CrossSumValue type as a 16-bit value and its operators.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_CROSSSUM_VALUE_H
 #define CRSCE_CROSSSUM_VALUE_H

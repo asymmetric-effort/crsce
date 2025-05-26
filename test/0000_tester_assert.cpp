@@ -1,8 +1,6 @@
-// file: test/0000_tester_assert.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-
 /**
  * @file 0000_tester_assert.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  * @brief Unit test for Tester::assertEqual, assertNotEqual, assertTrue, assertFalse.
  *
  * This test verifies:

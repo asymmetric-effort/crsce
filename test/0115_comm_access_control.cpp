@@ -1,5 +1,7 @@
-// file: test/0115_comm_access_control.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0115_comm_access_control.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 /**
  * @file 0115_comm_access_control.cpp

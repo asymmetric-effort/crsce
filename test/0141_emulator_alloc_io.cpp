@@ -1,5 +1,7 @@
-// file: test/0141_emulator_alloc_io.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 0141_emulator_alloc_io.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 /**
  * @file 0141_emulator_alloc_io.cpp
@@ -14,7 +16,7 @@
 #include "utils/test/Tester.h"
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"
-#include "Gpu/Common/AbstractPtr.h"
+#include "Common/AbstractPtr.h"
 
 #include <set>
 

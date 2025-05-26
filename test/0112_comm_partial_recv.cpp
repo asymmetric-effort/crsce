@@ -1,45 +1,62 @@
-// file: test/0112_comm_partial_recv.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-
 /**
  * @file 0112_comm_partial_recv.cpp
- * @brief Test Gpu::Ipc::Communications behavior when receiving truncated data.
- *
- * This test manually writes a partial `Gpu::Ipc::Message` into the pipe to simulate
- * stream truncation or protocol desynchronization. It validates that the receiving
- * side correctly returns Result::IOError instead of deserializing garbage or hanging.
+ * @brief Verifies that Communications::recv throws when given a truncated Message or Response payload.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "utils/test/Tester.h"
-#include "Gpu/Ipc/Communications.h"
+#include "utils/test/TestException.h"
 #include "Gpu/Ipc/Message.h"
-#include "Gpu/Ipc/Result.h"
-
+#include "Gpu/Ipc/Response.h"
+#include "Gpu/Ipc/Communications.h"
+#include "Gpu/Ipc/FailureCodes.h"
 #include <unistd.h>
+#include <cstdlib>
+#include <vector>
+#include <cstdint>
 
-using Gpu::Ipc::Communications;
 using Gpu::Ipc::Message;
-using Gpu::Ipc::Result;
+using Gpu::Ipc::Response;
+using Gpu::Ipc::Communications;
+using Gpu::Ipc::CommandType;
+using Gpu::Ipc::FailureCodes;
 
 int main() {
-    Tester tester("Gpu::Ipc::Communications partial recv");
+    Tester tester("0112_comm_partial_recv.cpp");
 
-    int ptc[2], ctp[2];
-    pipe(ptc);  // parent to child
-    pipe(ctp);  // child to parent
+    // Set up bidirectional pipes
+    int toChild[2], fromChild[2];
+    if (pipe(toChild) < 0 || pipe(fromChild) < 0) {
+        return EXIT_FAILURE;
+    }
+    Communications parentComm(toChild, fromChild, true);
+    Communications childComm(toChild, fromChild, false);
 
-    Communications parent(ptc, ctp, true);
-    const Communications child(ptc, ctp, false);
+    // ---- Partial Message receive ----
+    Message outMsg;
+    outMsg.type     = CommandType::Write;
+    outMsg.kernelId = 0x1010;
+    outMsg.size     = 0x2020;
+    outMsg.ptr      = 0x3030;
+    auto msgBuf = outMsg.serialize();
+    // Write only a truncated header (less than full 24 bytes)
+    write(toChild[1], msgBuf.data(), msgBuf.size() - 5);
+    tester.expectException<TestException>([&] {
+        childComm.recv(outMsg);
+    });
 
-    // Write a truncated message from parent manually (e.g., 12 bytes instead of full 24)
-    constexpr uint8_t partial[12] = {0x01, 0x02, 0x03};  // corrupted or incomplete message
-    const ssize_t n = write(ptc[1], partial, 12);
-    tester.assertEqual(static_cast<unsigned>(n), 12u, "Wrote partial message to pipe");
-
-    Message out;
-    const Result result = child.recv(out);
-
-    tester.assertEqual(result, Result::IOError, "recv() should fail on incomplete message");
+    // ---- Partial Response receive ----
+    Response outResp;
+    outResp.status = FailureCodes::ReadError;
+    outResp.size   = 4;
+    outResp.data   = {0xAA, 0xBB, 0xCC, 0xDD};
+    auto respBuf = outResp.serialize();
+    // Write only part of the response (missing payload bytes)
+    write(fromChild[1], respBuf.data(), respBuf.size() - 2);
+    tester.expectException<TestException>([&] {
+        parentComm.recv(outResp);
+    });
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

@@ -1,5 +1,7 @@
-// file: include/utils/TestPatterns.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/utils/TestPatterns.h
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_UTILS_TEST_PATTERNS_H
 #define CRSCE_UTILS_TEST_PATTERNS_H

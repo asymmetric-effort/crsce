@@ -1,5 +1,7 @@
-// file: src/utils/printUsage.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/utils/printUsage.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "utils/printUsage.h"
 
@@ -7,7 +9,7 @@
 #define COPYRIGHT "not_defined"
 #endif
 
-void printUsage(const std::string& programName) {
+int printUsage(const std::string& programName, const int exit_code) {
     std::cout << "\n" << COPYRIGHT <<"\n"
               << "Usage: " << programName << " --in <inputfile> --out <outputfile>\n"
               << "Options:\n"
@@ -16,4 +18,5 @@ void printUsage(const std::string& programName) {
               << "  --help        Show this help message\n"
               << "  --version     Show program version\n"
               << std::endl;
+    return exit_code;
 }

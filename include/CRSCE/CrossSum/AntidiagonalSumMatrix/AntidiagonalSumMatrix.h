@@ -1,17 +1,20 @@
-// file: include/CRSCE/CrossSum/AntidiagonalSumMatrix.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/CrossSum/AntidiagonalSumMatrix.h
+ * @brief declare the Anti-diagonal (xsm) matrix class
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
 #define CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-class AntidiagonalSumMatrix : public CrossSum {
+class AntidiagonalSumMatrix final : public CrossSum {
 public:
 
     explicit AntidiagonalSumMatrix();
 
-    ~AntidiagonalSumMatrix();
+    ~AntidiagonalSumMatrix() override;
 
     CrossSumValue get(const CrossSumIndex r, const CrossSumIndex c) const override;
 

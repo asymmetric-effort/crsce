@@ -1,9 +1,7 @@
-// file: test/0110_message_roundtrip.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-
 /**
  * @file 0110_response_roundtrip.cpp
  * @brief Unit test for Gpu::Ipc::Response serialization/deserialization round‐trip (status, size, payload).
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 

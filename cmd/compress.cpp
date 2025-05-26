@@ -1,5 +1,7 @@
-// file: src/cmd/compress.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file compress.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 #include "CRSCE/CRSCE.h"
 #include "utils/printUsage.h"
 #include "utils/printVersion.h"

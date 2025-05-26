@@ -1,5 +1,7 @@
-// file: test/4000_verify-vertical-sum-matrix.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file 4000_verify-vertical-sum-matrix.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 #include "CRSCE/constants/constants.h"

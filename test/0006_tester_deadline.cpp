@@ -1,8 +1,7 @@
-// file: test/0006_tester_deadline.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 /**
  * @file 0006_tester_deadline.cpp
  * @brief Verifies that Tester::deadline causes the test process to abort after the specified timeout.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "utils/test/Tester.h"

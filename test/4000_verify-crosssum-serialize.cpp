@@ -1,5 +1,7 @@
-// file: test/verify-crosssum-serialize.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file verify-crosssum-serialize.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 #include "CRSCE/constants/constants.h"

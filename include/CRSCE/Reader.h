@@ -1,5 +1,8 @@
-// file: include/CRSCE/Reader.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/CRSCE/Reader.h
+ * @brief Declare the CRSCE reader class which will read raw data into the CRSCE compressor.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #ifndef CRSCE_READER_H
 #define CRSCE_READER_H

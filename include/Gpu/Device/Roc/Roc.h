@@ -1,5 +1,8 @@
-// file: include/Gpu/Device/Roc/Roc.h
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file include/Gpu/Device/Roc/Roc.h
+ * @brief Declare a class representing the interface for an AMD ROC GPU.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #pragma once
 #include "Gpu/Device/Interface.h"

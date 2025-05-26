@@ -1,9 +1,18 @@
-// file: src/utils/test/assertFalse.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/utils/test/assertFalse-bool.cpp
+ * @brief Declares an assertion which expects equality.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
+
 #include "utils/test/Tester.h"
 
-// Assert a condition; on failure, print message and terminate
-void Tester::assertFalse(bool condition, const std::string& message) {
+/**
+ * @name assertFalse
+ * @brief assert that a condition is false
+ * @param condition
+ * @param message std::string&
+ */
+void Tester::assertFalse(const bool condition, const std::string& message) {
     if (!condition) {
         pass(std::format("ok: {}", message));
     }else{

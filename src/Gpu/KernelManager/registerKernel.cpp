@@ -1,5 +1,7 @@
-// file: src/Gpu/KernelManager/registerKernel.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/Gpu/KernelManager/registerKernel.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "../../../include/Gpu/Common/KernelManager.h"
 #include <random>

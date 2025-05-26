@@ -1,6 +1,3 @@
-// file: test/0000_tester_ptr.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-
 /**
  * @file 0000_tester_ptr.cpp
  * @brief Unit test for Tester::assertNotNull across raw, shared, unique, and weak pointers.
@@ -9,6 +6,7 @@
  *   - Null and non-null raw pointers.
  *   - Shared and unique pointer non-null checks.
  *   - Weak pointers lockable or not.
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "utils/test/Tester.h"
