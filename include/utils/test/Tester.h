@@ -96,6 +96,12 @@ public:
 
     void assertNotEqual(unsigned a, unsigned b, const std::string &message);
 
+    void assertNotEqual(const Common::Buffer8 &a, const Common::Buffer8 &b, const std::string &msg);
+
+    void assertNotEqual(const Common::Buffer64 &a, const Common::Buffer64 &b, const std::string &msg);
+
+    void assertNotEqual(const Gpu::Math::Matrix &a, const Gpu::Math::Matrix &b, const std::string &msg);
+
     void assertNotEqual(char a, char b, const std::string &message);
 
     void assertNotEqual(float a, float b, const std::string &message);
