@@ -135,8 +135,9 @@ public:
      * @brief Set a maximum duration (in seconds) for this test.
      * If the deadline elapses before the test completes, the process exits.
      * @param t Time in seconds until forced termination (default 60s).
+     * @param exit_code_on_deadline
      */
-    void deadline(unsigned t = 60);
+    void deadline(unsigned t = 60,int exit_code_on_deadline = EXIT_FAILURE);
 
     // debug: show a debug message
     void debug(const std::string &msg);
