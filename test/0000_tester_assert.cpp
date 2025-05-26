@@ -56,4 +56,6 @@ int main() {
     tester.assertEqual(0.123456789, 0.123456788, "double near-equal");
 
     tester.pass();
+
+    return tester.getFailCount()>0?1:EXIT_SUCCESS;
 }

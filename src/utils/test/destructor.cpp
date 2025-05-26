@@ -6,4 +6,5 @@
 // Construct with a test prefix
 Tester::~Tester() {
     showStatistics();
+    if(failScore > 0) exit(1);
 }

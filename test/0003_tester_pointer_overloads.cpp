@@ -111,5 +111,5 @@ int main() {
         [&] { tester.assertNotNull(std::unique_ptr<Gpu::Device::Interface>(), "unique_ptr<Interface> should not be null"); }
     );
 
-    return EXIT_SUCCESS;
+    return tester.getFailCount()>0?1:EXIT_SUCCESS;
 }

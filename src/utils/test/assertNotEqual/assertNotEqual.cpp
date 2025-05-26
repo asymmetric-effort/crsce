@@ -103,22 +103,39 @@ void Tester::assertNotEqual(const Common::Buffer64& a, const Common::Buffer64& b
     }
 }
 
-void Tester::assertNotEqual(const Gpu::Math::Matrix &a, const Gpu::Math::Matrix &b, const std::string &msg) {
+void Tester::assertNotEqual(const Gpu::Math::Matrix &a,
+                            const Gpu::Math::Matrix &b,
+                            const std::string &msg) {
+    // 1) Shape mismatch → PASS
     if (a.rows() != b.rows() || a.cols() != b.cols()) {
         std::ostringstream oss;
-        oss << msg << " [shape mismatch: " << a.rows() << "x" << a.cols()
-            << " != " << b.rows() << "x" << b.cols() << "]";
-        fail(oss.str());
+        oss << msg
+            << " [shape mismatch: "
+            << a.rows() << 'x' << a.cols()
+            << " != "
+            << b.rows() << 'x' << b.cols()
+            << "]";
+        pass(oss.str());
+        return;
     }
 
+    // 2) Element mismatch within tolerance → PASS
     for (std::size_t r = 0; r < a.rows(); ++r) {
         for (std::size_t c = 0; c < a.cols(); ++c) {
-            if (a.at(r, c) != b.at(r, c)) {
+            constexpr double tolerance = 1e-9;
+            double v1 = a.at(r, c);
+            if (double v2 = b.at(r, c); std::fabs(v1 - v2) > tolerance) {
                 std::ostringstream oss;
-                oss << msg << " [mismatch at (" << r << "," << c << "): "
-                    << a.at(r, c) << " != " << b.at(r, c) << "]";
-                fail(oss.str());
+                oss << msg
+                    << " [mismatch at (" << r << "," << c << "): "
+                    << v1 << " != " << v2
+                    << "]";
+                pass(oss.str());
+                return;
             }
         }
     }
+
+    // 3) No mismatches within tolerance → FAIL
+    fail(msg + " [matrices are equal within tolerance]");
 }

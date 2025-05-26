@@ -7,7 +7,7 @@
 #include <cstddef>
 
 int main() {
-    Tester tester("0001_tester_size_uint.cpp");
+    Tester tester("0001_tester_size_uint.cpp",ThrowExceptionOnError);
 
     // ---- size_t tests ----
     constexpr size_t s1 = static_cast<size_t>(42);
@@ -41,5 +41,5 @@ int main() {
     tester.assertNotEqual(u64_1, u64_2, "operands should be equal");
     tester.expectException<TestException>([&] { tester.assertNotEqual(u64_1, u64_1, "operands should be equal"); });
 
-    return EXIT_SUCCESS;
+    return tester.getFailCount()>0?1:EXIT_SUCCESS;
 }

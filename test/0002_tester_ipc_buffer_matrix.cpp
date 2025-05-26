@@ -10,7 +10,7 @@
 #include <cstdlib>
 
 int main() {
-    Tester tester("0002_tester_ipc_buffer_matrix.cpp");
+    Tester tester("0002_tester_ipc_buffer_matrix.cpp",ThrowExceptionOnError);
 
     // ---- Result tests ----
     using Gpu::Ipc::Result;
@@ -77,5 +77,5 @@ int main() {
         tester.assertNotEqual(m1, m2, "Matrix contents should not be equal(4)");
     });
 
-    return EXIT_SUCCESS;
+    return tester.getFailCount()>0?1:EXIT_SUCCESS;
 }

@@ -58,4 +58,6 @@ int main() {
     tester.assertNotNull(wp, "non-null weak_ptr");
 
     tester.pass();
+
+    return tester.getFailCount()>0?1:EXIT_SUCCESS;
 }
