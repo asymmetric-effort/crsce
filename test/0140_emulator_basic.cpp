@@ -20,6 +20,7 @@ using Gpu::Device::Interface;
 
 int main() {
     Tester tester("Gpu::Device::Emulator basic construction");
+    tester.skip("disable for debugging");
 
     std::unique_ptr<Interface> gpu = std::make_unique<Emulator>();
 

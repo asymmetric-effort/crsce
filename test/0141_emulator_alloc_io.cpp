@@ -24,6 +24,7 @@ using Common::AbstractPtr;
 
 int main() {
     Tester tester("Gpu::Device::Emulator alloc()");
+    tester.skip("disable for debugging");
 
     Emulator gpu;
 

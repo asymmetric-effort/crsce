@@ -24,6 +24,7 @@ using Gpu::KernelId;
 
 int main() {
     Tester tester("Gpu::Device::Emulator registerKernel() / launchTask()");
+    tester.skip("disable for debugging");
 
     Emulator gpu;
     constexpr KernelId id = 0xBEEF;

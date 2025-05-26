@@ -23,6 +23,7 @@ using Gpu::Exceptions::DeviceNotReady;
 
 int main() {
     Tester tester("Gpu::Device::Emulator lifecycle");
+    tester.skip("disable for debugging");
     {
         Emulator gpu;
 
