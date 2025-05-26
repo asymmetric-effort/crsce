@@ -7,7 +7,7 @@ void Tester::pass(){
     passScore++;
 }
 
-void Tester::pass(const std::string& msg){
-    debug(msg);
+void Tester::pass(const std::string& message){
+    debug(message);
     pass();
 }

@@ -3,29 +3,54 @@
 #include "utils/test/Tester.h"
 
 // Overload for raw pointers
-void Tester::assertNotNull(const void* ptr, const std::string& message) {
-    if (ptr==nullptr)
+void Tester::assertNotNull(const void *ptr, const std::string &message) {
+    if (ptr == nullptr)
         fail(std::format("Null pointer assertion failed: {}", message));
     else
         pass(std::format("ok: {}", message));
 }
 
+void Tester::assertNotNull(const std::unique_ptr<int> &ptr, const std::string &msg) {
+    if (!ptr) fail("null unique_ptr<int>: " + msg);
+    else pass(msg);
+}
+
+void Tester::assertNotNull(const std::unique_ptr<unsigned> &ptr, const std::string &msg) {
+    if (!ptr) fail("null unique_ptr<unsigned>: " + msg);
+    else pass(msg);
+}
+
+void Tester::assertNotNull(const std::unique_ptr<float> &ptr, const std::string &msg) {
+    if (!ptr) fail("null unique_ptr<float>: " + msg);
+    else pass(msg);
+}
+
+void Tester::assertNotNull(const std::unique_ptr<double> &ptr, const std::string &msg) {
+    if (!ptr) fail("null unique_ptr<double>: " + msg);
+    else pass(msg);
+}
+
+void Tester::assertNotNull(const std::unique_ptr<char> &ptr, const std::string &msg) {
+    if (!ptr) fail("null unique_ptr<char>: " + msg);
+    else pass(msg);
+}
+
 // unique_ptr<void> overload
-void Tester::assertNotNull(const std::unique_ptr<void>& ptr, const std::string& message) {
-    if (ptr.get()==nullptr)
+void Tester::assertNotNull(const std::unique_ptr<void> &ptr, const std::string &message) {
+    if (ptr.get() == nullptr)
         fail(std::format("assertNotNull Failed: {}", message));
     else
         pass(std::format("ok: {}", message));
 }
 
 // unique_ptr<Gpu::Interface> overload delegates to raw pointer
-void Tester::assertNotNull(const std::unique_ptr<Gpu::Device::Interface>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::unique_ptr<Gpu::Device::Interface> &ptr, const std::string &message) {
     assertNotNull(ptr.get(), message);
 }
 
 // Overload for shared_ptr convertible to void
-void Tester::assertNotNull(const std::shared_ptr<void>& ptr, const std::string& message) {
-    if (ptr.get()==nullptr)
+void Tester::assertNotNull(const std::shared_ptr<void> &ptr, const std::string &message) {
+    if (ptr.get() == nullptr)
         fail(std::format("assertNotNull Failed: {}", message));
     else
         pass(std::format("ok: {}", message));
@@ -33,35 +58,35 @@ void Tester::assertNotNull(const std::shared_ptr<void>& ptr, const std::string& 
 
 
 // Overload for shared_ptr convertible to void
-void Tester::assertNotNull(const std::shared_ptr<int>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::shared_ptr<int> &ptr, const std::string &message) {
     assertNotNull(std::static_pointer_cast<void>(ptr), message);
 }
 
 
 // Overload for shared_ptr convertible to void
-void Tester::assertNotNull(const std::shared_ptr<unsigned>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::shared_ptr<unsigned> &ptr, const std::string &message) {
     assertNotNull(std::static_pointer_cast<void>(ptr), message);
 }
 
 
 // Overload for shared_ptr convertible to void
-void Tester::assertNotNull(const std::shared_ptr<float>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::shared_ptr<float> &ptr, const std::string &message) {
     assertNotNull(std::static_pointer_cast<void>(ptr), message);
 }
 
 // Overload for shared_ptr convertible to void
-void Tester::assertNotNull(const std::shared_ptr<double>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::shared_ptr<double> &ptr, const std::string &message) {
     assertNotNull(std::static_pointer_cast<void>(ptr), message);
 }
 
 // Overload for shared_ptr convertible to void
-void Tester::assertNotNull(const std::shared_ptr<char>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::shared_ptr<char> &ptr, const std::string &message) {
     assertNotNull(std::static_pointer_cast<void>(ptr), message);
 }
 
 
 // Overload for std::weak_ptr via lock
-void Tester::assertNotNull(const std::weak_ptr<void>& ptr, const std::string& message) {
+void Tester::assertNotNull(const std::weak_ptr<void> &ptr, const std::string &message) {
     if (auto sp = ptr.lock()) {
         pass();
     } else {

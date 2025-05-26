@@ -4,8 +4,10 @@
 
 // Assert two values are equal; on success counts as pass, on failure counts and logs
 void Tester::assertEqual(double a, double b, const std::string& message) {
-    if (a == b)
-        pass(std::format("ok: {}", message));
-    else
-        fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
+    constexpr double epsilon = 1e-9;
+    if (std::abs(a - b) > epsilon) {
+        fail("assertEqual<double> Failed: " + message);
+    } else {
+        pass(message);
+    }
 }

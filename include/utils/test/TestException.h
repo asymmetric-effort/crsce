@@ -7,10 +7,12 @@
 
 class TestException final : public std::exception {
 public:
-    explicit TestException(): message_(""){}
-    explicit TestException(std::string message): message_(std::move(message)) {}
+    explicit TestException() = default;
 
-    const char* what() const noexcept override {
+    explicit TestException(std::string message) : message_(std::move(message)) {
+    }
+
+    const char *what() const noexcept override {
         return message_.c_str();
     }
 
