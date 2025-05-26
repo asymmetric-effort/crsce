@@ -8,7 +8,12 @@
 #include "Gpu/Common/Buffer8.h"
 
 namespace Gpu {
-
+    /**
+     * @name KernelId
+     * @brief Represents a GPU Kernel object
+     * @ref docs/Gpu/Design/Gpu-KernelManager.md
+     */
+    using KernelId = uint64_t;
     /**
      * @name Gpu::KernelManager
      * @brief Tracks and manages GPU kernel blobs by ID.
@@ -18,7 +23,6 @@ namespace Gpu {
      */
     class KernelManager final {
     public:
-        using KernelId = uint64_t;
 
         KernelManager()=default;
         ~KernelManager()=default;
