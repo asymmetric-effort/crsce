@@ -1,4 +1,4 @@
-// file: test/0110_response_roundtrip.cpp
+// file: test/0110_message_roundtrip.cpp
 // (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 /**
@@ -13,28 +13,44 @@
 
 using Gpu::Ipc::Response;
 using Gpu::Ipc::FailureCodes;
+using Common::Buffer8;
 
 int main() {
-    Tester tester("Gpu::Ipc::Response round-trip");
+    Tester tester("0110_response_roundtrip.cpp", ThrowExceptionOnError);
 
+    // Construct a response with error code, payload size, and data
     Response original;
-    original.status = FailureCodes::WriteError;
-    original.size = 4;
-    original.data = {0xDE, 0xAD, 0xBE, 0xEF};
+    original.status = FailureCodes::ReadError;
+    original.size   = 3;
+    original.data   = Buffer8{0xDE, 0xAD, 0xBE};
 
-    const auto serialized = original.serialize();
-    tester.assertEqual(serialized.size(), 9u + original.data.size(), "Serialized size check");
+    // Serialize and verify buffer length (1 byte status + 8 bytes size + payload)
+    const Buffer8 serialized = original.serialize();
+    tester.assertEqual(
+        serialized.size(),
+        static_cast<size_t>(1 + 8 + original.data.size()),
+        "Serialized length should be 1(status)+8(size)+payload"
+    );
 
+    // Deserialize and round-trip validate
     Response roundtrip;
     roundtrip.deserialize(serialized);
-
-    tester.assertEqual(static_cast<uint8_t>(roundtrip.status), static_cast<uint8_t>(original.status), "Status match");
-    tester.assertEqual(roundtrip.size, original.size, "Payload size match");
-    tester.assertEqual(roundtrip.data.size(), original.data.size(), "Data buffer size match");
-
-    for (std::size_t i = 0; i < roundtrip.data.size(); ++i) {
-        tester.assertEqual(roundtrip.data[i], original.data[i], "Data byte " + std::to_string(i));
-    }
+    tester.assertEqual(
+        static_cast<uint8_t>(roundtrip.status),
+        static_cast<uint8_t>(original.status),
+        "status match"
+    );
+    tester.assertEqual(
+        roundtrip.size,
+        original.size,
+        "size match"
+    );
+    tester.assertEqual(
+        roundtrip.data,
+        original.data,
+        "data match"
+    );
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

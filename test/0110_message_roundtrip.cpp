@@ -17,7 +17,7 @@ using Gpu::Ipc::FailureCodes;
 using Common::Buffer8;
 
 int main() {
-    Tester tester("0110_message_roundtrip.cpp",true);
+    Tester tester("0110_message_roundtrip.cpp",ThrowExceptionOnError);
 
     // Construct a response with error code, payload size, and data
     Response original;
