@@ -19,16 +19,14 @@ int main() {
 
     // assertTrue
     tester.assertTrue(true, "true should be true");
-    tester.expectException<TestException>([] {
-        Tester t("assertTrue fails", ThrowExceptionOnError);
-        t.assertTrue(false, "false should not be true");
+    tester.expectException<TestException>([&tester] {
+        tester.assertTrue(false, "false should not be true");
     });
 
     // assertFalse
     tester.assertFalse(false, "false should be false");
-    tester.expectException<TestException>([] {
-        Tester t("assertFalse fails", ThrowExceptionOnError);
-        t.assertFalse(true, "true should not be false");
+    tester.expectException<TestException>([&tester] {
+        tester.assertFalse(true, "true should not be false");
     });
 
     // assertEqual / assertNotEqual (int)
