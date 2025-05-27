@@ -53,14 +53,24 @@ public:
     void serialize(std::ostream& os) const;
 
 protected:
-    // Bit buffer for each row
+    /**
+     * @property row_buffers
+     * @brief Bit buffer for each row
+     */
     std::array<std::bitset<s>, s> row_buffers;
 
-    // Track current position in each row
+    /**
+     * @property row_positions
+     * @brief Track current position in each row
+     */
     std::array<size_t, s> row_positions;
 
-    // SHA256 hashes per row
+    /**
+     * @property row_hashes
+     * @brief SHA256 hashes per row
+     */
     std::array<std::string, s> row_hashes;
+
     /**
      * @name hash_and_store
      * @brief hash the current row buffer and store to the LHashMatrix row_index
