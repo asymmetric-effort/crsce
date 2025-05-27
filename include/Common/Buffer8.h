@@ -21,6 +21,10 @@
 #include <vector>
 #include <cstdint>
 
+/**
+ * @namespace Common
+ * @brief A common CRSCE namespace for reusable generic functionality.
+ */
 namespace Common {
     /**
      * @name Common::Buffer8

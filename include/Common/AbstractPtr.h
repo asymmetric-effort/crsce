@@ -18,8 +18,15 @@
 #pragma once
 #include <cstdint>
 
+/**
+ * @namespace Common
+ * @brief A common CRSCE namespace for reusable generic functionality.
+ */
 namespace Common {
-
+    /**
+     * @name Common::AbstractPtr
+     * @brief Represents a pseudo-random 64-bit memory reference used by the GPU abstraction layer.
+     */
     using AbstractPtr = uint64_t;
 
 } // namespace Common
