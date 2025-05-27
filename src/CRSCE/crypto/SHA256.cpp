@@ -1,5 +1,6 @@
 /**
  * @file src/CRSCE/crypto/SHA256.cpp
+ * @brief declare a class representing a SHA256 hash as a vector of uint8_t (byte) values.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -13,7 +14,16 @@
 #include <openssl/sha.h>
 #endif
 
+/**
+ * @name digest
+ * @class SHA256
+ * @brief computes the hash of a given input.
+ * @param data uint8_t*
+ * @param length size_t
+ * @return std::vector<uint8_t>
+ */
 std::vector<uint8_t> SHA256::digest(const uint8_t* data, size_t length) {
+
     std::vector<uint8_t> hash(32);
 
 #if defined(__APPLE__)
