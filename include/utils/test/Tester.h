@@ -473,11 +473,30 @@ private:
     * @brief print the test statistics (pass, fail, skip)
     */
     void showStatistics();
-
+    /**
+     * @property prefix
+     * @brief a string prepended to all test results/messages
+     */
     std::string prefix;
+    /**
+     * @property passScore
+     * @brief a count of passing tests
+     */
     unsigned int passScore = 0;
+    /**
+     * @property failScore
+     * @brief a count of failing tests
+     */
     unsigned int failScore = 0;
+    /**
+     * @property skipScore
+     * @brief a count of skipped tests
+     */
     unsigned int skipScore = 0;
+    /**
+     * @property onError
+     * @brief a flag indicating whether to terminate on error.
+     */
     ExitOnError onError;
 };
 
