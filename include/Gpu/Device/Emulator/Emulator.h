@@ -12,6 +12,9 @@
 #include "Gpu/Device/Interface.h"
 #include "Gpu/Ipc/Communications.h"
 
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
 
     /**

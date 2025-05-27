@@ -10,7 +10,9 @@
 #include "Gpu/Ipc/MemoryTracker.h"
 #include "ThreadRegistry.h"
 #include "Common/KernelManager.h"
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
     /**
      * @name Gpu::RuntimeManager

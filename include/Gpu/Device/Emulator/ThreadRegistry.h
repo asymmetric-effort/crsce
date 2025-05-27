@@ -9,7 +9,9 @@
 #include <thread>
 #include <mutex>
 #include <cstdint>
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
 
     /**

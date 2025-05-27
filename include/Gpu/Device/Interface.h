@@ -9,9 +9,10 @@
 #include "Common/AbstractPtr.h"
 #include "Common/Buffer8.h"
 #include "Common/Buffer64.h"
-
-namespace Gpu::Math { class Matrix; }
-
+#include "Gpu/Math/Matrix.h"
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
 
     /**

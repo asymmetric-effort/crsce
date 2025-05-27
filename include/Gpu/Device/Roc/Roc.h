@@ -6,7 +6,9 @@
 
 #pragma once
 #include "Gpu/Device/Interface.h"
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
 
     /**

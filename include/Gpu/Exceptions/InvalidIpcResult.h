@@ -9,7 +9,9 @@
 #include <stdexcept>
 #include <string>
 #include <format>
-
+/**
+ * @namespace Gpu::Exceptions
+ */
 namespace Gpu::Exceptions {
     /**
      * @name Gpu::Exceptions::InvalidIpcResult

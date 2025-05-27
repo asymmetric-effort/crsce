@@ -7,7 +7,9 @@
 
 #pragma once
 #include "Common/Buffer8.h"
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
 
     /**

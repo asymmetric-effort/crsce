@@ -7,7 +7,9 @@
 #pragma once
 #include <stdexcept>
 #include <string>
-
+/**
+ * @namespace Gpu::Exceptions
+ */
 namespace Gpu::Exceptions {
     /**
      * @name Gpu::Exceptions::InvalidIpcResponse
