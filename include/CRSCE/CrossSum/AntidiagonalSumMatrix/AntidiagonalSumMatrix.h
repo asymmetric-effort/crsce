@@ -68,7 +68,7 @@ public:
      * @param c CrossSumIndex
      * @param v CrossSumValue
      */
-    static CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c);
+    CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c);
 };
 
 #endif // CRSCE_ANTIDIAGONAL_SUM_MATRIX_H

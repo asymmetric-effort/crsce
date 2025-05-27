@@ -4,7 +4,13 @@
  */
 
 #include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
-
+/**
+ * @name increment
+ * @class DiagonalSumMatrix
+ * @brief increment the value at position (r,c)
+ * @param r CrossSumIndex
+ * @param c CrossSumIndex
+ */
 void DiagonalSumMatrix::increment(const CrossSumIndex r, const CrossSumIndex c) {
-    data[transform(r,c)]++;
+    ++data[transform(r,c)];
 }
