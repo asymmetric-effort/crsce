@@ -1,10 +1,16 @@
 /**
  * @file src/CRSCE/LHashMatrix/serialize.cpp
+ * @brief Define a one-dimensional matrix of row-aligned hashes.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "CRSCE/LHashMatrix.h"
-
+/**
+ * @name serialize
+ * @class LHashMatrix
+ * @param os std::ostream
+ * @brief write the LHashMatrix data out as a serialized bit-packed sequence.
+ */
 void LHashMatrix::serialize(std::ostream &os) const {
     for (CrossSumIndex r = 0; r < s; ++r) {
         // Finalize hash if row is full and hash has not been computed

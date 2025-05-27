@@ -27,11 +27,29 @@
 
 class LHashMatrix {
 public:
-    // Constructor assumes CRSCE s-value
+    /**
+     * @name constructor
+     * @brief initialize the values with zeroes
+     */
     LHashMatrix();
+    /**
+     * @name destructor
+     * @brief noop
+     */
     ~LHashMatrix();
-
-    void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
+    /**
+     * @name push
+     * @param r CrossSumIndex
+     * @param c CrossSumIndex
+     * @param bit_value bool
+     * @brief push value 'bit_value' to position (r,c)
+     */
+    void push(const CrossSumIndex r, const CrossSumIndex c, const bool bit_value);
+    /**
+     * @name serialize
+     * @param os std::ostream
+     * @brief write the LHashMatrix data out as a serialized bit-packed sequence.
+     */
     void serialize(std::ostream& os) const;
 
 protected:
@@ -43,7 +61,10 @@ protected:
 
     // SHA256 hashes per row
     std::array<std::string, s> row_hashes;
-
+    /**
+     * @name hash_and_store
+     * @brief hash the current row buffer and store to the LHashMatrix row_index
+     */
     void hash_and_store(CrossSumIndex row_index);
 };
 

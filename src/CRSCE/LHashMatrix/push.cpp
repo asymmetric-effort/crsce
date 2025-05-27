@@ -1,11 +1,19 @@
 /**
  * @file src/CRSCE/LHashMatrix/push.cpp
+ * @brief Define a one-dimensional matrix of row-aligned hashes.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "CRSCE/LHashMatrix.h"
-
-void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
+/**
+ * @name push
+ * @class LHashMatrix
+ * @param r CrossSumIndex
+ * @param c CrossSumIndex
+ * @param bit_value bool
+ * @brief push value 'bit_value' to position (r,c)
+ */
+void LHashMatrix::push(const CrossSumIndex r, const CrossSumIndex c, const bool bit_value) {
     bounds_check(r);
     bounds_check(c);
 
@@ -17,7 +25,7 @@ void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
     }
 
     row_buffers[r].set(c, bit_value);
-    row_positions[r]++;  // ✅ track how many bits have been pushed
+    row_positions[r]++;  // track how many bits have been pushed
 
     // Automatically hash and store once row is full
     if (row_positions[r] == s) {
