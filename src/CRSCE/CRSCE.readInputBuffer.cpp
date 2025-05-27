@@ -7,8 +7,14 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
-
-// readInputBuffer - read the input file byte for byte
+/**
+ * @name readInputBuffer
+ * @class CRSCE
+ * @brief read the input file byte for byte
+ * @protected
+ * @param buffer FileBuffer
+ * @return bool
+ */
 bool CRSCE::readInputBuffer(FileBuffer& buffer) {
     buffer.resize(INPUT_BUFFER_SIZE);
     inputStream.read(reinterpret_cast<char*>(buffer.data()), INPUT_BUFFER_SIZE);

@@ -9,6 +9,11 @@
 #include <iostream>
 #include <stdexcept>
 
+/**
+ * @name compress
+ * @class CRSCE
+ * @brief compress a given input
+ */
 int CRSCE::compress() {
     try {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
@@ -22,7 +27,7 @@ int CRSCE::compress() {
         // Load the entire input stream into inputBuffer (may contain multiple blocks)
         while (readInputBuffer(inputBuffer)) {
             // total_bits: actual number of bits read (one byte = 8 bits)
-            size_t total_bits = inputBuffer.size() * 8;
+            const size_t total_bits = inputBuffer.size() * 8;
             std::cerr << "[CRSCE] Read " << inputBuffer.size()
                       << " words (" << total_bits << " bits) into inputBuffer." << std::endl;
 
@@ -44,13 +49,13 @@ int CRSCE::compress() {
                 // Fill block with up to s*s bits from inputBuffer
                 while (block_bits < s * s && buf_bit < total_bits) {
                     // Determine which word and bit to read
-                    size_t word_idx = buf_bit / FILE_BUFFER_WIDTH;
-                    int bit_pos = FILE_BUFFER_WIDTH - 1 - (buf_bit % FILE_BUFFER_WIDTH);
-                    bool bit_value = (inputBuffer[word_idx] >> bit_pos) & 0x01;
+                    const size_t word_idx = buf_bit / FILE_BUFFER_WIDTH;
+                    const int bit_pos = FILE_BUFFER_WIDTH - 1 - (buf_bit % FILE_BUFFER_WIDTH);
+                    const bool bit_value = (inputBuffer[word_idx] >> bit_pos) & 0x01;
 
                     // Map flat bit index into row/col of the s×s matrix
-                    CrossSumIndex r = block_bits / s;
-                    CrossSumIndex c = block_bits % s;
+                    const CrossSumIndex r = block_bits / s;
+                    const CrossSumIndex c = block_bits % s;
 
                     // Update cross-sum matrices
                     if (bit_value) {

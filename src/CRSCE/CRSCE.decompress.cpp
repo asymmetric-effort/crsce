@@ -8,6 +8,11 @@
 #include <stdexcept>
 
 
+/**
+ * @name decompress
+ * @class CRSCE
+ * @brief decompress a given input
+ */
 int CRSCE::decompress() {
     std::cout << "[CRSCE] Decompressing..." << std::endl;
     return 0; // Stub method

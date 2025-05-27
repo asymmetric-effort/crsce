@@ -6,11 +6,14 @@
 #include <iostream>
 #include <stdexcept>
 
+/**
+ * @name destructor
+ * @class CRSCE
+ * @brief close any open files.
+ * @param inputFile std::string
+ * @param outputFile std::string
+ */
 CRSCE::~CRSCE() {
-    if (inputStream.is_open()) {
-        inputStream.close();
-    }
-    if (outputStream.is_open()) {
-        outputStream.close();
-    }
+    if (inputStream.is_open()) inputStream.close();
+    if (outputStream.is_open()) outputStream.close();
 }
