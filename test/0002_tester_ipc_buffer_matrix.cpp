@@ -31,14 +31,16 @@ int main() {
     });
     // ---- Buffer8 tests ----
     using Common::Buffer8;
-    const Buffer8 buf1 = {1, 2, 3}, buf2 = {1, 2, 3}, buf3 = {1, 2, 4};
+    const Buffer8 buf1 = {1, 2, 3};
+    const Buffer8 buf2 = {1, 2, 3};
+    const Buffer8 buf3 = {1, 2, 4};
     tester.assertEqual(buf1, buf2, "Buffer8 contents should be equal");
     tester.expectException<TestException>([&] {
         tester.assertEqual(buf1, buf3, "Buffer8 contents should be equal");
     });
-    tester.assertNotEqual(buf1, buf2, "Buffer8 contents should not be equal (1)");
+    tester.assertNotEqual(buf1, buf3, "Buffer8 contents should not be equal (1)");
     tester.expectException<TestException>([&] {
-        tester.assertNotEqual(buf1, buf3, "Buffer8 contents should not be equal (2)");
+        tester.assertNotEqual(buf1, buf2, "Buffer8 contents should not be equal (2)");
     });
 
     // ---- Buffer64 tests ----
@@ -48,9 +50,9 @@ int main() {
     tester.expectException<TestException>(
         [&] { tester.assertEqual(b641, b643, "Buffer64 contents should be equal"); }
     );
-    tester.assertNotEqual(b641, b642, "Buffer64 contents should not be equal (1)");
+    tester.assertNotEqual(b641, b643, "Buffer64 contents should not be equal (1)");
     tester.expectException<TestException>(
-        [&] { tester.assertNotEqual(b641, b643, "Buffer64 contents should not be equal (1)"); }
+        [&] { tester.assertNotEqual(b641, b642, "Buffer64 contents should not be equal (1)"); }
     );
 
     // ---- Matrix tests ----
