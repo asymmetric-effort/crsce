@@ -1,15 +1,18 @@
 /**
  * @file src/CRSCE/CrossSum/CrossSum.serialize.cpp
+ * @brief declare the CrossSum class and methods
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "CRSCE/CRSCE.h"
-#include "CRSCE/FileBuffer.h"
-#include "CRSCE/CrossSum/CrossSum.h"
-#include <bitset>
-#include <cstdint>
-#include <ostream>
 
+#include "CRSCE/CrossSum/CrossSum.h"
+
+/**
+ * @name serialize
+ * @class CrossSum
+ * @brief serialize the cross sum matrix as a packed array of b-bit elements
+ * @param os std::ostream&
+ */
 void CrossSum::serialize(std::ostream &os) const {
     constexpr size_t total_bits = b * s;
     std::bitset<total_bits> bits;
@@ -28,8 +31,7 @@ void CrossSum::serialize(std::ostream &os) const {
     for (size_t byte = 0; byte < (total_bits + 7) / 8; ++byte) {
         uint8_t out = 0;
         for (size_t bit = 0; bit < 8; ++bit) {
-            size_t index = byte * 8 + bit;
-            if (index < total_bits && bits[index]) {
+            if (const size_t index = byte * 8 + bit; index < total_bits && bits[index]) {
                 out |= (1 << (7 - bit));
             }
         }
