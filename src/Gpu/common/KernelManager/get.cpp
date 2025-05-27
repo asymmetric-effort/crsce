@@ -3,13 +3,13 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "../../../include/Gpu/Common/KernelManager.h"
+#include "Common/KernelManager.h"
 #include "Gpu/Exceptions/KernelNotFound.h"
 #include <stdexcept>
 
 namespace Gpu {
 
-    const Common::Buffer8& KernelManager::get(const KernelId id) const {
+    const Common::Buffer8& KernelManager::get(const Common::KernelId id) const {
         std::lock_guard lock(mutex_);
         const auto it = table_.find(id);
         if (it == table_.end()) {

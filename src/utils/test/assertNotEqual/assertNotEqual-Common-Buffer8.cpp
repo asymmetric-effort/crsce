@@ -37,5 +37,5 @@ void Tester::assertNotEqual(const Common::Buffer8& a,
     }
 
     // 3) All entries equal → FAIL
-    fail(msg + " [buffers are equal]");
+    fail(std::format("{} [buffers are equal]",message));
 }

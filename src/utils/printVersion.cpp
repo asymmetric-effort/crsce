@@ -16,4 +16,5 @@
 
 int printVersion() {
     std::cout << "CRSCE " << PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
+    return EXIT_SUCCESS;
 }

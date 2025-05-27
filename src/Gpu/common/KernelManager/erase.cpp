@@ -3,12 +3,12 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "../../../include/Gpu/Common/KernelManager.h"
+#include "Common/KernelManager.h"
 #include <random>
 
 namespace Gpu {
 
-    bool KernelManager::erase(const KernelId id) {
+    bool KernelManager::erase(const Common::KernelId id) {
         std::lock_guard lock(mutex_);
         if (const auto it = table_.find(id); it != table_.end()) {
             std::ranges::generate(it->second, std::rand);

@@ -3,7 +3,7 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "../../../include/Gpu/Common/KernelManager.h"
+#include "Common/KernelManager.h"
 #include <random>
 #include <ranges>
 

@@ -22,7 +22,7 @@
 using Gpu::Device::Emulator;
 using Gpu::Exceptions::DeviceNotReady;
 using Common::Buffer8;
-using Gpu::KernelId;
+using Common::KernelId;
 
 int main() {
     Tester tester("Gpu::Device::Emulator registerKernel() / launchTask()");
