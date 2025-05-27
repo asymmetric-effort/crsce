@@ -44,7 +44,7 @@ namespace Gpu::Device {
     private:
         Gpu::Ipc::MemoryTracker memory_;
         Gpu::Device::ThreadRegistry threads_;
-        Gpu::KernelManager kernels_;
+        Common::KernelManager kernels_;
         bool shutdown_ = false;
     };
 } // namespace Gpu

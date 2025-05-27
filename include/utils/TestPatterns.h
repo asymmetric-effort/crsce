@@ -10,9 +10,11 @@
 
 using PatternFn = bool(*)(size_t row, size_t col);
 
-bool all_zeros(size_t, size_t);
-bool all_ones(size_t, size_t);
-bool checkerboard(size_t row, size_t col);
+bool all_zeros(const size_t, const size_t);
+
+bool all_ones(const size_t, const size_t);
+
+bool checkerboard(const size_t row, const size_t col);
 
 struct TestPattern {
     std::string name;

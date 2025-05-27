@@ -14,6 +14,11 @@
 #define PROJECT_VERSION "not_defined"
 #endif
 
+/**
+ * @name printVersion
+ * @brief Print the CRSCE version string
+ * @return int
+ */
 int printVersion() {
     std::cout << "CRSCE " << PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
     return EXIT_SUCCESS;

@@ -5,14 +5,35 @@
 
 #include "utils/TestPatterns.h"
 
-bool all_zeros(size_t, size_t) {
+/**
+ * @name all_zeros
+ * @brief return false (representing a byte with all zeroes)
+ * @param row size_t
+ * @param col size_t
+ * @return bool
+ */
+bool all_zeros(const size_t, const size_t) {
     return false;
 }
 
-bool all_ones(size_t, size_t) {
+/**
+ * @name all_ones
+ * @brief return true (representing a by te with all ones)
+ * @param row size_t
+ * @param col size_t
+ * @return bool
+ */
+bool all_ones(const size_t, const size_t) {
     return true;
 }
 
-bool checkerboard(size_t row, size_t col) {
+/**
+ * @name checkerboard
+ * @brief return an alternating pattern of 0s and 1s
+ * @param row size_t
+ * @param col size_t
+ * @return
+ */
+bool checkerboard(const size_t row, const size_t col) {
     return (row + col) % 2 == 0;
 }
