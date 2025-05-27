@@ -9,6 +9,11 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
+/**
+ * @class AntidiagonalSumMatrix
+ * @memberof CrossSum
+ * @brief The CRSCE Antidiagonal Cross Sum Matrix (XSM) class.  This is a 1D matrix of 1xs elements.
+ */
 class AntidiagonalSumMatrix final : public CrossSum {
 public:
 
@@ -22,7 +27,7 @@ public:
 
     void increment(const CrossSumIndex r, const CrossSumIndex c) override;
 
-    CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
+    static CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c);
 };
 
 #endif // CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
