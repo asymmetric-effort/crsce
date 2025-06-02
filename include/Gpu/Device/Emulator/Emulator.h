@@ -37,6 +37,9 @@ namespace Gpu::Device {
          * @name constructor
          * @public
          * @brief Default constructor (no operation).
+         * @class Emulator
+         * @memberof Interface
+         * @brief noop
          */
         Emulator();
 
@@ -49,14 +52,19 @@ namespace Gpu::Device {
 
         /**
          * @name init
+         * @class Emulator
+         * @memberof Interface
          * @public
-         * @brief Initialize the GPU emulator: fork child process and establish IPC.
-         * @return true if initialization succeeded, false otherwise.
+         * @brief initialize the GPU Emulator.  This will spawn a child process, setup IPC and manage the mock GPU as
+         *        a child process of many threads.
+         * @return bool (true=no error)
          */
         bool init() override;
 
         /**
          * @name shutdown
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Shutdown the GPU emulator: send shutdown message and clean up IPC.
          */
@@ -64,6 +72,8 @@ namespace Gpu::Device {
 
         /**
          * @name reset
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Reset the GPU emulator state and send reset command to child.
          */
@@ -71,6 +81,8 @@ namespace Gpu::Device {
 
         /**
          * @name alloc
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Allocate a memory buffer on the mock GPU.
          * @param bytes Number of bytes to allocate.
@@ -80,6 +92,8 @@ namespace Gpu::Device {
 
         /**
          * @name free
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Free a previously allocated GPU buffer.
          * @param ptr Reference to abstract pointer to free; set to null on success.
@@ -89,6 +103,8 @@ namespace Gpu::Device {
 
         /**
          * @name write
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Write an 8-bit buffer to GPU memory.
          * @param source Data buffer to write.
@@ -99,6 +115,8 @@ namespace Gpu::Device {
 
         /**
          * @name write
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Write a 64-bit buffer to GPU memory.
          * @param source Data buffer to write.
@@ -109,6 +127,8 @@ namespace Gpu::Device {
 
         /**
          * @name read
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Read data from GPU memory into an 8-bit buffer.
          * @param source Abstract pointer to GPU memory source.
@@ -119,6 +139,8 @@ namespace Gpu::Device {
 
         /**
          * @name read
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Read data from GPU memory into a 64-bit buffer.
          * @param source Abstract pointer to GPU memory source.
@@ -129,6 +151,8 @@ namespace Gpu::Device {
 
         /**
          * @name registerKernel
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Register a kernel binary blob with the emulator.
          * @param id Unique kernel identifier.
@@ -139,6 +163,8 @@ namespace Gpu::Device {
 
         /**
          * @name launchTask
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Launch a registered GPU kernel with provided arguments.
          * @param id Kernel identifier to launch.
@@ -149,6 +175,8 @@ namespace Gpu::Device {
 
         /**
          * @name add
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Perform element-wise addition of two matrices on the GPU emulator.
          * @param result Output matrix to store sum.
@@ -160,6 +188,8 @@ namespace Gpu::Device {
 
         /**
          * @name dot
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Perform matrix multiplication (dot product) on GPU emulator.
          * @param result Output matrix to store dot product.
@@ -171,6 +201,8 @@ namespace Gpu::Device {
 
         /**
          * @name mul
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Perform element-wise multiplication of two matrices.
          * @param result Output matrix to store product.
@@ -182,6 +214,8 @@ namespace Gpu::Device {
 
         /**
          * @name sub
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Perform element-wise subtraction of two matrices.
          * @param result Output matrix to store difference.
@@ -193,6 +227,8 @@ namespace Gpu::Device {
 
         /**
          * @name transpose
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Transpose a matrix.
          * @param result Output matrix to store transposed data.
@@ -203,6 +239,8 @@ namespace Gpu::Device {
 
         /**
          * @name reduce
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Reduce a matrix along rows or columns.
          * @param result Output matrix to store reduced values.
@@ -214,6 +252,8 @@ namespace Gpu::Device {
 
         /**
          * @name barrier
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Synchronize all outstanding GPU operations (barrier).
          * @return true if barrier succeeded, false otherwise.
@@ -222,6 +262,8 @@ namespace Gpu::Device {
 
         /**
          * @name memfence
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Perform a memory fence on the GPU emulator.
          * @return true if memfence succeeded, false otherwise.
@@ -230,6 +272,8 @@ namespace Gpu::Device {
 
         /**
          * @name yield
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Yield execution of the current GPU task.
          * @return true if yield succeeded, false otherwise.
@@ -238,6 +282,8 @@ namespace Gpu::Device {
 
         /**
          * @name wait
+         * @class Emulator
+         * @memberof Interface
          * @public
          * @brief Wait for GPU tasks to complete up to a deadline.
          * @param deadline Time in milliseconds to wait before timeout.
@@ -248,6 +294,8 @@ namespace Gpu::Device {
     private:
         /**
          * @property childPid_
+         * @class Emulator
+         * @memberof Interface
          * @private
          * @brief Process ID of the forked child emulator process.
          */
@@ -255,6 +303,8 @@ namespace Gpu::Device {
 
         /**
          * @property ipc_
+         * @class Emulator
+         * @memberof Interface
          * @private
          * @brief IPC communications object for parent/child messaging.
          */
@@ -262,6 +312,8 @@ namespace Gpu::Device {
 
         /**
          * @property initialized_
+         * @class Emulator
+         * @memberof Interface
          * @private
          * @brief True if the emulator has been initialized successfully.
          */
@@ -270,6 +322,8 @@ namespace Gpu::Device {
         /**
          * @property shutdown_
          * @private
+         * @class Emulator
+         * @memberof Interface
          * @brief True if the emulator has been shut down.
          */
         bool shutdown_ = false;

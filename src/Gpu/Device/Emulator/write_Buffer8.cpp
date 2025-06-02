@@ -5,10 +5,26 @@
 
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"
+#include "Gpu/Exceptions/IpcRecvFailed.h"
+#include "Gpu/Exceptions/IpcSendFailed.h"
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
 
-    bool Emulator::write(const Common::Buffer8& source, Common::AbstractPtr& dst) {
+    /**
+     * @name write
+     * @class Emulator
+     * @memberof Interface
+     * @public
+     * @brief Write an 8-bit buffer to GPU memory.
+     * @param source Data buffer to write.
+     * @param dst Abstract pointer to destination GPU memory.
+     * @return true if write succeeded, false otherwise.
+     */
+    bool Emulator::write(const Common::Buffer8 &source, Common::AbstractPtr &dst) {
         if (!initialized_)
             throw Exceptions::DeviceNotReady("Emulator::write(Buffer8) called before init()");
 
@@ -17,11 +33,19 @@ namespace Gpu::Device {
         msg.ptr = dst;
         msg.size = source.size();
 
-        ipc_->send(msg);
-        ipc_->send(Ipc::Response{Ipc::FailureCodes::Success, msg.size, source});  // Payload trick
+        if (const auto result = ipc_->send(msg); result != Ipc::Result::Success) {
+            throw Gpu::Exceptions::IpcSendFailed(result);
+        }
+
+        // Payload trick
+        if (const auto result = ipc_->send(Ipc::Response{Ipc::FailureCodes::Success, msg.size, source}); result != Ipc::Result::Success) {
+            throw Gpu::Exceptions::IpcSendFailed(result);
+        }
 
         Ipc::Response res;
-        ipc_->recv(res);
+        if (const auto result = ipc_->recv(res); result != Ipc::Result::Success) {
+            throw Gpu::Exceptions::IpcRecvFailed(result);
+        }
 
         return res.status == Ipc::FailureCodes::Success;
     }

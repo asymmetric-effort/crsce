@@ -11,6 +11,8 @@
 namespace Gpu::Device {
     /**
      * @name constructor
+     * @public
+     * @brief Default constructor (no operation).
      * @class Emulator
      * @memberof Interface
      * @brief noop

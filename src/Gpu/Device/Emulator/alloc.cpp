@@ -6,8 +6,21 @@
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
 
+    /**
+     * @name alloc
+     * @class Emulator
+     * @memberof Interface
+     * @public
+     * @brief Allocate a memory buffer on the mock GPU.
+     * @param bytes Number of bytes to allocate.
+     * @return Abstract pointer representing the GPU buffer, or null on failure.
+     */
     Common::AbstractPtr Emulator::alloc(const std::size_t bytes) {
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::alloc() called before init()");
 
@@ -17,7 +30,6 @@ namespace Gpu::Device {
 
         if (const auto result = ipc_->send(msg);result!=Ipc::Result::Success)
             return 0;
-
 
         Ipc::Response res;
         if (const auto result = ipc_->recv(res);result!=Ipc::Result::Success)

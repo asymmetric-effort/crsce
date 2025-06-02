@@ -7,9 +7,22 @@
 #include <thread>
 #include <chrono>
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
 
-    bool Emulator::wait(unsigned deadline) {
+    /**
+     * @name wait
+     * @class Emulator
+     * @memberof Interface
+     * @public
+     * @brief Wait for GPU tasks to complete up to a deadline.
+     * @param deadline Time in milliseconds to wait before timeout.
+     * @return true if all tasks finished before deadline, false otherwise.
+     */
+    bool Emulator::wait(const unsigned deadline) {
         std::this_thread::sleep_for(std::chrono::milliseconds(deadline));
         return true;
     }

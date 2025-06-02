@@ -30,7 +30,7 @@ namespace Gpu::Device {
         int ptc[2], ctp[2];
         if (pipe(ptc) < 0 || pipe(ctp) < 0) return false;
 
-        pid_t pid = fork();
+        const pid_t pid = fork();
         if (pid < 0) return false;
 
         if (pid == 0) {

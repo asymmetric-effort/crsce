@@ -8,7 +8,19 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
+
+    /**
+     * @name shutdown
+     * @class Emulator
+     * @memberof Interface
+     * @public
+     * @brief Shutdown the GPU emulator: send shutdown message and clean up IPC.
+     */
     void Emulator::shutdown() {
         if (!initialized_) return;
 

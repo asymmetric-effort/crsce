@@ -14,7 +14,8 @@ namespace Gpu::Device {
 
     /**
      * @name destructor
-     * @brief noop
+     * @public
+     * @brief Destructor ensures proper shutdown.
      */
     Emulator::~Emulator() {
         shutdown();
