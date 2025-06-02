@@ -6,7 +6,6 @@
 
 #pragma once
 #include <vector>
-#include <cstdint>
 #include "Gpu/Ipc/FailureCodes.h"
 #include "Common/Buffer8.h"
 

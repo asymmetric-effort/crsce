@@ -7,7 +7,6 @@
 #pragma once
 #include <unordered_map>
 #include <vector>
-#include <cstdint>
 #include <mutex>
 #include <random>
 #include "Common/AbstractPtr.h"
