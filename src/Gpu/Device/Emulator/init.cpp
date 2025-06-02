@@ -1,5 +1,6 @@
 /**
  * @file src/Gpu/Device/Emulator/init.cpp
+ * @brief Define a GPU Emulator Device Class
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -9,9 +10,18 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
-
+    /**
+     * @name init
+     * @class Emulator
+     * @memberof Interface
+     * @brief initialize the GPU Emulator.  This will spawn a child process, setup IPC and manage the mock GPU as
+     *        a child process of many threads.
+     * @return bool (true=no error)
+     */
     bool Emulator::init() {
         if (shutdown_) throw Gpu::Exceptions::DeviceNotReady("init() after shutdown");
         if (initialized_) return true;
