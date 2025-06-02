@@ -4,11 +4,19 @@
  */
 
 #include "Gpu/Device/Emulator/MockGpu.h"
+#include "Gpu/Exceptions/IpcSendFailed.h"
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
-
+    /**
+     * @name run
+     * @class MockGpu
+     * @public
+     * @brief launch the mock GPU payload
+     */
     void MockGpu::run() {
         while (!runtime_.isShutdown()) {
             Ipc::Message msg;
@@ -24,7 +32,7 @@ namespace Gpu::Device {
                     res = runtime_.handleFree(msg);
                     break;
                 case Ipc::CommandType::Write: {
-                    Ipc::Response err = { Ipc::FailureCodes::WriteError, 0, {} };
+                    Ipc::Response err = {Ipc::FailureCodes::WriteError, 0, {}};
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
@@ -33,13 +41,13 @@ namespace Gpu::Device {
                     res = runtime_.handleRead(msg);
                     break;
                 case Ipc::CommandType::RegisterKernel: {
-                    Ipc::Response err = { Ipc::FailureCodes::KernelNotFound, 0, {} };
+                    Ipc::Response err = {Ipc::FailureCodes::KernelNotFound, 0, {}};
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
                 }
                 case Ipc::CommandType::LaunchTask: {
-                    Ipc::Response err = { Ipc::FailureCodes::ThreadLaunchFailure, 0, {} };
+                    Ipc::Response err = {Ipc::FailureCodes::ThreadLaunchFailure, 0, {}};
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
@@ -51,11 +59,12 @@ namespace Gpu::Device {
                     res = runtime_.handleShutdown();
                     break;
                 default:
-                    res = { Ipc::FailureCodes::UnknownError, 0, {} };
+                    res = {Ipc::FailureCodes::UnknownError, 0, {}};
                     break;
             }
-            ipc_.send(res);
+            if (auto const result = ipc_.send(res); result != Ipc::Result::Success) {
+                throw Gpu::Exceptions::IpcSendFailed(result);
+            }
         }
     }
-
 }

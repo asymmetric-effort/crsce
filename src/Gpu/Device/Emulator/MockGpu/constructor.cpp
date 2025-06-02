@@ -4,8 +4,17 @@
  */
 
 #include "Gpu/Device/Emulator/MockGpu.h"
-
+/**
+ * @namespace Gpu::Device
+ */
 namespace Gpu::Device {
+    /**
+     * @name constructor
+     * @class MockGpu
+     * @public
+     * @brief initialize the mock GPU child process
+     * @param comm - IPC Communication channel
+     */
     MockGpu::MockGpu(Ipc::Communications &comm) : ipc_(comm), runtime_() {
     }
 }

@@ -23,11 +23,35 @@ namespace Gpu::Device {
      */
     class MockGpu final {
     public:
+        /**
+         * @name constructor
+         * @class MockGpu
+         * @public
+         * @brief initialize the mock GPU child process
+         * @param comm - IPC Communication channel
+         */
         explicit MockGpu(Ipc::Communications& comm);
+
+        /**
+         * @name run
+         * @class MockGpu
+         * @public
+         * @brief launch the mock GPU payload
+         */
         void run();
 
     private:
+        /**
+         * @property ipc_
+         * @private
+         * @brief facilitate IPC communications
+         */
         Ipc::Communications& ipc_;
+        /**
+         * @property runtime_
+         * @private
+         * @brief an object representing the mock GPU kernel runtime
+         */
         RuntimeManager runtime_;
     };
 
