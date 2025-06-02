@@ -9,6 +9,10 @@
 #include "Gpu/Ipc/CommandType.h"
 #include "Common/AbstractPtr.h"
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Ipc {
 
     /**

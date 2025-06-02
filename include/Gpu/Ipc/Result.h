@@ -7,6 +7,10 @@
 #pragma once
 #include <string>
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Ipc {
     /**
      * @name Gpu::Ipc::Result

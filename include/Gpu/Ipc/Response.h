@@ -10,6 +10,10 @@
 #include "Gpu/Ipc/FailureCodes.h"
 #include "Common/Buffer8.h"
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Ipc {
 
     /**

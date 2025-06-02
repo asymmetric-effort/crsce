@@ -9,6 +9,10 @@
 #include <vector>
 #include <cstddef>
 
+/**
+ * @namespace Gpu::Math
+ * @brief Namespace for GPU Mathematics interfaces
+ */
 namespace Gpu::Math {
 
     /**
@@ -69,8 +73,23 @@ namespace Gpu::Math {
         const std::vector<double>& data() const noexcept;
 
     private:
+        /**
+         * @property rows_
+         * @private
+         * @brief number of rows
+         */
         std::size_t rows_;
+        /**
+         * @property cols_
+         * @private
+         * @brief number of cols
+         */
         std::size_t cols_;
+        /**
+         * @property buffer_
+         * @private
+         * @brief the memory allocated to the matrix as double-precision floating point numbers.
+         */
         std::vector<double> buffer_;
     };
 
