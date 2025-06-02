@@ -5,9 +5,16 @@
 
 #include "Gpu/Device/Emulator/ThreadRuntime.h"
 #include <stdexcept>
-
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
-
+    /**
+      * @name run
+      * @class ThreadRuntime
+      * @brief Execute the kernel blob in a deterministic, thread-local manner.
+      */
     void ThreadRuntime::run() const {
         if (kernel_.size() < 16) {
             throw std::runtime_error("Gpu::ThreadRuntime::run() — kernel blob too small");

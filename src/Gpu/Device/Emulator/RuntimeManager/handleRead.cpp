@@ -5,8 +5,20 @@
 
 #include "Gpu/Device/Emulator/RuntimeManager.h"
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
 
+    /**
+     * @name handleRead
+     * @class RuntimeManager
+     * @public
+     * @brief Handle a read request from IPC.
+     * @param msg IPC message specifying source address and size.
+     * @return Response containing requested data or error code.
+     */
     Ipc::Response RuntimeManager::handleRead(const Ipc::Message& msg) const {
         Common::Buffer8 buffer(msg.size);
         const bool ok = memory_.read(msg.ptr, buffer);

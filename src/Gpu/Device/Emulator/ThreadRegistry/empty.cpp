@@ -4,9 +4,18 @@
  */
 
 #include "Gpu/Device/Emulator/ThreadRegistry.h"
-
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
-
+    /**
+     * @name empty
+     * @class ThreadRegistry
+     * @public
+     * @brief Checks if the registry is empty.
+     * @return bool
+     */
     bool ThreadRegistry::empty() const {
 
         std::lock_guard lock(mutex_);

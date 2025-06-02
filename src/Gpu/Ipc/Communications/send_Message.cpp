@@ -6,8 +6,19 @@
 #include "Gpu/Ipc/Communications.h"
 #include <unistd.h>
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Ipc {
-
+    /**
+     * @name send (Message)
+     * @class Communications
+     * @brief send IPC Message from parent to child
+     * @param msg
+     * @return Gpu::Ipc::Result
+     * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
+     */
     Result Communications::send(const Message& msg) const {
         if (!validateParentAccess())
             return Result::InvalidRole;

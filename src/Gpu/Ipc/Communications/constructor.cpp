@@ -5,14 +5,27 @@
 
 #include "Gpu/Ipc/Communications.h"
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Ipc {
-
-    Communications::Communications(int parentToChild[2], int childToParent[2], bool isParentProcess)
+    /**
+     * @name constructor
+     * @class Communications
+     * @public
+     * @brief class constructor enumerates two p2c and two c2p file descriptors.
+     * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
+     * @param parentToChild int file handle array
+     * @param childToParent int file handle array
+     * @param isParentProcess bool
+     */
+    Communications::Communications(const int parentToChild[ipcPipeFdSz], const int childToParent[ipcPipeFdSz], const bool isParentProcess)
         : isParent(isParentProcess) {
-        parentToChildFd[0] = parentToChild[0];
-        parentToChildFd[1] = parentToChild[1];
-        childToParentFd[0] = childToParent[0];
-        childToParentFd[1] = childToParent[1];
+        parentToChildFd[readEndpoint] = parentToChild[readEndpoint];
+        parentToChildFd[writeEndpoint] = parentToChild[writeEndpoint];
+        childToParentFd[readEndpoint] = childToParent[readEndpoint];
+        childToParentFd[writeEndpoint] = childToParent[writeEndpoint];
     }
 
 }

@@ -11,41 +11,68 @@
 #include <cstdint>
 /**
  * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
  */
 namespace Gpu::Device {
-
     /**
-     * @name Gpu::ThreadRegistry
+     * @name LaunchId
+     * @brief 32-bit identifier representing an execution thread
+     */
+    using LaunchId = uint32_t;
+    /**
+     * @class Gpu::ThreadRegistry
      * @brief Tracks lifecycle of detached kernel threads for concurrent GPU emulation.
      * @ref docs/Gpu/Design/Gpu-ThreadRegistry.md
      */
     class ThreadRegistry final {
     public:
-        using LaunchId = uint32_t;
-
         /**
-         * Inserts a new kernel thread under a unique LaunchId.
-         * Takes ownership of the thread object.
+         * @name insert
+         * @class ThreadRegistry
+         * @public
+         * @brief  Inserts a new kernel thread under a unique LaunchId. Takes ownership of the thread object.
+         * @param id LaunchId
+         * @param thread_id std::thread
          */
-        void insert(LaunchId id, std::thread&& t);
+        void insert(LaunchId id, std::thread&& thread_id);
 
         /**
-         * Joins all registered threads and clears the table.
+         * @name joinAll
+         * @class ThreadRegistry
+         * @public
+         * @brief Joins all registered threads and clears the table.
          */
         void joinAll();
 
         /**
-         * Clears thread map without joining. Use with caution.
+         * @name clear
+         * @class ThreadRegistry
+         * @public
+         * @brief Clears thread map without joining. Use with caution.
          */
         void clear();
 
         /**
-         * Checks if the registry is empty.
+         * @name empty
+         * @class ThreadRegistry
+         * @public
+         * @brief Checks if the registry is empty.
+         * @return bool
          */
         bool empty() const;
 
     private:
+        /**
+         * @property mutex_
+         * @private
+         * @brief mutex lock
+         */
         mutable std::mutex mutex_;
+        /**
+         * @property table
+         * @private
+         * @brief a table of launchIds and threads
+         */
         std::unordered_map<LaunchId, std::thread> table_;
     };
 

@@ -7,8 +7,21 @@
 #include <unistd.h>
 #include <vector>
 
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Ipc {
 
+    /**
+     * @name recv (Message)
+     * @class Communications
+     * @public
+     * @brief recv IPC Message from parent
+     * @param msg
+     * @return Gpu::Ipc::Result
+     * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
+     */
     Result Communications::recv(Message& msg) const {
         if (!validateChildAccess()) return Result::InvalidRole;
 

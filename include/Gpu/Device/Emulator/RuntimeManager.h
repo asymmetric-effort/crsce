@@ -33,6 +33,7 @@ namespace Gpu::Device {
     public:
         /**
          * @name constructor
+         * @class RuntimeManager
          * @public
          * @brief Default constructor.
          */
@@ -40,13 +41,14 @@ namespace Gpu::Device {
 
         /**
          * @name destructor
+         * @class RuntimeManager
          * @public
          * @brief Default destructor.
          */
         ~RuntimeManager() = default;
-
         /**
          * @name handleAlloc
+         * @class RuntimeManager
          * @public
          * @brief Handle an allocation request from IPC Message.
          * @param msg IPC message containing allocation parameters.
@@ -56,6 +58,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleFree
+         * @class RuntimeManager
          * @public
          * @brief Handle a free request from IPC Message.
          * @param msg IPC message specifying which memory to free.
@@ -65,6 +68,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleWrite
+         * @class RuntimeManager
          * @public
          * @brief Handle a write request with payload.
          * @param msg IPC message specifying destination address and size.
@@ -75,6 +79,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleRead
+         * @class RuntimeManager
          * @public
          * @brief Handle a read request from IPC.
          * @param msg IPC message specifying source address and size.
@@ -84,6 +89,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleRegisterKernel
+         * @class RuntimeManager
          * @public
          * @brief Handle kernel registration request.
          * @param msg IPC message specifying kernel ID.
@@ -94,6 +100,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleLaunchTask
+         * @class RuntimeManager
          * @public
          * @brief Handle a kernel launch request.
          * @param msg IPC message specifying kernel ID and launch parameters.
@@ -104,6 +111,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleReset
+         * @class RuntimeManager
          * @public
          * @brief Handle a reset request, reinitializing internal state.
          * @return Response indicating reset completion status.
@@ -112,6 +120,7 @@ namespace Gpu::Device {
 
         /**
          * @name handleShutdown
+         * @class RuntimeManager
          * @public
          * @brief Handle a shutdown request, marking runtime for termination.
          * @return Response indicating shutdown completion.
@@ -120,6 +129,7 @@ namespace Gpu::Device {
 
         /**
          * @name isShutdown
+         * @class RuntimeManager
          * @public
          * @brief Query whether shutdown has been initiated.
          * @return true if shutdown has been requested, false otherwise.
@@ -129,6 +139,7 @@ namespace Gpu::Device {
     private:
         /**
          * @property memory_
+         * @class RuntimeManager
          * @private
          * @brief Tracks GPU memory allocations and deallocations.
          */
@@ -136,6 +147,7 @@ namespace Gpu::Device {
 
         /**
          * @property threads_
+         * @class RuntimeManager
          * @private
          * @brief Manages CPU threads simulating GPU compute units.
          */
@@ -143,6 +155,7 @@ namespace Gpu::Device {
 
         /**
          * @property kernels_
+         * @class RuntimeManager
          * @private
          * @brief Manages registered kernel binaries and metadata.
          */
@@ -150,6 +163,7 @@ namespace Gpu::Device {
 
         /**
          * @property shutdown_
+         * @class RuntimeManager
          * @private
          * @brief Indicates whether shutdown has been requested.
          */

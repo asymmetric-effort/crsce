@@ -6,9 +6,17 @@
 #include <ranges>
 
 #include "Gpu/Device/Emulator/ThreadRegistry.h"
-
+/**
+ * @namespace Gpu::Device
+ * @brief Namespace for GPU device abstractions and implementations.
+ */
 namespace Gpu::Device {
-
+    /**
+     * @name joinAll
+     * @class ThreadRegistry
+     * @public
+     * @brief Joins all registered threads and clears the table.
+     */
     void ThreadRegistry::joinAll() {
 
         std::lock_guard lock(mutex_);
