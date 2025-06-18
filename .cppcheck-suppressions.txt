@@ -6,6 +6,7 @@ missingInclude
 missingIncludeSystem
 unusedStructMember
 checkersReport
+normalCheckLevelMaxBranches
 
 # Suppress all warnings in test/ directory
 *:test/*
