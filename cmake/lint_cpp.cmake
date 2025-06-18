@@ -29,6 +29,8 @@ if (CPPCHECK)
                 --std=c++${CMAKE_CXX_STANDARD}
                 --language=c++
                 --check-level=normal
+                --inline-suppr
+                --error-exitcode=10
                 --suppressions-list=${CMAKE_SOURCE_DIR}/.cppcheck-suppressions.txt
                 "${SOURCE_FILE}"
                 COMMENT "Linting ${SOURCE_FILE}"
