@@ -61,6 +61,7 @@ bool verify_header(std::ifstream &in) {
 }
 
 bool verify_footer(std::ifstream &in) {
+    // cppcheck-suppress signConversion
     in.seekg(-2 * sizeof(uint64_t), std::ios::end);
     if (!in) {
         std::cerr << "[FAIL] Failed to seek to footer." << std::endl;
@@ -105,7 +106,7 @@ bool verify_structure(std::ifstream &in, std::streamsize actual_size, uint64_t b
     return true;
 }
 
-int main(int argc, char* argv[]) {
+int main(const int argc, const char* argv[]) {
     std::string filepath;
     if (argc == 2) {
         filepath = argv[1];
@@ -126,6 +127,7 @@ int main(int argc, char* argv[]) {
 
     infile.seekg(0, std::ios::end);
     std::streamsize total_size = infile.tellg();
+    // cppcheck-suppress signConversion
     infile.seekg(-2 * sizeof(uint64_t), std::ios::end);
     uint64_t block_size = 0;
     uint64_t block_count = 0;
