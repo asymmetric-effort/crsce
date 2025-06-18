@@ -2,10 +2,10 @@
 # file: .yamllint
 extends: default
 ignore:
-  - build/**
-  - cmake-build-debug/**
-  - cmake-build-default/**
-  - cmake-build-release/**
+  - build
+  - cmake-build-debug
+  - cmake-build-default
+  - cmake-build-release
 rules:
   line-length:
     max: 300

@@ -3,9 +3,16 @@
 
 # JSON lint
 find_program(JSON_LINTER jsonlint)
+include(glob_recurse_exclude)
 
 if(JSON_LINTER)
-    file(GLOB_RECURSE JSON_FILES "${CMAKE_SOURCE_DIR}/*.json")
+
+    glob_recurse_exclude(
+            JSON_FILES
+            "${CMAKE_SOURCE_DIR}"
+            "*.json"
+            ".*/(build|cmake-build-debug|cmake-build-default|cmake-build-release)/.*$"
+    )
 
     # Phony target that runs jsonlint on every file
     add_custom_target(lint_json

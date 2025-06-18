@@ -12,9 +12,9 @@ include(lint_markdown)
 add_custom_target(linters
         DEPENDS
         lint_markdown
+        lint_makefile
         lint_yaml
         lint_json
-        lint_makefile
         lint_cpp
         COMMENT "Run all lint checks"
 )

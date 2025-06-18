@@ -1,0 +1,12 @@
+// file: .cppcheck-suppressions.txt
+
+# Suppress specific warning IDs and messages for cppcheck
+unusedFunction
+missingInclude
+missingIncludeSystem
+
+# Suppress all warnings in test/ directory
+*:test/*
+
+unmatchedSuppression:{}
+
