@@ -4,9 +4,11 @@
 unusedFunction
 missingInclude
 missingIncludeSystem
+unusedStructMember
+checkersReport
 
 # Suppress all warnings in test/ directory
 *:test/*
 
-unmatchedSuppression:{}
+unmatchedSuppression
 
