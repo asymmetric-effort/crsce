@@ -30,6 +30,7 @@ SHA-256 value.
 This version assumes execution on GPU hardware with warp-synchronous execution and thread-block partitioning.
 
 ## Phases
+
 | Phase         | Description                                             |
 |---------------|---------------------------------------------------------|
 | DE            | Exact elimination of forced bits                        |
@@ -75,34 +76,34 @@ For each unsolved row \( r \):
 
 - Spawn a **row-master thread** to supervise that row
 - Spawn \( n < s \) **CA threads** under that master:
-    - Each CA thread manages a slice of the row’s columns
-    - Threads have access to:
-        - Shared memory for row-local state
-        - Global memory for VSM, XSM, DSM residuals
+  - Each CA thread manages a slice of the row’s columns
+  - Threads have access to:
+    - Shared memory for row-local state
+    - Global memory for VSM, XSM, DSM residuals
 
 ### Step 4: Initial Row Population (Fixed Budget)
 
 Each row-master performs:
 
 - Assign \( LSM[r] \) 1s to cells \( x_{rc} \in \{0,1\} \), where:
-    - Available bits are not fixed by DE
-    - Selected based on \( p_{rc} \): prefer high-belief cells
+  - Available bits are not fixed by DE
+  - Selected based on \( p_{rc} \): prefer high-belief cells
 - Resulting bitfield must satisfy:
-    - Row sum = \( LSM[r] \)
-    - No SHA-256 match required yet
+  - Row sum = \( LSM[r] \)
+  - No SHA-256 match required yet
 
 ### Step 5: Iterative CA Updates (Belief-Guided)
 
 CA threads perform synchronous updates in parallel:
 
 - For each cell \( x_{rc} \):
-    - Evaluate local residuals from column/diag/anti-diag constraints
-    - If cell holds a 1 but is low-belief or redundant:
-        - Attempt to **migrate** it to a neighbor column \( c' \) in row \( r \)
-        - Target columns should have:
-            - Underfilled VSM
-            - Higher belief
-            - Compatible XSM/DSM impact
+  - Evaluate local residuals from column/diag/anti-diag constraints
+  - If cell holds a 1 but is low-belief or redundant:
+    - Attempt to **migrate** it to a neighbor column \( c' \) in row \( r \)
+    - Target columns should have:
+      - Underfilled VSM
+      - Higher belief
+      - Compatible XSM/DSM impact
 - Each update preserves the **row bit budget**
 
 CA threads synchronize within their row-block using shared memory
@@ -112,8 +113,8 @@ CA threads synchronize within their row-block using shared memory
 Each row-master computes the SHA-256 hash of its row:
 
 - If the row's bit configuration satisfies:
-    - Row sum = \( LSM[r] \)
-    - SHA-256(row) = \( LHASH[r] \)
+  - Row sum = \( LSM[r] \)
+  - SHA-256(row) = \( LHASH[r] \)
 - Then: **terminate** the row-master and its CA threads
 
 This avoids the need for hash-lock flags—the row-master's termination is sufficient.
@@ -122,8 +123,8 @@ This avoids the need for hash-lock flags—the row-master's termination is suffi
 
 - Repeat Steps 5–6 for active row blocks
 - Convergence occurs when:
-    - All row-masters have exited
-    - Or a timeout limit (e.g. max 100 CA steps) is reached
+  - All row-masters have exited
+  - Or a timeout limit (e.g. max 100 CA steps) is reached
 
 If convergence fails:
 

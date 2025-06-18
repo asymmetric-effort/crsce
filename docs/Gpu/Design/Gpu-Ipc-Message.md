@@ -22,7 +22,7 @@ class format of the IPC Message along with methods to facilitate serialization a
 * Endianness must be explicitly little-endian in implementation, matching platform pipes and memory format.
 * The properties are serialized as `type``kernelId``size``ptr`
 
-## Methods:
+## Methods
 
 | Method        | Returns           | Arguments               | Description                                     |
 |---------------|-------------------|-------------------------|-------------------------------------------------|

@@ -19,7 +19,9 @@ memory objects (address and size)
 |----------|---------------------------------------------------------------|--------------------------|
 | `table`  | `std::unordered_map<Common::AbstractPtr, AllocationMetadata>` | Memory tracking table    |
 | `lock`   | `std::mutex`                                                  | A lock for thread safety |
+
 ### Notes
+
 * `AllocationMetadata` is defined internally as a struct containing the following fields:
 
   | Field   | Type   | Description                         |
@@ -46,5 +48,6 @@ Cleanup any allocated resources.
 | `public` | `void clear()`                                      | clear all internal state                                                 |
 
 ### Notes
+
 * The `insert()` method should return `0` on null `ptr` or on error and a non-zero random memory reference index otherwise.
 * The `erase()` and `contain()` methods returns `true` on success or `false` on error.

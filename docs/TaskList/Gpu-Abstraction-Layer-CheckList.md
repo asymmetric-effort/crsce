@@ -43,7 +43,7 @@ GPU Abstraction Layer Checklist
 |----------|-----------------------|-------------------------------------------------------------------|
 | 1.       | Gpu::Math::Matrix     | High-level matrix API interfacing with underlying GPU logic.      |
 | 2.       | Gpu::Device::MockGpu  | Child-side loop: receives messages, calls RuntimeManager.         |
-| 3.       | Gpu::Device::Emulator | Parent-side device implementation using Gpu::Ipc::Communications. | 
-| 4.       | Gpu::Device::Cuda     | Stub for future native CUDA backend (inherits Interface).         |         
-| 5.       | Gpu::Device::Roc      | Stub for AMD ROCm backend.                                        |                                    
-| 6.       | Gpu::Device::Metal    | Stub for Apple Metal backend.                                     |                                     
+| 3.       | Gpu::Device::Emulator | Parent-side device implementation using Gpu::Ipc::Communications. |
+| 4.       | Gpu::Device::Cuda     | Stub for future native CUDA backend (inherits Interface).         |
+| 5.       | Gpu::Device::Roc      | Stub for AMD ROCm backend.                                        |
+| 6.       | Gpu::Device::Metal    | Stub for Apple Metal backend.                                     |

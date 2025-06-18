@@ -40,7 +40,7 @@ implementations to use at runtime.
 | `public` | `bool shutdown();` | reset the mock GPU state                                          |
 | `public` | `bool reset();`    | shutdown the mock GPU and all of its threads                      |
 
-### Notes:
+### Notes
 
 * If `shutdown()` is called before `init()`, no operation will be performed, no error will occur.
 * If `reset()` is called before `init()`, no operation will be performed, no error will occur.
@@ -59,7 +59,7 @@ implementations to use at runtime.
 | `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`   | read the `source` from the `destination` reference       |
 | `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
 
-## Notes:
+## Notes
 
 * If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
@@ -75,7 +75,7 @@ implementations to use at runtime.
 | `public` | `void registerKernel(KernelId id, const Common::Buffer8& binary);` | register a binary blob with a given GPU     |
 | `public` | `bool launchTask(KernelId id, const Common::Buffer8& args = {});`  | launch a task using a pre-registered kernel |
 
-### Notes:
+### Notes
 
 * if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
@@ -91,7 +91,7 @@ implementations to use at runtime.
 | `public` | `bool transpose(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat);`                         | transpose mat         |
 | `public` | `bool reduce(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat, bool rowwise);`              | reduce mat            |
 
-### Notes:
+### Notes
 
 * if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
@@ -105,7 +105,7 @@ implementations to use at runtime.
 | `public` | `void yield();`                | This method hints to the runtime that the current kernel or task may yield control.                                       |
 | `public` | `void wait(unsigned deadline)` | Block until all kernel tasks complete or the deadline (in milliseconds) is reached.                                       |                                                                     |
 
-### Notes:
+### Notes
 
 * if any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.

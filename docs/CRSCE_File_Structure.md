@@ -1,7 +1,7 @@
 CRSCE File Structure
 ====================
 
-File Structure:
+File Structure
 ---------------
 
 Header
@@ -21,7 +21,7 @@ Blocks (1 or more)
 | [0x05 + 16KiB] | LSM block 0 serialized                             |
 | [LSM end]      | VSM block 0 serialized                             |
 | [VSM end]      | XSM block 0 serialized                             |
-| [XSM end]      | DSM block 0 serialized                             | 
+| [XSM end]      | DSM block 0 serialized                             |
 
 File Footer
 -----------

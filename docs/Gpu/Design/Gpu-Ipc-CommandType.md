@@ -10,10 +10,10 @@ Represents an Interprocess Communication message type encoded as `uint32_t`
 * `<<` - ostream operator
 * `std::string to_string()`
 
-## Values:
+## Values
 
-| `Gpu::Ipc::CommandType` | Description                                                                     | 
-|-------------------------|---------------------------------------------------------------------------------| 
+| `Gpu::Ipc::CommandType` | Description                                                                     |
+|-------------------------|---------------------------------------------------------------------------------|
 | `Init`                  | Confirms successful launch of `Gpu::Device::MockGpu` child process.             |
 | `Alloc`                 | Allocate memory inside the Mock GPU. Memory is zeroed on allocation.            |
 | `Free`                  | Free memory previously allocated inside the Mock GPU. Memory is zeroed on free. |

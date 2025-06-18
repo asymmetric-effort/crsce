@@ -16,7 +16,7 @@ Operates an InterProcess Communications hub between a parent and child process.
 | `isParent`        | `bool`              | True if this instance is running in the parent process |
 | `shutdownFlag`    | `std::atomic<bool>` | True indicates that shutdown is in progress            |
 
-### Notes:
+### Notes
 
 * For `parentToChildFd` and `childToParentFd`, "[0] is the read end, [1] is the write end, consistent with pipe()
   behavior."

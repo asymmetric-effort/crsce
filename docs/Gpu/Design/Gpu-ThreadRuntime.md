@@ -10,8 +10,8 @@ execution. It is invoked by the `Gpu::RuntimeManager` within a detached thread c
 
 - Instantiated inside a detached thread spawned during `Gpu::RuntimeManager::handleLaunchTask()`.
 - Receives:
-    - The kernel blob (raw bytes)
-    - Optional arguments (e.g., buffer sizes, dispatch dimensions)
+  - The kernel blob (raw bytes)
+  - Optional arguments (e.g., buffer sizes, dispatch dimensions)
 - Executes the kernel according to emulator semantics (deterministic and bounded).
 - May interact with `Gpu::Ipc::MemoryTracker` for reads/writes during execution.
 
@@ -57,7 +57,7 @@ Executes the thread's work.
 - Handles timeouts, invalid opcodes, malformed blobs gracefully (per design constraints).
 - Optional: may access `Gpu::Ipc::MemoryTracker` to simulate global memory effects.
 
-#### Notes:
+#### Notes
 
 - This method is the **entry point for all mock kernel threads**.
 - All thread-safe or shared state (e.g., memory tracker) must be accessed via RAII or lock guards.
@@ -89,8 +89,8 @@ instruction set simulation).
 ## Failure Handling
 
 - `run()` may throw:
-    - `std::runtime_error` on malformed blob
-    - Custom exceptions (if implemented) on opcode or memory violations
+  - `std::runtime_error` on malformed blob
+  - Custom exceptions (if implemented) on opcode or memory violations
 - All exceptions should be caught and logged by the parent thread wrapper if necessary
 
 ---

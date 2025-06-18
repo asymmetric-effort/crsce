@@ -59,7 +59,7 @@ facilitated by `Gpu::Ipc::Communications`.
 | `public` | `void shutdown();` | reset the mock GPU state                                          |
 | `public` | `void reset();`    | shutdown the mock GPU and all of its threads                      |
 
-### Notes:
+### Notes
 
 * If `shutdown()` is called before `init()`, no operation will be performed, no error will occur.
 * If `reset()` is called before `init()`, no operation will be performed, no error will occur.
@@ -78,7 +78,7 @@ facilitated by `Gpu::Ipc::Communications`.
 | `public` | `bool read(Common::Buffer8& source,Common::AbstractPtr& dst);`   | read the `source` from the `destination` reference       |
 | `public` | `bool read(Common::Buffer64& source,Common::AbstractPtr& dst);`  | read the `source` from the `destination` reference       |
 
-## Notes:
+## Notes
 
 * If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
   using `Gpu::Exception::DeviceNotReady`.
@@ -94,7 +94,7 @@ facilitated by `Gpu::Ipc::Communications`.
 | `public` | `bool registerKernel(KernelId id, const Common::Buffer8& binary);` | register a binary blob with a given GPU     |
 | `public` | `bool launchTask(KernelId id, const Common::Buffer8& args = {});`  | launch a task using a pre-registered kernel |
 
-### Notes:
+### Notes
 
 * Return true on success or false on error.
 * If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown
@@ -111,7 +111,7 @@ facilitated by `Gpu::Ipc::Communications`.
 | `public` | `bool transpose(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat);`                         | transpose mat         |
 | `public` | `bool reduce(Gpu::Math::Matrix& result, const Gpu::Math::Matrix& mat, bool rowwise);`              | reduce mat            |
 
-### Notes:
+### Notes
 
 * Return true on success or false on error.
 * These math operations should transfer the `Gpu::Math::Matrix` to the GPU, perform the operation and return the result
@@ -127,7 +127,7 @@ facilitated by `Gpu::Ipc::Communications`.
 | `public` | `bool yield();`                | This method hints to the runtime that the current kernel or task may yield control.                                       |
 | `public` | `bool wait(unsigned deadline)` | Block until all kernel tasks complete or the deadline (in milliseconds) is reached.                                       |                                                                     |
 
-### Notes:
+### Notes
 
 * Return true on success or false on error.
 * If any of these methods are called after `shutdown()` or `reset()` or before `init()` an exception will be thrown

@@ -11,8 +11,8 @@ a unique kernel ID (`Gpu::KernelId`), supporting deferred execution via `launchT
 
 - **Owned by `Gpu::RuntimeManager`**
 - Used during:
-    - `registerKernel()` — stores a named kernel blob
-    - `launchTask()` — retrieves and dispatches a kernel for execution
+  - `registerKernel()` — stores a named kernel blob
+  - `launchTask()` — retrieves and dispatches a kernel for execution
 
 ## Dependencies
 
@@ -37,7 +37,7 @@ using Gpu::KernelId = uint64_t;
 
 ## Methods
 
-| Scope    | Method           | Return                   | Argument                                     | Description                                                            | 
+| Scope    | Method           | Return                   | Argument                                     | Description                                                            |
 |----------|------------------|--------------------------|----------------------------------------------|------------------------------------------------------------------------|
 | `public` | `registerKernel` | `bool`                   | `KernelId id, const Common::Buffer8& binary` | Registers a kernel blob under a unique id.                             |
 | `public` | `has`            | `bool`                   | `KernelId id`                                | Checks whether a given kernelId is present in the registry.            |
@@ -55,6 +55,7 @@ using Gpu::KernelId = uint64_t;
 * `erase()` and `clear()` will securely delete any blob by first overwriting the data with random bytes.
 
 ## Example Usage
+
 ```c++
 Gpu::KernelManager km;
 km.registerKernel(42, binaryBlob);

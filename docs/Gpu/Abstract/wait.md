@@ -3,7 +3,7 @@ GPU Wait Semantics
 
 This document describes how `Interface::wait()` behaves across different GPU backends.
 
-## Implementation of `wait()`:
+## Implementation of `wait()`
 
 - **Emulator**: blocks until all IPC‐sent commands have been processed by the child process, but does _not_ terminate
   the child. Returns `0` on success.

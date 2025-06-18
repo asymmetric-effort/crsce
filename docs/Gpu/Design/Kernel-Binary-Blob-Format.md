@@ -28,6 +28,7 @@ All fields are encoded in **little-endian** byte order and must be fully aligned
 ## Binary Layout
 
 ### Blob Structure
+
 ```c++
 [Header][Instruction Block 0][...][Instruction Block N][Trailer]
 ```

@@ -3,7 +3,7 @@ GPU Reset Semantics
 
 This document describes how `Interface::reset()` behaves across different GPU backends.
 
-## Implementation of `reset()`:
+## Implementation of `reset()`
 
 - **Emulator**: sends a `Shutdown` IPC to the child, waits for it to exit, and closes all IPC channels.
 - **CUDA**: calls `cudaDeviceReset()` under the hood.

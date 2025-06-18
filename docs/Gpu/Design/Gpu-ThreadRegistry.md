@@ -42,7 +42,7 @@ Inserts a new thread into the registry.
 - Acquires mutex lock for map insertion.
 - Thread must not be `joinable()` after this point (transfer of ownership).
 
-#### Failure Mode:
+#### Failure Mode
 
 - If `launchId` already exists, abort (or assert in debug builds).
 
@@ -56,7 +56,7 @@ Joins all registered threads.
 - For each thread: if `joinable()`, invoke `join()`.
 - Clears `threads` map after all joins complete.
 
-#### Notes:
+#### Notes
 
 - Safe to call multiple times.
 - Must not be called concurrently with `insert()`.

@@ -10,7 +10,7 @@ Represents the result of an IPC operation.
 * `<<` - ostream operator
 * `std::string to_string()`
 
-## Values:
+## Values
 
 | Result     | Value | Description                           |
 |------------|-------|---------------------------------------|
