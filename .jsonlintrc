@@ -1,0 +1,6 @@
+{
+  "allowComments": false,         // disallow JavaScript-style comments
+  "allowTrailingCommas": false,   // disallow trailing commas in arrays/objects
+  "alwaysStrict": true,           // enforce strict parsing
+  "indent": 2                     // enforce 2-space indentation
+}

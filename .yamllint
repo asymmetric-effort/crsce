@@ -1,0 +1,12 @@
+# file: .yamllint
+# YAML Lint Configuration
+extends: default
+
+# Skip YAML files under build/
+ignore:
+  - build/**
+
+rules:
+    line-length:
+        max: 300
+        level: error
