@@ -21,7 +21,7 @@ if(YAMLLINT)
         add_custom_command(
                 TARGET            lint_yaml
                 POST_BUILD
-                COMMAND           ${YAMLLINT} -q "${f}"
+                COMMAND           ${YAMLLINT} --config-file .yamllint "${f}" || exit 1
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
                 COMMENT           "Linting ${f}"
         )

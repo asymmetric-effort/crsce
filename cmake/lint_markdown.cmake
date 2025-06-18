@@ -7,7 +7,7 @@ find_program(MARKDOWNLINT markdownlint)
 if(MARKDOWNLINT)
     file(GLOB_RECURSE MD_FILES "${CMAKE_SOURCE_DIR}/*.md")
     add_custom_target(lint_markdown
-            COMMAND ${MARKDOWNLINT} ${MD_FILES}
+            COMMAND ${MARKDOWNLINT} --config ../.markdownlint.json ${MD_FILES} || exit 1
             COMMENT "Linting Markdown files"
     )
 else()

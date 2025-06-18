@@ -16,9 +16,10 @@ if(CPPCHECK)
             --quiet
             --suppress=unusedFunction
             --std=c++20
+            -i ${PROJECT_SOURCE_DIR}/test
+            -I ${CMAKE_SOURCE_DIR}/include
             -I ${CMAKE_SOURCE_DIR}/src
-#            -I ${CMAKE_SOURCE_DIR}/test
-            ${CPP_SOURCES}
+            ${CPP_SOURCES} || exit 1
             COMMENT "Running cppcheck (suppressing unusedFunction)"
     )
 else()

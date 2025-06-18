@@ -11,10 +11,10 @@ include(lint_markdown)
 # Aggregate lint target
 add_custom_target(linters
         DEPENDS
+        lint_markdown
         lint_yaml
         lint_json
         lint_makefile
-        lint_markdown
         lint_cpp
         COMMENT "Run all lint checks"
 )
