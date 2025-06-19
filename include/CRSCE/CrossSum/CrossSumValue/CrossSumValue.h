@@ -17,7 +17,7 @@ public:
     CrossSumValue();
     explicit CrossSumValue(uint16_t value);
 
-    uint16_t to_uint16() const;
+    [[nodiscard]] uint16_t to_uint16() const;
 
     CrossSumValue operator+(uint16_t rhs) const;
     CrossSumValue operator+(CrossSumValue rhs) const;
