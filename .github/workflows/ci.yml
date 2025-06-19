@@ -17,9 +17,11 @@ jobs:
         uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - name: Install dependencies
         run: |
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-          sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev
+          add-apt-repository ppa:ubuntu-toolchain-r/test
+          apt-get update -y
+          apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          brew install jsonlint yamllint markdownlint cppcheck
       - name: Configure
         run: make clean configure
 #      - name: Lint
