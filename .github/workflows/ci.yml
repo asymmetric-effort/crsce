@@ -26,7 +26,8 @@ jobs:
           sudo apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make cppcheck wget \
           wget https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
           chmod +x install.sh
-          ./install.sh
+          echo 'installing brew'
+          ./install.sh || {echo 'brew install failed' && exit 1}
           echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bashrc
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install markdownlint-cli
