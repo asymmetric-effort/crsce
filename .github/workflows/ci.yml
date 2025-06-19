@@ -19,8 +19,9 @@ jobs:
         uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - name: install prereqs
         run: |
-          apt-get update -y
-          apt-get install build-essentials docker.io
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
+          sudo apt-get install build-essentials docker.io
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
