@@ -11,6 +11,7 @@ RUN apt-get update -y && \
                        libc++-dev \
                        libc++abi-dev \
                        make \
+                       ninja-build \
                        curl \
                        cppcheck \
                        python3 \
