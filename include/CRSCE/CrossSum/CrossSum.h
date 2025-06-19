@@ -31,6 +31,7 @@ public:
 
 protected:
 
+    // cppcheck-suppress unusedStructMember
     std::vector<CrossSumValue> data;
 
 };

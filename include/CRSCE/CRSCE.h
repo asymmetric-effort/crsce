@@ -28,6 +28,7 @@ public:
     int compress();
     int decompress();
 
+    // cppcheck-suppress unusedStructMember
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
   protected:

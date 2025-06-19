@@ -33,7 +33,7 @@ bool create_multi_block_file(const std::string& path, size_t blocks) {
 }
 
 // Check footer's block count matches expected
-bool check_block_count(const std::string& path, size_t expected_blocks) {
+bool check_block_count(const std::string& path, const size_t expected_blocks) {
     std::ifstream file(path, std::ios::binary);
     if (!file.is_open()) {
         std::cerr << "[FAIL] Could not open file: " << path << std::endl;
@@ -61,15 +61,15 @@ bool check_block_count(const std::string& path, size_t expected_blocks) {
 }
 
 int main() {
-    std::vector<size_t> tests = {2, 3, 10};
+    const std::vector<size_t> tests = {2, 3, 10};
     bool all_passed = true;
 
-    for (size_t blocks : tests) {
+    for (const size_t blocks : tests) {
         // Compute expected blocks accounting for byte padding
-        size_t bits = blocks * s * s;
-        size_t bytes = (bits + 7) / 8;
-        size_t total_bits = bytes * 8;
-        size_t expected = (total_bits + (s*s) - 1) / (s*s);
+        const size_t bits = blocks * s * s;
+        const size_t bytes = (bits + 7) / 8;
+        const size_t total_bits = bytes * 8;
+        const size_t expected = (total_bits + (s*s) - 1) / (s*s);
 
         std::string output_path = generate_temp_filename("z3_output", "crsce");
         std::cout << "[INFO] Testing " << blocks << " block(s)... (expecting " << expected << ")" << std::endl;

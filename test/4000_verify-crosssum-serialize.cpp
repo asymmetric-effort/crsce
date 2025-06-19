@@ -14,14 +14,14 @@ constexpr uint16_t white = 511;
 constexpr uint16_t grey = 341;
 
 void create_alternating_pattern(CrossSum &original) {
-    std::cout << "[INFO] create_alterating_pattern()" << std::endl;
+    std::cout << "[INFO] create_alternating_pattern()" << std::endl;
     for (size_t r = 0; r < s; ++r) {
         CrossSumValue val((r % 2 == 0) ? white : grey);
         original.set(r, 0, val);
     }
 }
 
-void serialize_matrix(CrossSum &original, std::string &serialized) {
+void serialize_matrix(const CrossSum &original, std::string &serialized) {
     std::cout << "[INFO] serialize_matrix()" << std::endl;
     std::ostringstream oss;
     original.serialize(oss);
@@ -34,6 +34,7 @@ void deserialize_bitstream(const std::string &serialized, std::bitset<b * s> &bi
     for (unsigned char c : serialized) {
         for (int i = 7; i >= 0; --i) {
             if (bit_index < b * s) {
+                // cppcheck-suppress AssignmentIntegerToAddress
                 bitstream[bit_index++] = (c >> i) & 1;
             }
         }
@@ -45,9 +46,10 @@ void reconstruct_matrix(const std::bitset<b * s> &bitstream, LateralSumMatrix &m
     for (size_t r = 0; r < s; ++r) {
         std::bitset<b> val_bits;
         for (size_t i = 0; i < b; ++i) {
+            // cppcheck-suppress AssignmentIntegerToAddress
             val_bits[i] = bitstream[(r * b) + i];
         }
-        CrossSumValue val(static_cast<uint16_t>(val_bits.to_ulong()));
+        const CrossSumValue val(static_cast<uint16_t>(val_bits.to_ulong()));
         matrix.set(r, 0, val);
     }
 }
@@ -55,9 +57,8 @@ void reconstruct_matrix(const std::bitset<b * s> &bitstream, LateralSumMatrix &m
 bool validate_matrix(const LateralSumMatrix &matrix) {
     std::cout << "[INFO] validate_matrix()" << std::endl;
     for (size_t r = 0; r < s; ++r) {
-        uint16_t expected = (r % 2 == 0) ? white : grey;
-        uint16_t actual = matrix.get(r, 0).to_uint16();
-        if (actual != expected) {
+        const uint16_t expected = (r % 2 == 0) ? white : grey;
+        if (const uint16_t actual = matrix.get(r, 0).to_uint16(); actual != expected) {
             std::cerr << "[FAIL] row " << r << ": expected " << expected << ", got " << actual << std::endl;
             return false;
         }

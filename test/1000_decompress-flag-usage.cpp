@@ -21,12 +21,16 @@ constexpr const char* target_binary = "build/bin/compress";
 std::string exec(const char* cmd) {
     std::array<char, 256> buffer;
     std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    const std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
     if (!pipe) {
         throw std::runtime_error("popen() failed!");
     }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
+    while (!feof(pipe.get())) {
+        // read up to buffer.size() bytes
+        if (const size_t n = fread(buffer.data(), 1, buffer.size(), pipe.get()); n > 0) {
+            // explicitly copy exactly n bytes
+            result.append(buffer.data(), n);
+        }
     }
     return result;
 }

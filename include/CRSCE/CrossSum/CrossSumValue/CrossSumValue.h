@@ -25,6 +25,7 @@ public:
     CrossSumValue operator++(int);
 
 private:
+    // cppcheck-suppress unusedStructMember
     std::bitset<b> bits;
 };
 

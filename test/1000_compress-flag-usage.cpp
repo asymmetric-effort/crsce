@@ -25,8 +25,12 @@ std::string exec(const char* cmd) {
     if (!pipe) {
         throw std::runtime_error("popen() failed!");
     }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
+    while (!feof(pipe.get())) {
+        // read up to buffer.size() bytes
+        if (const size_t n = fread(buffer.data(), 1, buffer.size(), pipe.get()); n > 0) {
+            // explicitly copy exactly n bytes
+            result.append(buffer.data(), n);
+        }
     }
     return result;
 }
@@ -36,7 +40,7 @@ int main() {
         const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
         const std::string expectedUsageStart = "Usage: "+std::string(target_binary)+" --in <inputfile> --out <outputfile>\n";
 
-        std::string output = exec(target_binary);
+        const std::string output = exec(target_binary);
 
         if (output.find(expectedCopyright) == std::string::npos) {
             std::cerr << "[FAIL] Missing or incorrect copyright.\n";
