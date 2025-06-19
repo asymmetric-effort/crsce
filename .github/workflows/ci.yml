@@ -16,7 +16,6 @@ jobs:
         run: |
           sudo apt-get update -y
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-          sudo apt-get update
           sudo apt-get install g++-13
           sudo apt-get install -y build-essential cmake ccache
       - name: Build and Test
