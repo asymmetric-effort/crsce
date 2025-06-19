@@ -23,14 +23,8 @@ jobs:
           echo "USER: $(whoami), SHELL: ${SHELL}"
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make cppcheck wget \
-          wget https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-          chmod +x install.sh
-          echo 'installing brew'
-          ./install.sh || {echo 'brew install failed' && exit 1}
-          echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/runner/.bashrc
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          brew install markdownlint-cli
+          sudo apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make cppcheck nodejs npm
+          npm install -g markdownlint-cli
           command -v markdownlint || exit 1
       - name: Configure
         run: make clean configure
