@@ -20,4 +20,4 @@ jobs:
           sudo apt-get install g++-13
           sudo apt-get install -y build-essential cmake ccache
       - name: Build and Test
-        run: make clean build test
+        run: make clean configure lint build test
