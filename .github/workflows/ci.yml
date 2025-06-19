@@ -14,9 +14,8 @@ jobs:
         uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
       - name: Install dependencies
         run: |
-          sudo apt-get update -y
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-          sudo apt-get install g++-13
-          sudo apt-get install -y build-essential cmake ccache
+          sudo apt-get update -y
+          sudo apt-get install -y build-essential cmake ccache g++-13
       - name: Build and Test
         run: make clean configure lint build test
