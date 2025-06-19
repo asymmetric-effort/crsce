@@ -25,12 +25,10 @@ jobs:
         run: |
           export DEBIAN_FRONTEND=noninteractive
           echo "USER: $(whoami), SHELL: ${SHELL}"
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-          sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make cppcheck nodejs \
-                                  npm yamllint cppcheck
-          npm install -g markdownlint-cli
-          command -v markdownlint || exit 1
+          add-apt-repository ppa:ubuntu-toolchain-r/test
+          apt-get update -y
+          apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make cppcheck nodejs \
+                             npm yamllint cppcheck
       - name: Configure
         run: make clean configure
       - name: Lint
