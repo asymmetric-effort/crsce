@@ -13,6 +13,8 @@ RUN apt-get update -y && \
                        make \
                        ninja-build \
                        curl \
+                       libssl-dev \
+                       pkg-config \
                        cppcheck \
                        python3 \
                        python3-pip
