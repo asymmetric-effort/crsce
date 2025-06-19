@@ -20,5 +20,11 @@ jobs:
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt-get update -y
           sudo apt-get install -y build-essential cmake ccache g++-13
-      - name: Build and Test
-        run: make clean configure lint build test
+      - name: Configure
+        run: make clean configure
+      - name: Lint
+        run: make lint
+      - name: Build
+        run: make build
+      - name: Test
+        run: make test
