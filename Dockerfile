@@ -11,6 +11,7 @@ RUN apt-get update -y && \
                        libc++-dev \
                        libc++abi-dev \
                        make \
+                       time \
                        ninja-build \
                        curl \
                        libssl-dev \
