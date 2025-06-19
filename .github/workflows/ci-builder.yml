@@ -5,8 +5,10 @@ on:
   push:
     branches:
       - '**'
-    paths:
-      - '.github/workflows/ci.yml'
+    paths-ignore:
+      - 'Dockerfile'   # only run when this file changes
+      - '.github/workflows/ci-docker.yml'
+
 jobs:
   ci-builder:
     permissions:

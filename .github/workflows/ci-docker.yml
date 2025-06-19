@@ -1,12 +1,12 @@
 name: ci-docker
 
 on:
-    push:
-        branches:
-            - '**'
-        paths:
-            - 'Dockerfile'   # only run when this file changes
-            - '.github/workflows/ci-docker.yml'
+  push:
+    branches:
+      - '**'
+    paths:
+      - 'Dockerfile'   # only run when this file changes
+      - '.github/workflows/ci-docker.yml'
 jobs:
     ci-docker:
         permissions:
