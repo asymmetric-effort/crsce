@@ -21,16 +21,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@09d2acae674a48949e3602304ab46fd20ae0c42f
-      - name: Install dependencies
-        env:
-          DEBIAN_FRONTEND: noninteractive
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          echo "USER: $(whoami), SHELL: ${SHELL}"
-          add-apt-repository ppa:ubuntu-toolchain-r/test
-          apt-get update -y
-          apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev make cppcheck nodejs \
-                             npm yamllint cppcheck
       - name: Configure
         run: make clean configure
       - name: Lint
