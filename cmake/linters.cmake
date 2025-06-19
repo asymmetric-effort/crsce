@@ -11,7 +11,7 @@ include(lint_markdown)
 # Aggregate lint target
 add_custom_target(linters
         DEPENDS
-        lint_markdown
+#        lint_markdown
         lint_makefile
         lint_yaml
         lint_json

@@ -23,7 +23,7 @@ if(JSON_LINTER)
         add_custom_command(
                 TARGET            lint_json
                 POST_BUILD
-                COMMAND           ${JSON_LINTER} -q -p -c "${f}" || exit 1
+                COMMAND           ${JSON_LINTER} -q -p "${f}" || exit 1
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
                 COMMENT           "Linting ${f}"
         )

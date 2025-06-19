@@ -56,3 +56,7 @@ decompress: compress
 clean:
 	@rm -rf ./build &> /dev/null || true
 	@mkdir -p ./build &> /dev/null || true
+
+.PHONY: docker
+docker:
+	@docker build --tag builder:latest .
