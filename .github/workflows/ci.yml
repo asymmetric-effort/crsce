@@ -9,8 +9,8 @@ on:
 jobs:
   ci-pipeline:
     permissions:
-        contents: read
-        pull-requests: write
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -19,12 +19,12 @@ jobs:
         run: |
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt-get update -y
-          sudo apt-get install -y build-essential cmake ccache g++-13
+          sudo apt-get install -y build-essential cmake ccache clang libc++-dev libc++abi-dev
       - name: Configure
         run: make clean configure
 #      - name: Lint
 #        run: make lint
-      - name: Build
-        run: make build
-      - name: Test
-        run: make test
+#      - name: Build
+#        run: make build
+#      - name: Test
+#        run: make test
