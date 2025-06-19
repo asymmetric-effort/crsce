@@ -15,11 +15,6 @@ set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE BOOL "" FORCE)
 
 set(PROJECT_ROOT ${CMAKE_SOURCE_DIR})
 
-add_compile_options(
-        -include cstdint
-        -include algorithm
-)
-
 add_compile_definitions(
         COPYRIGHT="${COPYRIGHT}"
         PROJECT_NAME="${PROJECT_NAME}"
