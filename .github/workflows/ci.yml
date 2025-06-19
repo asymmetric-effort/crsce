@@ -7,7 +7,7 @@ on:
       - '**'
     paths:
       - 'Dockerfile'   # only run when this file changes
-      - .github
+      - '.github/workflows/ci.yml'
 jobs:
   ci-docker:
     permissions:
