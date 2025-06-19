@@ -7,6 +7,7 @@ on:
       - '**'
     paths:
       - 'Dockerfile'   # only run when this file changes
+      - .github
 jobs:
   ci-docker:
     permissions:
