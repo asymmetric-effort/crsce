@@ -18,9 +18,8 @@ RUN apt-get update -y && \
                        pkg-config \
                        cppcheck \
                        python3 \
-                       python3-pip
-
-RUN pip install --break-system-packages \
+                       python3-pip && \
+    pip install --break-system-packages \
                 pymarkdown \
                 yamllint \
                 json-linter && \
