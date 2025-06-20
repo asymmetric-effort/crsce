@@ -20,6 +20,6 @@
 
 namespace Common {
 
-    using AbstractPtr = uint64_t;
+    using AbstractPtr = size_t;
 
 } // namespace Common
