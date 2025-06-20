@@ -6,6 +6,11 @@
 
 #include "CRSCE/CrossSum/CrossSumValue/CrossSumValue.h"
 
-CrossSumValue CrossSumValue::operator+(const CrossSumValue &rhs) const {
-    return *this + rhs.to_uint16();
+CrossSumValue operator+(const CrossSumValue& lhs, const CrossSumValue& rhs) {
+    const uint16_t l = lhs.to_uint16();
+    const uint16_t r = rhs.to_uint16();
+    if (l > s || r > s || static_cast<uint32_t>(l) + r > s) {
+        throw std::overflow_error("CrossSumValue addition overflow");
+    }
+    return CrossSumValue(static_cast<uint16_t>(l + r));
 }

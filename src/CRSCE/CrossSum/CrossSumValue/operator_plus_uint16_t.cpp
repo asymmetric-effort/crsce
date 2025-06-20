@@ -7,10 +7,11 @@
 #include "CRSCE/CrossSum/CrossSumValue/CrossSumValue.h"
 #include <stdexcept>
 
-CrossSumValue CrossSumValue::operator+(const uint16_t rhs) const {
-    uint16_t lhs = this->to_uint16();
-    if (lhs > s || rhs > s || lhs + rhs > s) {
-        throw std::overflow_error("Value out of bounds");
+
+CrossSumValue operator+(const CrossSumValue& lhs, const uint16_t rhs) {
+    const uint16_t l = lhs.to_uint16();
+    if (l > s || rhs > s || static_cast<uint32_t>(l) + rhs > s) {
+        throw std::overflow_error("CrossSumValue addition overflow");
     }
-    return CrossSumValue(lhs + rhs);
+    return CrossSumValue(static_cast<uint16_t>(l + rhs));
 }
