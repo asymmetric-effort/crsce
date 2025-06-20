@@ -18,6 +18,10 @@ public:
 
     //constructor : initialize a cross sum matrix with constants s and b.
     explicit CrossSum();
+    explicit CrossSum(const CrossSum&) = delete;
+    explicit CrossSum(CrossSum&&) noexcept = delete;
+    CrossSum& operator=(const CrossSum&) = delete;
+    CrossSum& operator=(CrossSum&&) noexcept = delete;
 
     virtual ~CrossSum();
 
