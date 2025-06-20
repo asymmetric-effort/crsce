@@ -9,10 +9,11 @@
 #include "utils/parseArgs.h"
 #include "utils/printUsage.h"
 #include "utils/printVersion.h"
+
 #include <filesystem>
 #include <iostream>
 #include <string>
 
-int parse_args(int argc, char* argv[], std::string &inputFile, std::string &outputFile);
+int parse_args(int argc, const char* argv[], std::string &inputFile, std::string &outputFile);
 
 #endif //UTILS_PARSEARGS_H

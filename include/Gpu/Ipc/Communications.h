@@ -28,7 +28,7 @@ namespace Gpu::Ipc {
          * @param childToParent
          * @param isParentProcess
          */
-        Communications(int parentToChild[2], int childToParent[2], bool isParentProcess);
+        Communications(const int parentToChild[2], const int childToParent[2], bool isParentProcess);
 
         /**
          * @name destructor
@@ -103,8 +103,8 @@ namespace Gpu::Ipc {
         static constexpr int writeEndpoint=1;
 
     private:
-        int parentToChildFd[2];
-        int childToParentFd[2];
+        int parentToChildFd[2]{};
+        int childToParentFd[2]{};
         bool isParent = true;
         std::atomic<bool> shutdownFlag = false;
     };
