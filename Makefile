@@ -8,28 +8,32 @@ lint: lint/json lint/yaml lint/cpp
 
 lint/json:
 	@echo "$@: starting)"
-	find . -type f -name '*.json' -exec jsonlint -q "{}" \;
+	find . -type f -name '*.json' -print0 | xargs -0 -n1 yamllint
 	@echo "$@: ok"
 
 lint/yaml:
 	@echo "$@: starting)"
-	find . -type f -name '*.yml' -exec yamllint "{}" \;
-	find . -type f -name '*.yaml' -exec yamllint "{}" \;
+	find . -type f \( -name '*.yml' -o -name '*.yaml' \) -print0 | xargs -0 -n1 yamllint
 	@echo "$@: ok"
 
+.PHONY: lint/cpp
 lint/cpp:
 	@echo "$@: starting)"
-	@cppcheck --enable=all \
-			  --quiet \
-			  --platform=unix64 \
-			  --std=c++20 \
-			  --language=c++ \
-			  --suppressions-list=.cppcheck-suppressions.txt \
-			  --inline-suppr \
-			  --check-level=normal \
-			  -I include/ \
-			  **/*.cpp && echo "$@: ok" && exit 0
-	echo "$@: fail" && exit 1
+	@find ./include ./src ./test \
+	  -type f \( -name '*.cpp' -o -name '*.h' \) -print0 \
+	  | xargs -0 -n1 sh -c '\
+	      cppcheck --enable=all \
+	        --platform=unix64 \
+	        --std=c++20 \
+	        --language=c++ \
+	        --suppressions-list=.cppcheck-suppressions.txt \
+	        --inline-suppr \
+	        --error-exitcode=2 \
+	        --check-level=normal \
+	        -I include/ "$$1" || exit 255\
+	    ' dummy
+	@echo "$@: ok"
+
 
 .PHONY: build
 build: configure
