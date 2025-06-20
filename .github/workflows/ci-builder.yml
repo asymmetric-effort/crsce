@@ -8,6 +8,8 @@ on:
     paths-ignore:
       - 'Dockerfile'   # only run when this file changes
       - '.github/workflows/ci-docker.yml'
+      - '.github/workflows/sonarcloud.yml'
+      - '.github/workflows/codeql-analysis'
 
 jobs:
   ci-builder:
