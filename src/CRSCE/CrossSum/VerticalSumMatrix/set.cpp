@@ -7,5 +7,5 @@
 
 void VerticalSumMatrix::set(const CrossSumIndex _, const CrossSumIndex c, const CrossSumValue &value) {
     bounds_check(c);
-    data[c]=value;
+    this->storage()[c]=value;
 }

@@ -7,5 +7,5 @@
 
 void LateralSumMatrix::set(const CrossSumIndex r, const CrossSumIndex _, const CrossSumValue &value) {
     bounds_check(r);
-    data[r]=value;
+    this->storage()[r]=value;
 }

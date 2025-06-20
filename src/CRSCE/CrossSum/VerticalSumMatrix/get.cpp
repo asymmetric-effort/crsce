@@ -7,5 +7,5 @@
 
 CrossSumValue VerticalSumMatrix::get(const CrossSumIndex _, const CrossSumIndex c) const {
     bounds_check(c);
-    return data[c];
+    return this->storage()[c];
 }

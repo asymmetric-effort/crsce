@@ -36,6 +36,10 @@ public:
 
     void serialize(std::ostream &os) const;
 
+protected:
+    virtual std::vector<CrossSumValue> &storage() { return data; }
+    virtual const std::vector<CrossSumValue> &storage() const { return data; }
+
 private:
     // cppcheck-suppress unusedStructMember
     std::vector<CrossSumValue> data;
