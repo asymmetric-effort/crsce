@@ -4,26 +4,26 @@ WORKDIR /opt/
 RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get install -y build-essential \
-                       docker.io \
-                       cmake \
                        ccache \
                        clang \
+                       cmake \
+                       cppcheck \
+                       curl \
                        libc++-dev \
                        libc++abi-dev \
-                       make \
-                       time \
-                       ninja-build \
-                       curl \
                        libssl-dev \
+                       make \
+                       ninja-build \
                        pkg-config \
-                       cppcheck \
                        python3 \
-                       python3-pip && \
+                       python3-pip \
+                       time && \
     pip install --break-system-packages \
+                json-linter \
                 pymarkdown \
-                yamllint \
-                json-linter && \
-    ln -s /usr/local/bin/json-linter /usr/local/bin/jsonlint
+                yamllint && \
+    ln -s /usr/local/bin/json-linter /usr/local/bin/jsonlint && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 FROM base AS builder
 COPY . /opt/
