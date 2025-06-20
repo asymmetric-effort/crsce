@@ -7,8 +7,12 @@
 #include <fstream>
 
 void Reader::write(const FileBuffer& buffer) {
+    if (!outputStream) {
+        return;
+    }
+    // Write exactly the bytes read from the last readFile() call
     outputStream.write(
         reinterpret_cast<const char*>(buffer.data()),
-        static_cast<std::streamsize>(buffer.size() * sizeof(FileBuffer::value_type))
+        static_cast<std::streamsize>(buffer.size())
     );
 }
