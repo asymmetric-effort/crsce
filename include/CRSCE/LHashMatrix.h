@@ -28,7 +28,7 @@
 class LHashMatrix {
 public:
     // Constructor assumes CRSCE s-value
-    LHashMatrix();
+    LHashMatrix(): row_positions{}{};
     ~LHashMatrix();
 
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
