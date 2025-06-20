@@ -15,6 +15,12 @@ CRSCE represents arbitrary binary input as a series of fixed-size s×s bit-matri
 cross-sum projections (lateral, vertical, diagonal, anti-diagonal) plus a cryptographic hash chain,
 and packs them into a compact, verifiable format.
 
+## Status
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=asymmetric-effort_crsce&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=asymmetric-effort_crsce)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=asymmetric-effort_crsce&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=asymmetric-effort_crsce)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=asymmetric-effort_crsce&metric=bugs)](https://sonarcloud.io/summary/new_code?id=asymmetric-effort_crsce)
+
+
 ## Features
 
 * ***Predictable compression:*** Fixed, content-independent ratio (42.97% at s=511).
