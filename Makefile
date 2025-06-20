@@ -6,9 +6,13 @@ configure:
 lint: lint/json lint/yaml lint/cpp
 	@echo "lint: ok"
 
+.PHONY: lint/json
 lint/json:
 	@echo "$@: starting)"
-	find . -type f -name '*.json' -print0 | xargs -0 -n1 jsonlint
+	@find . \
+	  \( -path './cmake-build-*' -o -path './build' \) -prune \
+	  -o -type f -name '*.json' -print0 \
+	  | xargs -0 -n1 json-linter
 	@echo "$@: ok"
 
 lint/yaml:
