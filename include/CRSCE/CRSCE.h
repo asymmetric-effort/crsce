@@ -31,9 +31,10 @@ public:
     // cppcheck-suppress unusedStructMember
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
-  protected:
+protected:
     bool readInputBuffer(FileBuffer& buffer);
 
+private:
     std::ifstream inputStream;
     std::ofstream outputStream;
 

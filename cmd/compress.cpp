@@ -14,7 +14,7 @@
 
 namespace fs = std::filesystem;
 
-int main(int argc, char* argv[]) {
+int main(const int argc, const char **argv) {
     try {
         std::string inputFile;
         std::string outputFile;
