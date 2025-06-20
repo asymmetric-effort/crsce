@@ -12,7 +12,7 @@ lint/json:
 	@find . \
 	  \( -path './cmake-build-*' -o -path './build' \) -prune \
 	  -o -type f -name '*.json' -print0 \
-	  | xargs -0 -n1 json-linter
+	  | xargs -0 -n1 json-linter filename
 	@echo "$@: ok"
 
 lint/yaml:
