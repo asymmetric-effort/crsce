@@ -8,7 +8,7 @@ lint: lint/json lint/yaml lint/cpp
 
 lint/json:
 	@echo "$@: starting)"
-	find . -type f -name '*.json' -print0 | xargs -0 -n1 yamllint
+	find . -type f -name '*.json' -print0 | xargs -0 -n1 jsonlint
 	@echo "$@: ok"
 
 lint/yaml:
