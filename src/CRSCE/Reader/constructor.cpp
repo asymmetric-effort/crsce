@@ -8,4 +8,18 @@
 Reader::Reader(
         const std::string& inputFile,
         const std::string& outputFile
-    ) : CRSCE(inputFile, outputFile) {/* noop */}
+    ) {
+
+    inputStream.open(inputFile, std::ifstream::in | std::ios::binary);
+
+    if (!inputStream.is_open()) {
+        throw std::runtime_error("Failed to open input file: " + inputFile);
+    }
+
+    outputStream.open(outputFile, std::ofstream::out | std::ios::binary);
+
+    if (!outputStream.is_open()) {
+        throw std::runtime_error("Failed to open output file: " + outputFile);
+    }
+
+}

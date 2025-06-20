@@ -7,6 +7,12 @@
 
 Reader::~Reader(){
 
-  /* Noop */
+    if (inputStream.is_open()) {
+        inputStream.close();
+    }
+
+    if (outputStream.is_open()) {
+        outputStream.close();
+    }
 
 }
