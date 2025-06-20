@@ -9,18 +9,18 @@ void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
     bounds_check(r);
     bounds_check(c);
 
-    if (row_positions[r] >= s) {
+    if (row_position_data[r] >= s) {
         throw std::overflow_error(
             "Row overflow: more than s bits pushed. position=" +
-            std::to_string(row_positions[r])
+            std::to_string(row_position_data[r])
         );
     }
 
-    row_buffers[r].set(c, bit_value);
-    row_positions[r]++;  // ✅ track how many bits have been pushed
+    row_buffer_data[r].set(c, bit_value);
+    row_position_data[r]++;  // ✅ track how many bits have been pushed
 
     // Automatically hash and store once row is full
-    if (row_positions[r] == s) {
+    if (row_position_data[r] == s) {
         hash_and_store(r);
     }
 }

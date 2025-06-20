@@ -8,11 +8,11 @@
 void LHashMatrix::serialize(std::ostream &os) const {
     for (CrossSumIndex r = 0; r < s; ++r) {
         // Finalize hash if row is full and hash has not been computed
-        if (row_positions[r] == s && row_hashes[r].empty()) {
+        if (row_position_data[r] == s && row_hash_data[r].empty()) {
             const_cast<LHashMatrix*>(this)->hash_and_store(r);
         }
 
-        const auto& hash = row_hashes[r];
+        const auto& hash = row_hash_data[r];
         if (hash.size() != SHA256::DIGEST_SIZE) {
             throw std::runtime_error(
                 "LHashMatrix::serialize() - Invalid hash length: " + std::to_string(hash.size())
