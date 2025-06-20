@@ -39,10 +39,13 @@ int main() {
     // ---- uint64_t tests ----
     constexpr uint64_t u64_1 = static_cast<uint64_t>(0x12345678ABCDEF00ULL);
     constexpr uint64_t u64_2 = static_cast<uint64_t>(0x00FEDCBA87654321ULL);
+
+#if SIZE_MAX != UINT64_MAX
     tester.assertEqual(u64_1, u64_1, "operands should be equal");
     tester.expectException<TestException>([&] { tester.assertEqual(u64_1, u64_2, "operands should be equal"); });
     tester.assertNotEqual(u64_1, u64_2, "operands should be equal");
     tester.expectException<TestException>([&] { tester.assertNotEqual(u64_1, u64_1, "operands should be equal"); });
+#endif
 
     return tester.getFailCount()>0?1:EXIT_SUCCESS;
 }

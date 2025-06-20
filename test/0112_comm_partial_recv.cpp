@@ -29,8 +29,8 @@ int main() {
     if (pipe(toChild) < 0 || pipe(fromChild) < 0) {
         return EXIT_FAILURE;
     }
-    Communications parentComm(toChild, fromChild, true);
-    Communications childComm(toChild, fromChild, false);
+    const Communications parentComm(toChild, fromChild, true);
+    const Communications childComm(toChild, fromChild, false);
 
     // ---- Partial Message receive ----
     Message outMsg;
@@ -38,7 +38,7 @@ int main() {
     outMsg.kernelId = 0x1010;
     outMsg.size     = 0x2020;
     outMsg.ptr      = 0x3030;
-    auto msgBuf = outMsg.serialize();
+    const auto msgBuf = outMsg.serialize();
     // Write only a truncated header (less than full 24 bytes)
     write(toChild[1], msgBuf.data(), msgBuf.size() - 5);
     tester.expectException<TestException>([&] {
@@ -50,7 +50,7 @@ int main() {
     outResp.status = FailureCodes::ReadError;
     outResp.size   = 4;
     outResp.data   = {0xAA, 0xBB, 0xCC, 0xDD};
-    auto respBuf = outResp.serialize();
+    const auto respBuf = outResp.serialize();
     // Write only part of the response (missing payload bytes)
     write(fromChild[1], respBuf.data(), respBuf.size() - 2);
     tester.expectException<TestException>([&] {

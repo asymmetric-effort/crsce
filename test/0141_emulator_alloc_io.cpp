@@ -1,10 +1,5 @@
 /**
  * @file 0141_emulator_alloc_io.cpp
- * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
- */
-
-/**
- * @file 0141_emulator_alloc_io.cpp
  * @brief Test Gpu::Device::Emulator::alloc() behavior.
  *
  * This test validates:

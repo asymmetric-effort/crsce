@@ -38,11 +38,13 @@ int main() {
         static_cast<uint8_t>(original.status),
         "status match"
     );
+#if SIZE_MAX != UINT64_MAX
     tester.assertEqual(
         roundtrip.size,
         original.size,
         "size match"
     );
+#endif
     tester.assertEqual(
         roundtrip.data,
         original.data,

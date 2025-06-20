@@ -15,7 +15,9 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#pragma once
+#ifndef COMMON_ABSTRACTPTR_H_
+#define COMMON_ABSTRACTPTR_H_
+
 #include <cstdint>
 
 namespace Common {
@@ -23,3 +25,5 @@ namespace Common {
     using AbstractPtr = size_t;
 
 } // namespace Common
+
+#endif //COMMON_ABSTRACTPTR_H_
