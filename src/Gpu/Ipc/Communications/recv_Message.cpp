@@ -13,11 +13,11 @@ namespace Gpu::Ipc {
         if (!validateChildAccess()) return Result::InvalidRole;
 
         uint8_t raw[24] = {};
-        ssize_t n = read(parentToChildFd[0], raw, 24);
+        const ssize_t n = read(parentToChildFd[0], raw, 24);
 
         if (n == 24) {
-            Common::Buffer8 buffer(raw, raw + 24);
             try {
+                const Common::Buffer8 buffer(raw, raw + 24);
                 msg.deserialize(buffer);
                 return Result::Success;
             } catch (...) {
