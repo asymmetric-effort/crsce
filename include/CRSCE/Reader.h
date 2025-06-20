@@ -27,7 +27,7 @@ class Reader {
 public:
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
-    explicit Reader(const std::string &inputFile,
+    Reader(const std::string &inputFile,
                     const std::string &outputFile);
     ~Reader();
 
