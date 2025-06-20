@@ -21,13 +21,13 @@ public:
 
     virtual ~CrossSum();
 
-    virtual CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const;
+    [[nodiscard]] virtual CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const;
 
-    virtual void set(CrossSumIndex r, CrossSumIndex c, CrossSumValue value);
+    virtual auto set(CrossSumIndex r, CrossSumIndex c, const CrossSumValue &value) -> void;
 
     virtual void increment(CrossSumIndex r, CrossSumIndex c);
 
-    void serialize(std::ostream& os) const;
+    void serialize(std::ostream &os) const;
 
 protected:
 

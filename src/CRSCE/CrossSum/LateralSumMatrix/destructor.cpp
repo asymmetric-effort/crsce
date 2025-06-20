@@ -5,6 +5,6 @@
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 
-LateralSumMatrix::~LateralSumMatrix(){
-    /*noop*/
-}
+// LateralSumMatrix::~LateralSumMatrix(){
+//     /*noop*/
+// }

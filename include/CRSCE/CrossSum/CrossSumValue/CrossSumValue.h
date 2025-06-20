@@ -20,7 +20,7 @@ public:
     [[nodiscard]] uint16_t to_uint16() const;
 
     CrossSumValue operator+(uint16_t rhs) const;
-    CrossSumValue operator+(CrossSumValue rhs) const;
+    CrossSumValue operator+(const CrossSumValue &rhs) const;
     CrossSumValue& operator++();
     CrossSumValue operator++(int);
 

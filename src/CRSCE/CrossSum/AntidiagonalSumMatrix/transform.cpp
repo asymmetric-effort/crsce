@@ -6,7 +6,7 @@
 #include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 
 //Translate 2D coordinates(r,c) into 1D linear address (x)
-CrossSumIndex AntidiagonalSumMatrix::transform(const CrossSumIndex r, const CrossSumIndex c) const {
+CrossSumIndex AntidiagonalSumMatrix::transform(const CrossSumIndex r, const CrossSumIndex c) {
     bounds_check(r);
     bounds_check(c);
     return (s + (r - c)) % s;

@@ -5,6 +5,6 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-void CrossSum::set(CrossSumIndex r,CrossSumIndex c, CrossSumValue value) {
+void CrossSum::set(const CrossSumIndex r,const CrossSumIndex c, const CrossSumValue &value) {
     /*noop*/
 }

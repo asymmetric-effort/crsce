@@ -5,7 +5,7 @@
 
 #include "CRSCE/CrossSum/LateralSumMatrix/LateralSumMatrix.h"
 
-void LateralSumMatrix::set(const CrossSumIndex r, const CrossSumIndex _, const CrossSumValue v) {
+void LateralSumMatrix::set(const CrossSumIndex r, const CrossSumIndex _, const CrossSumValue &value) {
     bounds_check(r);
-    data[r]=v;
+    data[r]=value;
 }

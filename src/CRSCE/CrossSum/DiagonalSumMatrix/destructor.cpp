@@ -5,6 +5,6 @@
 
 #include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
 
-DiagonalSumMatrix::~DiagonalSumMatrix() {
-    /* noop */
-}
+// DiagonalSumMatrix::~DiagonalSumMatrix() {
+//     /* noop */
+// }

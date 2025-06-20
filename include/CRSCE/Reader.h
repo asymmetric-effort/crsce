@@ -14,7 +14,7 @@ class Reader : public CRSCE {
     Reader(const std::string& inputFile, const std::string& outputFile);
     ~Reader();
     bool readFile(FileBuffer& buffer);
-    void write(FileBuffer& buffer);
+    void write(const FileBuffer& buffer);
 };
 
 #endif //CRSCE_READER_H

@@ -14,6 +14,6 @@
 // we should never have a cross sum index greater than s==512.
 using CrossSumIndex = uint16_t;
 
-void bounds_check(const CrossSumIndex index);
+void bounds_check(CrossSumIndex index);
 
 #endif // CRSCE_CROSS_SUM_INDEX_H

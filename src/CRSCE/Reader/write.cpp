@@ -6,6 +6,9 @@
 #include "CRSCE/Reader.h"
 #include <fstream>
 
-void Reader::write(FileBuffer& buffer) {
-    outputStream.write(reinterpret_cast<char*>(buffer.data()), buffer.size());
+void Reader::write(const FileBuffer& buffer) {
+    outputStream.write(
+        reinterpret_cast<const char*>(buffer.data()),
+        static_cast<std::streamsize>(buffer.size() * sizeof(FileBuffer::value_type))
+    );
 }

@@ -7,5 +7,5 @@
 
 void LateralSumMatrix::increment(const CrossSumIndex r, const CrossSumIndex _) {
     bounds_check(r);
-    data[r]++;
+    ++data[r];
 }

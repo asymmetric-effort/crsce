@@ -5,6 +5,6 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-CrossSumValue CrossSum::get(CrossSumIndex r, CrossSumIndex c) const {
+CrossSumValue CrossSum::get(const CrossSumIndex r, const CrossSumIndex c) const {
     return CrossSumValue(0);
 }
