@@ -10,7 +10,9 @@ lint: lint/json lint/yaml lint/cpp
 lint/json:
 	@echo "$@: starting"
 	@( \
-		for i in $$(find . \( -path './cmake-build-*' -o -path './build' \) -prune -type f -name '*.json'); do json-linter filename $${i}; done; \
+		for i in $$(find . \( -path './cmake-build-*' -o -path './build' \) -prune -type f -name '*.json'); do \
+		    json-linter filename $${i} || exit 1; \
+		done; \
 	)
 	@echo "$@: ok"
 
