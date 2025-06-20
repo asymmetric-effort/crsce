@@ -35,6 +35,9 @@ public:
     void serialize(std::ostream& os) const;
 
 protected:
+    void hash_and_store(CrossSumIndex row_index);
+
+private:
     // Bit buffer for each row
     std::array<std::bitset<s>, s> row_buffers;
 
@@ -43,8 +46,6 @@ protected:
 
     // SHA256 hashes per row
     std::array<std::string, s> row_hashes;
-
-    void hash_and_store(CrossSumIndex row_index);
 };
 
 #endif // CRSCE_LHASHMATRIX_H
