@@ -12,7 +12,7 @@
 #include <cstdlib>
 #include <vector>
 
-class TestLHashMatrix : public LHashMatrix {
+class TestLHashMatrix final : public LHashMatrix {
 public:
     std::string debug_serialize_to_hex() const {
         std::ostringstream oss;
@@ -37,9 +37,9 @@ bool run_lateral_hash_serialization_test(const std::string& name, PatternFn patt
         }
     }
 
-    std::string serialized_hex = matrix.debug_serialize_to_hex();
-    size_t expected_bytes = s * SHA256::DIGEST_SIZE;
-    size_t actual_bytes = serialized_hex.size() / 2;
+    const std::string serialized_hex = matrix.debug_serialize_to_hex();
+    constexpr size_t expected_bytes = s * SHA256::DIGEST_SIZE;
+    const size_t actual_bytes = serialized_hex.size() / 2;
 
     if (actual_bytes != expected_bytes) {
         std::cerr << "[FAIL] " << name << " - Serialized output size mismatch. Expected "
@@ -59,8 +59,8 @@ int main() {
     };
 
     bool all_passed = true;
-    for (const auto& pattern : patterns) {
-        all_passed &= run_lateral_hash_serialization_test(pattern.name, pattern.generator);
+    for (const auto&[name, generator] : patterns) {
+        all_passed &= run_lateral_hash_serialization_test(name, generator);
     }
 
     return all_passed ? EXIT_SUCCESS : EXIT_FAILURE;

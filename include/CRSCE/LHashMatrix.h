@@ -29,7 +29,8 @@ class LHashMatrix {
 public:
     // Constructor assumes CRSCE s-value
     LHashMatrix(): row_position_data{}{};
-    ~LHashMatrix();
+
+    virtual ~LHashMatrix();
 
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;
