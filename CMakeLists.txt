@@ -29,4 +29,3 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_ROOT}/cmake")
 
 include(include_directories)
 include(build_all)
-include(linters)

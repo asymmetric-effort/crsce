@@ -3,8 +3,33 @@ configure:
 	@cmake -G Ninja -S . -B build
 
 .PHONY: lint
-lint: configure
-	@time cmake --build build --target linters
+lint: lint/json lint/yaml lint/cpp
+	@echo "lint: ok"
+
+lint/json:
+	@echo "$@: starting)"
+	time find . -type f -name '*.json' -exec jsonlint -q "{}" \;
+	@echo "$@: ok"
+
+lint/yaml:
+	@echo "$@: starting)"
+	time find . -type f -name '*.yml' -exec yamllint "{}" \;
+	time find . -type f -name '*.yaml' -exec yamllint "{}" \;
+	@echo "$@: ok"
+
+lint/cpp:
+	@echo "$@: starting)"
+	@time cppcheck --enable=all \
+			  --quiet \
+			  --platform=unix64 \
+			  --std=c++20 \
+			  --language=c++ \
+			  --suppressions-list=.cppcheck-suppressions.txt \
+			  --inline-suppr \
+			  --check-level=normal \
+			  -I include/ \
+			  **/*.cpp
+	@echo "$@: ok"
 
 .PHONY: build
 build: configure
