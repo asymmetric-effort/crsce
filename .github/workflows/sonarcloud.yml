@@ -58,6 +58,5 @@ jobs:
             -Dsonar.cfamily.compile-commands=compile_commands.json
             -Dsonar.sources=.
             -Dsonar.inclusions=**/Makefile,**/*.md,Dockerfile,**/*.py,**/*.cpp,**/*.h
-            -Dsonar.verbose=true
             -Dsonar.scm.provider=git
           projectBaseDir: .
