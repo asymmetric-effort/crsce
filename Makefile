@@ -8,18 +8,18 @@ lint: lint/json lint/yaml lint/cpp
 
 lint/json:
 	@echo "$@: starting)"
-	time find . -type f -name '*.json' -exec jsonlint -q "{}" \;
+	find . -type f -name '*.json' -exec jsonlint -q "{}" \;
 	@echo "$@: ok"
 
 lint/yaml:
 	@echo "$@: starting)"
-	time find . -type f -name '*.yml' -exec yamllint "{}" \;
-	time find . -type f -name '*.yaml' -exec yamllint "{}" \;
+	find . -type f -name '*.yml' -exec yamllint "{}" \;
+	find . -type f -name '*.yaml' -exec yamllint "{}" \;
 	@echo "$@: ok"
 
 lint/cpp:
 	@echo "$@: starting)"
-	@time cppcheck --enable=all \
+	@cppcheck --enable=all \
 			  --quiet \
 			  --platform=unix64 \
 			  --std=c++20 \
@@ -28,8 +28,8 @@ lint/cpp:
 			  --inline-suppr \
 			  --check-level=normal \
 			  -I include/ \
-			  **/*.cpp
-	@echo "$@: ok"
+			  **/*.cpp && echo "$@: ok" && exit 0
+	echo "$@: fail" && exit 1
 
 .PHONY: build
 build: configure
