@@ -5,6 +5,9 @@
 
 #include "CRSCE/LHashMatrix.h"
 
-LHashMatrix::LHashMatrix() {
-    row_positions.fill(0);
-}
+LHashMatrix::LHashMatrix()
+    : row_positions{}  // value-initialize all elements to zero via initializer list
+{
+
+}  // namespace CRSCE
+
