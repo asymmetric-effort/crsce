@@ -38,6 +38,10 @@ private:
     std::ifstream inputStream;
     std::ofstream outputStream;
 
+    static void increment_sums(bool bit_value, CrossSumIndex r, CrossSumIndex c,
+                               LateralSumMatrix &LSM, VerticalSumMatrix &VSM, DiagonalSumMatrix &XSM,
+                               AntidiagonalSumMatrix &DSM, LHashMatrix &LHASH);
+
 };
 
 #endif // CRSCE_H

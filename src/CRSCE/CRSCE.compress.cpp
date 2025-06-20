@@ -9,9 +9,6 @@
 #include <iostream>
 #include <stdexcept>
 
-void increment_sums(bool bit_value, CrossSumIndex r, CrossSumIndex c, LateralSumMatrix &LSM, VerticalSumMatrix &VSM,
-                    DiagonalSumMatrix &XSM, AntidiagonalSumMatrix &DSM, LHashMatrix &LHASH);
-
 int CRSCE::compress() {
     try {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
@@ -57,13 +54,6 @@ int CRSCE::compress() {
 
                     // Update cross-sum matrices
                     increment_sums(bit_value, r, c, LSM, VSM, XSM, DSM, LHASH);
-                    if (bit_value) {
-                        LSM.increment(r, c);
-                        VSM.increment(r, c);
-                        XSM.increment(r, c);
-                        DSM.increment(r, c);
-                    }
-                    LHASH.push(r, c, bit_value);
 
                     ++block_bits;
                     ++buf_bit;
@@ -74,8 +64,8 @@ int CRSCE::compress() {
                     std::cerr << "[CRSCE] Padding block " << block_count
                             << " from " << block_bits << " to " << (s * s) << " bits." << std::endl;
                     for (size_t i = block_bits; i < s * s; ++i) {
-                        CrossSumIndex r = i / s;
-                        CrossSumIndex c = i % s;
+                        const CrossSumIndex r = i / s;
+                        const CrossSumIndex c = i % s;
                         LHASH.push(r, c, false);
                     }
                 }
@@ -95,7 +85,7 @@ int CRSCE::compress() {
 
         // Write the 128-bit file footer: block size and block count
         std::cerr << "[CRSCE] Writing footer. Total blocks: " << block_count << std::endl;
-        uint64_t block_size_value = s;
+        constexpr uint64_t block_size_value = s;
         outputStream.write(reinterpret_cast<const char *>(&block_size_value), sizeof(block_size_value));
         outputStream.write(reinterpret_cast<const char *>(&block_count), sizeof(block_count));
         outputStream.flush();
@@ -106,24 +96,4 @@ int CRSCE::compress() {
         std::cerr << "[CRSCE] Compression failed: " << e.what() << std::endl;
         return EXIT_FAILURE;
     }
-}
-
-void increment_sums(
-    const bool bit_value,
-    const CrossSumIndex r,
-    const CrossSumIndex c,
-    LateralSumMatrix &LSM,
-    VerticalSumMatrix &VSM,
-    DiagonalSumMatrix &XSM,
-    AntidiagonalSumMatrix &DSM,
-    LHashMatrix &LHASH
-) {
-    // Update cross-sum matrices
-    if (bit_value) {
-        LSM.increment(r, c);
-        VSM.increment(r, c);
-        XSM.increment(r, c);
-        DSM.increment(r, c);
-    }
-    LHASH.push(r, c, bit_value);
 }
