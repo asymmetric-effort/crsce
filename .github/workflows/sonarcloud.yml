@@ -56,7 +56,6 @@ jobs:
             -Dsonar.projectKey=asymmetric-effort_crsce
             -Dsonar.organization=asymmetric-effort
             -Dsonar.cfamily.compile-commands=compile_commands.json
-            -Dsonar.tests=test
             -Dsonar.sources=.
             -Dsonar.inclusions=**/Makefile,**/*.md,Dockerfile,**/*.py,**/*.cpp,**/*.h
             -Dsonar.verbose=true
