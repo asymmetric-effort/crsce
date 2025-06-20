@@ -15,13 +15,16 @@
 
 class CrossSum {
 public:
-
     //constructor : initialize a cross sum matrix with constants s and b.
     explicit CrossSum();
-    explicit CrossSum(const CrossSum&) = delete;
-    explicit CrossSum(CrossSum&&) noexcept = delete;
-    CrossSum& operator=(const CrossSum&) = delete;
-    CrossSum& operator=(CrossSum&&) noexcept = delete;
+
+    explicit CrossSum(const CrossSum &) = delete;
+
+    explicit CrossSum(CrossSum &&) noexcept = delete;
+
+    CrossSum &operator=(const CrossSum &) = delete;
+
+    CrossSum &operator=(CrossSum &&) noexcept = delete;
 
     virtual ~CrossSum();
 
@@ -34,10 +37,8 @@ public:
     void serialize(std::ostream &os) const;
 
 protected:
-
     // cppcheck-suppress unusedStructMember
     std::vector<CrossSumValue> data;
-
 };
 
 #endif // CRSCE_CROSSSUM_H

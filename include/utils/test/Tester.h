@@ -28,6 +28,14 @@ public:
      */
     explicit Tester(const std::string &prefix, ExitOnError onError = false);
 
+    explicit Tester(const Tester &) = delete;
+
+    explicit Tester(Tester &&) = delete;
+
+    Tester &operator=(const Tester &) = delete;
+
+    Tester &operator=(Tester &&) noexcept = delete;
+
     /**
      * @name destructor
      * @brief show test statistics and if there were errors, terminate with non-zero exit code.
