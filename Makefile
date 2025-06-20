@@ -8,21 +8,20 @@ lint: lint/json lint/yaml lint/cpp
 
 .PHONY: lint/json
 lint/json:
-	@echo "$@: starting)"
-	@find . \
-	  \( -path './cmake-build-*' -o -path './build' \) -prune \
-	  -o -type f -name '*.json' -print0 \
-	  | xargs -0 -n1 json-linter filename
+	@echo "$@: starting"
+	@( \
+		for i in $$(find . \( -path './cmake-build-*' -o -path './build' \) -prune -type f -name '*.json'); do json-linter filename $${i}; done; \
+	)
 	@echo "$@: ok"
 
 lint/yaml:
-	@echo "$@: starting)"
+	@echo "$@: starting"
 	find . -type f \( -name '*.yml' -o -name '*.yaml' \) -print0 | xargs -0 -n1 yamllint
 	@echo "$@: ok"
 
 .PHONY: lint/cpp
 lint/cpp:
-	@echo "$@: starting)"
+	@echo "$@: starting"
 	@find ./include ./src ./test \
 	  -type f \( -name '*.cpp' -o -name '*.h' \) -print0 \
 	  | xargs -0 -n1 sh -c '\
