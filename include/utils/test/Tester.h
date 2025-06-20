@@ -15,6 +15,8 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <cstdint>   // for UINT64_MAX
+#include <cstddef>   // for SIZE_MAX
 
 class Tester {
 public:
@@ -148,6 +150,7 @@ public:
      */
     void assertEqual(uint16_t a, uint16_t b, const std::string &message);
 
+#if SIZE_MAX != UINT64_MAX
     /**
      * @name assertEqual
      * @brief asserts that a should equal b
@@ -156,6 +159,7 @@ public:
      * @param message std::string
      */
     void assertEqual(uint64_t a, uint64_t b, const std::string &message);
+#endif
 
     /**
      * @name assertEqual
@@ -256,6 +260,7 @@ public:
      */
     void assertNotEqual(uint16_t a, uint16_t b, const std::string &message);
 
+#if SIZE_MAX != UINT64_MAX
     /**
      * @name assertNotEqual
      * @brief asserts that a should equal b
@@ -264,6 +269,7 @@ public:
      * @param message std::string
      */
     void assertNotEqual(uint64_t a, uint64_t b, const std::string &message);
+#endif
 
     /**
      * @name assertNotEqual
