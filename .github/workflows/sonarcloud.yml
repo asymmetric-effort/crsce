@@ -56,7 +56,7 @@ jobs:
             -Dsonar.projectKey=asymmetric-effort_crsce
             -Dsonar.organization=asymmetric-effort
             -Dsonar.sources=.
-            -Dsonar.inclusions=**/Makefile,**/*.md,Dockerfile,**/*.py
+            -Dsonar.inclusions=**/Makefile,**/*.md,Dockerfile,**/*.py,**/.cmake,**/.json,**/.yml,**/.yaml,**/*
             -Dsonar.verbose=true
             -Dsonar.scm.provider=git
           projectBaseDir: .
