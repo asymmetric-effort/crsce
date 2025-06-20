@@ -43,19 +43,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository (full history for SCM)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Analyze with SonarCloud
         uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args:
-            # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
-            # mandatory
             -Dsonar.projectKey=asymmetric-effort_crsce
             -Dsonar.organization=asymmetric-effort
             -Dsonar.sources=.
             -Dsonar.inclusions=**/Makefile,**/*.md,Dockerfile,**/*.py
             -Dsonar.verbose=true
             -Dsonar.scm.provider=git
-          # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
           projectBaseDir: .
