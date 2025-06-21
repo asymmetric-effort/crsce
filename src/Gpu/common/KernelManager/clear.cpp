@@ -17,8 +17,7 @@ namespace Gpu {
         std::mt19937 gen(rd());
         std::uniform_int_distribution<std::uint8_t> dist(0, 255);
         for (auto &blob : table_ | std::views::values)
-            // ReSharper disable once CppUseRangeAlgorithm
-            std::generate(blob.begin(), blob.end(), [&] { return dist(gen); });
+            std::ranges::generate(blob, [&] { return dist(gen); });
         table_.clear();
         return true;
     }
