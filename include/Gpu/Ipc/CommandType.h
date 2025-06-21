@@ -20,7 +20,7 @@ namespace Gpu::Ipc {
      * @example
      * Gpu::Ipc::CommandType cmd = Gpu::Ipc::CommandType::Alloc;
      * if (cmd == Gpu::Ipc::CommandType::Shutdown) {
-     *  // Trigger graceful shutdown
+     *    -- Trigger graceful shutdown --
      * }
      */
     enum CommandType : uint8_t {
