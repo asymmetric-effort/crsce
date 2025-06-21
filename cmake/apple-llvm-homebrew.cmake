@@ -11,6 +11,11 @@ set(CMAKE_PREFIX_PATH "/usr/local/opt/llvm")
 set(CMAKE_C_COMPILER   "${CMAKE_PREFIX_PATH}/bin/clang"   CACHE STRING "" FORCE)
 set(CMAKE_CXX_COMPILER "${CMAKE_PREFIX_PATH}/bin/clang++" CACHE STRING "" FORCE)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lc++ -lc++abi")
+set(CMAKE_CXX_LINKER_FLAGS "${CMAKE_CXX_LINKER_FLAGS} -lc++ -lc++abi")
+
 include_directories(BEFORE "/usr/local/opt/llvm/include/c++/v1")
 
 link_directories("/usr/local/opt/llvm/lib")
