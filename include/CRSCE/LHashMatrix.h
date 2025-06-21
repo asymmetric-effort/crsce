@@ -56,13 +56,13 @@ protected:
 
 private:
     // Bit buffer for each row
-    std::array<std::bitset<s>, s> row_buffer_data;
+    std::array<std::bitset<s>, s> row_buffer_data{};  // zero-initialize all positions
 
     // Track current position in each row
     std::array<size_t, s> row_position_data{};  // zero-initialize all positions
 
     // SHA256 hashes per row
-    std::array<std::string, s> row_hash_data;
+    std::array<std::string, s> row_hash_data{};  // zero-initialize all positions
 };
 
 #endif // CRSCE_LHASHMATRIX_H
