@@ -27,7 +27,6 @@ int main() {
     Tester tester("0111_comm_send_recv_happy.cpp");
     tester.deadline(240);
 
-
     tester.debug("create the bidirectional pipes");
     Gpu::Ipc::Handles toChild;
     Gpu::Ipc::Handles fromChild;
@@ -37,7 +36,7 @@ int main() {
     const Communications childComm(toChild, fromChild, false);
 
     tester.debug("Prepare a message to send");
-    constexpr Message outMsg = {Gpu::Ipc::CommandType::Write, 0x1111, 0x2222, 0x3333};
+    constexpr Message outMsg = {Write, 0x1111, 0x2222, 0x3333};
     Message inMsg;
 
     tester.debug("Send the message");

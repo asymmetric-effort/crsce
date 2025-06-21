@@ -22,7 +22,7 @@ using Gpu::Ipc::FailureCodes;
 int main() {
     Tester tester("0101_test_commandTypeToUnderlying.cpp");
     using enum Gpu::Ipc::CommandType;
-    const std::map<Gpu::Ipc::CommandType, uint8_t> commands = {
+    const std::map<Gpu::Ipc::CommandType, uint32_t> commands = {
         {Init, 0x00},
         {Alloc, 0x01},
         {Free, 0x02},

@@ -21,7 +21,7 @@ using Gpu::Ipc::FailureCodes;
 int main() {
     Tester tester("0100_test_commandType.cpp");
     using enum Gpu::Ipc::CommandType;
-    const std::map<Gpu::Ipc::CommandType, uint8_t> commands = {
+    const std::map<Gpu::Ipc::CommandType, uint32_t> commands = {
         {Init, 0x00},
         {Alloc, 0x01},
         {Free, 0x02},
@@ -34,10 +34,10 @@ int main() {
     };
     for (auto [lhs, rhs]: commands) {
         tester.assertEqual(
-            static_cast<uint8_t>(lhs),
-            static_cast<uint8_t>(rhs),
+            static_cast<uint32_t>(lhs),
+            static_cast<uint32_t>(rhs),
             std::format("mismatched type (lhs:{},rhs:{})",
-                        static_cast<uint8_t>(lhs),
+                        static_cast<uint32_t>(lhs),
                         rhs));
     }
     tester.pass();
