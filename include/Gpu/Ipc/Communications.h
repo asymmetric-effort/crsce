@@ -10,6 +10,7 @@
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/Result.h"
+#include "Gpu/Ipc/Handles.h"
 
 namespace Gpu::Ipc {
 
@@ -28,7 +29,7 @@ namespace Gpu::Ipc {
          * @param childToParent
          * @param isParentProcess
          */
-        Communications(const int parentToChild[2], const int childToParent[2], bool isParentProcess);
+        Communications(Handles parentToChild, Handles childToParent, bool isParentProcess);
 
         /**
          * @name destructor
@@ -103,8 +104,8 @@ namespace Gpu::Ipc {
         static constexpr int writeEndpoint=1;
 
     private:
-        int parentToChildFd[2]{};
-        int childToParentFd[2]{};
+        Handles parentToChildFd{};
+        Handles childToParentFd{};
         bool isParent = true;
         std::atomic<bool> shutdownFlag = false;
     };

@@ -13,7 +13,7 @@ namespace Gpu::Ipc {
         if (!validateParentAccess()) return Result::InvalidRole;
 
         uint8_t header[9] = {};
-        if (const ssize_t read_header = read(childToParentFd[readEndpoint], header, 9); read_header != 9)
+        if (const ssize_t read_header = read(childToParentFd.at(readEndpoint), header, 9); read_header != 9)
             return (read_header == 0 ? Result::Closed : Result::IOError);
 
         uint64_t payload_size = 0;
@@ -24,7 +24,7 @@ namespace Gpu::Ipc {
         std::copy_n(header, 9, full.begin());
 
         if (payload_size > 0) {
-            if (const ssize_t read_payload = read(childToParentFd[readEndpoint], full.data() + 9, payload_size); read_payload != static_cast<ssize_t>(payload_size))
+            if (const ssize_t read_payload = read(childToParentFd.at(readEndpoint), full.data() + 9, payload_size); read_payload != static_cast<ssize_t>(payload_size))
                 return (read_payload == 0 ? Result::Closed : Result::IOError);
         }
 

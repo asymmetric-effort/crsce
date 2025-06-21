@@ -13,7 +13,7 @@ namespace Gpu::Ipc {
         if (!validateChildAccess()) return Result::InvalidRole;
 
         uint8_t raw[24] = {};
-        const ssize_t n = read(parentToChildFd[0], raw, 24);
+        const ssize_t n = read(parentToChildFd.at(0), raw, 24);
 
         if (n == 24) {
             try {

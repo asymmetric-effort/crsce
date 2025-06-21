@@ -14,7 +14,7 @@ namespace Gpu::Ipc {
 
         const Common::Buffer8 buffer = msg.serialize();
 
-        const ssize_t written = write(parentToChildFd[1], buffer.data(), buffer.size());
+        const ssize_t written = write(parentToChildFd.at(1), buffer.data(), buffer.size());
 
         if (written == static_cast<ssize_t>(buffer.size()))
             return Result::Success;
