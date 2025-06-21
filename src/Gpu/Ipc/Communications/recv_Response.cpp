@@ -9,7 +9,6 @@
 
 namespace Gpu::Ipc {
     Result Communications::recv(Response &res) const {
-        constexpr size_t MAX_MESSAGE_SIZE = 1048576;
         constexpr size_t header_size = 9;
 
         if (!validateParentAccess()) return Result::InvalidRole;
@@ -22,9 +21,11 @@ namespace Gpu::Ipc {
         uint64_t payload_size = 0;
         // Decode 64-bit little-endian payload size from header[1..8]
         for (int i = 0; i < 8; ++i)
+            // cppcheck-suppress containerOutOfBounds
             payload_size |= static_cast<uint64_t>(header.at(1 + i)) << (i * 8);
 
-        if (payload_size > MAX_MESSAGE_SIZE) return Result::IOError;
+
+        if (constexpr size_t MAX_MESSAGE_SIZE = 1048576; payload_size > MAX_MESSAGE_SIZE) return Result::IOError;
 
         Common::Buffer8 full(header.size() + payload_size, 0);
         std::copy_n(header.data(), header.size(), full.begin());
