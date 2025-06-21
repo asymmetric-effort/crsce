@@ -20,7 +20,7 @@ void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
     }
 
     row_buffer_data[r].set(c, bit_value);
-    row_position_data[r]++; // ✅ track how many bits have been pushed
+    row_position_data[r]++; // track how many bits have been pushed
 
     // Automatically hash and store once row is full
     if (row_position_data[r] == s) {
