@@ -35,6 +35,13 @@ public:
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;
 
+    /**
+     * @brief If the current block has fewer than s×s bits, pad the rest with zeros.
+     * @param block_count Index of the block being padded (for logging).
+     * @param block_bits  Number of bits already pushed in this block.
+     */
+    void padRemainingBits(std::size_t block_count, std::size_t block_bits);
+
 protected:
     void hash_and_store(CrossSumIndex row_index);
 

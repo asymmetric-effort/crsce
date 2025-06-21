@@ -59,16 +59,7 @@ int CRSCE::compress() {
                     ++buf_bit;
                 }
 
-                // If this block is incomplete, pad remaining bits with zeros
-                if (block_bits < s * s) {
-                    std::cerr << "[CRSCE] Padding block " << block_count
-                            << " from " << block_bits << " to " << (s * s) << " bits." << std::endl;
-                    for (size_t i = block_bits; i < s * s; ++i) {
-                        const CrossSumIndex r = i / s;
-                        const CrossSumIndex c = i % s;
-                        LHASH.push(r, c, false);
-                    }
-                }
+                LHASH.padRemainingBits(block_count, block_bits);
 
                 // Serialize all five matrices for this block
                 LHASH.serialize(outputStream);
