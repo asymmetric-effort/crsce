@@ -22,6 +22,8 @@ int main() {
     operator delete(vp);
 
     // ---- raw int* pointer tests ----
+    // ReSharper disable once CppUseAuto
+    // ReSharper disable once CppLocalVariableMayBeConst
     int* raw = new int(42);
     tester.assertNotNull(raw, "raw int* should not be null");
     tester.expectException<TestException>(
@@ -30,6 +32,7 @@ int main() {
     delete raw;
 
     // ---- unique_ptr<int> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto upi = std::make_unique<int>(7);
     tester.assertNotNull(upi, "unique_ptr<int> should not be null");
     tester.expectException<TestException>(
@@ -37,6 +40,7 @@ int main() {
     );
 
     // ---- unique_ptr<unsigned> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto upu = std::make_unique<unsigned>(123u);
     tester.assertNotNull(upu, "unique_ptr<unsigned> should not be null");
     tester.expectException<TestException>(
@@ -44,6 +48,7 @@ int main() {
     );
 
     // ---- unique_ptr<float> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto upf = std::make_unique<float>(3.14f);
     tester.assertNotNull(upf, "unique_ptr<float> should not be null");
     tester.expectException<TestException>(
@@ -51,6 +56,7 @@ int main() {
     );
 
     // ---- unique_ptr<double> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto upd = std::make_unique<double>(2.718);
     tester.assertNotNull(upd, "unique_ptr<double> should not be null");
     tester.expectException<TestException>(
@@ -58,6 +64,7 @@ int main() {
     );
 
     // ---- unique_ptr<char> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto upc = std::make_unique<char>('x');
     tester.assertNotNull(upc, "unique_ptr<char> should not be null");
     tester.expectException<TestException>(
@@ -65,6 +72,7 @@ int main() {
     );
 
     // ---- shared_ptr<void> / weak_ptr<void> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     std::shared_ptr<void> spv(operator new(1), [](void* p){ ::operator delete(p); });
     std::weak_ptr<void> wpv(spv);
     tester.assertNotNull(wpv, "weak_ptr<void> should not be null");
@@ -73,6 +81,7 @@ int main() {
     );
 
     // ---- shared_ptr<int> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto spi = std::make_shared<int>(99);
     tester.assertNotNull(spi, "shared_ptr<int> should not be null");
     tester.expectException<TestException>(
@@ -80,6 +89,7 @@ int main() {
     );
 
     // ---- shared_ptr<unsigned> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto spu = std::make_shared<unsigned>(456u);
     tester.assertNotNull(spu, "shared_ptr<unsigned> should not be null");
     tester.expectException<TestException>(
@@ -87,6 +97,7 @@ int main() {
     );
 
     // ---- shared_ptr<float> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto spf = std::make_shared<float>(1.23f);
     tester.assertNotNull(spf, "shared_ptr<float> should not be null");
     tester.expectException<TestException>(
@@ -94,6 +105,7 @@ int main() {
     );
 
     // ---- shared_ptr<double> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto spd = std::make_shared<double>(4.56);
     tester.assertNotNull(spd, "shared_ptr<double> should not be null");
     tester.expectException<TestException>(
@@ -101,6 +113,7 @@ int main() {
     );
 
     // ---- shared_ptr<char> tests ----
+    // ReSharper disable once CppLocalVariableMayBeConst
     auto spc = std::make_shared<char>('z');
     tester.assertNotNull(spc, "shared_ptr<char> should not be null");
     tester.expectException<TestException>(
