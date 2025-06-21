@@ -28,7 +28,7 @@
 class LHashMatrix {
 public:
     // Constructor assumes CRSCE s-value
-    LHashMatrix(): row_position_data{}{};
+    LHashMatrix() = default;
 
     virtual ~LHashMatrix();
 
@@ -59,7 +59,7 @@ private:
     std::array<std::bitset<s>, s> row_buffer_data;
 
     // Track current position in each row
-    std::array<size_t, s> row_position_data;
+    std::array<size_t, s> row_position_data{};  // zero-initialize all positions
 
     // SHA256 hashes per row
     std::array<std::string, s> row_hash_data;
