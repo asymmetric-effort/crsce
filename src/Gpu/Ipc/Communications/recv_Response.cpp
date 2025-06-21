@@ -20,6 +20,7 @@ namespace Gpu::Ipc {
             return (read_header == 0 ? Result::Closed : Result::IOError);
 
         uint64_t payload_size = 0;
+        // Decode 64-bit little-endian payload size from header[1..8]
         for (int i = 0; i < 8; ++i)
             payload_size |= static_cast<uint64_t>(header.at(1 + i)) << (i * 8);
 
