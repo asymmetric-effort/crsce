@@ -15,7 +15,7 @@ namespace Gpu {
         std::lock_guard lock(mutex_);
         for (auto &blob : table_ | std::views::values)
             // ReSharper disable once CppUseRangeAlgorithm
-            std::generate(blob.begin(), blob.end(), std::rand);
+            std::generate(blob.begin(), blob.end(), [] { return std::rand(); });
         table_.clear();
         return true;
     }

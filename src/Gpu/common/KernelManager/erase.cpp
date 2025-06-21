@@ -13,7 +13,7 @@ namespace Gpu {
         std::lock_guard lock(mutex_);
         if (const auto it = table_.find(id); it != table_.end()) {
             // ReSharper disable once CppUseRangeAlgorithm
-            std::generate(it->second.begin(), it->second.end(), std::rand);
+            std::generate(it->second.begin(), it->second.end(), [] { return std::rand(); });
             table_.erase(it);
             return true;
         }
