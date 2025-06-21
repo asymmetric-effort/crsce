@@ -36,7 +36,7 @@ namespace Gpu::Ipc {
          * @brief class destructor
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
          */
-        ~Communications();
+        ~Communications()=default;;
 
         /**
          * @name send (Message)
