@@ -10,7 +10,7 @@ namespace Gpu::Ipc {
     Common::AbstractPtr MemoryTracker::alloc(std::size_t size) {
         if (size == 0) return 0;
         Common::Buffer8 buffer(size, 0);
-        Common::AbstractPtr ptr = generateUniqueHandle();
+        const Common::AbstractPtr ptr = generateUniqueHandle();
         std::lock_guard lock(mutex_);
         table_[ptr] = std::move(buffer);
         return ptr;
