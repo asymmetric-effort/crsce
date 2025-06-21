@@ -43,8 +43,7 @@ int verify_1_bit_per_antidiagonal() {
         dsm.increment(r, r);  // Set diagonal bits only
 
     for (uint16_t i = 0; i < block_size; ++i) {
-        uint16_t expected = (i == 0) ? block_size : 0;
-        if (dsm.get(i, 0).to_uint16() != expected) {
+        if (const uint16_t expected = (i == 0) ? block_size : 0; dsm.get(i, 0).to_uint16() != expected) {
             std::cerr << "[FAIL] DSM[" << i << "] = "
                       << dsm.get(i, 0).to_uint16()
                       << " expected " << expected << std::endl;
@@ -58,9 +57,9 @@ int verify_1_bit_per_antidiagonal() {
 
 int verify_overflow_works() {
     std::cout << "verify_overflow_works()" << std::endl;
-    AntidiagonalSumMatrix dsm;
 
     try {
+        AntidiagonalSumMatrix dsm;
         for (uint16_t r = 0; r <= block_size; ++r)
             for (uint16_t c = 0; c <= block_size; ++c)
                 dsm.increment(r, c);
@@ -74,9 +73,9 @@ int verify_overflow_works() {
 
 int main() {
     try {
-        if (int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
-        if (int exit = verify_1_bit_per_antidiagonal(); exit != EXIT_SUCCESS) return exit;
-        if (int exit = verify_overflow_works(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_1_bit_per_antidiagonal(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_overflow_works(); exit != EXIT_SUCCESS) return exit;
 
         std::cout << "[PASS] AntidiagonalSumMatrix antidiagonal encoding verified." << std::endl;
         return EXIT_SUCCESS;

@@ -15,16 +15,16 @@ int verify_single_bit_location(uint64_t bit_offset) {
     LateralSumMatrix lsm;
 
     FileBuffer buffer((bit_offset / FILE_BUFFER_WIDTH) + 1, 0);
-    size_t word_index = bit_offset / FILE_BUFFER_WIDTH;
-    size_t bit_index = FILE_BUFFER_WIDTH - 1 - (bit_offset % FILE_BUFFER_WIDTH);
-    buffer[word_index] = uint64_t(1) << bit_index;
+    const size_t word_index = bit_offset / FILE_BUFFER_WIDTH;
+    const size_t bit_index = FILE_BUFFER_WIDTH - 1 - (bit_offset % FILE_BUFFER_WIDTH);
+    buffer[word_index] = static_cast<uint64_t>(1) << bit_index;
 
     uint64_t bit_index_global = 0;
     for (const auto& word : buffer) {
         for (int bit = FILE_BUFFER_WIDTH - 1; bit >= 0; --bit) {
-            bool bit_value = (word >> bit) & 0x01;
-            CrossSumIndex r = bit_index_global / s;
-            CrossSumIndex c = bit_index_global % s;
+            const bool bit_value = (word >> bit) & 0x01;
+            const CrossSumIndex r = bit_index_global / s;
+            const CrossSumIndex c = bit_index_global % s;
 
             if (bit_value)
                 lsm.increment(r, c);
@@ -34,12 +34,12 @@ int verify_single_bit_location(uint64_t bit_offset) {
 
     // Now validate: exactly one matrix element should be 1, all others 0
     size_t ones = 0;
-    CrossSumIndex expected_r = bit_offset / s;
-    CrossSumIndex expected_c = bit_offset % s;
+    const CrossSumIndex expected_r = bit_offset / s;
+    const CrossSumIndex expected_c = bit_offset % s;
 
     for (CrossSumIndex r = 0; r < s; ++r) {
         CrossSumValue val = lsm.get(r, expected_c);
-        uint16_t v = val.to_uint16();
+        const uint16_t v = val.to_uint16();
         if (r == expected_r) {
             if (v != 1) {
                 std::cerr << "[FAIL] Expected (r=" << r << ",c=" << expected_c
@@ -69,7 +69,7 @@ int main() {
         // Sample a few strategic offsets:
         std::vector<uint64_t> bit_offsets = {0, s - 1, s, s + 1, s * 10 + 5, s * s - 1};
 
-        for (auto offset : bit_offsets) {
+        for (const auto offset : bit_offsets) {
             std::cout << "Testing bit offset " << offset << "..." << std::endl;
             if (verify_single_bit_location(offset) != EXIT_SUCCESS)
                 return EXIT_FAILURE;
