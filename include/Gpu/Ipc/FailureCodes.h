@@ -15,11 +15,11 @@ namespace Gpu::Ipc {
      * @ref docs/Gpu/Design/Gpu-Ipc-FailureCodes.md
      * @example
      *   Gpu::Ipc::FailureCodes status = Gpu::Ipc::FailureCodes::ReadError;
-     *       if (status != Gpu::Ipc::FailureCodes::IpcSuccess) {
+     *       if (status != Gpu::Ipc::FailureCodes::Success) {
      *          // handle error
      *       }
      */
-    enum FailureCodes : uint8_t {
+    enum class FailureCodes : uint8_t {
         IpcSuccess = 0x00,
         UnknownError = 0x01,
         InvalidPointer = 0x02,

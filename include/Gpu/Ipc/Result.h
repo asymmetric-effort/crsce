@@ -22,7 +22,7 @@ namespace Gpu::Ipc {
      *      // Handle pipe failure
      *  }
      */
-    enum Result : uint8_t {
+    enum class Result : uint8_t {
         Success = 0x00, ///< The pipe operation completed successfully
         Closed = 0x01, ///< The pipe is closed (broken pipe, EOF, etc.)
         IOError = 0x02, ///< A read or write error occurred at the OS level
