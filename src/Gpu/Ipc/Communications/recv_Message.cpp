@@ -1,24 +1,24 @@
 /**
- * @file src/Gpu/Ipc/Communications/recv_Message.cpp
+* @file src/Gpu/Ipc/Communications/recv_Message.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include "Gpu/Ipc/Communications.h"
+#include "Gpu/Ipc/Message.h"
 #include <unistd.h>
-#include <vector>
 
 namespace Gpu::Ipc {
-
-    Result Communications::recv(Message& msg) const {
+    Result Communications::recv(Message &msg) const {
         if (!validateChildAccess()) return Result::InvalidRole;
 
-        uint8_t raw[24] = {};
-        const ssize_t n = read(parentToChildFd.at(0), raw, 24);
+        constexpr size_t message_size = 24;
+        Common::Buffer8 raw{message_size, 0};
 
-        if (n == 24) {
+        const ssize_t n = read(parentToChildFd.at(0), raw.data(), message_size);
+
+        if (n == static_cast<ssize_t>(message_size)) {
             try {
-                const Common::Buffer8 buffer(raw, raw + 24);
-                msg.deserialize(buffer);
+                msg.deserialize(raw);
                 return Result::Success;
             } catch (...) {
                 return Result::IOError;
@@ -28,5 +28,4 @@ namespace Gpu::Ipc {
         if (n == 0) return Result::Closed;
         return Result::IOError;
     }
-
 }

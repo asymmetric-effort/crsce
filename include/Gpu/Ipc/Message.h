@@ -37,7 +37,7 @@ namespace Gpu::Ipc {
          * @brief Deserialize a message from binary data (must be 24 bytes).
          * @throws Gpu::Exceptions::InvalidIpcMessage
          */
-        void deserialize(const Common::Buffer8& data);
+        void deserialize(const Common::Buffer8& buffer);
     };
 
 } // namespace Gpu::Ipc
