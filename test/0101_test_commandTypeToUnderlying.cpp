@@ -14,11 +14,6 @@
 #include <map>
 #include <typeinfo>
 
-using Gpu::Ipc::Message;
-using Gpu::Ipc::Response;
-using Gpu::Ipc::Communications;
-using Gpu::Ipc::FailureCodes;
-
 int main() {
     Tester tester("0101_test_commandTypeToUnderlying.cpp");
     using enum Gpu::Ipc::CommandType;

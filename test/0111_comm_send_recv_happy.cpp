@@ -14,13 +14,10 @@
 #include <cstdint>
 #include <format>
 #include <map>
-
 #include "utils/to_underlying.h"
 
-using Gpu::Ipc::Message;
-using Gpu::Ipc::Response;
 using Gpu::Ipc::Communications;
-using Gpu::Ipc::FailureCodes;
+using Gpu::Ipc::Message;
 
 int main() {
     using enum Gpu::Ipc::CommandType;
