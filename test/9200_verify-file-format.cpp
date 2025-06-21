@@ -13,6 +13,8 @@
 #include <vector>
 #include <cstdlib>
 #include <cstring>
+#include <cmath>
+
 
 bool generate_test_compression(const std::string &output_path) {
     std::string input_path = generate_temp_filename("z2_input", "bin");
