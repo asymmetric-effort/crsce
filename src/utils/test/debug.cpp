@@ -7,8 +7,8 @@
 /**
  * @name debug
  * @brief print debug message
- * @param message std::string
+ * @param msg std::string
  */
-void Tester::debug(const std::string& message) const {
-    std::cerr << "[" << prefix << "] " << message << std::endl;
+void Tester::debug(const std::string& msg) const {
+    std::cerr << "[" << prefix << "] " << msg << std::endl;
 }
