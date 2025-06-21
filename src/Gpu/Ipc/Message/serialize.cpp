@@ -5,6 +5,7 @@
 
 #include "Gpu/Ipc/Message.h"
 #include "utils/to_underlying.h"
+#include <cstring>
 
 namespace Gpu::Ipc {
 
