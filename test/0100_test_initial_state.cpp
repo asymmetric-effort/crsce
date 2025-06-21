@@ -19,7 +19,7 @@ using Gpu::Ipc::Communications;
 using Gpu::Ipc::FailureCodes;
 
 int main() {
-    Tester tester("0100_test_commandType.cpp");
+    Tester tester("0100_test_initial_state.cpp");
 
     constexpr int closed = -1;
 
