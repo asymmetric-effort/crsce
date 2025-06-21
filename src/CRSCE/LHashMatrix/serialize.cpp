@@ -17,7 +17,7 @@ void LHashMatrix::serialize(std::ostream &os) const {
     for (CrossSumIndex r = 0; r < s; ++r) {
         // Finalize hash if row is full and hash has not been computed
         if (row_positions()[r] == s && row_hashes()[r].empty()) {
-            const_cast<LHashMatrix *>(this)->hash_and_store(r);
+            hash_and_store(r);  // no const_cast needed anymore
         }
 
         const auto &hash = row_hashes()[r];

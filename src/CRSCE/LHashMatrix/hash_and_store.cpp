@@ -5,7 +5,7 @@
 
 #include "CRSCE/LHashMatrix.h"
 
-void LHashMatrix::hash_and_store(const CrossSumIndex row_index) {
+void LHashMatrix::hash_and_store(const CrossSumIndex row_index) const {
     uint8_t row_bytes[64] = {0}; // 512 bits = 64 bytes
 
     for (size_t i = 0; i < s; ++i) {

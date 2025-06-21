@@ -43,7 +43,7 @@ public:
     void padRemainingBits(std::size_t block_count, std::size_t block_bits);
 
 protected:
-    void hash_and_store(CrossSumIndex row_index);
+    void hash_and_store(CrossSumIndex row_index) const;
 
     virtual std::array<std::bitset<s>, s> &row_buffers() { return row_buffer_data; }
     [[nodiscard]] virtual const std::array<std::bitset<s>, s> &row_buffers() const { return row_buffer_data; }
@@ -62,7 +62,7 @@ private:
     std::array<size_t, s> row_position_data{};  // zero-initialize all positions
 
     // SHA256 hashes per row
-    std::array<std::string, s> row_hash_data{};  // zero-initialize all positions
+    mutable std::array<std::string, s> row_hash_data{};  // zero-initialize all positions
 };
 
 #endif // CRSCE_LHASHMATRIX_H
