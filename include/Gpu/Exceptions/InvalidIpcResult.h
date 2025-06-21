@@ -23,7 +23,7 @@ namespace Gpu::Exceptions {
                 std::format(
                     "InvalidIpcResult: {}",
                     std::to_string(
-                        static_cast<uint8_t>(result)
+                        std::__to_underlying(result)
                     )
                 )
             ) {
