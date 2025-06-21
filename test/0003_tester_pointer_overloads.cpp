@@ -8,8 +8,6 @@
 #include "utils/test/TestException.h"
 #include "Gpu/Device/Interface.h"
 #include <memory>
-#include <new>
-#include <cstdint>
 #include <cstdlib>
 
 int main() {
