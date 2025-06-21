@@ -4,6 +4,7 @@
  */
 
 #include "Gpu/Device/Emulator/MockGpu.h"
+#include "Gpu/Exceptions/IpcSendFailed.h"
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
 
@@ -55,7 +56,7 @@ namespace Gpu::Device {
                     break;
             }
             if (Gpu::Ipc::Result result = ipc_.send(res); result != Ipc::Result::Success) {
-                throw std::runtime_error("IPC send() failed with result: " + to_string(result));
+                throw Gpu::Exceptions::IpcSendFailed(result);
             }
         }
     }
