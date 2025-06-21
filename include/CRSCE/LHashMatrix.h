@@ -46,13 +46,13 @@ protected:
     void hash_and_store(CrossSumIndex row_index);
 
     virtual std::array<std::bitset<s>, s> &row_buffers() { return row_buffer_data; }
-    virtual const std::array<std::bitset<s>, s> &row_buffers() const { return row_buffer_data; }
+    [[nodiscard]] virtual const std::array<std::bitset<s>, s> &row_buffers() const { return row_buffer_data; }
 
     virtual std::array<size_t, s> &row_positions() { return row_position_data; }
-    virtual const std::array<size_t, s> &row_positions() const { return row_position_data; }
+    [[nodiscard]] virtual const std::array<size_t, s> &row_positions() const { return row_position_data; }
 
     virtual std::array<std::string, s> &row_hashes() { return row_hash_data; }
-    virtual const std::array<std::string, s> &row_hashes() const { return row_hash_data; }
+    [[nodiscard]] virtual const std::array<std::string, s> &row_hashes() const { return row_hash_data; }
 
 private:
     // Bit buffer for each row
