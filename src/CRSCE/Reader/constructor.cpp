@@ -4,6 +4,7 @@
  */
 
 #include "CRSCE/Reader.h"
+#include "utils/Exceptions/FileOpenFailed.h"
 
 Reader::Reader(
         const std::string& inputFile,
@@ -13,13 +14,13 @@ Reader::Reader(
     inputStream.open(inputFile, std::ifstream::in | std::ios::binary);
 
     if (!inputStream.is_open()) {
-        throw std::runtime_error("Failed to open input file: " + inputFile);
+        throw Exceptions::FileOpenFailed(inputFile);
     }
 
     outputStream.open(outputFile, std::ofstream::out | std::ios::binary);
 
     if (!outputStream.is_open()) {
-        throw std::runtime_error("Failed to open output file: " + outputFile);
+        throw Exceptions::FileOpenFailed(outputFile);
     }
 
 }
