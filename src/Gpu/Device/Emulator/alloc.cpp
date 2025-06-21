@@ -23,7 +23,7 @@ namespace Gpu::Device {
         if (const auto result = ipc_->recv(res);result!=Ipc::Result::Success)
             return 0;
 
-        if (res.status != Ipc::FailureCodes::Success || res.size != sizeof(Common::AbstractPtr)) return 0;
+        if (res.status != Ipc::FailureCodes::IpcSuccess || res.size != sizeof(Common::AbstractPtr)) return 0;
 
         Common::AbstractPtr ptr = 0;
         for (int i = 0; i < 8; ++i)

@@ -20,7 +20,7 @@ namespace Gpu::Device {
         Ipc::Response res;
         ipc_->recv(res);
 
-        return res.status == Ipc::FailureCodes::Success;
+        return res.status == Ipc::FailureCodes::IpcSuccess;
     }
 
 }

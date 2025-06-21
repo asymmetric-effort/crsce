@@ -9,7 +9,7 @@ namespace Gpu::Device {
 
     Ipc::Response RuntimeManager::handleFree(const Ipc::Message& msg) {
         const bool ok = memory_.free(msg.ptr);
-        return {ok ? Ipc::FailureCodes::Success : Ipc::FailureCodes::InvalidPointer, 0, {}};
+        return {ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::InvalidPointer, 0, {}};
     }
 
 }

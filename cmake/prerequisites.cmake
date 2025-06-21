@@ -3,6 +3,8 @@
 
 if(APPLE)
     include("cmake/apple-llvm-homebrew.cmake")
+else ()
+
 endif()
 
 # Note: we can add more prereqs here.

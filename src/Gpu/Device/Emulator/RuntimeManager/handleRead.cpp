@@ -11,7 +11,7 @@ namespace Gpu::Device {
         Common::Buffer8 buffer(msg.size);
         const bool ok = memory_.read(msg.ptr, buffer);
         return {
-            ok ? Ipc::FailureCodes::Success : Ipc::FailureCodes::ReadError,
+            ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::ReadError,
             ok ? static_cast<uint64_t>(buffer.size()) : 0,
             ok ? std::move(buffer) : Common::Buffer8{}
         };

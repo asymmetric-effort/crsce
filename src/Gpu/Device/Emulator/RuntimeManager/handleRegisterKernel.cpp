@@ -9,7 +9,7 @@ namespace Gpu::Device {
 
     Ipc::Response RuntimeManager::handleRegisterKernel(const Ipc::Message& msg, const Common::Buffer8& blob) {
         const bool ok = kernels_.registerKernel(msg.kernelId, blob);
-        return {ok ? Ipc::FailureCodes::Success : Ipc::FailureCodes::KernelNotFound, 0, {}};
+        return {ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::KernelNotFound, 0, {}};
     }
 
 }

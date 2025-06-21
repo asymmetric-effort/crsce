@@ -20,7 +20,7 @@ namespace Gpu::Device {
                     const ThreadRuntime rt(blob, args);
                     rt.run();
                 }));
-            return {Ipc::FailureCodes::Success, 0, {}};
+            return {Ipc::FailureCodes::IpcSuccess, 0, {}};
         } catch (...) {
             return {Ipc::FailureCodes::ThreadLaunchFailure, 0, {}};
         }

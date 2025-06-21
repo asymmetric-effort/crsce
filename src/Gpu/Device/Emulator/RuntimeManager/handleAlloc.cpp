@@ -12,7 +12,7 @@ namespace Gpu::Device {
 
         Ipc::Response res;
 
-        res.status = (ptr != 0) ? Ipc::FailureCodes::Success : Ipc::FailureCodes::AllocationFailed;
+        res.status = (ptr != 0) ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::AllocationFailed;
 
         res.size = sizeof(Common::AbstractPtr);
 

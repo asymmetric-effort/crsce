@@ -21,7 +21,7 @@ namespace Gpu::Device {
         Ipc::Response res;
         ipc_->recv(res);
 
-        if (res.status != Ipc::FailureCodes::Success || res.size != source.size())
+        if (res.status != Ipc::FailureCodes::IpcSuccess || res.size != source.size())
             return false;
 
         source = res.data;

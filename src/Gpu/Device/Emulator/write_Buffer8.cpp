@@ -18,12 +18,12 @@ namespace Gpu::Device {
         msg.size = source.size();
 
         ipc_->send(msg);
-        ipc_->send(Ipc::Response{Ipc::FailureCodes::Success, msg.size, source});  // Payload trick
+        ipc_->send(Ipc::Response{Ipc::FailureCodes::IpcSuccess, msg.size, source});  // Payload trick
 
         Ipc::Response res;
         ipc_->recv(res);
 
-        return res.status == Ipc::FailureCodes::Success;
+        return res.status == Ipc::FailureCodes::IpcSuccess;
     }
 
 }

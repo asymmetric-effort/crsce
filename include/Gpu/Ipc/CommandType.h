@@ -23,7 +23,7 @@ namespace Gpu::Ipc {
      *  // Trigger graceful shutdown
      * }
      */
-    enum class CommandType : uint8_t {
+    enum CommandType : uint8_t {
         Init = 0x00, ///< Initialize the emulator (no-op in most cases)
         Alloc = 0x01, ///< Allocate device memory
         Free = 0x02, ///< Free previously allocated memory

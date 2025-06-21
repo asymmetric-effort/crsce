@@ -21,7 +21,7 @@ namespace Gpu::Ipc {
      * returned by an emulated GPU operation.
      */
     struct Response {
-        FailureCodes status = FailureCodes::Success; ///< Result code
+        FailureCodes status = FailureCodes::IpcSuccess; ///< Result code
         uint64_t size = 0;                           ///< Payload length
         Common::Buffer8 data;                        ///< Optional binary result data
 
