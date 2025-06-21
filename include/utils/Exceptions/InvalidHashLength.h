@@ -16,7 +16,7 @@ namespace Exceptions {
         explicit InvalidHashLength(const size_t actual_size)
             : std::runtime_error(
                 std::format(
-                    "LHashMatrix::serialize() - Invalid hash length: %s",
+                    "LHashMatrix::serialize() - Invalid hash length: {}",
                     std::to_string(actual_size)
                 )
             ) {

@@ -14,7 +14,7 @@ namespace Exceptions {
     class FileOpenFailed final : public std::runtime_error {
     public:
         explicit FileOpenFailed(const std::string &fileName)
-            : std::runtime_error(std::format("file open failed for %s", fileName)) {
+            : std::runtime_error(std::format("file open failed for {}", fileName)) {
         }
     };
 } // namespace Gpu::Exceptions
