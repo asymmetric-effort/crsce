@@ -20,7 +20,7 @@ CRSCE::CRSCE(const std::string& inputFile, const std::string& outputFile) {
     outputStream.open(outputFile, std::ofstream::out | std::ios::binary);
 
     if (!outputStream.is_open()) {
-        throw Exceptions::FileOpenFailed(inputFile);
+        throw Exceptions::FileOpenFailed(outputFile);
     }
 
 }
