@@ -72,8 +72,18 @@ int CRSCE::compress() {
         // Write the 128-bit file footer: block size and block count
         std::cerr << "[CRSCE] Writing footer. Total blocks: " << block_count << std::endl;
         constexpr uint64_t block_size_value = s;
-        outputStream.write(reinterpret_cast<const char *>(&block_size_value), sizeof(block_size_value));
-        outputStream.write(reinterpret_cast<const char *>(&block_count), sizeof(block_count));
+        outputStream.write(
+            reinterpret_cast<const char*>(
+                reinterpret_cast<const std::byte*>(&block_size_value)
+            ),
+            sizeof(block_size_value)
+        );
+        outputStream.write(
+            reinterpret_cast<const char*>(
+                reinterpret_cast<const std::byte*>(&block_count)
+            ),
+            sizeof(block_count)
+        );
         outputStream.flush();
 
         std::cerr << "[CRSCE] Compression finished successfully." << std::endl;
