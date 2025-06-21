@@ -6,5 +6,5 @@
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
 // VerticalSumMatrix::~VerticalSumMatrix(){
-//     /*noop*/
+//
 // }

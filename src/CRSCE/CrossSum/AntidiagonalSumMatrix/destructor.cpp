@@ -6,5 +6,5 @@
 #include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 
 // AntidiagonalSumMatrix::~AntidiagonalSumMatrix() {
-//     /* noop */
+//
 // }
