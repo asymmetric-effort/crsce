@@ -61,7 +61,7 @@ int verify_overlow_works(){
                 lsm.increment(r, c); // set diagonal pattern
         std::cerr << "set oversize value should cause overflow." << std::endl;
         return EXIT_FAILURE;
-    } catch (const std::overflow_error) {
+    } catch (std::overflow_error) {
         return EXIT_SUCCESS;
     }
 }

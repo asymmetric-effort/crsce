@@ -62,7 +62,7 @@ int verify_overflow_works() {
 
         std::cerr << "[FAIL] Expected overflow not triggered." << std::endl;
         return EXIT_FAILURE;
-    } catch (const std::overflow_error) {
+    } catch (std::overflow_error) {
         return EXIT_SUCCESS;
     }
 }

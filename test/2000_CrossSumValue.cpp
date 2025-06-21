@@ -73,7 +73,7 @@ int test_add_operator(){
                          "got:  " << std::to_string(value3.to_uint16()) << "\n"
                          "want: " << std::to_string(s) << std::endl;
             return EXIT_FAILURE;
-        } catch (const std::overflow_error) {
+        } catch (std::overflow_error) {
             // expected overflow
         }
     }
