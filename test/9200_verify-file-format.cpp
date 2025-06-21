@@ -41,8 +41,8 @@ bool generate_test_compression(const std::string &output_path) {
 }
 
 bool verify_header(std::ifstream &in) {
-    const size_t header_len = HEADER.length();  // runtime-safe
-    std::vector<char> header_buffer(header_len);  // avoid VLA
+    const size_t header_len = HEADER.length(); // runtime-safe
+    std::vector<char> header_buffer(header_len); // avoid VLA
 
     in.seekg(0, std::ios::beg);
     in.read(header_buffer.data(), header_len);
@@ -94,10 +94,7 @@ bool verify_structure(const std::ifstream &in, const std::streamsize actual_size
     constexpr size_t lateral_bytes = (lateral_bits + 7) / 8;
     constexpr size_t lhash_bytes = s * 32;
     constexpr size_t block_bytes = lateral_bytes + lhash_bytes;
-    const size_t expected_size = static_cast<size_t>(std::ceil(
-        static_cast<double>(header_bytes + block_count * block_bytes + footer_bytes)));
-
-    if (static_cast<std::size_t>(actual_size) != expected_size) {
+    if (const auto expected_size = static_cast<size_t>(std::ceil(static_cast<double>(header_bytes + block_count * block_bytes + footer_bytes))); static_cast<std::size_t>(actual_size) != expected_size) {
         std::cerr << "[FAIL] File size mismatch." << std::endl;
         std::cerr << "        Actual:   " << actual_size << " bytes" << std::endl;
         std::cerr << "        Expected: " << expected_size << " bytes" << std::endl;
