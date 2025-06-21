@@ -17,44 +17,45 @@ namespace Gpu::Device {
 
             Ipc::Response res;
             switch (msg.type) {
-                case Ipc::CommandType::Alloc:
+                using enum Ipc::CommandType;
+                case Alloc:
                     res = runtime_.handleAlloc(msg);
                     break;
-                case Ipc::CommandType::Free:
+                case Free:
                     res = runtime_.handleFree(msg);
                     break;
-                case Ipc::CommandType::Write: {
+                case Write: {
                     Ipc::Response err = { Ipc::FailureCodes::WriteError, 0, {} };
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
                 }
-                case Ipc::CommandType::Read:
+                case Read:
                     res = runtime_.handleRead(msg);
                     break;
-                case Ipc::CommandType::RegisterKernel: {
+                case RegisterKernel: {
                     Ipc::Response err = { Ipc::FailureCodes::KernelNotFound, 0, {} };
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
                 }
-                case Ipc::CommandType::LaunchTask: {
+                case LaunchTask: {
                     Ipc::Response err = { Ipc::FailureCodes::ThreadLaunchFailure, 0, {} };
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
                 }
-                case Ipc::CommandType::Reset:
+                case Reset:
                     res = runtime_.handleReset();
                     break;
-                case Ipc::CommandType::Shutdown:
+                case Shutdown:
                     res = runtime_.handleShutdown();
                     break;
                 default:
                     res = { Ipc::FailureCodes::UnknownError, 0, {} };
                     break;
             }
-            ipc_.send(res);
+            (void) ipc_.send(res);
         }
     }
 
