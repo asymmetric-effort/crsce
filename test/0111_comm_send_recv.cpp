@@ -23,7 +23,8 @@ int main() {
     Tester tester("0111_comm_send_recv.cpp");
 
     // Create bidirectional pipes
-    int toChild[2], fromChild[2];
+    int toChild[2];
+    int fromChild[2];
     if (pipe(toChild) < 0 || pipe(fromChild) < 0) {
         return EXIT_FAILURE;
     }

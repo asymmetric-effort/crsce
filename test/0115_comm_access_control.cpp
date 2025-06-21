@@ -29,7 +29,8 @@ using Gpu::Ipc::Result;
 int main() {
     Tester tester("Gpu::Ipc::Communications access control");
 
-    int parentToChild[2], childToParent[2];
+    int parentToChild[2];
+    int childToParent[2];
     pipe(parentToChild);  // parent to child
     pipe(childToParent);  // child to parent
 

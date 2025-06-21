@@ -25,7 +25,8 @@ int main() {
     Tester tester("0112_comm_partial_recv.cpp");
 
     // Set up bidirectional pipes
-    int toChild[2], fromChild[2];
+    int toChild[2];
+    int fromChild[2];
     if (pipe(toChild) < 0 || pipe(fromChild) < 0) {
         return EXIT_FAILURE;
     }

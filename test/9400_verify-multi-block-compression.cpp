@@ -42,7 +42,8 @@ bool check_block_count(const std::string& path, const size_t expected_blocks) {
     // Seek to footer
     // cppcheck-suppress signConversion
     file.seekg(-2 * sizeof(uint64_t), std::ios::end);
-    uint64_t block_size = 0, block_count = 0;
+    uint64_t block_size = 0;
+    uint64_t  block_count = 0;
     file.read(reinterpret_cast<char*>(&block_size), sizeof(block_size));
     file.read(reinterpret_cast<char*>(&block_count), sizeof(block_count));
 
