@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <cstdint>
 
+#include "utils/to_underlying.h"
+
 using Gpu::Ipc::Message;
 using Gpu::Ipc::Response;
 using Gpu::Ipc::Communications;
@@ -42,7 +44,7 @@ int main() {
     Message inMsg;
     childComm.recv(inMsg);
 
-    tester.assertEqual(static_cast<uint8_t>(inMsg.type), static_cast<uint8_t>(outMsg.type), "Message type round-trip");
+    tester.assertEqual(std::to_underlying(inMsg.type), std::to_underlying(outMsg.type), "Message type round-trip");
     tester.assertEqual(inMsg.kernelId, outMsg.kernelId, "Message kernelId round-trip");
 #if SIZE_MAX != UINT64_MAX
     tester.assertEqual(inMsg.size, outMsg.size, "Message size round-trip");
@@ -60,7 +62,7 @@ int main() {
     Response inResp;
     parentComm.recv(inResp);
 
-    tester.assertEqual(static_cast<uint8_t>(inResp.status), static_cast<uint8_t>(outResp.status), "Response status round-trip");
+    tester.assertEqual( std::to_underlying(inResp.status), std::to_underlying(outResp.status), "Response status round-trip");
 #if SIZE_MAX != UINT64_MAX
     tester.assertEqual(inResp.size, outResp.size, "Response size round-trip");
 #endif

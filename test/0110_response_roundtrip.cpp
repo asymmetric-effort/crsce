@@ -8,6 +8,7 @@
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/FailureCodes.h"
+#include "utils/to_underlying.h"
 
 using Gpu::Ipc::Response;
 using Gpu::Ipc::FailureCodes;
@@ -34,8 +35,8 @@ int main() {
     Response roundtrip;
     roundtrip.deserialize(serialized);
     tester.assertEqual(
-        static_cast<uint8_t>(roundtrip.status),
-        static_cast<uint8_t>(original.status),
+        std::to_underlying(roundtrip.status),
+        std::to_underlying(original.status),
         "status match"
     );
 #if SIZE_MAX != UINT64_MAX

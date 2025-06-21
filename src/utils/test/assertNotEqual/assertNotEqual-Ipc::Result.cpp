@@ -3,6 +3,7 @@
  * @brief Declares an assertion which expects inequality.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
+#include "utils/to_underlying.h"
 #include "utils/test/Tester.h"
 
 /**
@@ -14,5 +15,5 @@
  */
 
 void Tester::assertNotEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string &message) {
-  assertNotEqual(static_cast<uint8_t>(a), static_cast<uint8_t>(b), message);
+  assertNotEqual(std::to_underlying(a), std::to_underlying(b), message);
 }
