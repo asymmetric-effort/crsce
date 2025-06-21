@@ -8,6 +8,7 @@
 #define CRSCE_FILE_BUFFER_H
 
 #include <vector>
+#include <cstdint>
 
 constexpr size_t FILE_BUFFER_WIDTH = 64;
 
