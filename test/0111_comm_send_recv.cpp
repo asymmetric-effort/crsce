@@ -45,8 +45,16 @@ int main() {
     Message inMsg;
     childComm.recv(inMsg);
 
-    tester.assertEqual(std::to_underlying(inMsg.type), std::to_underlying(outMsg.type), "Message type round-trip");
-    tester.assertEqual(inMsg.kernelId, outMsg.kernelId, "Message kernelId round-trip");
+    tester.assertEqual(
+        std::to_underlying(inMsg.type),
+        std::to_underlying(outMsg.type),
+        "Message type round-trip");
+
+    tester.assertEqual(
+        inMsg.kernelId,
+        outMsg.kernelId,
+        "Message kernelId round-trip");
+
 #if SIZE_MAX != UINT64_MAX
     tester.assertEqual(inMsg.size, outMsg.size, "Message size round-trip");
     tester.assertEqual(inMsg.ptr, outMsg.ptr, "Message ptr round-trip");
@@ -63,7 +71,11 @@ int main() {
     Response inResp;
     parentComm.recv(inResp);
 
-    tester.assertEqual( std::to_underlying(inResp.status), std::to_underlying(outResp.status), "Response status round-trip");
+    tester.assertEqual(
+        std::to_underlying(inResp.status),
+        std::to_underlying(outResp.status),
+        "Response status round-trip");
+
 #if SIZE_MAX != UINT64_MAX
     tester.assertEqual(inResp.size, outResp.size, "Response size round-trip");
 #endif
