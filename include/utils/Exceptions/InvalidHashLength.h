@@ -10,7 +10,6 @@ namespace Exceptions {
     /**
      * @name Exceptions::InvalidHashLength
      * @brief Thrown on invalid hash length in LHashMatrix::serialize
-     * @ref docs/Gpu/Design/Gpu-Exceptions.md
      */
     class InvalidHashLength final : public std::runtime_error {
     public:
