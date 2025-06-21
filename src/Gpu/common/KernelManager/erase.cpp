@@ -4,18 +4,19 @@
  */
 
 #include "Common/KernelManager.h"
+#include <algorithm>
+#include <cstdlib>
 #include <random>
 
 namespace Gpu {
-
     bool KernelManager::erase(const Common::KernelId id) {
         std::lock_guard lock(mutex_);
         if (const auto it = table_.find(id); it != table_.end()) {
-            std::ranges::generate(it->second, std::rand);
+            // ReSharper disable once CppUseRangeAlgorithm
+            std::generate(it->second.begin(), it->second.end(), std::rand);
             table_.erase(it);
             return true;
         }
         return false;
     }
-
 }
