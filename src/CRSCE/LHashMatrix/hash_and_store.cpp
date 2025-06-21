@@ -4,9 +4,10 @@
  */
 
 #include "CRSCE/LHashMatrix.h"
+#include <array>
 
 void LHashMatrix::hash_and_store(const CrossSumIndex row_index) const {
-    uint8_t row_bytes[64] = {0}; // 512 bits = 64 bytes
+    std::array<uint8_t, 64> row_bytes{}; // 512 bits = 64 bytes
 
     for (size_t i = 0; i < s; ++i) {
         if (row_buffer_data[row_index][i]) {
@@ -16,6 +17,6 @@ void LHashMatrix::hash_and_store(const CrossSumIndex row_index) const {
         }
     }
 
-    const auto hash = SHA256::digest(row_bytes, sizeof(row_bytes));
+    const auto hash = SHA256::digest(row_bytes.data(), row_bytes.size());
     row_hash_data[row_index] = std::string(reinterpret_cast<const char*>(hash.data()), hash.size());
 }
