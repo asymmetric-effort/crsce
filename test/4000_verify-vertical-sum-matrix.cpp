@@ -9,7 +9,6 @@
 #include <cstdlib>
 
 constexpr size_t block_size = s;
-constexpr size_t cross_sum_width = b;
 
 int verify_100pct_set() {
     std::cout << "verify_100pct_set()" << std::endl;
