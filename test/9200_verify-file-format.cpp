@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <cstring>
 
-bool generate_test_compression(const std::string& output_path) {
+bool generate_test_compression(const std::string &output_path) {
     std::string input_path = generate_temp_filename("z2_input", "bin");
 
     // Create all-zero test input block (s x s bits = 32640+1 bits → 4080 bytes)
@@ -40,20 +40,17 @@ bool generate_test_compression(const std::string& output_path) {
 }
 
 bool verify_header(std::ifstream &in) {
-    char header_buffer[HEADER_LENGTH];
+    char header_buffer[HEADER.length()];
     in.seekg(0, std::ios::beg);
-    in.read(header_buffer, HEADER_LENGTH);
+    in.read(header_buffer, HEADER.length());
     if (!in) {
         std::cerr << "[FAIL] Could not read header from file." << std::endl;
         return false;
     }
-    if (std::memcmp(header_buffer, HEADER, HEADER_LENGTH) != 0) {
+    if (std::memcmp(header_buffer, HEADER.c_str(), HEADER.length()) != 0) {
         std::cerr << "[FAIL] Header does not match expected CRSCE signature." << std::endl;
-        std::cerr << "[DEBUG] Read:   ";
-        for (int i = 0; i < HEADER_LENGTH; ++i) std::cerr << header_buffer[i];
-        std::cerr << "\n[DEBUG] Expect: ";
-        for (int i = 0; i < HEADER_LENGTH; ++i) std::cerr << HEADER[i];
-        std::cerr << std::endl;
+        std::cerr << "[DEBUG] Read:   " << HEADER << std::endl;
+        std::cerr << "[DEBUG] Expect: " << HEADER << std::endl;
         return false;
     }
     std::cout << "[PASS] Header verified." << std::endl;
@@ -70,8 +67,8 @@ bool verify_footer(std::ifstream &in) {
 
     uint64_t block_size = 0;
     uint64_t block_count = 0;
-    in.read(reinterpret_cast<char*>(&block_size), sizeof(block_size));
-    in.read(reinterpret_cast<char*>(&block_count), sizeof(block_count));
+    in.read(reinterpret_cast<char *>(&block_size), sizeof(block_size));
+    in.read(reinterpret_cast<char *>(&block_count), sizeof(block_count));
 
     if (!in) {
         std::cerr << "[FAIL] Could not read footer." << std::endl;
@@ -89,12 +86,13 @@ bool verify_footer(std::ifstream &in) {
 
 bool verify_structure(const std::ifstream &in, const std::streamsize actual_size, const uint64_t block_count) {
     constexpr size_t footer_bytes = 2 * sizeof(uint64_t);
-    constexpr size_t header_bytes = HEADER_LENGTH;
+    constexpr size_t header_bytes = HEADER.length();
     constexpr size_t lateral_bits = 4 * s * b;
     constexpr size_t lateral_bytes = (lateral_bits + 7) / 8;
     constexpr size_t lhash_bytes = s * 32;
     constexpr size_t block_bytes = lateral_bytes + lhash_bytes;
-    size_t expected_size = static_cast<size_t>(std::ceil(static_cast<double>(header_bytes + block_count * block_bytes + footer_bytes)));
+    size_t expected_size = static_cast<size_t>(std::ceil(
+        static_cast<double>(header_bytes + block_count * block_bytes + footer_bytes)));
 
     if (static_cast<std::size_t>(actual_size) != expected_size) {
         std::cerr << "[FAIL] File size mismatch." << std::endl;
@@ -106,7 +104,7 @@ bool verify_structure(const std::ifstream &in, const std::streamsize actual_size
     return true;
 }
 
-int main(const int argc, const char* argv[]) {
+int main(const int argc, const char *argv[]) {
     std::string filepath;
     if (argc == 2) {
         filepath = argv[1];
@@ -131,8 +129,8 @@ int main(const int argc, const char* argv[]) {
     infile.seekg(-2 * sizeof(uint64_t), std::ios::end);
     uint64_t block_size = 0;
     uint64_t block_count = 0;
-    infile.read(reinterpret_cast<char*>(&block_size), sizeof(block_size));
-    infile.read(reinterpret_cast<char*>(&block_count), sizeof(block_count));
+    infile.read(reinterpret_cast<char *>(&block_size), sizeof(block_size));
+    infile.read(reinterpret_cast<char *>(&block_count), sizeof(block_count));
 
     const bool structure_ok = verify_structure(infile, total_size, block_count);
 

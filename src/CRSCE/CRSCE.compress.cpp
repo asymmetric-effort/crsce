@@ -14,8 +14,8 @@ int CRSCE::compress() {
         std::cerr << "[CRSCE] Compression starting..." << std::endl;
         FileBuffer inputBuffer;
 
-        // Write the file header (HEADER_LENGTH bytes)
-        outputStream.write(HEADER, HEADER_LENGTH);
+        // Write the file header (HEADER.length() bytes)
+        outputStream.write(HEADER.c_str(), HEADER.length());
 
         uint64_t block_count = 0;
 
