@@ -8,6 +8,7 @@
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/FailureCodes.h"
 #include "Gpu/Ipc/Communications.h"
+#include "Gpu/Ipc/Handles.h"
 #include <unistd.h>
 #include <cstdlib>
 #include <cstdint>
@@ -23,9 +24,9 @@ int main() {
     Tester tester("0111_comm_send_recv.cpp");
 
     // Create bidirectional pipes
-    int toChild[2];
-    int fromChild[2];
-    if (pipe(toChild) < 0 || pipe(fromChild) < 0) {
+    Gpu::Ipc::Handles toChild;
+    Gpu::Ipc::Handles fromChild;
+    if (pipe(toChild.data()) < 0 || pipe(fromChild.data()) < 0) {
         return EXIT_FAILURE;
     }
 
