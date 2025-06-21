@@ -45,7 +45,7 @@ int verify_1_bit_per_row_set() {
     for (uint16_t r = 0; r < s; ++r)
       lsm.increment(r, r); // set diagonal pattern
     for (uint16_t r = 0; r < s; ++r)
-        if (auto sum = lsm.get(r, r).to_uint16(); sum != 1) {
+        if (const auto sum = lsm.get(r, r).to_uint16(); sum != 1) {
             std::cerr << "[FAIL] Verification(2): LSM value expects 1 value." << std::endl;
             return EXIT_FAILURE;
         }
@@ -53,9 +53,9 @@ int verify_1_bit_per_row_set() {
 }
 
 int verify_overlow_works(){
-    LateralSumMatrix lsm;
     std::cout << "verify_overlow_works()" << std::endl;
     try{
+        LateralSumMatrix lsm;
         for (uint16_t r = 0; r <= s; ++r)
             for(uint16_t c = 0; c <= s; ++c)
                 lsm.increment(r, c); // set diagonal pattern
@@ -68,9 +68,9 @@ int verify_overlow_works(){
 
 int main() {
     try {
-        if(int exit=verify_100pct_set();exit!=EXIT_SUCCESS) return EXIT_FAILURE;
-        if(int exit=verify_1_bit_per_row_set();exit!=EXIT_SUCCESS) return EXIT_FAILURE;
-        if(int exit=verify_overlow_works();exit!=EXIT_SUCCESS) return EXIT_FAILURE;
+        if(const int exit=verify_100pct_set();exit!=EXIT_SUCCESS) return EXIT_FAILURE;
+        if(const int exit=verify_1_bit_per_row_set();exit!=EXIT_SUCCESS) return EXIT_FAILURE;
+        if(const int exit=verify_overlow_works();exit!=EXIT_SUCCESS) return EXIT_FAILURE;
 
         std::cout << "[PASS] LateralSumMatrix row-major encoding verified." << std::endl;
         return EXIT_SUCCESS;
