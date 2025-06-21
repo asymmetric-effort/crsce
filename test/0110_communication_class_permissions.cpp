@@ -1,5 +1,5 @@
 /**
- * @file 0110_communication_class_isShutdown.cpp
+* @file 0110_communication_class_permissions.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -16,7 +16,7 @@
 int main() {
     using Gpu::Ipc::Communications;
     using enum Gpu::Ipc::CommandType;
-    Tester tester("0110_communication_class_isShutdown.cpp");
+    Tester tester("0110_communication_class_permissions.cpp");
     tester.deadline(240);
 
     tester.debug("create the bidirectional pipes");
@@ -24,10 +24,16 @@ int main() {
     Gpu::Ipc::Handles fromChild;
 
     tester.debug("setup communications channel");
-    const Communications comms(toChild, fromChild, true);
+    const Communications parent(toChild, fromChild, true);
+    const Communications child(toChild, fromChild, true);
 
     tester.debug("examine state");
-    tester.assertFalse(comms.isShutdown(),"isShutdown() should return false");
+    tester.assertTrue(parent.validateParentAccess(),"parent access failed");
+    tester.assertFalse(parent.validateChildAccess(),"child access should fail");
+
+    tester.assertTrue(child.validateChildAccess(),"child access failed");
+    tester.assertFalse(child.validateParentAccess(),"parent access should fail");
+
     tester.pass();
     return EXIT_SUCCESS;
 }
