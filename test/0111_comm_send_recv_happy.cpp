@@ -30,14 +30,37 @@ int main() {
     const Communications childComm(toChild, fromChild, false);
 
     tester.debug("Prepare a message to send");
-    constexpr Message outMsg = {Write, 0x1111, 0x2222, 0x3333};
+    constexpr Message outMsg = {Write, 1337, 684867, 5948};
     Message inMsg;
 
     tester.debug("Send the message");
     // ReSharper disable once CppExpressionWithoutSideEffects
     parentComm.send(outMsg);
+    tester.debug("Message sent.  Verify it is still intact");
+
+    tester.assertEqual(
+        static_cast<uint32_t>(outMsg.type),
+        static_cast<uint32_t>(Write),
+        "Message kernelId");
+
+    tester.assertEqual(
+        outMsg.kernelId,
+        static_cast<uint32_t>(1337),
+        "Message kernelId");
+
+    tester.assertEqual(
+        outMsg.size,
+        static_cast<size_t>(684867),
+        "Message size");
+
+    tester.assertEqual(
+        outMsg.ptr,
+        static_cast<size_t>(5948),
+        "Message ptr");
+
     tester.debug("Recv the message");
     childComm.recv(inMsg);
+    tester.debug("Message received");
 
     tester.assertEqual(
         std::to_underlying(inMsg.type),
