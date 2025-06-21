@@ -62,12 +62,7 @@ int CRSCE::compress() {
                 LHASH.padRemainingBits(block_count, block_bits);
 
                 // Serialize all five matrices for this block
-                LHASH.serialize(outputStream);
-                LSM.serialize(outputStream);
-                VSM.serialize(outputStream);
-                XSM.serialize(outputStream);
-                DSM.serialize(outputStream);
-                outputStream.flush();
+                this->serialize_output(LSM,VSM,XSM,DSM,LHASH);
 
                 std::cerr << "[CRSCE] Finished writing block " << block_count << std::endl;
                 ++block_count;

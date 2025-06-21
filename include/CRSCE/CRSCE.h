@@ -22,17 +22,19 @@
 
 class CRSCE {
 public:
-    explicit CRSCE(const std::string& inputFile, const std::string& outputFile);
+    explicit CRSCE(const std::string &inputFile, const std::string &outputFile);
+
     ~CRSCE();
 
     int compress();
+
     int decompress();
 
     // cppcheck-suppress unusedStructMember
     static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
 
 protected:
-    bool readInputBuffer(FileBuffer& buffer);
+    bool readInputBuffer(FileBuffer &buffer);
 
 private:
     std::ifstream inputStream;
@@ -42,6 +44,8 @@ private:
                                LateralSumMatrix &LSM, VerticalSumMatrix &VSM, DiagonalSumMatrix &XSM,
                                AntidiagonalSumMatrix &DSM, LHashMatrix &LHASH);
 
+    void serialize_output(const LateralSumMatrix &LSM, const VerticalSumMatrix &VSM, const DiagonalSumMatrix &XSM,
+                          const AntidiagonalSumMatrix &DSM, const LHashMatrix &LHASH);
 };
 
 #endif // CRSCE_H
