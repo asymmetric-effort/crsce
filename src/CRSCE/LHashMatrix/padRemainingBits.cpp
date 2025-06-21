@@ -14,8 +14,8 @@ void LHashMatrix::padRemainingBits(const std::size_t block_count, const std::siz
                   << " to " << total_bits
                   << " bits." << std::endl;
         for (std::size_t i = block_bits; i < total_bits; ++i) {
-            const CrossSumIndex r = static_cast<CrossSumIndex>(i / s);
-            const CrossSumIndex c = static_cast<CrossSumIndex>(i % s);
+            const auto r = static_cast<CrossSumIndex>(i / s);
+            const auto c = static_cast<CrossSumIndex>(i % s);
             push(r, c, false);
         }
     }
