@@ -11,16 +11,16 @@
  * @class LHashMatrix
  * @brief This method serializes the LHASH content and writes it to an ostream
  * @param os std::ostream
- * @throws std::runtime()
+ * @throws Exceptions::InvalidHashLength()
  */
 void LHashMatrix::serialize(std::ostream &os) const {
     for (CrossSumIndex r = 0; r < s; ++r) {
         // Finalize hash if row is full and hash has not been computed
-        if (row_position_data[r] == s && row_hash_data[r].empty()) {
+        if (row_positions()[r] == s && row_hashes()[r].empty()) {
             const_cast<LHashMatrix *>(this)->hash_and_store(r);
         }
 
-        const auto &hash = row_hash_data[r];
+        const auto &hash = row_hashes()[r];
         if (hash.size() != SHA256::DIGEST_SIZE) {
             throw Exceptions::InvalidHashLength(hash.size());
         }
