@@ -19,6 +19,11 @@ set(CMAKE_C_COMPILER_LAUNCHER ccache)
 set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE BOOL "" FORCE)
 
+if(APPLE)
+    message(STATUS "Disabling default macOS SDK sysroot to allow Homebrew libc++ usage")
+    set(CMAKE_OSX_SYSROOT "" CACHE PATH "Clear macOS sysroot to prevent libc++ conflicts" FORCE)
+endif()
+
 set(PROJECT_ROOT ${CMAKE_SOURCE_DIR})
 
 add_compile_definitions(
