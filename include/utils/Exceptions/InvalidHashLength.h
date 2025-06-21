@@ -16,7 +16,11 @@ namespace Exceptions {
     public:
         explicit InvalidHashLength(const size_t actual_size)
             : std::runtime_error(
-                "LHashMatrix::serialize() - Invalid hash length: " + std::to_string(actual_size)) {
+                std::format(
+                    "LHashMatrix::serialize() - Invalid hash length: %s",
+                    std::to_string(actual_size)
+                )
+            ) {
         }
     };
 } // namespace Gpu::Exceptions
