@@ -11,7 +11,7 @@
 #include <vector>
 #include <cstdlib>
 
-int verify_single_bit_location(uint64_t bit_offset) {
+int verify_single_bit_location(const uint64_t bit_offset) {
     LateralSumMatrix lsm;
 
     FileBuffer buffer((bit_offset / FILE_BUFFER_WIDTH) + 1, 0);
@@ -67,9 +67,8 @@ int verify_single_bit_location(uint64_t bit_offset) {
 int main() {
     try {
         // Sample a few strategic offsets:
-        std::vector<uint64_t> bit_offsets = {0, s - 1, s, s + 1, s * 10 + 5, s * s - 1};
 
-        for (const auto offset : bit_offsets) {
+        for (std::vector<uint64_t> bit_offsets = {0, s - 1, s, s + 1, s * 10 + 5, s * s - 1}; const auto offset : bit_offsets) {
             std::cout << "Testing bit offset " << offset << "..." << std::endl;
             if (verify_single_bit_location(offset) != EXIT_SUCCESS)
                 return EXIT_FAILURE;
