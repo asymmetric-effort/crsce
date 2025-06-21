@@ -30,7 +30,7 @@ namespace Gpu::Ipc {
          * @brief Serialize this message to a binary payload (fixed 24 bytes).
          * @return Common::Buffer8
          */
-        Common::Buffer8 serialize() const;
+        [[nodiscard]] Common::Buffer8 serialize() const;
 
         /**
          * @name deserialize
