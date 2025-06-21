@@ -344,8 +344,6 @@ public:
      */
     void assertNotNull(const std::unique_ptr<char> &ptr, const std::string &message);
 
-    // void assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message);
-
     /**
      * @name assertNotNull
      * @brief asserts that ptr is not null
