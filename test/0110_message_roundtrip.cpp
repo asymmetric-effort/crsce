@@ -29,7 +29,7 @@ int main() {
     const Buffer8 serialized = original.serialize();
     tester.assertEqual(
         serialized.size(),
-        static_cast<size_t>(1 + 8 + original.data.size()),
+        (1 + 8 + original.data.size()),
         "Serialized size should be 9 + payload size"
     );
 
