@@ -25,7 +25,7 @@ int main() {
 
     tester.debug("setup communications channel");
     const Communications parent(toChild, fromChild, true);
-    const Communications child(toChild, fromChild, true);
+    const Communications child(toChild, fromChild, false);
 
     tester.debug("examine state");
     tester.assertTrue(parent.validateParentAccess(),"parent access failed");
