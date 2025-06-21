@@ -16,7 +16,7 @@ namespace Gpu::Device {
         const auto& blob = kernels_.get(msg.kernelId);
         try {
             threads_.insert(static_cast<uint32_t>(msg.kernelId),
-                std::thread([blob, args] {
+                std::jthread([blob, args] {
                     const ThreadRuntime rt(blob, args);
                     rt.run();
                 }));

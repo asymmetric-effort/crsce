@@ -25,7 +25,7 @@ namespace Gpu::Device {
          * Inserts a new kernel thread under a unique LaunchId.
          * Takes ownership of the thread object.
          */
-        void insert(LaunchId id, std::thread&& t);
+        void insert(LaunchId id, std::jthread&& t);
 
         /**
          * Joins all registered threads and clears the table.
@@ -44,7 +44,7 @@ namespace Gpu::Device {
 
     private:
         mutable std::mutex mutex_;
-        std::unordered_map<LaunchId, std::thread> table_;
+        std::unordered_map<LaunchId, std::jthread> table_;
     };
 
 } // namespace Gpu

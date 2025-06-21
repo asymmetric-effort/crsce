@@ -16,7 +16,7 @@
  * @param exit_code_on_deadline
  */
 void Tester::deadline(unsigned t, int exit_code_on_deadline) {
-    std::thread([t, this, exit_code_on_deadline]() {
+    std::jthread([t, this, exit_code_on_deadline]() {
         std::this_thread::sleep_for(std::chrono::seconds(t));
         std::cerr << '[' << prefix << "] Test deadline of " << t
                   << " seconds reached. Exiting." << std::endl;
