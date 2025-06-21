@@ -9,12 +9,13 @@
 namespace Gpu::Ipc {
     std::string to_string(const Gpu::Ipc::Result result) {
         switch (result) {
-            case Gpu::Ipc::Result::Success: return "Success";
-            case Gpu::Ipc::Result::Closed: return "Closed";
-            case Gpu::Ipc::Result::IOError: return "IOError";
-            case Gpu::Ipc::Result::InvalidRole: return "InvalidRole";
+            using enum Result;
+            case Success: return "Success";
+            case Closed: return "Closed";
+            case IOError: return "IOError";
+            case InvalidRole: return "InvalidRole";
             default:
-                throw Gpu::Exceptions::InvalidIpcResult(result);
+                throw Exceptions::InvalidIpcResult(result);
         }
     }
 }
