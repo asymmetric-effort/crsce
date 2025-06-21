@@ -12,16 +12,17 @@ namespace Gpu::Ipc {
     Result Communications::recv(Response& res) const {
         if (!validateParentAccess()) return Result::InvalidRole;
 
-        uint8_t header[9] = {};
-        if (const ssize_t read_header = read(childToParentFd.at(readEndpoint), header, 9); read_header != 9)
+        constexpr size_t header_size = 9;
+        Common::Buffer8 header{header_size, 0};
+        if (const ssize_t read_header = read(childToParentFd.at(readEndpoint), header.data(), header.size()); read_header != header.size())
             return (read_header == 0 ? Result::Closed : Result::IOError);
 
         uint64_t payload_size = 0;
         for (int i = 0; i < 8; ++i)
-            payload_size |= static_cast<uint64_t>(header[1 + i]) << (i * 8);
+            payload_size |= static_cast<uint64_t>(header.at(1 + i)) << (i * 8);
 
-        Common::Buffer8 full(9 + payload_size);
-        std::copy_n(header, 9, full.begin());
+        Common::Buffer8 full(header.size() + payload_size,0);
+        std::copy_n(header.data(), header.size(), full.begin());
 
         if (payload_size > 0) {
             if (const ssize_t read_payload = read(childToParentFd.at(readEndpoint), full.data() + 9, payload_size); read_payload != static_cast<ssize_t>(payload_size))
