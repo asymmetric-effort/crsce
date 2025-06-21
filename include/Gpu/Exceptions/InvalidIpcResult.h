@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Gpu/Ipc/Result.h"
+#include "utils/to_underlying.h"
 #include <stdexcept>
 #include <string>
 #include <format>
@@ -23,7 +24,7 @@ namespace Gpu::Exceptions {
                 std::format(
                     "InvalidIpcResult: {}",
                     std::to_string(
-                        std::__to_underlying(result)
+                        std::to_underlying(result)
                     )
                 )
             ) {

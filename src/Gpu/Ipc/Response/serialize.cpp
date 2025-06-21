@@ -5,13 +5,13 @@
 
 #include "Gpu/Ipc/Response.h"
 #include <cstring>
-#include <__utility/to_underlying.h>
+#include "utils/to_underlying.h"
 
 namespace Gpu::Ipc {
     Common::Buffer8 Response::serialize() const {
         Common::Buffer8 output;
         output.reserve(1 + 8 + data.size());
-        output.push_back(std::__to_underlying(status));
+        output.push_back(std::to_underlying(status));
 
         for (int i = 0; i < 8; ++i)
             output.push_back(static_cast<uint8_t>((size >> (i * 8)) & 0xFF));
