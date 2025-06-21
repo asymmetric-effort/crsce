@@ -26,7 +26,7 @@ namespace Gpu::Device {
 
     private:
         Ipc::Communications& ipc_;
-        RuntimeManager runtime_;
+        RuntimeManager runtime_{};
     };
 
 } // namespace Gpu::Device
