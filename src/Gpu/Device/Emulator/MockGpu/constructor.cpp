@@ -6,6 +6,6 @@
 #include "Gpu/Device/Emulator/MockGpu.h"
 
 namespace Gpu::Device {
-    MockGpu::MockGpu(Ipc::Communications &comm) : ipc_(comm), runtime_() {
+    MockGpu::MockGpu(Ipc::Communications &comm) : ipc_(comm) {
     }
 }
