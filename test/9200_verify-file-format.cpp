@@ -5,7 +5,7 @@
 
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/CRSCE.h"
-#include "utils/TestPatterns.h"
+#include "utils/Test/Tester.h"
 #include "utils/generate_temp_filename.h"
 #include <iostream>
 #include <fstream>
@@ -29,8 +29,7 @@ bool generate_test_compression(const std::string &output_path) {
         input.put(0x00);
     input.close();
 
-    CRSCE compressor(input_path, output_path);
-    if (compressor.compress() != EXIT_SUCCESS) {
+    if (CRSCE compressor(input_path, output_path); compressor.compress() != EXIT_SUCCESS) {
         std::cerr << "[FAIL] Compression failed during setup." << std::endl;
         return false;
     }
@@ -40,16 +39,18 @@ bool generate_test_compression(const std::string &output_path) {
 }
 
 bool verify_header(std::ifstream &in) {
-    char header_buffer[HEADER.length()];
+    const size_t header_len = HEADER.length();  // runtime-safe
+    std::vector<char> header_buffer(header_len);  // avoid VLA
+
     in.seekg(0, std::ios::beg);
-    in.read(header_buffer, HEADER.length());
+    in.read(header_buffer.data(), header_len);
     if (!in) {
         std::cerr << "[FAIL] Could not read header from file." << std::endl;
         return false;
     }
-    if (std::memcmp(header_buffer, HEADER.c_str(), HEADER.length()) != 0) {
+    if (std::memcmp(header_buffer.data(), HEADER.c_str(), header_len) != 0) {
         std::cerr << "[FAIL] Header does not match expected CRSCE signature." << std::endl;
-        std::cerr << "[DEBUG] Read:   " << HEADER << std::endl;
+        std::cerr << "[DEBUG] Read:   " << std::string(header_buffer.begin(), header_buffer.end()) << std::endl;
         std::cerr << "[DEBUG] Expect: " << HEADER << std::endl;
         return false;
     }
@@ -86,12 +87,12 @@ bool verify_footer(std::ifstream &in) {
 
 bool verify_structure(const std::ifstream &in, const std::streamsize actual_size, const uint64_t block_count) {
     constexpr size_t footer_bytes = 2 * sizeof(uint64_t);
-    constexpr size_t header_bytes = HEADER.length();
+    const size_t header_bytes = HEADER.length();
     constexpr size_t lateral_bits = 4 * s * b;
     constexpr size_t lateral_bytes = (lateral_bits + 7) / 8;
     constexpr size_t lhash_bytes = s * 32;
     constexpr size_t block_bytes = lateral_bytes + lhash_bytes;
-    size_t expected_size = static_cast<size_t>(std::ceil(
+    const size_t expected_size = static_cast<size_t>(std::ceil(
         static_cast<double>(header_bytes + block_count * block_bytes + footer_bytes)));
 
     if (static_cast<std::size_t>(actual_size) != expected_size) {

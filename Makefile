@@ -42,7 +42,7 @@ lint/cpp:
 
 .PHONY: build
 build: configure
-	@time cmake --build build --target build_all
+	@time cmake --build build --target build_all -- $(cat build/concurrency.build.flag)
 
 .PHONY: build-decompress
 build-decompress: configure
