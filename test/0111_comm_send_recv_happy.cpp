@@ -5,13 +5,10 @@
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Message.h"
-#include "Gpu/Ipc/Response.h"
-#include "Gpu/Ipc/FailureCodes.h"
 #include "Gpu/Ipc/Communications.h"
 #include "Gpu/Ipc/Handles.h"
 #include <unistd.h>
 #include <cstdlib>
-#include <cstdint>
 #include <format>
 #include <map>
 #include "utils/to_underlying.h"
@@ -54,7 +51,7 @@ int main() {
     tester.assertEqual(inMsg.kernelId, outMsg.kernelId, "Message kernelId round-trip");
     tester.assertEqual(inMsg.size, outMsg.size, "Message size round-trip");
     tester.assertEqual(inMsg.ptr, outMsg.ptr, "Message ptr round-trip");
-    tester.pass();
 
+    tester.pass();
     return EXIT_SUCCESS;
 }

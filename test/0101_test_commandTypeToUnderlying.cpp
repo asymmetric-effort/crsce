@@ -47,6 +47,7 @@ int main() {
             t_rhs,
             std::format("expected type mismatch on v_lhs:{} t_lhs:{}, t_rhs:{}", v_lhs, t_lhs, t_rhs));
     }
+
     tester.pass();
     return EXIT_SUCCESS;
 }

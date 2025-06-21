@@ -56,4 +56,5 @@ int main() {
     tester.assertEqual(r2, Result::InvalidRole, "Parent cannot send Response");
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

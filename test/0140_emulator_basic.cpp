@@ -31,4 +31,5 @@ int main() {
     tester.assertTrue(gpu->init(), "init() completes successfully");
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

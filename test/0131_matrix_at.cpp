@@ -32,7 +32,7 @@ int main() {
 
     // Test const access
     const Matrix& constMat = mat;
-    double value = constMat.at(1, 2);
+    const double value = constMat.at(1, 2);
     tester.assertEqual(value, -7.25, "Const read at(1,2)");
 
     // Exception: row out-of-bounds
@@ -52,4 +52,5 @@ int main() {
     }
 
     tester.pass();
+    return EXIT_SUCCESS;
 }
