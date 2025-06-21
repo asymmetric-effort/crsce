@@ -10,7 +10,7 @@
  * @brief increment skip score and terminate
  * @param message std::string
  */
-void Tester::skip(const std::string& message){
+__attribute__((noreturn)) void Tester::skip(const std::string& message){
     std::cerr << "[" << prefix << "] Tester::skip() " << message << std::endl;
     skipScore++;
     showStatistics();
