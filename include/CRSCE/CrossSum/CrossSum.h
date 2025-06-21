@@ -16,7 +16,7 @@
 class CrossSum {
 public:
     //constructor : initialize a cross sum matrix with constants s and b.
-    explicit CrossSum();
+    explicit CrossSum()=default;
 
     explicit CrossSum(const CrossSum &) = delete;
 
@@ -42,7 +42,7 @@ protected:
 
 private:
     // cppcheck-suppress unusedStructMember
-    std::vector<CrossSumValue> data;
+    std::vector<CrossSumValue> data = std::vector<CrossSumValue>(s); /* Initialize vector with 'size' (s) elements all zeroed. */
 };
 
 #endif // CRSCE_CROSSSUM_H

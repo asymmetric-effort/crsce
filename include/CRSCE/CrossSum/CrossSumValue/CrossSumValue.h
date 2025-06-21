@@ -26,7 +26,7 @@ public:
 
 private:
     // cppcheck-suppress unusedStructMember
-    std::bitset<b> bits;
+    std::bitset<b> bits{};
 };
 
 #endif // CRSCE_CROSSSUM_VALUE_H
