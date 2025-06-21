@@ -8,7 +8,6 @@
 #include "Gpu/Ipc/Response.h"
 
 namespace Gpu::Device {
-
     void MockGpu::run() {
         while (!runtime_.isShutdown()) {
             Ipc::Message msg;
@@ -17,7 +16,7 @@ namespace Gpu::Device {
 
             Ipc::Response res;
             switch (msg.type) {
-                using enum Ipc::CommandType;
+                    using enum Ipc::CommandType;
                 case Alloc:
                     res = runtime_.handleAlloc(msg);
                     break;
@@ -25,7 +24,7 @@ namespace Gpu::Device {
                     res = runtime_.handleFree(msg);
                     break;
                 case Write: {
-                    Ipc::Response err = { Ipc::FailureCodes::WriteError, 0, {} };
+                    Ipc::Response err = {Ipc::FailureCodes::WriteError, 0, {}};
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
@@ -34,13 +33,13 @@ namespace Gpu::Device {
                     res = runtime_.handleRead(msg);
                     break;
                 case RegisterKernel: {
-                    Ipc::Response err = { Ipc::FailureCodes::KernelNotFound, 0, {} };
+                    Ipc::Response err = {Ipc::FailureCodes::KernelNotFound, 0, {}};
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
                 }
                 case LaunchTask: {
-                    Ipc::Response err = { Ipc::FailureCodes::ThreadLaunchFailure, 0, {} };
+                    Ipc::Response err = {Ipc::FailureCodes::ThreadLaunchFailure, 0, {}};
                     // Error: missing payload delivery mechanism.
                     res = err;
                     break;
@@ -52,11 +51,12 @@ namespace Gpu::Device {
                     res = runtime_.handleShutdown();
                     break;
                 default:
-                    res = { Ipc::FailureCodes::UnknownError, 0, {} };
+                    res = {Ipc::FailureCodes::UnknownError, 0, {}};
                     break;
             }
-            (void) ipc_.send(res);
+            if (Gpu::Ipc::Result result = ipc_.send(res); result != Ipc::Result::Success) {
+                throw std::runtime_error("IPC send() failed with result: " + to_string(result));
+            }
         }
     }
-
 }
