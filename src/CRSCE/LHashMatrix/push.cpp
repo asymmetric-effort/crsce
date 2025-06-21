@@ -4,6 +4,7 @@
  */
 
 #include "CRSCE/LHashMatrix.h"
+#include <format>
 
 void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
     bounds_check(r);
@@ -11,13 +12,15 @@ void LHashMatrix::push(CrossSumIndex r, CrossSumIndex c, bool bit_value) {
 
     if (row_position_data[r] >= s) {
         throw std::overflow_error(
-            "Row overflow: more than s bits pushed. position=" +
-            std::to_string(row_position_data[r])
+            std::format(
+                "Row overflow: more than s bits pushed. position={}",
+                std::to_string(row_position_data[r])
+            )
         );
     }
 
     row_buffer_data[r].set(c, bit_value);
-    row_position_data[r]++;  // ✅ track how many bits have been pushed
+    row_position_data[r]++; // ✅ track how many bits have been pushed
 
     // Automatically hash and store once row is full
     if (row_position_data[r] == s) {
