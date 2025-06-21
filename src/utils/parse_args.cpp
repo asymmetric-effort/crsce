@@ -19,10 +19,10 @@ namespace fs = std::filesystem;
  */
 int parse_args(const int argc, const char* argv[], std::string &inputFile, std::string &outputFile) {
 
-    constexpr std::string argHelp="--help";
-    constexpr std::string argVersion="--version";
-    constexpr std::string argIn="--in";
-    constexpr std::string argOut="--out";
+    const std::string argHelp="--help";
+    const std::string argVersion="--version";
+    const std::string argIn="--in";
+    const std::string argOut="--out";
     const std::string program_name(argv[0]);
 
     if (argc < 2)

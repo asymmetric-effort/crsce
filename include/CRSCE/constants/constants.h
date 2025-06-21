@@ -15,6 +15,6 @@ constexpr size_t max_index = s - 1; // 510
 constexpr size_t b = 9; // ceil(log2(s + 1))
 
 // File header
-constexpr std::string HEADER = "CRSCE";
+const std::string HEADER = "CRSCE";
 
 #endif // CRSCE_CONSTANTS_H
