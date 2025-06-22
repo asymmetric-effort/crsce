@@ -8,11 +8,11 @@
 /**
  * @name assertEqual
  * @brief asserts that a should equal b
- * @param a unsigned int
- * @param b unsigned int
+ * @param a uint32_t
+ * @param b uint32_t
  * @param message std::string&
  */
-void Tester::assertEqual(unsigned int a, unsigned int b, const std::string& message) {
+void Tester::assertEqual(uint32_t a, uint32_t b, const std::string& message) {
     if (a == b)
         pass(std::format("ok: {}", message));
     else

@@ -9,9 +9,10 @@
 
 namespace Gpu::Ipc {
     Result Communications::recv(Message &msg) const {
+        constexpr size_t message_size = 24;
+
         if (!validateChildAccess()) return Result::InvalidRole;
 
-        constexpr size_t message_size = 24;
         Common::Buffer8 raw{message_size, 0};
 
         const ssize_t n = read(parentToChildFd.at(0), raw.data(), message_size);
@@ -24,8 +25,6 @@ namespace Gpu::Ipc {
                 return Result::IOError;
             }
         }
-
-        if (n == 0) return Result::Closed;
-        return Result::IOError;
+        return (n == 0) ? Result::Closed : Result::IOError;
     }
 }

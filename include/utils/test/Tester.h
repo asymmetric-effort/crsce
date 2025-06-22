@@ -172,11 +172,11 @@ public:
     /**
      * @name assertEqual
      * @brief asserts that a should equal b
-     * @param a unsigned int
-     * @param b unsigned int
+     * @param a uint32_t
+     * @param b uint32_t
      * @param message std::string
      */
-    void assertEqual(unsigned a, unsigned b, const std::string &message);
+    void assertEqual(const uint32_t a, const uint32_t b, const std::string &message);
 
     /**
      * @name assertNotEqual
