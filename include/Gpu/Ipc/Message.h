@@ -8,6 +8,7 @@
 #include "Common/Buffer8.h"
 #include "Gpu/Ipc/CommandType.h"
 #include "Common/AbstractPtr.h"
+#include <cstring>
 
 namespace Gpu::Ipc
 {
