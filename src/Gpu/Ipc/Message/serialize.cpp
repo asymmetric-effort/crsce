@@ -31,10 +31,10 @@ namespace Gpu::Ipc {
         buffer[7] = static_cast<uint8_t>((kernelId_ >> 24) & 0xFF);
 
         // Size in native little endian via memcpy
-        std::memcpy(buffer.data() + 8,  &payload_size_, sizeof(payload_size_));
+        memcpy(buffer.data() + 8,  &payload_size_, sizeof(payload_size_));
 
         // Ptr in native little endian via memcpy
-        std::memcpy(buffer.data() + 16, &ptr_,  sizeof(ptr_));
+        memcpy(buffer.data() + 16, &ptr_,  sizeof(ptr_));
 
         return buffer;
     }
