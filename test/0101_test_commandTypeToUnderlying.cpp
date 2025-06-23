@@ -39,7 +39,7 @@ int main()
             v_lhs,
             v_rhs,
             std::format("match type (lhs:{},rhs:{})",
-                        std::__to_underlying(lhs),
+                        std::to_underlying(lhs),
                         rhs));
 
         tester.assertEqual(
