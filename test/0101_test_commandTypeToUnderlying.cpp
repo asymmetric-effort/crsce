@@ -5,10 +5,7 @@
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Message.h"
-#include "Gpu/Ipc/Response.h"
 #include "utils/to_underlying.h"
-#include "Gpu/Ipc/FailureCodes.h"
-#include "Gpu/Ipc/Communications.h"
 #include <unistd.h>
 #include <cstdlib>
 #include <format>
