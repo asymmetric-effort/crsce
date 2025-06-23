@@ -9,7 +9,7 @@
 
 namespace Gpu::Device {
 
-    bool Emulator::wait(unsigned deadline) {
+    bool Emulator::wait(const unsigned deadline) {
         std::this_thread::sleep_for(std::chrono::milliseconds(deadline));
         return true;
     }

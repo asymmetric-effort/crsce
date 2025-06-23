@@ -25,7 +25,7 @@ namespace Gpu::Ipc
         type_ = static_cast<CommandType>(buffer.at(0));
 
         constexpr auto kernelIdSz = sizeof(kernelId_);
-        constexpr auto sizeSz = sizeof(size_);
+        constexpr auto sizeSz = sizeof(payload_size_);
         constexpr auto ptrSz = sizeof(ptr_);
 
         constexpr size_t kernelIdStart = 0;
@@ -33,7 +33,7 @@ namespace Gpu::Ipc
         constexpr size_t ptrStart = sizeStart + sizeSz;
 
         std::copy_n(buffer.begin() + kernelIdStart, kernelIdSz, reinterpret_cast<uint8_t*>(&kernelId_));
-        std::copy_n(buffer.begin() + sizeStart, sizeSz, reinterpret_cast<uint8_t*>(&size_));
+        std::copy_n(buffer.begin() + sizeStart, sizeSz, reinterpret_cast<uint8_t*>(&payload_size_));
         std::copy_n(buffer.begin() + ptrStart, ptrSz, reinterpret_cast<uint8_t*>(&ptr_));
     }
 }

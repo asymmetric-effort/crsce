@@ -45,10 +45,10 @@ int main() {
                         thisSize,
                         thisPtr
                     };
-                    tester.assertEqual(testMsg.kernelId, thisKernelId,
+                    tester.assertEqual(testMsg.kernelId(), thisKernelId,
                                        std::format("Kernel Id ({}) mismatch", thisKernelId));
-                    tester.assertEqual(testMsg.kernelId, thisKernelId, std::format("Sizes ({}) mismatch", thisSize));
-                    tester.assertEqual(testMsg.kernelId, thisKernelId, std::format("Pointer ({}) mismatch", thisPtr));
+                    tester.assertEqual(testMsg.kernelId(), thisKernelId, std::format("Sizes ({}) mismatch", thisSize));
+                    tester.assertEqual(testMsg.kernelId(), thisKernelId, std::format("Pointer ({}) mismatch", thisPtr));
                 }
             }
         }

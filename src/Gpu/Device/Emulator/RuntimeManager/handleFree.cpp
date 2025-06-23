@@ -5,11 +5,15 @@
 
 #include "Gpu/Device/Emulator/RuntimeManager.h"
 
-namespace Gpu::Device {
-
-    Ipc::Response RuntimeManager::handleFree(const Ipc::Message& msg) {
-        const bool ok = memory_.free(msg.ptr);
-        return {ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::InvalidPointer, 0, {}};
+namespace Gpu::Device
+{
+    Ipc::Response RuntimeManager::handleFree(const Ipc::Message& msg)
+    {
+        const bool ok = memory_.free(msg.ptr());
+        return {
+            ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::InvalidPointer,
+            0,
+            {}
+        };
     }
-
 }

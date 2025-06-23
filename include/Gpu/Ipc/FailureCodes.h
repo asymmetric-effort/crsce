@@ -7,7 +7,8 @@
 #pragma once
 #include <cstdint>
 
-namespace Gpu::Ipc {
+namespace Gpu::Ipc
+{
     /**
      * @name Gpu::Ipc::FailureCodes
      * @brief Describes the response status code of an IPC operation encoded as uint8_t
@@ -19,7 +20,8 @@ namespace Gpu::Ipc {
      *          // handle error
      *       }
      */
-    enum class FailureCodes : uint8_t {
+    enum class FailureCodes : uint8_t
+    {
         IpcSuccess = 0x00,
         UnknownError = 0x01,
         InvalidPointer = 0x02,
@@ -32,5 +34,20 @@ namespace Gpu::Ipc {
         ShutdownFailure = 0x09
     };
 
-}
+    /**
+     * @brief Compare two FailureCodes values for equality using underlying integral values.
+     */
+    inline bool operator==(FailureCodes lhs, FailureCodes rhs) noexcept
+    {
+        using Under = std::underlying_type_t<FailureCodes>;
+        return static_cast<Under>(lhs) == static_cast<Under>(rhs);
+    }
 
+    /**
+     * @brief Compare two FailureCodes values for inequality.
+     */
+    inline bool operator!=(const FailureCodes lhs, const FailureCodes rhs) noexcept
+    {
+        return !(lhs == rhs);
+    }
+}

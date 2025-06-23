@@ -16,7 +16,7 @@ namespace Gpu::Device {
                 continue;
 
             Ipc::Response res;
-            switch (msg.type) {
+            switch (msg.type()) {
                     using enum Ipc::CommandType;
                 case Alloc:
                     res = runtime_.handleAlloc(msg);

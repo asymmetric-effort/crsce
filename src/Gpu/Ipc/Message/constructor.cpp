@@ -5,7 +5,8 @@
 
 #include "Gpu/Ipc/Message.h"
 
-namespace Gpu::Ipc {
+namespace Gpu::Ipc
+{
     /**
      * @name constructor
      * @class Message
@@ -13,11 +14,13 @@ namespace Gpu::Ipc {
      * @brief initialize the Message object
      * @param type  CommandType
      * @param kernelId  uint32_t
-     * @param size size_t
+     * @param payload_size size_t
      * @param ptr Common::AbstractPtr
      */
-    Message::Message(const CommandType type, const uint32_t kernelId, const size_t size, const Common::AbstractPtr ptr) noexcept
-    : type_(type), kernelId_(kernelId), size_(size), ptr_(ptr){
+    Message::Message(const CommandType type, const uint32_t kernelId,
+                     const size_t payload_size,const Common::AbstractPtr ptr
+    ) noexcept : type_(type), kernelId_(kernelId), payload_size_(payload_size), ptr_(ptr)
+    {
         /* noop*/
     }
 }

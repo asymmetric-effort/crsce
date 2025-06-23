@@ -14,7 +14,7 @@ int main() {
     auto constexpr expectedPtr = 0x9876;
 
 
-    constexpr Gpu::Ipc::Message message = {
+    const Gpu::Ipc::Message message = {
         expectedCommand,
         expectedKernelId,
         expectedSize,
@@ -22,22 +22,22 @@ int main() {
     };
 
     tester.assertEqual(
-        static_cast<uint32_t>(message.type),
+        static_cast<uint32_t>(message.type()),
         static_cast<uint32_t>(expectedCommand),
         "commandType mismatch");
 
     tester.assertEqual(
-        static_cast<size_t>(message.size),
+        static_cast<size_t>(message.size()),
         static_cast<size_t>(expectedSize),
         "size mismatch");
 
     tester.assertEqual(
-        static_cast<size_t>(message.ptr),
+        static_cast<size_t>(message.ptr()),
         static_cast<size_t>(expectedPtr),
         "ptr mismatch");
 
     tester.assertEqual(
-        static_cast<uint32_t>(message.kernelId),
+        static_cast<uint32_t>(message.kernelId()),
         static_cast<uint32_t>(expectedKernelId),
         "kernelId mismatch");
 

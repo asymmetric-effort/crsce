@@ -6,23 +6,24 @@
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"
 
-namespace Gpu::Device {
-
-    bool Emulator::launchTask(const KernelId id, const Common::Buffer8& args) {
+namespace Gpu::Device
+{
+    bool Emulator::launchTask(const KernelId id, const Common::Buffer8& args)
+    {
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::launchTask() called before init()");
 
         Ipc::Message msg;
-        msg.type = Ipc::CommandType::LaunchTask;
-        msg.kernelId = static_cast<uint32_t>(id);
-        msg.size = args.size();
+        msg.type(Ipc::CommandType::LaunchTask);
+        msg.kernelId(static_cast<uint32_t>(id));
+        msg.size(args.size());
 
-        ipc_->send(msg);
-        ipc_->send(Ipc::Response{Ipc::FailureCodes::IpcSuccess, msg.size, args});
+        if (auto const result = ipc_->send(msg); result != Ipc::Result::Success) return false;
+
+        ipc_->send(Ipc::Response{Ipc::FailureCodes::IpcSuccess, msg.size(), args});
 
         Ipc::Response res;
         ipc_->recv(res);
 
         return res.status == Ipc::FailureCodes::IpcSuccess;
     }
-
 }

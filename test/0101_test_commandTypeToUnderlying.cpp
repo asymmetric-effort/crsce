@@ -14,7 +14,8 @@
 #include <map>
 #include <typeinfo>
 
-int main() {
+int main()
+{
     Tester tester("0101_test_commandTypeToUnderlying.cpp");
     using enum Gpu::Ipc::CommandType;
     const std::map<Gpu::Ipc::CommandType, uint32_t> commands = {
@@ -28,7 +29,8 @@ int main() {
         {Reset, 0x07},
         {Shutdown, 0x08},
     };
-    for (auto [lhs, rhs]: commands) {
+    for (auto [lhs, rhs] : commands)
+    {
         auto const v_lhs = std::__to_underlying(lhs);
         auto const v_rhs = rhs;
 
@@ -38,14 +40,15 @@ int main() {
         tester.assertEqual(
             v_lhs,
             v_rhs,
-            std::format("mismatched type (lhs:{},rhs:{})",
+            std::format("match type (lhs:{},rhs:{})",
                         std::__to_underlying(lhs),
                         rhs));
 
         tester.assertEqual(
             t_lhs,
             t_rhs,
-            std::format("expected type mismatch on v_lhs:{} t_lhs:{}, t_rhs:{}", v_lhs, t_lhs, t_rhs));
+            std::format("expected type match on v_lhs:{} t_lhs:{}, t_rhs:{}",
+                        v_lhs, t_lhs, t_rhs));
     }
 
     tester.pass();

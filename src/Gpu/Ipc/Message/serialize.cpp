@@ -25,14 +25,13 @@ namespace Gpu::Ipc {
         buffer[3] = static_cast<uint8_t>((type_int32 >> 24) & 0xFF);
 
         // KernelId as uint32_t (little endian)
-        const auto kid_int32 = static_cast<uint32_t>(kernelId_);
-        buffer[4] = static_cast<uint8_t>(kid_int32 & 0xFF);
-        buffer[5] = static_cast<uint8_t>((kid_int32 >> 8) & 0xFF);
-        buffer[6] = static_cast<uint8_t>((kid_int32 >> 16) & 0xFF);
-        buffer[7] = static_cast<uint8_t>((kid_int32 >> 24) & 0xFF);
+        buffer[4] = static_cast<uint8_t>(kernelId_ & 0xFF);
+        buffer[5] = static_cast<uint8_t>((kernelId_ >> 8) & 0xFF);
+        buffer[6] = static_cast<uint8_t>((kernelId_ >> 16) & 0xFF);
+        buffer[7] = static_cast<uint8_t>((kernelId_ >> 24) & 0xFF);
 
         // Size in native little endian via memcpy
-        std::memcpy(buffer.data() + 8,  &size_, sizeof(size_));
+        std::memcpy(buffer.data() + 8,  &payload_size_, sizeof(payload_size_));
 
         // Ptr in native little endian via memcpy
         std::memcpy(buffer.data() + 16, &ptr_,  sizeof(ptr_));
