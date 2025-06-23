@@ -12,14 +12,15 @@
 #include "Gpu/Ipc/Result.h"
 #include "Gpu/Ipc/Handles.h"
 
-namespace Gpu::Ipc {
-
+namespace Gpu::Ipc
+{
     /**
      * @name Gpu::Ipc::Communications
      * @brief Encapsulates bidirectional pipe communication between parent and child processes.
      * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
      */
-    class Communications {
+    class Communications
+    {
     public:
         /**
          * @name constructor
@@ -36,7 +37,7 @@ namespace Gpu::Ipc {
          * @brief class destructor
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
          */
-        ~Communications()=default;;
+        ~Communications() = default;;
 
         /**
          * @name send (Message)
@@ -97,11 +98,12 @@ namespace Gpu::Ipc {
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
          * @return
          */
-        [[nodiscard]] bool isShutdown() const noexcept ;
+        [[nodiscard]] bool isShutdown() const noexcept;
 
         //Constants to use in read/write fd indexes
-        static constexpr int readEndpoint=0;
-        static constexpr int writeEndpoint=1;
+        static constexpr int readEndpoint = 0;
+        static constexpr int writeEndpoint = 1;
+        static constexpr int closed = -1;
 
     private:
         Handles parentToChildFd{};
@@ -109,5 +111,4 @@ namespace Gpu::Ipc {
         bool isParent = true;
         std::atomic<bool> shutdownFlag = false;
     };
-
 } // namespace Gpu::Ipc
