@@ -34,10 +34,10 @@ int main()
                                  expectedPtr);
 
     // Build expected byte sequence
-    const uint32_t cmd_int = static_cast<uint32_t>(expectedCommand);
-    const uint32_t kid_int = expectedKernelId;
-    const uint64_t size64  = expectedSize;
-    const uint64_t ptr64   = expectedPtr;
+    constexpr auto cmd_int = static_cast<uint32_t>(expectedCommand);
+    constexpr uint32_t kid_int = expectedKernelId;
+    constexpr uint64_t size64  = expectedSize;
+    constexpr uint64_t ptr64   = expectedPtr;
 
     std::vector<uint8_t> expected_bytes = {
         // CommandType (4 bytes, little endian)
