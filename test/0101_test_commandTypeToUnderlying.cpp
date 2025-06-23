@@ -6,6 +6,7 @@
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
+#include "utils/to_underlying.h"
 #include "Gpu/Ipc/FailureCodes.h"
 #include "Gpu/Ipc/Communications.h"
 #include <unistd.h>
@@ -31,7 +32,7 @@ int main()
     };
     for (auto [lhs, rhs] : commands)
     {
-        auto const v_lhs = std::__to_underlying(lhs);
+        auto const v_lhs = std::to_underlying(lhs);
         auto const v_rhs = rhs;
 
         auto const t_lhs = typeid(decltype(v_lhs)).hash_code();
