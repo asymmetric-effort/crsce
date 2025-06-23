@@ -8,13 +8,13 @@
 
 namespace Gpu::Device
 {
-    bool Emulator::read(Common::Buffer8& source, Common::AbstractPtr& dst)
+    bool Emulator::read(Common::Buffer8& source, Common::AbstractPtr& destination)
     {
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::read(Buffer8) called before init()");
 
         Ipc::Message msg;
         msg.type(Ipc::CommandType::Read);
-        msg.ptr(dst);
+        msg.ptr(destination);
         msg.size(source.size());
 
         if (const auto result = ipc_->send(msg); result != Ipc::Result::Success) return false;

@@ -32,8 +32,8 @@ namespace Gpu::Device {
         bool free(Common::AbstractPtr& ptr) override;
         bool write(const Common::Buffer8& source, Common::AbstractPtr& dst) override;
         bool write(const Common::Buffer64& source, Common::AbstractPtr& dst) override;
-        bool read(Common::Buffer8& source, Common::AbstractPtr& dst) override;
-        bool read(Common::Buffer64& source, Common::AbstractPtr& dst) override;
+        bool read(Common::Buffer8& source, Common::AbstractPtr& destination) override;
+        bool read(Common::Buffer64& source, Common::AbstractPtr& destination) override;
 
         bool registerKernel(KernelId id, const Common::Buffer8& binary) override;
         bool launchTask(KernelId id, const Common::Buffer8& args) override;
