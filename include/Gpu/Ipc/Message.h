@@ -22,7 +22,7 @@ namespace Gpu::Ipc {
     struct Message {
         CommandType type = CommandType::Init;
         uint32_t kernelId = 0;
-        uint64_t size = 0;
+        size_t size = 0;
         Common::AbstractPtr ptr = 0;
 
         /**
@@ -30,14 +30,14 @@ namespace Gpu::Ipc {
          * @brief Serialize this message to a binary payload (fixed 24 bytes).
          * @return Common::Buffer8
          */
-        Common::Buffer8 serialize() const;
+        [[nodiscard]] Common::Buffer8 serialize() const;
 
         /**
          * @name deserialize
          * @brief Deserialize a message from binary data (must be 24 bytes).
          * @throws Gpu::Exceptions::InvalidIpcMessage
          */
-        void deserialize(const Common::Buffer8& data);
+        void deserialize(const Common::Buffer8& buffer);
     };
 
 } // namespace Gpu::Ipc

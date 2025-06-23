@@ -22,7 +22,6 @@ RUN apt-get update -y && \
                 json-linter \
                 pymarkdown \
                 yamllint && \
-    ln -s /usr/local/bin/json-linter /usr/local/bin/jsonlint && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 FROM base AS builder

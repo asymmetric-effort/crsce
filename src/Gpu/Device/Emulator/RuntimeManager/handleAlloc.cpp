@@ -8,11 +8,11 @@
 namespace Gpu::Device {
 
     Ipc::Response RuntimeManager::handleAlloc(const Ipc::Message& msg) {
-        const auto ptr = memory_.alloc(static_cast<std::size_t>(msg.size));
+        const auto ptr = memory_.alloc(msg.size);
 
         Ipc::Response res;
 
-        res.status = (ptr != 0) ? Ipc::FailureCodes::Success : Ipc::FailureCodes::AllocationFailed;
+        res.status = (ptr != 0) ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::AllocationFailed;
 
         res.size = sizeof(Common::AbstractPtr);
 

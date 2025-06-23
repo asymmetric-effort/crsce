@@ -19,14 +19,14 @@ public:
 
     [[nodiscard]] uint16_t to_uint16() const;
 
-    CrossSumValue operator+(uint16_t rhs) const;
-    CrossSumValue operator+(CrossSumValue rhs) const;
+    friend CrossSumValue operator+(const CrossSumValue &lhs, uint16_t rhs);
+    friend CrossSumValue operator+(const CrossSumValue &lhs, const CrossSumValue &rhs);
     CrossSumValue& operator++();
     CrossSumValue operator++(int);
 
 private:
     // cppcheck-suppress unusedStructMember
-    std::bitset<b> bits;
+    std::bitset<b> bits{};
 };
 
 #endif // CRSCE_CROSSSUM_VALUE_H

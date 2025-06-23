@@ -5,7 +5,7 @@
 
 #include "CRSCE/CrossSum/VerticalSumMatrix/VerticalSumMatrix.h"
 
-void VerticalSumMatrix::set(const CrossSumIndex _, const CrossSumIndex c, const CrossSumValue v) {
+void VerticalSumMatrix::set(const CrossSumIndex _, const CrossSumIndex c, const CrossSumValue &value) {
     bounds_check(c);
-    data[c]=v;
+    this->storage()[c]=value;
 }

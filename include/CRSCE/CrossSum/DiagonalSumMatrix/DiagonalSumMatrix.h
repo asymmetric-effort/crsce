@@ -15,15 +15,15 @@ public:
 
     explicit DiagonalSumMatrix();
 
-    ~DiagonalSumMatrix() override;
+    ~DiagonalSumMatrix() override =default;
 
-    CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const override;
+    [[nodiscard]] CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const override;
 
-    void set(CrossSumIndex r, CrossSumIndex c, CrossSumValue value) override;
+    void set(CrossSumIndex r, CrossSumIndex c, const CrossSumValue &value) override;
 
     void increment(CrossSumIndex r, CrossSumIndex c) override;
 
-    CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
+    [[nodiscard]] CrossSumIndex transform(CrossSumIndex r, CrossSumIndex c) const;
 };
 
 #endif // CRSCE_DIAGONAL_SUM_MATRIX_H

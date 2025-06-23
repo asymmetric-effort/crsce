@@ -15,12 +15,12 @@ namespace Gpu::Device {
 
         const auto& blob = kernels_.get(msg.kernelId);
         try {
-            threads_.insert(static_cast<uint32_t>(msg.kernelId),
-                std::thread([blob, args] {
+            threads_.insert(msg.kernelId,
+                std::jthread([blob, args] {
                     const ThreadRuntime rt(blob, args);
                     rt.run();
                 }));
-            return {Ipc::FailureCodes::Success, 0, {}};
+            return {Ipc::FailureCodes::IpcSuccess, 0, {}};
         } catch (...) {
             return {Ipc::FailureCodes::ThreadLaunchFailure, 0, {}};
         }

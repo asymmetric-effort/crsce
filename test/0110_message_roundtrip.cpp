@@ -10,12 +10,14 @@
 #include "Common/Buffer8.h"
 #include <cstdlib>
 
+#include "utils/to_underlying.h"
+
 using Gpu::Ipc::Response;
 using Gpu::Ipc::FailureCodes;
 using Common::Buffer8;
 
 int main() {
-    Tester tester("0110_message_roundtrip.cpp",ThrowExceptionOnError);
+    Tester tester("0110_message_roundtrip.cpp", ThrowExceptionOnError);
 
     // Construct a response with error code, payload size, and data
     Response original;
@@ -27,7 +29,7 @@ int main() {
     const Buffer8 serialized = original.serialize();
     tester.assertEqual(
         serialized.size(),
-        static_cast<size_t>(1 + 8 + original.data.size()),
+        (1 + 8 + original.data.size()),
         "Serialized size should be 9 + payload size"
     );
 
@@ -35,15 +37,17 @@ int main() {
     Response roundtrip;
     roundtrip.deserialize(serialized);
     tester.assertEqual(
-        static_cast<uint8_t>(roundtrip.status),
-        static_cast<uint8_t>(original.status),
+        std::to_underlying(roundtrip.status),
+        std::to_underlying(original.status),
         "status match"
     );
+#if SIZE_MAX != UINT64_MAX
     tester.assertEqual(
         roundtrip.size,
         original.size,
         "size match"
     );
+#endif
     tester.assertEqual(
         roundtrip.data,
         original.data,

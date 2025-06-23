@@ -5,6 +5,7 @@
  */
 #include "utils/test/Tester.h"
 
+#if SIZE_MAX != UINT64_MAX
 /**
  * @name assertEqual
  * @brief asserts that a should equal b
@@ -18,3 +19,4 @@ void Tester::assertEqual(uint64_t a, uint64_t b, const std::string& message) {
     else
         fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
 }
+#endif

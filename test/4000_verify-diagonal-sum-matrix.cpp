@@ -10,7 +10,6 @@
 #include <cstdlib>
 
 constexpr size_t block_size = s;
-constexpr size_t cross_sum_width = b;
 
 int verify_100pct_set() {
     std::cout << "verify_100pct_set()" << std::endl;
@@ -58,7 +57,7 @@ int verify_1_bit_per_diagonal() {
 
 int verify_transform_distribution() {
     std::cout << "verify_transform_distribution()" << std::endl;
-    DiagonalSumMatrix xsm;
+    const DiagonalSumMatrix xsm;
     std::map<CrossSumIndex, int> value_count;
 
     for (CrossSumIndex r = 0; r < block_size; ++r)
@@ -84,9 +83,9 @@ int verify_transform_distribution() {
 
 int main() {
     try {
-        if (int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
-        if (int exit = verify_1_bit_per_diagonal(); exit != EXIT_SUCCESS) return exit;
-        if (int exit = verify_transform_distribution(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_1_bit_per_diagonal(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_transform_distribution(); exit != EXIT_SUCCESS) return exit;
 
         std::cout << "[PASS] DiagonalSumMatrix diagonal encoding verified." << std::endl;
         return EXIT_SUCCESS;

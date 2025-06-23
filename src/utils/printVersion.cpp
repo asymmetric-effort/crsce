@@ -15,6 +15,8 @@
 #endif
 
 int printVersion() {
-    std::cout << "CRSCE " << PROJECT_NAME << " " << PROJECT_VERSION << std::endl;
+    const std::string project_name(PROJECT_NAME);
+    const std::string project_version(PROJECT_VERSION);
+    std::cout << "CRSCE " << project_name << " " << project_version << std::endl;
     return EXIT_SUCCESS;
 }

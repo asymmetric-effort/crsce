@@ -6,7 +6,7 @@ on:
     branches:
       - '**'
     paths-ignore:
-      - 'Dockerfile'   # only run when this file changes
+      - 'Dockerfile'
       - '.github/workflows/ci-docker.yml'
       - '.github/workflows/sonarcloud.yml'
       - '.github/workflows/codeql-analysis'
@@ -27,7 +27,7 @@ jobs:
         run: make clean configure
       - name: Lint
         run: make lint
-#      - name: Build
-#        run: make build
+      - name: Build
+        run: make build
 #      - name: Test
 #        run: make test

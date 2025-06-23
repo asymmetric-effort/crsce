@@ -6,16 +6,18 @@
 #include "Gpu/Device/Emulator/ThreadRuntime.h"
 #include <stdexcept>
 
+#include "Gpu/Exceptions/InvalidKernelBlob.h"
+
 namespace Gpu::Device {
 
     void ThreadRuntime::run() const {
         if (kernel_.size() < 16) {
-            throw std::runtime_error("Gpu::ThreadRuntime::run() — kernel blob too small");
+            throw Exceptions::InvalidKernelBlob("Kernel name must not be empty");
         }
 
         // Placeholder: validate header, dispatch fake instruction execution
         if (const uint8_t magic = kernel_[0]; magic != 0xB1) {
-            throw std::runtime_error("Gpu::ThreadRuntime::run() — invalid kernel blob magic byte");
+            throw Exceptions::InvalidKernelBlob("Kernel name must not be empty");
         }
 
         // Actual kernel interpretation would be implemented here.

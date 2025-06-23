@@ -8,9 +8,6 @@
 
 namespace Gpu::Ipc {
 
-    MemoryTracker::MemoryTracker() {
-        std::random_device rd;
-        prng_ = std::mt19937_64(rd());
-    }
+    MemoryTracker::MemoryTracker() : prng_(std::random_device{}()) {}
 
 }

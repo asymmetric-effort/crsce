@@ -11,7 +11,7 @@ namespace Gpu::Device {
         threads_.joinAll();
         memory_.clear();
         kernels_.clear();
-        return {Ipc::FailureCodes::Success, 0, {}};
+        return {Ipc::FailureCodes::IpcSuccess, 0, {}};
     }
 
 }

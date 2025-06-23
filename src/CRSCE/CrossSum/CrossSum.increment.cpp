@@ -5,6 +5,6 @@
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
-void CrossSum::increment(CrossSumIndex r, CrossSumIndex c) {
+void CrossSum::increment(const CrossSumIndex r, const CrossSumIndex c) {
     /*noop*/
 }

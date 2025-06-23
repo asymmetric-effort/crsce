@@ -14,15 +14,15 @@ public:
 
     explicit AntidiagonalSumMatrix();
 
-    ~AntidiagonalSumMatrix() override;
+    ~AntidiagonalSumMatrix() override =default;
 
-    CrossSumValue get(const CrossSumIndex r, const CrossSumIndex c) const override;
+    [[nodiscard]] CrossSumValue get(CrossSumIndex r, CrossSumIndex c) const override;
 
-    void set(const CrossSumIndex r, const CrossSumIndex c, const CrossSumValue v) override;
+    void set(CrossSumIndex r, CrossSumIndex c, const CrossSumValue &value) override;
 
-    void increment(const CrossSumIndex r, const CrossSumIndex c) override;
+    void increment(CrossSumIndex r, CrossSumIndex c) override;
 
-    CrossSumIndex transform(const CrossSumIndex r, const CrossSumIndex c) const;
+    [[nodiscard]] static CrossSumIndex transform(CrossSumIndex r, CrossSumIndex c);
 };
 
 #endif // CRSCE_ANTIDIAGONAL_SUM_MATRIX_H

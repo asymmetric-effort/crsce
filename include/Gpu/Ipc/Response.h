@@ -11,7 +11,6 @@
 #include "Common/Buffer8.h"
 
 namespace Gpu::Ipc {
-
     /**
      * @name Gpu::Ipc::Response
      * @brief Represents the serialized response sent from child to parent via IPC.
@@ -21,9 +20,9 @@ namespace Gpu::Ipc {
      * returned by an emulated GPU operation.
      */
     struct Response {
-        FailureCodes status = FailureCodes::Success; ///< Result code
-        uint64_t size = 0;                           ///< Payload length
-        Common::Buffer8 data;                        ///< Optional binary result data
+        FailureCodes status = FailureCodes::IpcSuccess;
+        size_t size = 0;
+        Common::Buffer8 data;
 
         /**
          * @name serialize
@@ -37,7 +36,6 @@ namespace Gpu::Ipc {
          * @brief Deserialize binary data into a Response object.
          * @throws Gpu::Exceptions::InvalidIpcResponse
          */
-        void deserialize(const Common::Buffer8& data);
+        void deserialize(const Common::Buffer8 &data);
     };
-
 } // namespace Gpu::Ipc

@@ -38,8 +38,8 @@ std::string exec(const char* cmd) {
 int main() {
     try {
 
-        constexpr std::string project_name = PROJECT_NAME;
-        constexpr std::string project_version = PROJECT_VERSION;
+        const std::string project_name = PROJECT_NAME;
+        const std::string project_version = PROJECT_VERSION;
 
         if (project_version == "not_defined") {
             std::cout << "[FAIL] Cmake does not define PROJECT_VERSION. Got '"

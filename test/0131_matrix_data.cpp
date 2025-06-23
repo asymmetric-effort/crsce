@@ -37,4 +37,5 @@ int main() {
     tester.assertEqual(constBuf[4], 2.5, "Const data() read confirms value");
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

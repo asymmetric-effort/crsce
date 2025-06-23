@@ -20,7 +20,7 @@ namespace Gpu::Ipc {
      *       }
      */
     enum class FailureCodes : uint8_t {
-        Success = 0x00,
+        IpcSuccess = 0x00,
         UnknownError = 0x01,
         InvalidPointer = 0x02,
         AllocationFailed = 0x03,

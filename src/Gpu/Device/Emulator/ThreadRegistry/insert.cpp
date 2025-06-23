@@ -8,7 +8,7 @@
 
 namespace Gpu::Device {
 
-    void ThreadRegistry::insert(const LaunchId id, std::thread&& t) {
+    void ThreadRegistry::insert(const LaunchId id, std::jthread&& t) {
         std::lock_guard lock(mutex_);
         if (table_.contains(id)) {
             throw std::runtime_error("Gpu::ThreadRegistry::insert() - LaunchId already exists");

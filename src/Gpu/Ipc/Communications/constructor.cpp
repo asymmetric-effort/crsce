@@ -6,13 +6,11 @@
 #include "Gpu/Ipc/Communications.h"
 
 namespace Gpu::Ipc {
-
-    Communications::Communications(int parentToChild[2], int childToParent[2], bool isParentProcess)
+    Communications::Communications(const Handles parentToChild, const Handles childToParent, const bool isParentProcess)
         : isParent(isParentProcess) {
-        parentToChildFd[0] = parentToChild[0];
-        parentToChildFd[1] = parentToChild[1];
-        childToParentFd[0] = childToParent[0];
-        childToParentFd[1] = childToParent[1];
-    }
 
+        parentToChildFd = parentToChild;
+        childToParentFd = childToParent;
+
+    }
 }

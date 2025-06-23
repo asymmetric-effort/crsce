@@ -6,5 +6,5 @@
 #include "CRSCE/CrossSum/DiagonalSumMatrix/DiagonalSumMatrix.h"
 
 void DiagonalSumMatrix::increment(const CrossSumIndex r, const CrossSumIndex c) {
-    data[transform(r,c)]++;
+    ++this->storage()[transform(r,c)];
 }

@@ -15,6 +15,8 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <cstdint>   // for UINT64_MAX
+#include <cstddef>   // for SIZE_MAX
 
 class Tester {
 public:
@@ -25,6 +27,14 @@ public:
      * @param onError
      */
     explicit Tester(const std::string &prefix, ExitOnError onError = false);
+
+    explicit Tester(const Tester &) = delete;
+
+    explicit Tester(Tester &&) = delete;
+
+    Tester &operator=(const Tester &) = delete;
+
+    Tester &operator=(Tester &&) noexcept = delete;
 
     /**
      * @name destructor
@@ -148,6 +158,7 @@ public:
      */
     void assertEqual(uint16_t a, uint16_t b, const std::string &message);
 
+#if SIZE_MAX != UINT64_MAX
     /**
      * @name assertEqual
      * @brief asserts that a should equal b
@@ -156,15 +167,16 @@ public:
      * @param message std::string
      */
     void assertEqual(uint64_t a, uint64_t b, const std::string &message);
+#endif
 
     /**
      * @name assertEqual
      * @brief asserts that a should equal b
-     * @param a unsigned int
-     * @param b unsigned int
+     * @param a uint32_t
+     * @param b uint32_t
      * @param message std::string
      */
-    void assertEqual(unsigned a, unsigned b, const std::string &message);
+    void assertEqual(const uint32_t a, const uint32_t b, const std::string &message);
 
     /**
      * @name assertNotEqual
@@ -256,6 +268,7 @@ public:
      */
     void assertNotEqual(uint16_t a, uint16_t b, const std::string &message);
 
+#if SIZE_MAX != UINT64_MAX
     /**
      * @name assertNotEqual
      * @brief asserts that a should equal b
@@ -264,6 +277,7 @@ public:
      * @param message std::string
      */
     void assertNotEqual(uint64_t a, uint64_t b, const std::string &message);
+#endif
 
     /**
      * @name assertNotEqual
@@ -329,8 +343,6 @@ public:
      * @param message std::string
      */
     void assertNotNull(const std::unique_ptr<char> &ptr, const std::string &message);
-
-    // void assertNotNull(const std::unique_ptr<Gpu::Interface>& ptr, const std::string& message);
 
     /**
      * @name assertNotNull

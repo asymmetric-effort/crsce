@@ -28,23 +28,41 @@
 class LHashMatrix {
 public:
     // Constructor assumes CRSCE s-value
-    LHashMatrix();
-    ~LHashMatrix();
+    LHashMatrix() = default;
+
+    virtual ~LHashMatrix();
 
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;
 
+    /**
+     * @brief If the current block has fewer than s×s bits, pad the rest with zeros.
+     * @param block_count Index of the block being padded (for logging).
+     * @param block_bits  Number of bits already pushed in this block.
+     */
+    void padRemainingBits(std::size_t block_count, std::size_t block_bits);
+
 protected:
+    void hash_and_store(CrossSumIndex row_index) const;
+
+    virtual std::array<std::bitset<s>, s> &row_buffers() { return row_buffer_data; }
+    [[nodiscard]] virtual const std::array<std::bitset<s>, s> &row_buffers() const { return row_buffer_data; }
+
+    virtual std::array<size_t, s> &row_positions() { return row_position_data; }
+    [[nodiscard]] virtual const std::array<size_t, s> &row_positions() const { return row_position_data; }
+
+    virtual std::array<std::string, s> &row_hashes() { return row_hash_data; }
+    [[nodiscard]] virtual const std::array<std::string, s> &row_hashes() const { return row_hash_data; }
+
+private:
     // Bit buffer for each row
-    std::array<std::bitset<s>, s> row_buffers;
+    std::array<std::bitset<s>, s> row_buffer_data{};  // zero-initialize all positions
 
     // Track current position in each row
-    std::array<size_t, s> row_positions;
+    std::array<size_t, s> row_position_data{};  // zero-initialize all positions
 
     // SHA256 hashes per row
-    std::array<std::string, s> row_hashes;
-
-    void hash_and_store(CrossSumIndex row_index);
+    mutable std::array<std::string, s> row_hash_data{};  // zero-initialize all positions
 };
 
 #endif // CRSCE_LHASHMATRIX_H

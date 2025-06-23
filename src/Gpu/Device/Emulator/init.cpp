@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "Gpu/Ipc/Handles.h"
 
 namespace Gpu::Device {
 
@@ -17,10 +18,12 @@ namespace Gpu::Device {
         if (initialized_) return true;
 
 
-        int ptc[2], ctp[2];
-        if (pipe(ptc) < 0 || pipe(ctp) < 0) return false;
+        Ipc::Handles ptc{-1, -1};
+        Ipc::Handles ctp{-1, -1};
 
-        pid_t pid = fork();
+        if (pipe(ptc.data()) < 0 || pipe(ctp.data()) < 0) return false;
+
+        const pid_t pid = fork();
         if (pid < 0) return false;
 
         if (pid == 0) {

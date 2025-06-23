@@ -15,11 +15,11 @@ public:
 
     explicit LateralSumMatrix();
 
-    ~LateralSumMatrix() override;
+    ~LateralSumMatrix() override =default;
 
-    CrossSumValue get(CrossSumIndex r, CrossSumIndex _) const override;
+    [[nodiscard]] CrossSumValue get(CrossSumIndex r, CrossSumIndex _) const override;
 
-    void set(CrossSumIndex r, CrossSumIndex _, CrossSumValue value) override;
+    void set(CrossSumIndex r, CrossSumIndex _, const CrossSumValue &value) override;
 
     void increment(CrossSumIndex r, CrossSumIndex _) override;
 

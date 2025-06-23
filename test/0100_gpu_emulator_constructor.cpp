@@ -10,20 +10,23 @@
  */
 
 #include "Gpu/Device/Emulator/Emulator.h"
+#include "utils/test/Tester.h"
 #include <iostream>
 
 using Gpu::Device::Emulator;
 
 int main() {
+    Tester tester("0111_comm_send_recv_happy.cpp");
     try {
         Emulator emu;
-        std::cout << "[PASS] Gpu::Device::Emulator constructor/destructor test passed.\n";
-        return 0;
-    } catch (const std::exception& e) {
-        std::cerr << "[FAIL] Exception thrown during Emulator construction: " << e.what() << "\n";
+        tester.debug("[PASS] Gpu::Device::Emulator constructor/destructor test passed.\n");
+    } catch (const std::exception &e) {
+        tester.fail(std::format("[FAIL] Exception thrown during Emulator construction: {}", e.what()));
         return 1;
     } catch (...) {
-        std::cerr << "[FAIL] Unknown exception during Emulator construction.\n";
+        tester.fail("[FAIL] Unknown exception during Emulator construction.\n");
         return 1;
     }
+    tester.pass();
+    return 0;
 }

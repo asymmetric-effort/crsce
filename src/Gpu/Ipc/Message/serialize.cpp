@@ -4,6 +4,7 @@
  */
 
 #include "Gpu/Ipc/Message.h"
+#include "utils/to_underlying.h"
 #include <cstring>
 
 namespace Gpu::Ipc {
@@ -12,7 +13,7 @@ namespace Gpu::Ipc {
         Common::Buffer8 buffer(24, 0);
 
         // CommandType as uint32_t (little endian)
-        const uint32_t type_int = static_cast<uint32_t>(type);
+        const uint32_t type_int = std::to_underlying(type);
         buffer[0] = static_cast<uint8_t>(type_int & 0xFF);
         buffer[1] = static_cast<uint8_t>((type_int >> 8) & 0xFF);
         buffer[2] = static_cast<uint8_t>((type_int >> 16) & 0xFF);

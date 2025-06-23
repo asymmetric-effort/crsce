@@ -9,7 +9,6 @@
 #include <cstdlib>
 
 constexpr size_t block_size = s;
-constexpr size_t cross_sum_width = b;
 
 int verify_100pct_set() {
     std::cout << "verify_100pct_set()" << std::endl;
@@ -54,25 +53,25 @@ int verify_1_bit_per_col_set() {
 
 int verify_overflow_works() {
     std::cout << "verify_overflow_works()" << std::endl;
-    VerticalSumMatrix vsm;
 
     try {
+        VerticalSumMatrix vsm;
         for (uint16_t r = 0; r <= block_size; ++r)
             for (uint16_t c = 0; c <= block_size; ++c)
                 vsm.increment(r, c);
 
         std::cerr << "[FAIL] Expected overflow not triggered." << std::endl;
         return EXIT_FAILURE;
-    } catch (const std::overflow_error& e) {
+    } catch (std::overflow_error) {
         return EXIT_SUCCESS;
     }
 }
 
 int main() {
     try {
-        if (int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
-        if (int exit = verify_1_bit_per_col_set(); exit != EXIT_SUCCESS) return exit;
-        if (int exit = verify_overflow_works(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_100pct_set(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_1_bit_per_col_set(); exit != EXIT_SUCCESS) return exit;
+        if (const int exit = verify_overflow_works(); exit != EXIT_SUCCESS) return exit;
 
         std::cout << "[PASS] VerticalSumMatrix column-major encoding verified." << std::endl;
         return EXIT_SUCCESS;

@@ -7,5 +7,5 @@
 
 CrossSumValue LateralSumMatrix::LateralSumMatrix::get(const CrossSumIndex r, const CrossSumIndex _) const {
     bounds_check(r);
-    return data[r];
+    return this->storage()[r];
 }

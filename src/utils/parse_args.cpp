@@ -4,19 +4,10 @@
  */
 
 #include "utils/parseArgs.h"
+#include "utils/terminate_and_show_usage.h"
 
 namespace fs = std::filesystem;
-/**
- * @name terminate_and_show_usage
- * @brief terminate with the given exit code and print the program usage string.
- * @param program_name std::string
- * @param exit_code int
- * @return int exit_code
- */
-int terminate_and_show_usage(const std::string& program_name, const int exit_code=EXIT_FAILURE){
-    printUsage(program_name);
-    return exit_code;
-}
+
 
 /**
  * @name parse_args
@@ -26,12 +17,12 @@ int terminate_and_show_usage(const std::string& program_name, const int exit_cod
  * @param outputFile - std::string
  * @return int - exit code
  */
-int parse_args(const int argc, char* argv[], std::string &inputFile, std::string &outputFile) {
+int parse_args(const int argc, const char* argv[], std::string &inputFile, std::string &outputFile) {
 
-    constexpr std::string argHelp="--help";
-    constexpr std::string argVersion="--version";
-    constexpr std::string argIn="--in";
-    constexpr std::string argOut="--out";
+    const std::string argHelp="--help";
+    const std::string argVersion="--version";
+    const std::string argIn="--in";
+    const std::string argOut="--out";
     const std::string program_name(argv[0]);
 
     if (argc < 2)

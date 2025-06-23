@@ -3,12 +3,46 @@ configure:
 	@cmake -G Ninja -S . -B build
 
 .PHONY: lint
-lint: configure
-	@time cmake --build build --target linters
+lint: lint/json lint/yaml lint/cpp
+	@echo "lint: ok"
+
+.PHONY: lint/json
+lint/json:
+	@echo "$@: starting"
+	@( \
+		for i in $$(find . \( -path './cmake-build-*' -o -path './build' \) -prune -type f -name '*.json'); do \
+		    json-linter filename $${i} || exit 1; \
+		done; \
+	)
+	@echo "$@: ok"
+
+lint/yaml:
+	@echo "$@: starting"
+	find . -type f \( -name '*.yml' -o -name '*.yaml' \) -print0 | xargs -0 -n1 yamllint
+	@echo "$@: ok"
+
+.PHONY: lint/cpp
+lint/cpp:
+	@echo "$@: starting"
+	@find ./include ./src ./test \
+	  -type f \( -name '*.cpp' -o -name '*.h' \) -print0 \
+	  | xargs -0 -n1 sh -c '\
+	      cppcheck --enable=all \
+	        --platform=unix64 \
+	        --std=c++20 \
+	        --language=c++ \
+	        --suppressions-list=.cppcheck-suppressions.txt \
+	        --inline-suppr \
+	        --error-exitcode=2 \
+	        --check-level=normal \
+	        -I include/ "$$1" || exit 255\
+	    ' dummy
+	@echo "$@: ok"
+
 
 .PHONY: build
 build: configure
-	@time cmake --build build --target build_all
+	@time cmake --build build --target build_all -- $(cat build/concurrency.build.flag)
 
 .PHONY: build-decompress
 build-decompress: configure

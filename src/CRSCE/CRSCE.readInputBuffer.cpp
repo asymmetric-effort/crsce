@@ -6,13 +6,12 @@
 #include "CRSCE/CRSCE.h"
 #include <iostream>
 #include <vector>
-#include <cstring>
 
 // readInputBuffer - read the input file byte for byte
 bool CRSCE::readInputBuffer(FileBuffer& buffer) {
     buffer.resize(INPUT_BUFFER_SIZE);
     inputStream.read(reinterpret_cast<char*>(buffer.data()), INPUT_BUFFER_SIZE);
-    std::streamsize bytesRead = inputStream.gcount();
+    const std::streamsize bytesRead = inputStream.gcount();
     buffer.resize(static_cast<size_t>(bytesRead));
     return bytesRead > 0;
 }

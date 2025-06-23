@@ -15,11 +15,11 @@ public:
 
     explicit VerticalSumMatrix();
 
-    ~VerticalSumMatrix() override;
+    ~VerticalSumMatrix() override =default;
 
-    CrossSumValue get(CrossSumIndex _, CrossSumIndex c) const override;
+    [[nodiscard]] CrossSumValue get(CrossSumIndex _, CrossSumIndex c) const override;
 
-    void set(CrossSumIndex _, CrossSumIndex c, CrossSumValue value) override;
+    void set(CrossSumIndex _, CrossSumIndex c, const CrossSumValue &value) override;
 
     void increment(CrossSumIndex _, CrossSumIndex c) override;
 

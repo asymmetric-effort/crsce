@@ -59,8 +59,7 @@ bool run_compression_pattern(const TestPattern& pattern) {
     // Setup CRSCE and call compression
     CRSCE compressor(input_filename, output_filename);
 
-    int result = compressor.compress();
-    if (result != EXIT_SUCCESS) {
+    if (const int result = compressor.compress(); result != EXIT_SUCCESS) {
         std::cerr << "[FAIL] CRSCE::compress() failed for pattern " << pattern.name << std::endl;
         return false;
     }
@@ -90,7 +89,7 @@ int main() {
     };
 
     for (const auto& pattern : patterns) {
-        if (bool success = run_compression_pattern(pattern); !success)
+        if (const bool success = run_compression_pattern(pattern); !success)
             return EXIT_FAILURE;
         std::cout << "[PASS] zzz-final-compression-test completed successfully." << std::endl;
     }

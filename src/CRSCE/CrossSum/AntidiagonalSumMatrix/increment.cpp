@@ -6,5 +6,5 @@
 #include "CRSCE/CrossSum/AntidiagonalSumMatrix/AntidiagonalSumMatrix.h"
 
 void AntidiagonalSumMatrix::increment(const CrossSumIndex r, const CrossSumIndex c) {
-    data[transform(r,c)]++;
+    ++this->storage()[transform(r,c)];
 }

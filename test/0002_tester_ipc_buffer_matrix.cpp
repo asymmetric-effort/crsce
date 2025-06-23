@@ -45,7 +45,10 @@ int main() {
 
     // ---- Buffer64 tests ----
     using Common::Buffer64;
-    const Buffer64 b641 = {1ULL, 2ULL, 3ULL}, b642 = {1ULL, 2ULL, 3ULL}, b643 = {1ULL, 2ULL, 4ULL};
+    const Buffer64 b641 = {1ULL, 2ULL, 3ULL};
+    const Buffer64 b642 = {1ULL, 2ULL, 3ULL};
+    const Buffer64 b643 = {1ULL, 2ULL, 4ULL};
+
     tester.assertEqual(b641, b642, "Buffer64 contents should be equal");
     tester.expectException<TestException>(
         [&] { tester.assertEqual(b641, b643, "Buffer64 contents should be equal"); }
@@ -57,7 +60,11 @@ int main() {
 
     // ---- Matrix tests ----
     using Gpu::Math::Matrix;
-    Matrix m1(2, 2), m2(2, 2), m3(2, 2);
+
+    Matrix m1(2, 2);
+    Matrix m2(2, 2);
+    Matrix m3(2, 2);
+
     m1.at(0, 0) = 1;
     m1.at(0, 1) = 2;
     m1.at(1, 0) = 3;

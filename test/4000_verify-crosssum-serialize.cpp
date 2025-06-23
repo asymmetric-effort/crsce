@@ -31,7 +31,7 @@ void serialize_matrix(const CrossSum &original, std::string &serialized) {
 void deserialize_bitstream(const std::string &serialized, std::bitset<b * s> &bitstream) {
     std::cout << "[INFO] deserialize_bitstream()" << std::endl;
     size_t bit_index = 0;
-    for (unsigned char c : serialized) {
+    for (const unsigned char c : serialized) {
         for (int i = 7; i >= 0; --i) {
             if (bit_index < b * s) {
                 // cppcheck-suppress AssignmentIntegerToAddress

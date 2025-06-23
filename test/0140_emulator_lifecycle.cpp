@@ -57,4 +57,5 @@ int main() {
     }
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

@@ -10,7 +10,7 @@
  * @brief update stats and throw a message exception.  OnError (true) terminates execution.
  * @throw TestException
  */
-void Tester::fail() {
+__attribute__((noreturn)) void Tester::fail() {
     failScore++;
     if (onError) {
         showStatistics();
@@ -26,7 +26,7 @@ void Tester::fail() {
  * @param message std::string
  * @throw TestException
  */
-void Tester::fail(const std::string &message) {
+__attribute__((noreturn)) void Tester::fail(const std::string &message) {
     failScore++;
     if (onError) {
         showStatistics();

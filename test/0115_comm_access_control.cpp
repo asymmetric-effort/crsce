@@ -18,6 +18,7 @@
 #include "Gpu/Ipc/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/Result.h"
+#include "Gpu/Ipc/Handles.h"
 
 #include <unistd.h>
 
@@ -29,9 +30,10 @@ using Gpu::Ipc::Result;
 int main() {
     Tester tester("Gpu::Ipc::Communications access control");
 
-    int parentToChild[2], childToParent[2];
-    pipe(parentToChild);  // parent to child
-    pipe(childToParent);  // child to parent
+    Gpu::Ipc::Handles parentToChild;
+    Gpu::Ipc::Handles childToParent;
+    pipe(parentToChild.data());  // parent to child
+    pipe(childToParent.data());  // child to parent
 
     const Communications parent(parentToChild, childToParent, true);
     const Communications child(parentToChild, childToParent, false);
@@ -54,4 +56,5 @@ int main() {
     tester.assertEqual(r2, Result::InvalidRole, "Parent cannot send Response");
 
     tester.pass();
+    return EXIT_SUCCESS;
 }

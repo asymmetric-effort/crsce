@@ -2,20 +2,17 @@
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 cmake_minimum_required(VERSION 3.27.4)
+include("cmake/prerequisites.cmake")
 
 project(crsce VERSION 1.0.0)
 set(COPYRIGHT "(c) 2025 Asymmetric Effort, LLC.  All Rights Reserved.")
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_C_COMPILER clang)
-set(CMAKE_CXX_COMPILER clang++)
-set(CMAKE_CXX_FLAGS -stdlib=libc++)
-set(CMAKE_CXX_LINKER_FLAGS -lc++ -lc++abi)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
-set(CMAKE_CXX_EXTENSIONS NO)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 set(CMAKE_C_COMPILER_LAUNCHER ccache)
 set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
-set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE BOOL "" FORCE)
 
 set(PROJECT_ROOT ${CMAKE_SOURCE_DIR})
 
@@ -29,4 +26,3 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_ROOT}/cmake")
 
 include(include_directories)
 include(build_all)
-include(linters)
