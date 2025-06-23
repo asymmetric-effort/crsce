@@ -24,4 +24,13 @@ namespace Common {
      * @typedef Common::Buffer64
      */
     using Buffer64 = std::vector<uint64_t>;
+
+
+    inline bool operator==(const Buffer64& a, const Buffer64& b) {
+        return a.size() == b.size() && std::equal(a.begin(), a.end(), b.begin());
+    }
+    inline bool operator!=(const Buffer64& a, const Buffer64& b) {
+        return a.size() != b.size() || !std::equal(a.begin(), a.end(), b.begin());
+    }
+
 } // namespace Common

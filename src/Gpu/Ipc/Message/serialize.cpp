@@ -4,26 +4,40 @@
  */
 
 #include "Gpu/Ipc/Message.h"
-#include "utils/to_underlying.h"
-#include <cstring>
 
 namespace Gpu::Ipc {
-
+    /**
+     * @name serialize
+     * @class Message
+     * @namespace Gpu::Ipc
+     * @brief This method serializes a Message object to return binary stream.
+     * @return Common::Buffer8
+     */
     Common::Buffer8 Message::serialize() const {
+        // Create a 24-byte buffer.
         Common::Buffer8 buffer(24, 0);
 
         // CommandType as uint32_t (little endian)
-        const uint32_t type_int = std::to_underlying(type);
-        buffer[0] = static_cast<uint8_t>(type_int & 0xFF);
-        buffer[1] = static_cast<uint8_t>((type_int >> 8) & 0xFF);
-        buffer[2] = static_cast<uint8_t>((type_int >> 16) & 0xFF);
-        buffer[3] = static_cast<uint8_t>((type_int >> 24) & 0xFF);
+        const auto type_int32 = static_cast<uint32_t>(type_);
+        buffer[0] = static_cast<uint8_t>(type_int32 & 0xFF);
+        buffer[1] = static_cast<uint8_t>((type_int32 >> 8) & 0xFF);
+        buffer[2] = static_cast<uint8_t>((type_int32 >> 16) & 0xFF);
+        buffer[3] = static_cast<uint8_t>((type_int32 >> 24) & 0xFF);
 
-        std::memcpy(buffer.data() + 4,  &kernelId, sizeof(kernelId));
-        std::memcpy(buffer.data() + 8,  &size,     sizeof(size));
-        std::memcpy(buffer.data() + 16, &ptr,      sizeof(ptr));
+        // KernelId as uint32_t (little endian)
+        const auto kid_int32 = static_cast<uint32_t>(kernelId_);
+        buffer[4] = static_cast<uint8_t>(kid_int32 & 0xFF);
+        buffer[5] = static_cast<uint8_t>((kid_int32 >> 8) & 0xFF);
+        buffer[6] = static_cast<uint8_t>((kid_int32 >> 16) & 0xFF);
+        buffer[7] = static_cast<uint8_t>((kid_int32 >> 24) & 0xFF);
+
+        // Size in native little endian via memcpy
+        std::memcpy(buffer.data() + 8,  &size_, sizeof(size_));
+
+        // Ptr in native little endian via memcpy
+        std::memcpy(buffer.data() + 16, &ptr_,  sizeof(ptr_));
 
         return buffer;
     }
 
-}
+} // namespace Gpu::Ipc

@@ -9,11 +9,12 @@
 namespace Gpu::Device {
 
     Common::AbstractPtr Emulator::alloc(const std::size_t bytes) {
-        if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::alloc() called before init()");
+        if (!initialized_)
+            throw Exceptions::DeviceNotReady("Emulator::alloc() called before init()");
 
         Ipc::Message msg;
-        msg.type = Ipc::CommandType::Alloc;
-        msg.size = bytes;
+        msg.type(Ipc::CommandType::Alloc);
+        msg.size(bytes);
 
         if (const auto result = ipc_->send(msg);result!=Ipc::Result::Success)
             return 0;
@@ -23,7 +24,8 @@ namespace Gpu::Device {
         if (const auto result = ipc_->recv(res);result!=Ipc::Result::Success)
             return 0;
 
-        if (res.status != Ipc::FailureCodes::IpcSuccess || res.size != sizeof(Common::AbstractPtr)) return 0;
+        if (res.status != Ipc::FailureCodes::IpcSuccess || res.size != sizeof(Common::AbstractPtr))
+            return 0;
 
         Common::AbstractPtr ptr = 0;
         for (int i = 0; i < 8; ++i)

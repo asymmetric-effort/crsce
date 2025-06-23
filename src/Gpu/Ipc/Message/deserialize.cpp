@@ -4,26 +4,36 @@
  */
 
 #include "Gpu/Ipc/Message.h"
-#include <cstring>
-#include <stdexcept>
-
 #include "Gpu/Exceptions/DeviceNotReady.h"
 #include "Gpu/Exceptions/InvalidIpcMessage.h"
 
-namespace Gpu::Ipc {
-    void Message::deserialize(const Common::Buffer8 &buffer) {
+namespace Gpu::Ipc
+{
+    /**
+     * @name deserialize
+     * @class Message
+     * @namespace Gpu::Ipc
+     * @brief This method deserializes a given binary string into the various properties of a message.
+     * @param buffer
+     */
+    void Message::deserialize(const Common::Buffer8& buffer)
+    {
         if (buffer.size() != 24)
-            throw Gpu::Exceptions::InvalidIpcMessage("deserialization expects 24-byte buffer");
+            throw Exceptions::InvalidIpcMessage("deserialization expects 24-byte buffer");
 
         // CommandType is always 1 byte
-        type = static_cast<CommandType>(buffer.at(0));
+        type_ = static_cast<CommandType>(buffer.at(0));
+
+        constexpr auto kernelIdSz = sizeof(kernelId_);
+        constexpr auto sizeSz = sizeof(size_);
+        constexpr auto ptrSz = sizeof(ptr_);
 
         constexpr size_t kernelIdStart = 0;
-        constexpr size_t sizeStart     = kernelIdStart + sizeof(kernelId);
-        constexpr size_t ptrStart      = sizeStart     + sizeof(size);
+        constexpr size_t sizeStart = kernelIdStart + kernelIdSz;
+        constexpr size_t ptrStart = sizeStart + sizeSz;
 
-        std::copy_n(buffer.begin() + kernelIdStart, sizeof(kernelId), reinterpret_cast<uint8_t *>(&kernelId));
-        std::copy_n(buffer.begin() + sizeStart,     sizeof(size),     reinterpret_cast<uint8_t *>(&size));
-        std::copy_n(buffer.begin() + ptrStart,      sizeof(ptr),      reinterpret_cast<uint8_t *>(&ptr));
+        std::copy_n(buffer.begin() + kernelIdStart, kernelIdSz, reinterpret_cast<uint8_t*>(&kernelId_));
+        std::copy_n(buffer.begin() + sizeStart, sizeSz, reinterpret_cast<uint8_t*>(&size_));
+        std::copy_n(buffer.begin() + ptrStart, ptrSz, reinterpret_cast<uint8_t*>(&ptr_));
     }
 }

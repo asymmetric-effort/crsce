@@ -27,4 +27,12 @@ namespace Common {
      * @typedef Common::Buffer8
      */
     using Buffer8 = std::vector<uint8_t>;
+
+    inline bool operator==(const Buffer8& a, const Buffer8& b) {
+        return a.size() == b.size() && std::equal(a.begin(), a.end(), b.begin());
+    }
+    inline bool operator!=(const Buffer8& a, const Buffer8& b) {
+        return a.size() != b.size() || !std::equal(a.begin(), a.end(), b.begin());
+    }
+
 } // namespace Common
