@@ -40,7 +40,7 @@ int main()
     constexpr uint64_t size64 = expectedSize;
     constexpr uint64_t ptr64 = expectedPtr;
 
-    std::vector<uint8_t> expected_bytes = {
+    const std::vector<uint8_t> expected_bytes = {
         // CommandType (4 bytes, little endian)
         static_cast<uint8_t>(cmd_int & 0xFF),
         static_cast<uint8_t>((cmd_int >> 8) & 0xFF),
