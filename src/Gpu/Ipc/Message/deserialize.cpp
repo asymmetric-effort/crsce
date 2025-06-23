@@ -45,14 +45,14 @@ namespace Gpu::Ipc {
         for (int i = 0; i < 8; ++i) {
             size_int |= static_cast<uint64_t>(buffer[8 + i]) << (8 * i);
         }
-        payload_size_ = static_cast<size_t>(size_int);
+        payload_size_ = size_int;
 
         // Extract ptr_ (8 bytes little-endian)
         uint64_t ptr_int = 0;
         for (int i = 0; i < 8; ++i) {
             ptr_int |= static_cast<uint64_t>(buffer[16 + i]) << (8 * i);
         }
-        ptr_ = static_cast<Common::AbstractPtr>(ptr_int);
+        ptr_ = ptr_int;
     }
 
 } // namespace Gpu::Ipc
