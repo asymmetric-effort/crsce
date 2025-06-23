@@ -18,17 +18,12 @@ namespace Gpu::Ipc {
         // CommandType is always 1 byte
         type = static_cast<CommandType>(buffer.at(0));
 
-        constexpr int kernelIdStart = 4;
-        constexpr int sizeStart = 8;
-        constexpr int ptrStart = 16;
+        constexpr size_t kernelIdStart = 0;
+        constexpr size_t sizeStart     = kernelIdStart + sizeof(kernelId);
+        constexpr size_t ptrStart      = sizeStart     + sizeof(size);
 
-        // KernelId (uint32_t)
         std::copy_n(buffer.begin() + kernelIdStart, sizeof(kernelId), reinterpret_cast<uint8_t *>(&kernelId));
-
-        // Size (uint64_t)
-        std::copy_n(buffer.begin() + sizeStart, sizeof(size), reinterpret_cast<uint8_t *>(&size));
-
-        // Pointer (uint64_t)
-        std::copy_n(buffer.begin() + ptrStart, sizeof(ptr), reinterpret_cast<uint8_t *>(&ptr));
+        std::copy_n(buffer.begin() + sizeStart,     sizeof(size),     reinterpret_cast<uint8_t *>(&size));
+        std::copy_n(buffer.begin() + ptrStart,      sizeof(ptr),      reinterpret_cast<uint8_t *>(&ptr));
     }
 }
