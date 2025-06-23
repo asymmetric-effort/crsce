@@ -1,20 +1,21 @@
-// file: test/0101_test_message_serialize.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * file: test/0101_test_message_serialize.cpp
+ * (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "utils/test/Tester.h"
 #include "Gpu/Ipc/Message.h"
 #include <vector>
-#include <cstdint>
 #include <format>
 
 int main()
 {
     Tester tester("0101_test_message_serialize.cpp");
 
-    const Common::AbstractPtr expectedPtr      = static_cast<Common::AbstractPtr>(0x9876);
-    const size_t              expectedSize     = static_cast<size_t>(0x5678u);
-    const uint32_t            expectedKernelId = static_cast<uint32_t>(0u); // Write commands ignore kernelId
-    const Gpu::Ipc::CommandType expectedCommand = Gpu::Ipc::CommandType::Write;
+    constexpr auto expectedPtr      = static_cast<Common::AbstractPtr>(0x9876);
+    constexpr auto              expectedSize     = static_cast<size_t>(0x5678u);
+    constexpr auto            expectedKernelId = static_cast<uint32_t>(0u); // Write commands ignore kernelId
+    constexpr auto expectedCommand = Gpu::Ipc::CommandType::Write;
 
     // Verify type widths
     tester.assertTrue(
