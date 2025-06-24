@@ -4,7 +4,7 @@
  */
 #include "utils/test/Tester.h"
 
-void Tester::showStatistics(){
+void Tester::showStatistics() const{
     std::cerr <<
         "[" << prefix << "] Tester tear-down: " << std::endl
         << " Pass: " << passScore << std::endl

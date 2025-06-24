@@ -484,7 +484,7 @@ private:
     * @name showStatistics
     * @brief print the test statistics (pass, fail, skip)
     */
-    void showStatistics();
+    void showStatistics() const;
 
     std::string prefix;
     unsigned int passScore = 0;
