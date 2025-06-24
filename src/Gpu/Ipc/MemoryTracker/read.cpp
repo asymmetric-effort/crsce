@@ -7,9 +7,9 @@
 
 namespace Gpu::Ipc {
 
-    bool MemoryTracker::read(Common::AbstractPtr src, Common::Buffer8& dst) const {
+    bool MemoryTracker::read(const Common::AbstractPtr src, Common::Buffer8& dst) const {
         std::lock_guard lock(mutex_);
-        auto it = table_.find(src);
+        const auto it = table_.find(src);
         if (it == table_.end() || it->second.size() != dst.size()) return false;
         dst = it->second;
         return true;

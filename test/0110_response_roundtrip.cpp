@@ -19,15 +19,15 @@ int main() {
 
     // Construct a response with error code, payload size, and data
     Response original;
-    original.status = FailureCodes::ReadError;
-    original.size   = 3;
-    original.data   = Buffer8{0xDE, 0xAD, 0xBE};
+    original.status(FailureCodes::ReadError);
+    original.size(3);
+    original.data(Buffer8{0xDE, 0xAD, 0xBE});
 
     // Serialize and verify buffer length (1 byte status + 8 bytes size + payload)
     const Buffer8 serialized = original.serialize();
     tester.assertEqual(
         serialized.size(),
-        (1 + 8 + original.data.size()),
+        (1 + 8 + original.data().size()),
         "Serialized length should be 1(status)+8(size)+payload"
     );
 
@@ -35,8 +35,8 @@ int main() {
     Response roundtrip;
     roundtrip.deserialize(serialized);
     tester.assertEqual(
-        std::to_underlying(roundtrip.status),
-        std::to_underlying(original.status),
+        std::to_underlying(roundtrip.status()),
+        std::to_underlying(original.status()),
         "status match"
     );
 #if SIZE_MAX != UINT64_MAX
@@ -47,8 +47,8 @@ int main() {
     );
 #endif
     tester.assertEqual(
-        roundtrip.data,
-        original.data,
+        roundtrip.data(),
+        original.data(),
         "data match"
     );
 

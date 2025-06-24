@@ -12,16 +12,16 @@ namespace Gpu::Ipc {
         if (data.size() < 9)
             throw Exceptions::InvalidIpcResponse("deserialize: buffer too small");
 
-        status = static_cast<FailureCodes>(data[0]);
+        status_ = static_cast<FailureCodes>(data[0]);
 
-        size = 0;
+        payload_size_ = 0;
         for (int i = 0; i < 8; ++i)
-            size |= static_cast<uint64_t>(data[1 + i]) << (i * 8);
+            payload_size_ |= static_cast<uint64_t>(data[1 + i]) << (i * 8);
 
-        if (data.size() < 9 + size)
+        if (data.size() < 9 + payload_size_)
             throw Exceptions::InvalidIpcResponse("deserialize: payload size mismatch");
 
-        this->data.assign(data.begin() + 9, data.begin() + 9 + size);
+        this->data_.assign(data.begin() + 9, data.begin() + 9 + payload_size_);
     }
 
 }
