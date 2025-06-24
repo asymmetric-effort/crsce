@@ -8,7 +8,7 @@
 int main() {
     Tester tester("0101_test_message_struct.cpp");
 
-    auto constexpr expectedCommand = Gpu::Ipc::CommandType::Write;
+    auto constexpr expectedCommand = Gpu::Ipc::MessageType::Write;
     auto constexpr expectedKernelId = 0x1234;
     auto constexpr expectedSize = 0x5678u;
     auto constexpr expectedPtr = 0x9876;

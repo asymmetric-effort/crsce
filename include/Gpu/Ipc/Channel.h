@@ -24,11 +24,9 @@ namespace Gpu::Ipc {
          * @name constructor
          * @brief class constructor enumerates two p2c and two c2p file descriptors.
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
-         * @param parentToChild
-         * @param childToParent
          * @param isParentProcess
          */
-        Communications(Handles parentToChild, Handles childToParent, bool isParentProcess);
+        Communications();
 
         /**
          * @name destructor
@@ -36,6 +34,10 @@ namespace Gpu::Ipc {
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
          */
         ~Communications() = default;;
+
+        claimLeft(){} //claim request sender / response receiver
+        claimRight(){} //claim response sender / request receiver
+
 
         /**
          * @name send (Message)
@@ -79,7 +81,21 @@ namespace Gpu::Ipc {
         static constexpr int closed = -1;
 
     private:
-        Handles parentToChildFd{};
-        Handles childToParentFd{};
+        /**
+         * @name requestPipe
+         * @class Communications
+         * @namespace Gpu::Ipc
+         * @brief This is the IPC file handle pair for sending/receiving requests from parent to child process.
+         */
+        Handles requestPipe{};
+
+        /**
+         * @name responsePipe
+         * @class Communications
+         * @namespace Gpu::Ipc
+         * @brief This is the IPC file handle pair for sending/receiving responses from child to parent.
+         */
+        Handles responsePipe{};
+        bool isParent = true;
     };
 } // namespace Gpu::Ipc

@@ -14,7 +14,7 @@ int main() {
     constexpr auto expectedPtr = static_cast<Common::AbstractPtr>(0x9876);
     constexpr auto expectedSize = static_cast<size_t>(0x5678u);
     constexpr auto expectedKernelId = static_cast<uint32_t>(0u); // Write commands ignore kernelId
-    constexpr auto expectedCommand = Gpu::Ipc::CommandType::Write;
+    constexpr auto expectedCommand = Gpu::Ipc::MessageType::Write;
 
     // Verify type widths
     tester.assertTrue(

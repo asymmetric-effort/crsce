@@ -15,8 +15,8 @@
 int main()
 {
     Tester tester("0101_test_commandTypeToUnderlying.cpp");
-    using enum Gpu::Ipc::CommandType;
-    const std::map<Gpu::Ipc::CommandType, uint32_t> commands = {
+    using enum Gpu::Ipc::MessageType;
+    const std::map<Gpu::Ipc::MessageType, uint32_t> commands = {
         {Noop, 0x00},
         {Init, 0x01},
         {Alloc, 0x02},

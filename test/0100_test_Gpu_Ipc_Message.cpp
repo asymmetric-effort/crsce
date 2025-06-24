@@ -22,7 +22,7 @@ using Gpu::Ipc::FailureCodes;
 
 int main() {
     Tester tester("0100_test_Gpu_Ipc_Message.cpp");
-    using enum Gpu::Ipc::CommandType;
+    using enum Gpu::Ipc::MessageType;
     for (auto a = 0; a < 2; a++) {
         for (auto b = 0; b < 2; b++) {
             for (auto c = 0; c < 2; c++) {
