@@ -14,6 +14,7 @@ Represents an Interprocess Communication message type encoded as `uint32_t`
 
 | `Gpu::Ipc::CommandType` | Description                                                                     |
 |-------------------------|---------------------------------------------------------------------------------|
+| `Noop`                  | No operation (passive state)                                                    |
 | `Init`                  | Confirms successful launch of `Gpu::Device::MockGpu` child process.             |
 | `Alloc`                 | Allocate memory inside the Mock GPU. Memory is zeroed on allocation.            |
 | `Free`                  | Free memory previously allocated inside the Mock GPU. Memory is zeroed on free. |
