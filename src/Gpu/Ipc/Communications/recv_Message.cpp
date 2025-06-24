@@ -7,7 +7,7 @@
 #include "Gpu/Ipc/Communications.h"
 #include "Gpu/Ipc/Message.h"
 #include <unistd.h>
-#include <__ostream/basic_ostream.h>
+#include <ostream>
 
 namespace Gpu::Ipc {
 
