@@ -73,31 +73,6 @@ namespace Gpu::Ipc {
          */
         Result recv(Response& res) const;
 
-        /**
-         * @name validateParentAccess
-         * @brief validate the parent can send
-         * @return bool
-         * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
-         */
-        bool validateParentAccess() const;
-
-        /**
-         * @name validateChildAccess
-         * @brief validate the child can send
-         * @return bool
-         * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
-         */
-        bool validateChildAccess() const;
-
-        /**
-         * @name isShutdown
-         * @brief return whether or not the class instance is in shutdown
-         * @return bool
-         * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
-         * @return
-         */
-        [[nodiscard]] bool isShutdown() const noexcept;
-
         //Constants to use in read/write fd indexes
         static constexpr int readEndpoint = 0;
         static constexpr int writeEndpoint = 1;
@@ -106,7 +81,5 @@ namespace Gpu::Ipc {
     private:
         Handles parentToChildFd{};
         Handles childToParentFd{};
-        bool isParent = true;
-        std::atomic<bool> shutdownFlag = false;
     };
 } // namespace Gpu::Ipc
