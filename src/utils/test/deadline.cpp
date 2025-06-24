@@ -18,9 +18,12 @@
 void Tester::deadline(unsigned t, int exit_code_on_deadline) {
     std::jthread([t, this, exit_code_on_deadline]() {
         std::this_thread::sleep_for(std::chrono::seconds(t));
-        std::cerr << '[' << prefix << "] Test deadline of " << t
-                  << " seconds reached. Exiting." << std::endl;
+
+        debug(std::format("Test deadline ({}) expired", t));
+
+        failScore++;
         showStatistics();
+
         // Immediately terminate without throwing exceptions or calling destructors
         std::_Exit(exit_code_on_deadline);
     }).detach();

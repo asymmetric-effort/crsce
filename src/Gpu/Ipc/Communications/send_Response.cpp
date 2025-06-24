@@ -8,8 +8,6 @@
 
 namespace Gpu::Ipc {
     Result Communications::send(const Response &res) const {
-        if (!validateChildAccess()) return Result::InvalidRole;
-
         const auto buffer = res.serialize();
         const ssize_t written = write(childToParentFd.at(writeEndpoint), buffer.data(), buffer.size());
         if (written == static_cast<ssize_t>(buffer.size()))

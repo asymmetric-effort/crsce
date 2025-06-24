@@ -9,19 +9,15 @@
 namespace Gpu::Ipc {
 
     Result Communications::send(const Message& msg) const {
-        if (!validateParentAccess())
-            return Result::InvalidRole;
-
+        // Select correct pipe: parent→child if parent, else child→parent
+        const Handles& fds = isParent ? parentToChildFd : childToParentFd;
         const Common::Buffer8 buffer = msg.serialize();
-
-        const ssize_t written = write(parentToChildFd.at(1), buffer.data(), buffer.size());
+        const ssize_t written = write(fds.at(writeEndpoint), buffer.data(), buffer.size());
 
         if (written == static_cast<ssize_t>(buffer.size()))
             return Result::Success;
-
         if (written == 0)
             return Result::Closed;
-
         return Result::IOError;
     }
 
