@@ -19,7 +19,7 @@ namespace Gpu::Ipc {
      * @param buffer A Common::Buffer8 of size exactly 24 bytes.
      * @throws Exceptions::InvalidIpcMessage if buffer size is not 24.
      */
-    void Message::deserialize(const Common::Buffer8 &buffer) {
+    void Message::deserialize(const Common::Buffer8& buffer) {
         if (buffer.size() != 24) {
             throw Exceptions::InvalidIpcMessage("deserialization expects 24-byte buffer");
         }
@@ -54,5 +54,4 @@ namespace Gpu::Ipc {
         }
         ptr_ = ptr_int;
     }
-
 } // namespace Gpu::Ipc

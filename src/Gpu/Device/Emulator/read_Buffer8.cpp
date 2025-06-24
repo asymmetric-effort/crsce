@@ -6,10 +6,8 @@
 #include "Gpu/Device/Emulator/Emulator.h"
 #include "Gpu/Exceptions/DeviceNotReady.h"
 
-namespace Gpu::Device
-{
-    bool Emulator::read(Common::Buffer8& source, Common::AbstractPtr& destination)
-    {
+namespace Gpu::Device {
+    bool Emulator::read(Common::Buffer8& source, Common::AbstractPtr& destination) {
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::read(Buffer8) called before init()");
 
         Ipc::Message msg;

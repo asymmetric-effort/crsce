@@ -24,14 +24,15 @@ namespace Gpu::Ipc {
      * }
      */
     enum class CommandType : uint32_t {
-        Init = 0x00, ///< Initialize the emulator (no-op in most cases)
-        Alloc = 0x01, ///< Allocate device memory
-        Free = 0x02, ///< Free previously allocated memory
-        Write = 0x03, ///< Write data to a device memory region
-        Read = 0x04, ///< Read data from a device memory region
-        RegisterKernel = 0x05, ///< Register a binary kernel blob
-        LaunchTask = 0x06, ///< Launch a kernel thread by ID
-        Reset = 0x07, ///< Reset all emulator state except process lifetime
-        Shutdown = 0x08 ///< Fully terminate emulator state and exit child process
+        Noop = 0x0,
+        Init = 0x01, ///< Initialize the emulator (no-op in most cases)
+        Alloc = 0x02, ///< Allocate device memory
+        Free = 0x03, ///< Free previously allocated memory
+        Write = 0x04, ///< Write data to a device memory region
+        Read = 0x05, ///< Read data from a device memory region
+        RegisterKernel = 0x06, ///< Register a binary kernel blob
+        LaunchTask = 0x07, ///< Launch a kernel thread by ID
+        Reset = 0x08, ///< Reset all emulator state except process lifetime
+        Shutdown = 0x09 ///< Fully terminate emulator state and exit child process
     };
 }

@@ -10,8 +10,7 @@
 #include "Common/AbstractPtr.h"
 #include <cstring>
 
-namespace Gpu::Ipc
-{
+namespace Gpu::Ipc {
     /**
      * @brief Encapsulates an IPC command for the GPU emulator.
      * @ref docs/Gpu/Design/Gpu-Ipc-Message.md
@@ -22,8 +21,7 @@ namespace Gpu::Ipc
      * - 8 bytes: size        (size_t little endian)
      * - 8 bytes: ptr         (AbstractPtr little endian)
      */
-    class Message
-    {
+    class Message {
     public:
         Message() = default;
         /**
@@ -60,11 +58,9 @@ namespace Gpu::Ipc
         uint32_t kernelId_{0};
         size_t payload_size_{0};
         Common::AbstractPtr ptr_{0};
-
     };
 
     bool operator==(const Message& a, const Message& b) noexcept;
 
     bool operator!=(const Message& a, const Message& b) noexcept;
-
 } // namespace Gpu::Ipc

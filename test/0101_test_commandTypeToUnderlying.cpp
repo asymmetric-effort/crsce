@@ -1,5 +1,5 @@
 /**
-* @file 0101_test_commandTypeToUnderlying.cpp
+ * @file 0101_test_commandTypeToUnderlying.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -17,15 +17,16 @@ int main()
     Tester tester("0101_test_commandTypeToUnderlying.cpp");
     using enum Gpu::Ipc::CommandType;
     const std::map<Gpu::Ipc::CommandType, uint32_t> commands = {
-        {Init, 0x00},
-        {Alloc, 0x01},
-        {Free, 0x02},
-        {Write, 0x03},
-        {Read, 0x04},
-        {RegisterKernel, 0x05},
-        {LaunchTask, 0x06},
-        {Reset, 0x07},
-        {Shutdown, 0x08},
+        {Noop, 0x00},
+        {Init, 0x01},
+        {Alloc, 0x02},
+        {Free, 0x03},
+        {Write, 0x04},
+        {Read, 0x05},
+        {RegisterKernel, 0x06},
+        {LaunchTask, 0x07},
+        {Reset, 0x08},
+        {Shutdown, 0x09},
     };
     for (auto [lhs, rhs] : commands)
     {

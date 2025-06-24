@@ -12,15 +12,13 @@
 #include "Gpu/Ipc/Result.h"
 #include "Gpu/Ipc/Handles.h"
 
-namespace Gpu::Ipc
-{
+namespace Gpu::Ipc {
     /**
      * @name Gpu::Ipc::Communications
      * @brief Encapsulates bidirectional pipe communication between parent and child processes.
      * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
      */
-    class Communications
-    {
+    class Communications {
     public:
         /**
          * @name constructor

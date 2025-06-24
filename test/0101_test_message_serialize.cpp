@@ -8,8 +8,7 @@
 #include <vector>
 #include <format>
 
-int main()
-{
+int main() {
     Tester tester("0101_test_message_serialize.cpp");
 
     constexpr auto expectedPtr = static_cast<Common::AbstractPtr>(0x9876);

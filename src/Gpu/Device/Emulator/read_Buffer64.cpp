@@ -8,8 +8,7 @@
 #include <cstdint>
 
 namespace Gpu::Device {
-
-    bool Emulator::read(Common::Buffer64 &source, Common::AbstractPtr &dst) {
+    bool Emulator::read(Common::Buffer64& source, Common::AbstractPtr& dst) {
         // Use the byte-based read() to fetch raw bytes
         const size_t byteCount = source.size() * sizeof(uint64_t);
         Common::Buffer8 temp(byteCount);
@@ -23,14 +22,13 @@ namespace Gpu::Device {
         for (size_t i = 0; i < count; ++i) {
             std::array<uint8_t, sizeof(uint64_t)> bytes;
             std::copy(
-            temp.data() + i * sizeof(uint64_t),
-            temp.data() + (i + 1) * sizeof(uint64_t),
-            bytes.begin()
-        );
+                temp.data() + i * sizeof(uint64_t),
+                temp.data() + (i + 1) * sizeof(uint64_t),
+                bytes.begin()
+            );
             source[i] = std::bit_cast<uint64_t>(bytes);
         }
 
         return true;
     }
-
 } // namespace Gpu::Device
