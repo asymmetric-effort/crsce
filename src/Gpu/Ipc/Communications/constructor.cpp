@@ -7,10 +7,7 @@
 
 namespace Gpu::Ipc {
     Communications::Communications(const Handles parentToChild, const Handles childToParent, const bool isParentProcess)
-        : isParent(isParentProcess) {
-
-        parentToChildFd = parentToChild;
-        childToParentFd = childToParent;
-
+        : parentToChildFd(parentToChild),childToParentFd(childToParent),isParent(isParentProcess) {
+        /*noop*/
     }
 }
