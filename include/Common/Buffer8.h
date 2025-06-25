@@ -19,6 +19,7 @@
 
 #pragma once
 #include <vector>
+#include <cassert>
 #include <cstdint>
 
 namespace Common {
@@ -61,6 +62,7 @@ namespace Common {
     inline void serialize(Buffer8& buf, const uint8_t& value) {
         buf.push_back(static_cast<uint8_t>(value));
     }
+
     /**
      * @name serialize (16bit)
      * @brief serialize a single 16-bit input to a Buffer8
@@ -68,9 +70,10 @@ namespace Common {
      * @param value uint16_t
      */
     inline void serialize(Buffer8& buf, const uint16_t& value) {
-        buf.push_back(static_cast<uint8_t>(value && 0x00FFu));
-        buf.push_back(static_cast<uint8_t>(value && 0xFF00u) >> 8);
+        buf.push_back(static_cast<uint8_t>(value & 0x00FFu));
+        buf.push_back(static_cast<uint8_t>(value & 0xFF00u) >> 8);
     }
+
     /**
      * @name serialize (32bit)
      * @brief serialize a single 32-bit input to a Buffer8
@@ -82,6 +85,7 @@ namespace Common {
             buf.push_back(static_cast<uint8_t>((value >> (8 * i)) & 0xFFu));
         }
     }
+
     /**
      * @name serialize (64bit)
      * @brief serialize a single 64-bit input to a Buffer8
@@ -92,5 +96,37 @@ namespace Common {
         for (int i = 0; i < sizeof(uint32_t); ++i) {
             buf.push_back(static_cast<uint8_t>((value >> (8 * i)) & 0xFFu));
         }
+    }
+
+    /**
+     * @name serialize (size_t)
+     * @brief serialize size_t as a 64-bit unsigned integer
+     * @param buf Buffer8
+     * @param value size_t
+     */
+    inline void serialize(Buffer8& buf, const size_t& value) {
+        serialize(buf, static_cast<uint64_t>(value));
+    }
+
+    /**
+     * @name deserialize
+     * @brief Deserialize a little-endian unsigned integral of size 1,2,4 or 8 bytes.
+     * @tparam T Must be one of uint8_t, uint16_t, uint32_t, uint64_t or size_t.
+     * @param buf        Input byte buffer.
+     * @param start_index Byte offset where the value begins.
+     * @return The deserialized value.
+     */
+    template <typename T>
+    T deserialize(const Buffer8& buf, size_t start_index)
+        requires (std::is_same_v<T, uint8_t> ||
+            std::is_same_v<T, uint16_t> ||
+            std::is_same_v<T, uint32_t> ||
+            std::is_same_v<T, uint64_t> ||
+            std::is_same_v<T, size_t>) {
+        assert(start_index + sizeof(T) <= buf.size());
+        T v = 0;
+        for (size_t i = 0; i < sizeof(T); ++i)
+            v |= static_cast<T>(buf[start_index + i]) << (8 * i);
+        return v;
     }
 } // namespace Common

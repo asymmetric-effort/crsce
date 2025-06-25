@@ -32,18 +32,12 @@ namespace Gpu::Ipc::Message {
          * @return Common::Buffer8
          */
         [[nodiscard]] Common::Buffer8 serialize() const noexcept override {
-            // first byte = message type
-            constexpr uint8_t typeByte = static_cast<uint8_t>(Type::KernelList);
-            const uint16_t offset = static_cast<uint16_t>(offset_);
-            const uint16_t limit = static_cast<uint16_t>(limit_);
-            // serialize to byte vector
-            return Common::Buffer8{
-                typeByte,
-                static_cast<uint8_t>(offset & 0xFFu),
-                static_cast<uint8_t>(offset & 0xFF00u >> 8),
-                static_cast<uint8_t>(limit & 0xFFu),
-                static_cast<uint8_t>(limit & 0xFF00u >> 8)
-            };
+            constexpr auto typeByte = static_cast<uint8_t>(Type::KernelList);
+            Common::Buffer8 buf;
+            Common::serialize(buf, static_cast<uint8_t>(typeByte));
+            Common::serialize(buf, static_cast<uint16_t>(offset_));
+            Common::serialize(buf, static_cast<uint16_t>(limit_));
+            return buf;
         }
 
         /**
@@ -63,17 +57,17 @@ namespace Gpu::Ipc::Message {
         /**
          * @name offset
          * @brief return the row offset for the requested records
-         * @return offset_
+         * @return offset_ uint16_t
          */
-        uint16_t offset() const { return offset_; }
+        [[nodiscard]] uint16_t offset() const { return offset_; }
 
 
         /**
          * @name limit
          * @brief return the row count requested in the recordset
-         * @return limit_
+         * @return limit_ uint16_t
          */
-        uint16_t size() const { return limit_; }
+        [[nodiscard]] uint16_t size() const { return limit_; }
 
         /**
          * @name operator ==

@@ -24,10 +24,10 @@ namespace Gpu::Ipc::Message {
          * @return Common::Buffer8
          */
         [[nodiscard]] Common::Buffer8 serialize() const override {
-            auto v = Type::GpuShutdown;
-            return Common::Buffer8{
-                static_cast<uint8_t>(v),
-            };
+            constexpr auto typeByte = Type::GpuShutdown;
+            Common::Buffer8 buf;
+            Common::serialize(buf, static_cast<uint8_t>(typeByte));
+            return buf;
         };
 
         /**

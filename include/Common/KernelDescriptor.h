@@ -1,6 +1,11 @@
+/**
+ * @file: include/Gpu/Common/KernelDescriptor.h
+ * @brief Create a struct to describe GPU-registered kernel objects.
+ * @copyright: (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
+
 #pragma once
 
-#include <cstddef>
 #include <cstdint>
 #include <array>
 #include <stdexcept>
@@ -10,7 +15,8 @@
 
 namespace Common {
     /**
-     * @brief Describes a kernel blob registered with the GPU controller.
+     * @name KernelDescriptor
+     * @brief describe a single kernel object registered with the GPU controller
      */
     struct KernelDescriptor {
         uint64_t kernel_id; ///< pseudo-random identifier
@@ -26,8 +32,10 @@ namespace Common {
             + /* hash      */ 32;
 
         /**
+         * @name serialize
          * @brief Serialize into little-endian bytes:
          *        [kernel_id:8][size:8][ptr:8][hash:32]
+         * @return Buffer8
          */
         [[nodiscard]] Buffer8 serialize() const noexcept {
             Buffer8 buf;
@@ -49,7 +57,9 @@ namespace Common {
         }
 
         /**
+         * @name deserialize
          * @brief Deserialize from little-endian bytes back into fields.
+         * @param buffer Buffer8
          * @throws std::runtime_error if buffer.size() < serialized_size.
          */
         void deserialize(const Buffer8& buffer) {
@@ -57,8 +67,7 @@ namespace Common {
                 throw std::runtime_error(
                     "KernelDescriptor::deserialize: buffer too small");
             }
-
-            auto read_u64 = [&](size_t offset) {
+            auto read_u64 = [&](const size_t offset) {
                 uint64_t v = 0;
                 for (int i = 0; i < 8; ++i) {
                     v |= (static_cast<uint64_t>(buffer[offset + i]) << (8 * i));
