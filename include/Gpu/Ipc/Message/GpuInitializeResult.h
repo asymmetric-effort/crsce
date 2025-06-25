@@ -25,7 +25,9 @@ namespace Gpu::Ipc::Message {
          */
         [[nodiscard]] Common::Buffer8 serialize() const override {
             auto v = Type::GpuInitializeResult;
-            return Common::Buffer8{static_cast<uint8_t>(v)};
+            Common::Buffer8 buf;
+            Common::serialize(buf, static_cast<uint8_t>(v));
+            return buf;
         };
         /**
          * @name deserialize

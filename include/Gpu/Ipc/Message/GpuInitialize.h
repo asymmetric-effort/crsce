@@ -42,10 +42,10 @@ namespace Gpu::Ipc::Message {
          */
         [[nodiscard]] Common::Buffer8 serialize() const override {
             auto v = Type::GpuInitialize;
-            return Common::Buffer8{
-                static_cast<uint8_t>(v),
-                static_cast<uint8_t>(gpu_type_),
-            };
+            Common::Buffer8 buf;
+            Common::serialize(buf, static_cast<uint8_t>(v));
+            Common::serialize(buf, static_cast<uint8_t>(gpu_type_));
+            return buf;
         };
 
         /**
