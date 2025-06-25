@@ -104,6 +104,8 @@ namespace Gpu::Ipc::Message {
         };
 
     private:
-        std::vector<KernelDescriptorStruct> list_;
+        uint16_t offset_;
+        uint16_t limit_;
+        std::vector<Common::KernelDescriptor> list_;
     };
 }
