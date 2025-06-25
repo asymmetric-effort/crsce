@@ -1,5 +1,5 @@
 /**
- * @file include/Gpu/Ipc/Communications.h
+ * @file include/Gpu/Ipc/Channel.h
  * @brief Declare types supporting the InterProcess Communication (IPC) mechanism
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
@@ -7,14 +7,15 @@
 #pragma once
 #include <atomic>
 #include <unistd.h>
-#include "Gpu/Ipc/Message.h"
+#include "Message/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/Result.h"
 #include "Gpu/Ipc/Handles.h"
 
 namespace Gpu::Ipc {
+    class Pipe{};
     /**
-     * @name Gpu::Ipc::Communications
+     * @name Gpu::Ipc::Channel
      * @brief Encapsulates bidirectional pipe communication between parent and child processes.
      * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
      */
@@ -26,14 +27,15 @@ namespace Gpu::Ipc {
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
          * @param isParentProcess
          */
-        Communications();
+        Channel();
+        Channel(Channel &c)=delete;
 
         /**
          * @name destructor
          * @brief class destructor
          * @ref docs/Gpu/Design/Gpu-Ipc-Communications.md
          */
-        ~Communications() = default;;
+        ~Channel() = default;
 
         claimLeft(){} //claim request sender / response receiver
         claimRight(){} //claim response sender / request receiver
