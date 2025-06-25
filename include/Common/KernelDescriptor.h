@@ -1,33 +1,38 @@
-/**
-* @file include/Gpu/Common/KernelDescriptor.h
- * @brief Define the KernelDescriptor used by Ipc and Gpu::Device
- * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
- */
-
 #pragma once
 
+#include <cstddef>
+#include <cstdint>
+#include <array>
+#include <stdexcept>
+
 #include "Common/AbstractPtr.h"
+#include "Common/Buffer8.h"
 
 namespace Common {
     /**
-     * @name KernelDescriptor
-     * @brief A struct that describes a single kernel object registered with the GPU controller
+     * @brief Describes a kernel blob registered with the GPU controller.
      */
     struct KernelDescriptor {
-        uint64_t kernel_id; // pseudo-random identifier
-        size_t size; // kernel blob size
-        AbstractPtr ptr; // starting address of kernel blob
-        std::array<uint8_t, 32> hash; // kernel hash
+        uint64_t kernel_id; ///< pseudo-random identifier
+        size_t size; ///< kernel blob size
+        AbstractPtr ptr; ///< starting address of kernel blob
+        std::array<uint8_t, 32> hash; ///< kernel hash
+
+        /// Exact byte-count emitted by serialize(): 8 + 8 + 8 + 32 = 56
+        static constexpr size_t serialized_size =
+            /* kernel_id */ 8
+            + /* size      */ 8
+            + /* ptr       */ 8
+            + /* hash      */ 32;
 
         /**
-         * @brief Serialize the KernelDescriptor into little-endian bytes:
+         * @brief Serialize into little-endian bytes:
          *        [kernel_id:8][size:8][ptr:8][hash:32]
          */
         [[nodiscard]] Buffer8 serialize() const noexcept {
             Buffer8 buf;
-            buf.reserve(8 + 8 + 8 + 32);
+            buf.reserve(serialized_size);
 
-            // helper to append a 64-bit integer LE
             auto append_u64 = [&](uint64_t v) {
                 for (int i = 0; i < 8; ++i) {
                     buf.push_back(static_cast<uint8_t>((v >> (8 * i)) & 0xFFu));
@@ -36,6 +41,7 @@ namespace Common {
 
             append_u64(kernel_id);
             append_u64(static_cast<uint64_t>(size));
+            // reinterpret_cast ptr to preserve full pointer width
             append_u64(static_cast<uint64_t>(ptr));
             buf.insert(buf.end(), hash.begin(), hash.end());
 
@@ -43,18 +49,15 @@ namespace Common {
         }
 
         /**
-         * @name deserialize
          * @brief Deserialize from little-endian bytes back into fields.
-         * @throws std::runtime_error if buffer.size() < 56.
+         * @throws std::runtime_error if buffer.size() < serialized_size.
          */
         void deserialize(const Buffer8& buffer) {
-            constexpr size_t expect = 8 + 8 + 8 + 32;
-            if (buffer.size() < expect) {
+            if (buffer.size() < serialized_size) {
                 throw std::runtime_error(
                     "KernelDescriptor::deserialize: buffer too small");
             }
 
-            // helper to read a uint64_t LE from buffer[offset..offset+7]
             auto read_u64 = [&](size_t offset) {
                 uint64_t v = 0;
                 for (int i = 0; i < 8; ++i) {
@@ -69,8 +72,9 @@ namespace Common {
 
             // copy the 32-byte hash
             for (size_t i = 0; i < hash.size(); ++i) {
-                hash[i] = buffer[24 + i];
+                constexpr size_t hashOffset = 24;
+                hash[i] = buffer[hashOffset + i];
             }
         }
-    }; // KernelDescriptor
-}
+    }; // struct KernelDescriptor
+} // namespace Common
