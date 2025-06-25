@@ -1,13 +1,13 @@
 /**
- * @file src/Gpu/Ipc/Communications/constructor.cpp
+ * @file src/Gpu/Ipc/Channel/constructor.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "Gpu/Ipc/Communications.h"
+#include "Gpu/Ipc/Channel.h"
 
 namespace Gpu::Ipc {
-    Communications::Communications(const Handles parentToChild, const Handles childToParent, const bool isParentProcess)
-        : parentToChildFd(parentToChild),childToParentFd(childToParent),isParent(isParentProcess) {
-        /*noop*/
+    Channel::Channel(){
+        pipe(requestPipe.data());
+        pipe(responsePipe.data());
     }
 }

@@ -18,7 +18,7 @@ namespace Gpu::Device {
 
         Ipc::Message shutdownMsg;
 
-        shutdownMsg.type(Ipc::CommandType::Shutdown);
+        shutdownMsg.type(Ipc::MessageType::Shutdown);
 
         if (const auto result = ipc_->send(shutdownMsg); result != Ipc::Result::Success)
             throw Gpu::Exceptions::IpcSendFailed(result);

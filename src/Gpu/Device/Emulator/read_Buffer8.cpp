@@ -11,7 +11,7 @@ namespace Gpu::Device {
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::read(Buffer8) called before init()");
 
         Ipc::Message msg;
-        msg.type(Ipc::CommandType::Read);
+        msg.type(Ipc::MessageType::Read);
         msg.ptr(destination);
         msg.size(source.size());
 

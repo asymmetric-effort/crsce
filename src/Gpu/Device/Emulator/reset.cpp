@@ -14,7 +14,7 @@ namespace Gpu::Device
         if (!initialized_) return;
 
         Ipc::Message msg;
-        msg.type(Ipc::CommandType::Reset);
+        msg.type(Ipc::MessageType::Reset);
 
         if (const auto result = ipc_->send(msg); result != Ipc::Result::Success)
             throw Gpu::Exceptions::IpcSendFailed("Emulator::reset message send failed");

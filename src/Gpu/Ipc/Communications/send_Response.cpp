@@ -9,7 +9,7 @@
 namespace Gpu::Ipc {
     Result Communications::send(const Response &res) const {
         const auto buffer = res.serialize();
-        const ssize_t written = write(childToParentFd.at(writeEndpoint), buffer.data(), buffer.size());
+        const ssize_t written = write(responsePipe.at(writeEndpoint), buffer.data(), buffer.size());
         if (written == static_cast<ssize_t>(buffer.size()))
             return Result::Success;
         if (written == 0)

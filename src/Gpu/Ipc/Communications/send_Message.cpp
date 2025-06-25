@@ -10,7 +10,7 @@ namespace Gpu::Ipc {
 
     Result Communications::send(const Message& msg) const {
         // Select correct pipe: parent→child if parent, else child→parent
-        const Handles& fds = isParent ? parentToChildFd : childToParentFd;
+        const Handles& fds = isParent ? requestPipe : responsePipe;
         const Common::Buffer8 buffer = msg.serialize();
         const ssize_t written = write(fds.at(writeEndpoint), buffer.data(), buffer.size());
 

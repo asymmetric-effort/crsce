@@ -5,7 +5,7 @@
 
 #include "Gpu/Device/Emulator/MockGpu.h"
 #include "Gpu/Exceptions/IpcSendFailed.h"
-#include "Gpu/Ipc/Message.h"
+#include "../../../../../include/Gpu/Ipc/Message/Message.h"
 #include "Gpu/Ipc/Response.h"
 
 namespace Gpu::Device {
@@ -17,7 +17,7 @@ namespace Gpu::Device {
 
             Ipc::Response res;
             switch (msg.type()) {
-                    using enum Ipc::CommandType;
+                    using enum Ipc::MessageType;
                 case Alloc:
                     res = runtime_.handleAlloc(msg);
                     break;

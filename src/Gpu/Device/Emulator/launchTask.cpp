@@ -13,7 +13,7 @@ namespace Gpu::Device
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::launchTask() called before init()");
 
         Ipc::Message msg;
-        msg.type(Ipc::CommandType::LaunchTask);
+        msg.type(Ipc::MessageType::LaunchTask);
         msg.kernelId(static_cast<uint32_t>(id));
         msg.size(args.size());
 

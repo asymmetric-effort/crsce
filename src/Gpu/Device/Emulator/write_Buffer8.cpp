@@ -13,7 +13,7 @@ namespace Gpu::Device
         if (!initialized_)
             throw Exceptions::DeviceNotReady("Emulator::write(Buffer8) called before init()");
 
-        const Ipc::Message msg(Ipc::CommandType::Write, 0, source.size(), dst );
+        const Ipc::Message msg(Ipc::MessageType::Write, 0, source.size(), dst );
 
         if (const auto result = ipc_->send(msg); result != Ipc::Result::Success) return false;
 

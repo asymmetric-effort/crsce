@@ -11,10 +11,8 @@ namespace Gpu::Ipc {
     Result Communications::recv(Response &res) const {
         constexpr size_t header_size = 9;
 
-        if (!validateParentAccess()) return Result::InvalidRole;
-
         Common::Buffer8 header{header_size, 0};
-        if (const ssize_t read_header = read(childToParentFd.at(readEndpoint), header.data(), header.size());
+        if (const ssize_t read_header = read(responsePipe.at(readEndpoint), header.data(), header.size());
             read_header != header.size())
             return (read_header == 0 ? Result::Closed : Result::IOError);
 
@@ -31,7 +29,7 @@ namespace Gpu::Ipc {
         std::copy_n(header.data(), header.size(), full.begin());
 
         if (payload_size > 0) {
-            if (const ssize_t read_payload = read(childToParentFd.at(readEndpoint), full.data() + header.size(),
+            if (const ssize_t read_payload = read(responsePipe.at(readEndpoint), full.data() + header.size(),
                                                   payload_size); read_payload != static_cast<ssize_t>(payload_size))
                 return (read_payload == 0 ? Result::Closed : Result::IOError);
         }

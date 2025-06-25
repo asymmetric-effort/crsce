@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include "Gpu/Ipc/Communications.h"
-#include "Gpu/Ipc/Message.h"
+#include "../../../../include/Gpu/Ipc/Message/Message.h"
 #include <unistd.h>
 #include <ostream>
 
@@ -15,7 +15,7 @@ namespace Gpu::Ipc {
         constexpr size_t message_size = 24;
         Common::Buffer8 raw(message_size);
         // Select correct pipe: child→parent if parent, else parent→child
-        const Handles& fds = isParent ? childToParentFd : parentToChildFd;
+        const Handles& fds = isParent ? responsePipe : requestPipe;
         const ssize_t n = read(fds.at(readEndpoint), raw.data(), message_size);
 
         if (n == static_cast<ssize_t>(message_size)) {

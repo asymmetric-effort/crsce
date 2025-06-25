@@ -13,7 +13,7 @@ namespace Gpu::Device
         if (!initialized_) throw Exceptions::DeviceNotReady("Emulator::registerKernel() called before init()");
 
         Ipc::Message msg;
-        msg.type(Ipc::CommandType::RegisterKernel);
+        msg.type(Ipc::MessageType::RegisterKernel);
         msg.kernelId(static_cast<uint32_t>(id));
         msg.size(binary.size());
 

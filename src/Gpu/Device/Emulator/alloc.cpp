@@ -13,7 +13,7 @@ namespace Gpu::Device {
             throw Exceptions::DeviceNotReady("Emulator::alloc() called before init()");
 
         Ipc::Message msg;
-        msg.type(Ipc::CommandType::Alloc);
+        msg.type(Ipc::MessageType::Alloc);
         msg.size(bytes);
 
         if (const auto result = ipc_->send(msg);result!=Ipc::Result::Success)

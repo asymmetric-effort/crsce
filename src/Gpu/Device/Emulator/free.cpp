@@ -14,7 +14,7 @@ namespace Gpu::Device
             throw Exceptions::DeviceNotReady("Emulator::free() called before init()");
 
         Ipc::Message msg;
-        msg.type(Ipc::CommandType::Free);
+        msg.type(Ipc::MessageType::Free);
         msg.ptr(ptr);
 
         if (const Ipc::Result result = ipc_->send(msg); result != Ipc::Result::Success)
