@@ -1,5 +1,5 @@
 /**
-* @file include/Gpu/Ipc/Message/GpuInitialize.h
+ * @file include/Gpu/Ipc/Message/GpuInitialize.h
  * @brief Define an IPC Message class representing the GPU-initialize message
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
@@ -8,21 +8,10 @@
 
 #include "Gpu/Ipc/Message/Base.h"
 #include "Gpu/Ipc/Message/MessageType.h"
+#include "Gpu/Ipc/Message/GpuType.h"
 #include "Common/Buffer8.h"
 
 namespace Gpu::Ipc::Message {
-    /**
-     * @enum GpuType
-     * @brief Enumerate the supported GPU types
-     */
-    enum class GpuType : uint8_t {
-        Emulator = 0x00,
-        Cuda = 0x01,
-        AmdRoc = 0x02,
-        AppleMetal = 0x03,
-        MaxGpuType = AppleMetal,
-    };
-
     /**
      * @class GpuInitialize
      * @brief This message is used by an application to signal the GPU controller to initialize the attached
@@ -96,7 +85,7 @@ namespace Gpu::Ipc::Message {
     private:
         /**
          * @name gpu_type
-         * @brief The type of GPU to be intialized (e.g. Emulator
+         * @brief The type of GPU to be initialized (e.g. Emulator)
          */
         GpuType gpu_type_;
     };
