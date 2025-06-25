@@ -8,7 +8,6 @@
 
 #include "Gpu/Ipc/Message/Base.h"
 #include "Gpu/Ipc/Message/MessageType.h"
-#include "Gpu/Ipc/Message/GpuType.h"
 #include "Common/Buffer8.h"
 
 namespace Gpu::Ipc::Message {
