@@ -30,9 +30,27 @@ namespace Gpu::Ipc::Message {
          * @brief serialize the KernelListResult message consisting of Message Type number of bytes requested (size_)
          * @return Common::Buffer8
          */
-        [[nodiscard]] Common::Buffer8 serialize() const noexcept override {
-            //ToDo: for each element in list_, serialize the elements
+        [[nodiscard]] Common::Buffer8 serialize() const override {
+            // 1) type byte
+            Common::Buffer8 buf;
+            buf.reserve(1 + 4 + list_.size() * Common::KernelDescriptor::serialized_size);
+            buf.push_back(static_cast<uint8_t>(Type::KernelListResult));
+
+            // 2) 32-bit little-endian count
+            uint32_t count = static_cast<uint32_t>(list_.size());
+            for (int i = 0; i < 4; ++i) {
+                buf.push_back(static_cast<uint8_t>((count >> (8 * i)) & 0xFFu));
+            }
+
+            // 3) each KernelDescriptor
+            for (auto const &desc : list_) {
+                auto part = desc.serialize();
+                buf.insert(buf.end(), part.begin(), part.end());
+            }
+
+            return buf;
         }
+
 
         /**
          * @name deserialize
