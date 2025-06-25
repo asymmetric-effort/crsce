@@ -73,6 +73,13 @@ namespace Gpu::Ipc::Message {
         }
 
         /**
+         * @name size
+         * @brief return the requested memory allocation
+         * @return size_t
+         */
+        size_t size() const { return size_; }
+
+        /**
          * @name operator ==
          * @brief compare the equivalence of two MemoryAlloc objects using their serialized forms
          * @param lhs MemoryAlloc
