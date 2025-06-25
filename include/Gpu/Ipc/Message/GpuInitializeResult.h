@@ -1,6 +1,6 @@
 /**
 * @file include/Gpu/Ipc/Message/GpuInitializeResult.h
- * @brief Define an IPC Message class representing the GPU-initialize message
+ * @brief Define an IPC Message class representing the GPU-initialize result.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
