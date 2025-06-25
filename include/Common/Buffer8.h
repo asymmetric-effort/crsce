@@ -117,13 +117,14 @@ namespace Common {
      * @return The deserialized value.
      */
     template <typename T>
-    T deserialize(const Buffer8& buf, size_t start_index)
+    T deserialize(const Buffer8& buf, const size_t start_index)
         requires (std::is_same_v<T, uint8_t> ||
             std::is_same_v<T, uint16_t> ||
             std::is_same_v<T, uint32_t> ||
             std::is_same_v<T, uint64_t> ||
             std::is_same_v<T, size_t>) {
         assert(start_index + sizeof(T) <= buf.size());
+
         T v = 0;
         for (size_t i = 0; i < sizeof(T); ++i)
             v |= static_cast<T>(buf[start_index + i]) << (8 * i);

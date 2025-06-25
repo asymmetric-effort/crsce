@@ -57,7 +57,7 @@ namespace Gpu::Ipc::Message {
             auto expected_type = Type::GpuInitialize;
             verify_message_type(buffer, expected_type);
             // deserialize GpuType (byte1)
-            gpu_type_ = static_cast<GpuType>(buffer[1]);
+            gpu_type_ = static_cast<GpuType>(Common::deserialize<uint8_t>(buffer, 1));
         }
 
         /**
