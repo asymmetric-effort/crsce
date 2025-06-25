@@ -4,7 +4,7 @@
  */
 
 #include "utils/test/Tester.h"
-#include "Gpu/Ipc/Message.h"
+#include "../include/Gpu/Ipc/Message/Message.h"
 #include "utils/to_underlying.h"
 #include <unistd.h>
 #include <cstdlib>

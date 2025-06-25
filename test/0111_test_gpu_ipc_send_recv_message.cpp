@@ -5,21 +5,20 @@
  */
 
 #include "utils/test/Tester.h"
-#include "Gpu/Ipc/Message.h"
-#include "Gpu/Ipc/Communications.h"
+#include "../include/Gpu/Ipc/Message/Message.h"
+#include "Gpu/Ipc/Channel.h"
 #include "Gpu/Ipc/Handles.h"
 #include <unistd.h>
 #include <sys/wait.h>
 #include <cstdlib>
 
 using Gpu::Ipc::Message;
-using Gpu::Ipc::Communications;
 using Gpu::Ipc::Handles;
 using Gpu::Ipc::Result;
 using Gpu::Ipc::MessageType;
 using Common::AbstractPtr;
 
-void child_process(Tester& tester, const Communications& channel) {
+void child_process(Tester& tester, const Channel& channel) {
     // --- Child: receive a Message, echo it back ---
     tester.debug("child: starting");
 
@@ -44,7 +43,7 @@ void child_process(Tester& tester, const Communications& channel) {
     _exit(EXIT_SUCCESS);
 }
 
-void parent_process(Tester& tester, const Communications& channel) {
+void parent_process(Tester& tester, const Channel& channel) {
     // --- Parent: send a Message, receive the echo, verify ---
     tester.debug("parent: starting");
 
@@ -82,7 +81,7 @@ int main() {
     tester.assertFalse(pid < 0, "fork process");
 
     // Set up two pipes: parent→child and child→parent
-    const Communications channel{};
+    const Channel channel{};
 
     if (pid == 0) {
         channel.claimRight(); //righthand side

@@ -4,7 +4,7 @@
  */
 
 #include "utils/test/Tester.h"
-#include "Gpu/Ipc/Message.h"
+#include "../include/Gpu/Ipc/Message/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/FailureCodes.h"
 #include "Gpu/Ipc/Communications.h"
