@@ -1,6 +1,6 @@
 /**
  * @file include/Gpu/Ipc/Message/GpuReset.h
- * @brief Define an IPC Message class representing the GPU-reset message
+ * @brief Define an IPC Message class representing the GPU-reset result
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -14,13 +14,13 @@
 namespace Gpu::Ipc::Message {
     /**
      * @class GpuReset
-     * @brief This message represents an IPC reset signal to the GPU Controller
+     * @brief This message represents an IPC response from the GPU Controller
      */
     class GpuReset final : public Base {
     public:
         /**
          * @name serialize
-         * @brief serialize the GpuInitialize message
+         * @brief serialize the GpuReset message
          * @return Common::Buffer8
          */
         [[nodiscard]] Common::Buffer8 serialize() const override {
