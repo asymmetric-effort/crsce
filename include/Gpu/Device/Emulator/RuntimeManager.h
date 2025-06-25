@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "Gpu/Ipc/Message.h"
+#include "../../Ipc/Message/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Ipc/MemoryTracker.h"
 #include "ThreadRegistry.h"

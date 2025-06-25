@@ -7,7 +7,7 @@
 #include <memory>
 #include <sys/types.h>
 #include "Gpu/Ipc/Result.h"
-#include "Gpu/Ipc/Message.h"
+#include "../../Ipc/Message/Message.h"
 #include "Gpu/Ipc/Response.h"
 #include "Gpu/Device/Interface.h"
 #include "Gpu/Ipc/Communications.h"
