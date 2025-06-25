@@ -24,7 +24,8 @@ namespace Gpu::Ipc::Message {
         GpuInitializeResult = GpuInitialize + 1, ///< Result of GpuInitialize (error state)
         GpuReset = GpuInitializeResult + 1, ///< Reset the GPU state.
         GpuResetResult = GpuReset + 1, ///< GpuReset outcome (error state)
-        MemoryAlloc = GpuResetResult + 1, ///< Allocate device memory
+        GpuShutdown = GpuResetResult + 1, ///< Terminate the GPU Controller
+        MemoryAlloc = GpuShutdown + 1, ///< Allocate device memory
         MemoryAllocResult = MemoryAlloc + 1, ///< Memory was allocated (returns AbstractPtr)
         MemoryFree = MemoryAllocResult + 1, ///< Free previously allocated memory (secure delete)
         MemoryFreeResult = MemoryFree + 1, ///< Result of a MemoryFree (pass/fail)
@@ -44,9 +45,9 @@ namespace Gpu::Ipc::Message {
         TaskLaunchResult = TaskLaunch + 1, ///< Result of TaskLaunch (returns TaskId, error state)
         TaskStop = TaskLaunchResult + 1, ///< Stop a running GPU task (identified by taskId)
         TaskStopResult = TaskStop + 1, ///< Result of TaskStop (error state)
-        ReqShutdown = TaskStopResult + 1, ///< Terminate the GPU Controller
+
         // Add more values here if needed...
-        MessageTypeMax = ReqShutdown ///< The maximum value when deserializing
+        MessageTypeMax = TaskStopResult ///< The maximum value when deserializing
     };
 
     /**
@@ -60,6 +61,7 @@ namespace Gpu::Ipc::Message {
         case Type::Noop: return "Noop";
         case Type::GpuInitialize: return "GpuInitialize";
         case Type::GpuInitializeResult: return "GpuInitializeResult";
+        case Type::GpuShutdown: return "GpuShutdown";
         case Type::GpuReset: return "GpuReset";
         case Type::GpuResetResult: return "GpuResetResult";
         case Type::MemoryAlloc: return "MemoryAlloc";
@@ -79,7 +81,6 @@ namespace Gpu::Ipc::Message {
         case Type::TaskLaunchResult: return "TaskLaunchResult";
         case Type::TaskStop: return "TaskStop";
         case Type::TaskStopResult: return "TaskStopResult";
-        case Type::ReqShutdown: return "ReqShutdown";
         default:
             throw std::runtime_error(std::format("undefined method {}", static_cast<uint8_t>(expected_type)));
         }

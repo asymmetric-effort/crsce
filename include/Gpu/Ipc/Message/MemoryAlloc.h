@@ -13,7 +13,7 @@
 namespace Gpu::Ipc::Message {
     /**
      * @class MemoryAlloc
-     * @brief This message represents an IPC response from the GPU Controller
+     * @brief This message represents an IPC message to allocate GPU memory
      */
     class MemoryAlloc final : public Base {
     public:
