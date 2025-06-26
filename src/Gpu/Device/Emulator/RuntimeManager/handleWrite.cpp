@@ -7,12 +7,12 @@
 
 namespace Gpu::Device {
 
-    Ipc::Response RuntimeManager::handleWrite(const Ipc::Message& msg, const Common::Buffer8& payload) {
-        const bool ok = memory_.write(msg.ptr(), payload);
+    Ipc::Response RuntimeManager::handleWrite(const Ipc::Message::Base& msg, const Common::Buffer8& payload) {
+        // const bool ok = memory_.write(msg.ptr(), payload);
         return {
-            ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::WriteError,
-            0,
-            {}
+            // ok ? Ipc::FailureCodes::IpcSuccess : Ipc::FailureCodes::WriteError,
+            // 0,
+            // {}
         };
     }
 

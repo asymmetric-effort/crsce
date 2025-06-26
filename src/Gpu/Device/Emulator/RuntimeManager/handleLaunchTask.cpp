@@ -9,17 +9,17 @@
 
 namespace Gpu::Device {
 
-    Ipc::Response RuntimeManager::handleLaunchTask(const Ipc::Message& msg, const Common::Buffer8& args) {
-        if (!kernels_.has(msg.kernelId()))
-            return {Ipc::FailureCodes::KernelNotFound, 0, {}};
+    Ipc::Response RuntimeManager::handleLaunchTask(const Ipc::Message::Base& msg, const Common::Buffer8& args) {
+        // if (!kernels_.has(msg.kernelId()))
+            // return {Ipc::FailureCodes::KernelNotFound, 0, {}};
 
-        const auto& blob = kernels_.get(msg.kernelId());
+        // const auto& blob = kernels_.get(msg.kernelId());
         try {
-            threads_.insert(msg.kernelId(),
-                std::jthread([blob, args] {
-                    const ThreadRuntime rt(blob, args);
-                    rt.run();
-                }));
+            // threads_.insert(msg.kernelId(),
+                // std::jthread([blob, args] {
+                    // const ThreadRuntime rt(blob, args);
+                    // rt.run();
+                // }));
             return {Ipc::FailureCodes::IpcSuccess, 0, {}};
         } catch (...) {
             return {Ipc::FailureCodes::ThreadLaunchFailure, 0, {}};
