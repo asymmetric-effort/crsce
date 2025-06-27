@@ -1,5 +1,5 @@
 /**
- * @file 0002_tester_ipc_buffer_matrix.cpp
+ * @file tester_buffer.cpp
  * @brief Verifies Gpu::Ipc::Result, Common::Buffer8, Common::Buffer64, and Gpu::Math::Matrix comparisons via Tester assertions.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
@@ -11,7 +11,7 @@
 #include <cstdlib>
 
 int main() {
-    Tester tester("0002_tester_ipc_buffer_matrix.cpp",ThrowExceptionOnError);
+    Tester tester("tester_buffer.cpp",ThrowExceptionOnError);
 
     // ---- Buffer8 tests ----
     using Common::Buffer8;
