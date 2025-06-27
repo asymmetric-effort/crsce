@@ -1,5 +1,5 @@
 /**
- * @file 0006_tester_deadline.cpp
+ * @file tester_deadline.cpp
  * @brief Verifies that Tester::deadline causes the test process to abort after the specified timeout.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
@@ -11,7 +11,7 @@
 
 int main() {
     // The following should cause the test to terminate after exceeding the 1-second deadline
-    Tester tester("0006_tester_deadline.cpp", ThrowExceptionOnError);
+    Tester tester("tester_deadline", ThrowExceptionOnError);
     tester.deadline(1, EXIT_SUCCESS);
 
     // Sleep long enough to trigger deadline

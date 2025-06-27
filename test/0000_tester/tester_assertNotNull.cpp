@@ -1,11 +1,6 @@
 /**
- * @file 0000_tester_ptr.cpp
+ * @file tester_assertNotNull.cpp
  * @brief Unit test for Tester::assertNotNull across raw, shared, unique, and weak pointers.
- *
- * Validates:
- *   - Null and non-null raw pointers.
- *   - Shared and unique pointer non-null checks.
- *   - Weak pointers lockable or not.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -15,7 +10,7 @@
 #include <memory>
 
 int main() {
-    Tester tester("0000_tester_ptr");
+    Tester tester("tester_assertNotNull");
 
     // Raw pointer
     int val = 42;
