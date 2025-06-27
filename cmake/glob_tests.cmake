@@ -1,2 +1,4 @@
 # Glob all test programs
-file(GLOB TEST_PROGRAMS "${PROJECT_ROOT}/test/*.cpp")
+file(GLOB_RECURSE TEST_PROGRAMS
+        CONFIGURE_DEPENDS
+        "${PROJECT_ROOT}/test/*.cpp")

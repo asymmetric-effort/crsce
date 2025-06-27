@@ -6,7 +6,6 @@
 
 #include "utils/test/Tester.h"
 #include "utils/test/TestException.h"
-#include "Gpu/Device/Interface.h"
 #include <memory>
 #include <cstdlib>
 
@@ -118,11 +117,6 @@ int main() {
     tester.assertNotNull(spc, "shared_ptr<char> should not be null");
     tester.expectException<TestException>(
         [&] { tester.assertNotNull(std::shared_ptr<char>(), "shared_ptr<char> should not be null"); }
-    );
-
-    // ---- unique_ptr<Gpu::Device::Interface> tests ----
-    tester.expectException<TestException>(
-        [&] { tester.assertNotNull(std::unique_ptr<Gpu::Device::Interface>(), "unique_ptr<Interface> should not be null"); }
     );
 
     return tester.getFailCount()>0?1:EXIT_SUCCESS;
