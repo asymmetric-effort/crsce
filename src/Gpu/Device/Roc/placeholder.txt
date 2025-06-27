@@ -1,1 +1,0 @@
-placeholder for AMD ROC implementation

@@ -5,10 +5,9 @@
  */
 #pragma once
 
-#include "Gpu/Device/Interface.h"
 #include "utils/test/ExitOnError.h"
-#include "Gpu/Math/Matrix.h"
-#include "Gpu/Ipc/Result.h"
+#include "Common/Buffer8.h"
+#include "Common/Buffer64.h"
 #include <exception>
 #include <chrono>
 #include <cstdlib>
@@ -106,24 +105,6 @@ public:
 
     /**
      * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a Gpu::Ipc::Result
-     * @param b Gpu::Ipc::Result
-     * @param message std::string&
-     */
-    void assertEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string &message);
-
-    /**
-     * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a Gpu::Math::Matrix&
-     * @param b Gpu::Math::Matrix&
-     * @param message std::string&
-     */
-    void assertEqual(const Gpu::Math::Matrix &a, const Gpu::Math::Matrix &b, const std::string &msg);
-
-    /**
-     * @name assertEqual
      * @brief assert that a != b.
      * @param a char
      * @param b char
@@ -213,24 +194,6 @@ public:
      * @param message std::string
      */
     void assertNotEqual(float a, const float b, const std::string &message);
-
-    /**
-     * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a int
-     * @param b int
-     * @param message std::string
-     */
-    void assertNotEqual(Gpu::Ipc::Result a, Gpu::Ipc::Result b, const std::string &message);
-
-    /**
-     * @name assertNotEqual
-     * @brief Assert that two matrices are not equal within a given tolerance.
-     * @param a First Gpu::Math::Matrix to compare.
-     * @param b Second Gpu::Math::Matrix to compare.
-     * @param message Message to display on assertion outcome.
-     */
-    void assertNotEqual(const Gpu::Math::Matrix &a, const Gpu::Math::Matrix &b, const std::string &message);
 
     /**
      * @name assertNotEqual
@@ -391,8 +354,6 @@ public:
      * @param message std::string
      */
     void assertNotNull(const std::shared_ptr<char> &ptr, const std::string &message);
-
-    void assertNotNull(const std::unique_ptr<Gpu::Device::Interface> &ptr, const std::string &message);
 
     /**
      * @name assertNotNull
