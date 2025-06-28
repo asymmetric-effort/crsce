@@ -34,17 +34,7 @@ jobs:
         run: |
           # emit .project as JSON into the "meta" output
           echo "meta<<EOF" >> $GITHUB_OUTPUT
-          yq eval -o=json '.project' PROJECT.yaml >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          # emit .fields as JSON into the "fields" output
-          echo "fields<<EOF" >> $GITHUB_OUTPUT
-          yq eval -o=json '.fields' PROJECT.yaml >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          # emit .issues as JSON into the "issues" output
-          echo "issues<<EOF" >> $GITHUB_OUTPUT
-          yq eval -o=json '.issues' PROJECT.yaml >> $GITHUB_OUTPUT
+          yq eval -o=json '.' PROJECT.yaml > $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create or get project
