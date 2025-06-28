@@ -1,4 +1,6 @@
 ---
+# ci-docker.yml
+# (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 name: ci-docker
 
 on:
@@ -34,6 +36,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: Dockerfile
           push: true
           target: project_automation
           tags: ghcr.io/${{ github.repository_owner }}/project_automation:${{ github.ref_name }}
@@ -41,6 +44,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          file: Dockerfile
           push: true
           target: project_automation
           tags: ghcr.io/${{ github.repository_owner }}/builder:${{ github.ref_name }}
