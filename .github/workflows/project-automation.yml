@@ -1,12 +1,8 @@
 # .github/workflows/project-automation.yml
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
 on:
-  push:
-    branches:
-      - '**'
-    paths:
-      - '.github/workflows/project-automation.yml'
-      - 'PROJECT.yaml'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,7 +14,8 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Install deps
         run: |
@@ -27,59 +24,88 @@ jobs:
       - name: Read PROJECT.yaml
         id: load
         run: |
-          echo "::set-output name=meta::$(yq eval -o=json '.project' PROJECT.yaml)"
-          echo "::set-output name=meta::$(yq eval -o=json '.project.title' PROJECT.yaml)"
-          echo "::set-output name=fields::$(yq eval -o=json '.fields' PROJECT.yaml)"
-          echo "::set-output name=issues::$(yq eval -o=json '.issues' PROJECT.yaml)"
+          # emit .project as JSON into the "meta" output
+          echo "meta<<EOF" >> $GITHUB_OUTPUT
+          yq eval -o=json '.project' PROJECT.yaml >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          # emit .fields as JSON into the "fields" output
+          echo "fields<<EOF" >> $GITHUB_OUTPUT
+          yq eval -o=json '.fields' PROJECT.yaml >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          # emit .issues as JSON into the "issues" output
+          echo "issues<<EOF" >> $GITHUB_OUTPUT
+          yq eval -o=json '.issues' PROJECT.yaml >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create or get project
         id: proj
         run: |
-          PROJECT_ID=$(echo "${{ steps.load.outputs.meta }}" \
-            | jq -r '"\(.owner)"' \
-            | xargs -I% gh project list --owner % --json id,number,title \
-                | jq -r ".[] | select(.title==\"${{ steps.load.outputs.title }}\") | .id")
+          META="${{ steps.load.outputs.meta }}"
+          TITLE=$(jq -r .title <<<"$META")
+          OWNER=$(jq -r .owner <<<"$META")
+
+          # try to find existing
+          PROJECT_ID=$(gh project list --owner "$OWNER" --json id,title \
+            | jq -r ".[] | select(.title==\"$TITLE\") | .id")
+
           if [ -z "$PROJECT_ID" ]; then
             gh project create \
-              --owner "$(echo '${{ steps.load.outputs.meta }}' | jq -r .owner)" \
-              --title "$(echo '${{ steps.load.outputs.meta }}' | jq -r .title)" \
-              --description "$(echo '${{ steps.load.outputs.meta }}' | jq -r .description)" \
-              --public false --format json \
-              | jq -r .id > project.id
-            PROJECT_ID=$(cat project.id)
+              --owner "$OWNER" \
+              --title "$TITLE" \
+              --description "$(jq -r .description <<<"$META")" \
+              --public false \
+              --format json \
+            | jq -r .id > project.id
+            PROJECT_ID=$(<project.id)
           fi
-          echo "::set-output name=id::$PROJECT_ID"
+
+          echo "id=$PROJECT_ID" >> $GITHUB_OUTPUT
 
       - name: Create fields
         run: |
-          for i in $(echo '${{ steps.load.outputs.fields }}' | jq -c '.[]'); do
-            NAME=$(echo $i | jq -r .name)
-            TYPE=$(echo $i | jq -r .type)
-            gh project field-create "${{ steps.proj.outputs.id }}" \
+          PROJID="${{ steps.proj.outputs.id }}"
+          for fld in $(jq -c '.[]' <<<"${{ steps.load.outputs.fields }}"); do
+            NAME=$(jq -r .name <<<"$fld")
+            TYPE=$(jq -r .type <<<"$fld")
+            gh project field-create "$PROJID" \
               --name "$NAME" --type "$TYPE" \
-              --format json > /dev/null || true
+              --format json >/dev/null || true
           done
 
       - name: Add issues & cards
         run: |
-          for issue in $(echo '${{ steps.load.outputs.issues }}' | jq -c '.[]'); do
-            IT=$(echo $issue | jq -r .title)
-            B=$(echo $issue | jq -r .body)
-            L=$(echo $issue | jq -r '.labels|join(",")')
-            A=$(echo $issue | jq -r .assignee)
-            # create issue
-            NUM=$(gh issue create --title "$IT" --body "$B" \
-                 --label "$L" --assignee "$A" --format json \
-                 | jq -r .number)
-            # add to project
-            ITEM_ID=$(gh project item add "${{ steps.proj.outputs.id }}" \
-              --issue "${{ steps.load.outputs.meta.owner }}/$(basename $GITHUB_REPOSITORY)#$NUM" \
-              --format json | jq -r .id)
-            # set field-values
-            for fv in $(echo $issue | jq -c '.fields|to_entries[]'); do
-              FN=$(echo $fv | jq -r .key)
-              VAL=$(echo $fv | jq -r .value)
+          PROJID="${{ steps.proj.outputs.id }}"
+          ISSUES="${{ steps.load.outputs.issues }}"
+          OWNER=$(jq -r .owner <<<"${{ steps.load.outputs.meta }}")
+          REPO=$(basename $GITHUB_REPOSITORY)
+
+          for issue in $(jq -c '.[]' <<<"$ISSUES"); do
+            TITLE=$(jq -r .title <<<"$issue")
+            BODY=$(jq -r .body <<<"$issue")
+            LABELS=$(jq -r '.labels|join(",")' <<<"$issue")
+            ASSIGNEE=$(jq -r .assignee <<<"$issue")
+
+            NUM=$(gh issue create \
+              --repo "$OWNER/$REPO" \
+              --title "$TITLE" \
+              --body "$BODY" \
+              --label "$LABELS" \
+              --assignee "$ASSIGNEE" \
+              --format json \
+            | jq -r .number)
+
+            ITEM_ID=$(gh project item add "$PROJID" \
+              --issue "$OWNER/$REPO#$NUM" \
+              --format json \
+            | jq -r .id)
+
+            for fv in $(jq -c '.fields|to_entries[]' <<<"$issue"); do
+              FIELD=$(jq -r .key <<<"$fv")
+              VALUE=$(jq -r .value <<<"$fv")
               gh project field-value set "$ITEM_ID" \
-                --field "$FN" --value "$VAL"
+                --field "$FIELD" \
+                --value "$VALUE"
             done
           done
