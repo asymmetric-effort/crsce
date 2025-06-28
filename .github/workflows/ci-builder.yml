@@ -4,12 +4,8 @@ name: ci-builder
 on:
   push:
     branches:
-      - '**'
-    paths-ignore:
-      - 'Dockerfile'
-      - '.github/workflows/ci-docker.yml'
-      - '.github/workflows/sonarcloud.yml'
-      - '.github/workflows/codeql-analysis'
+      - 'main'
+    paths:
       - '.github/workflows/project-automation.yml'
 
 jobs:
