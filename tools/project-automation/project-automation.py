@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Sync a GitHub Project with a PROJECT.yaml definition.
-
+project-automation.py
 (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+
+Sync a GitHub Project with a PROJECT.yaml definition.
 
 Reads PROJECT.yaml, then uses the `gh` CLI to:
   - create or find the Project
@@ -15,8 +16,6 @@ import subprocess
 import sys
 from pathlib import Path
 import yaml
-
-
 def run(cmd: list[str]) -> str:
     """
     Run a shell command, raise on error, and return its stdout.

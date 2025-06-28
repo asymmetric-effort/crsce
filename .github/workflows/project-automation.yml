@@ -21,104 +21,17 @@ permissions:
 jobs:
   manage_project:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/project_automation:${{ github.ref_name }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: read
+      repository-projects: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install deps
-        run: |
-          sudo apt-get update && sudo apt-get install -y jq yq
-
-      - name: Read PROJECT.yaml
-        id: load
-        run: |
-          # Grab each section as raw JSON
-          meta=$(yq e -o=json '.project' PROJECT.yaml)
-          fields=$(yq e -o=json '.fields' PROJECT.yaml)
-          issues=$(yq e -o=json '.issues' PROJECT.yaml)
-
-          # Publish to $GITHUB_OUTPUT with here-docs
-          echo "meta<<EOF" >> $GITHUB_OUTPUT
-          echo "$meta" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          echo "fields<<EOF" >> $GITHUB_OUTPUT
-          echo "$fields" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          echo "issues<<EOF" >> $GITHUB_OUTPUT
-          echo "$issues" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Create or get project
-        id: proj
-        run: |
-          META="${{ steps.load.outputs.meta }}"
-          TITLE=$(jq -r .title <<<"$META")
-          OWNER=$(jq -r .owner <<<"$META")
-
-          # try to find existing
-          PROJECT_ID=$(gh project list --owner "$OWNER" --json id,title \
-            | jq -r ".[] | select(.title==\"$TITLE\") | .id")
-
-          if [ -z "$PROJECT_ID" ]; then
-            gh project create \
-              --owner "$OWNER" \
-              --title "$TITLE" \
-              --description "$(jq -r .description <<<"$META")" \
-              --public false \
-              --format json \
-            | jq -r .id > project.id
-            PROJECT_ID=$(<project.id)
-          fi
-
-          echo "id=$PROJECT_ID" >> $GITHUB_OUTPUT
-
-      - name: Create fields
-        run: |
-          PROJID="${{ steps.proj.outputs.id }}"
-          for fld in $(jq -c '.[]' <<<"${{ steps.load.outputs.fields }}"); do
-            NAME=$(jq -r .name <<<"$fld")
-            TYPE=$(jq -r .type <<<"$fld")
-            gh project field-create "$PROJID" \
-              --name "$NAME" --type "$TYPE" \
-              --format json >/dev/null || true
-          done
-
-      - name: Add issues & cards
-        run: |
-          PROJID="${{ steps.proj.outputs.id }}"
-          ISSUES="${{ steps.load.outputs.issues }}"
-          OWNER=$(jq -r .owner <<<"${{ steps.load.outputs.meta }}")
-          REPO=$(basename $GITHUB_REPOSITORY)
-
-          for issue in $(jq -c '.[]' <<<"$ISSUES"); do
-            TITLE=$(jq -r .title <<<"$issue")
-            BODY=$(jq -r .body <<<"$issue")
-            LABELS=$(jq -r '.labels|join(",")' <<<"$issue")
-            ASSIGNEE=$(jq -r .assignee <<<"$issue")
-
-            NUM=$(gh issue create \
-              --repo "$OWNER/$REPO" \
-              --title "$TITLE" \
-              --body "$BODY" \
-              --label "$LABELS" \
-              --assignee "$ASSIGNEE" \
-              --format json \
-            | jq -r .number)
-
-            ITEM_ID=$(gh project item add "$PROJID" \
-              --issue "$OWNER/$REPO#$NUM" \
-              --format json \
-            | jq -r .id)
-
-            for fv in $(jq -c '.fields|to_entries[]' <<<"$issue"); do
-              FIELD=$(jq -r .key <<<"$fv")
-              VALUE=$(jq -r .value <<<"$fv")
-              gh project field-value set "$ITEM_ID" \
-                --field "$FIELD" \
-                --value "$VALUE"
-            done
-          done
+      - name: Sync Project
+        run: python3 project-automation.py
