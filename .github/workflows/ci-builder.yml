@@ -9,6 +9,7 @@ on:
       - '**'
     paths-ignore:
       - 'Dockerfile'
+      - '.tools/'
       - '.github/workflows/ci-docker.yml'
       - '.github/workflows/sonarcloud.yml'
       - '.github/workflows/codeql-analysis'
