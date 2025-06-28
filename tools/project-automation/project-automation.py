@@ -70,7 +70,9 @@ def find_or_create_project(meta: dict) -> str:
     except json.JSONDecodeError:
         projects = [json.loads(line) for line in raw.splitlines() if line.strip()]
 
+    print(f"projects: {projects}")
     for obj in projects:
+        print(f"  title={title} of {obj}")
         if obj.get("title") == title:
             return obj["id"]
 
