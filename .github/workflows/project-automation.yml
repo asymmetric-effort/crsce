@@ -32,4 +32,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Sync Project
-        run: python3 project-automation.py
+        run: python3 /opt/project-automation.py
