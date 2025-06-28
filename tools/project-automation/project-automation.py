@@ -26,6 +26,7 @@ def run(cmd: list[str]) -> str:
         :param cmd: list[str]
         :return: str
     """
+    print("run() starting (cmd:{cmd})")
     result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True)
     return result.stdout.strip()
 
@@ -37,6 +38,7 @@ def load_project_definition(path: Path) -> dict:
         :param path: Path
         :return dict
     """
+    print(f"load_project_definition() path={path}")
     with path.open() as f:
         return yaml.safe_load(f)
 
@@ -49,6 +51,7 @@ def find_or_create_project(meta: dict) -> str:
         :param meta: dict
         :return str
     """
+    print(f"find_or_create_project(): {meta}")
     owner = meta["owner"]
     title = meta["title"]
     listing = run([
@@ -78,7 +81,9 @@ def find_or_create_project(meta: dict) -> str:
         "--public" if meta.get("public", False)
         else "--format", "json"
     ])
-    return yaml.safe_load(out)["id"]
+    result = yaml.safe_load(out)["id"]
+    print(f"find_or_create_project() done. result:{result}")
+    return result
 
 
 def ensure_fields(proj_id: str, fields: list[dict]) -> None:
@@ -89,6 +94,7 @@ def ensure_fields(proj_id: str, fields: list[dict]) -> None:
         :param fields: list[dict]
         :return None
     """
+    print(f"ensure_results() proj_id:{proj_id}, fields:{fields}")
     for fld in fields:
         name, typ = fld["name"], fld["type"]
         # ignore errors if already exists
@@ -99,6 +105,7 @@ def ensure_fields(proj_id: str, fields: list[dict]) -> None:
             ],
             check=False
         )
+    print("ensure_fields() done")
 
 
 def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
@@ -113,6 +120,7 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
           :param issues: list[dict]
           :return None
     """
+    print("sync_issues() start. proj_id:{proj_id}, meta:{meta}, issues:{issues}")
     owner = meta["owner"]
     repo = run(["gh", "repo", "view", "--json", "name", "--jq", ".name"])
     for spec in issues:
@@ -153,6 +161,7 @@ def main() -> int:
     """
     try:
         project_def = load_project_definition(Path("PROJECT.yaml"))
+        print("main(): load_project_definition() returned")
         meta = project_def["project"]
         fields = project_def.get("fields", [])
         issues = project_def.get("issues", [])
