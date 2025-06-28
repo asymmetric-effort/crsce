@@ -1,4 +1,5 @@
-# CRSCE GPU Decompression Implementation Plan
+CRSCE GPU Decompression Implementation Plan
+===========================================
 
 ## Summary of Decisions
 
