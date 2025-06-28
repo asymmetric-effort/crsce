@@ -72,7 +72,7 @@ correctness, and future-proofing:
                            code churn.
 
 * **Metal for macOS MVP**: 
-                           Offers native support on our hardware (AMD Radeon Pro 5500M or Apple M\*) and leverages 
+                           Offers native support on our hardware (AMD Radeon Pro 5500M or Apple M*) and leverages 
                            Apple’s robust tooling. We consolidate GPU efforts into Metal first, then expand to other 
                            GPU platforms.
 
