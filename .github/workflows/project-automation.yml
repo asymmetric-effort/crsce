@@ -10,9 +10,6 @@ on:
     paths:
       - 'PROJECT.yaml'
       - '.github/workflows/project-automation.yml'
-  workflow_run:
-    workflows: ["ci-docker"]
-    types: [completed]
 
 permissions:
   contents: read
