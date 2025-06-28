@@ -28,6 +28,7 @@ jobs:
         id: load
         run: |
           echo "::set-output name=meta::$(yq eval -o=json '.project' PROJECT.yaml)"
+          echo "::set-output name=meta::$(yq eval -o=json '.project.title' PROJECT.yaml)"
           echo "::set-output name=fields::$(yq eval -o=json '.fields' PROJECT.yaml)"
           echo "::set-output name=issues::$(yq eval -o=json '.issues' PROJECT.yaml)"
 
@@ -37,7 +38,7 @@ jobs:
           PROJECT_ID=$(echo "${{ steps.load.outputs.meta }}" \
             | jq -r '"\(.owner)"' \
             | xargs -I% gh project list --owner % --json id,number,title \
-                | jq -r ".[] | select(.title==\"${{ fromJson(steps.load.outputs.meta).title }}\") | .id")
+                | jq -r ".[] | select(.title==\"${{ steps.load.outputs.title }}\") | .id")
           if [ -z "$PROJECT_ID" ]; then
             gh project create \
               --owner "$(echo '${{ steps.load.outputs.meta }}' | jq -r .owner)" \
