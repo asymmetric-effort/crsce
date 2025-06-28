@@ -6,8 +6,6 @@
 #pragma once
 
 #include "utils/test/ExitOnError.h"
-#include "Common/Buffer8.h"
-#include "Common/Buffer64.h"
 #include <exception>
 #include <chrono>
 #include <cstdlib>
@@ -15,7 +13,6 @@
 #include <string>
 #include <thread>
 #include <cstdint>   // for UINT64_MAX
-#include <cstddef>   // for SIZE_MAX
 
 class Tester {
 public:
@@ -66,24 +63,6 @@ public:
      * @param message std::string
      */
     void assertFalse(bool condition, const std::string &message);
-
-    /**
-     * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a Common::Buffer8&
-     * @param b Common::Buffer8&
-     * @param message std::string&
-     */
-    void assertEqual(const Common::Buffer8 &a, const Common::Buffer8 &b, const std::string &message);
-
-    /**
-     * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a Common::Buffer64&
-     * @param b Common::Buffer64&
-     * @param message std::string&
-     */
-    void assertEqual(const Common::Buffer64 &a, const Common::Buffer64 &b, const std::string &message);
 
     /**
      * @name assertEqual
@@ -158,24 +137,6 @@ public:
      * @param message std::string
      */
     void assertEqual(const uint32_t a, const uint32_t b, const std::string &message);
-
-    /**
-     * @name assertNotEqual
-     * @brief Assert that two Common::Buffer8 objects are not equal.
-     * @param a First buffer to compare.
-     * @param b Second buffer to compare.
-     * @param message Message to display on assertion outcome.
-     */
-    void assertNotEqual(const Common::Buffer8 &a, const Common::Buffer8 &b, const std::string &message);
-
-    /**
-     * @name assertNotEqual
-     * @brief Assert that two Common::Buffer64 objects are not equal.
-     * @param a First buffer to compare.
-     * @param b Second buffer to compare.
-     * @param message Message to display on assertion outcome.
-     */
-    void assertNotEqual(const Common::Buffer64 &a, const Common::Buffer64 &b, const std::string &message);
 
     /**
      * @name assertNotEqual
@@ -466,7 +427,7 @@ void Tester::expectException(PayloadFunc &&func) {
     try {
         func();
         fail("Expected exception of type " + std::string(typeid(ExpectedExceptionClass).name()) + " not thrown");
-    } catch (const ExpectedExceptionClass &e) {
+    } catch (const ExpectedExceptionClass) {
         recoverFail();
         pass(std::format("expected exception ({}) was thrown", std::string(typeid(ExpectedExceptionClass).name())));
     } catch (const std::exception &e) {
