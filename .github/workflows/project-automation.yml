@@ -1,7 +1,12 @@
 # .github/workflows/project-automation.yml
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/project-automation.yml'
+      - 'PROJECT.yaml'
 
 permissions:
   contents: read
