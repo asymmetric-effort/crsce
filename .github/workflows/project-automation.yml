@@ -32,9 +32,22 @@ jobs:
       - name: Read PROJECT.yaml
         id: load
         run: |
-          # emit .project as JSON into the "meta" output
+          # Grab each section as raw JSON
+          meta=$(yq e -o=json '.project' PROJECT.yaml)
+          fields=$(yq e -o=json '.fields' PROJECT.yaml)
+          issues=$(yq e -o=json '.issues' PROJECT.yaml)
+
+          # Publish to $GITHUB_OUTPUT with here-docs
           echo "meta<<EOF" >> $GITHUB_OUTPUT
-          yq eval -o=json '.' PROJECT.yaml > $GITHUB_OUTPUT
+          echo "$meta" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "fields<<EOF" >> $GITHUB_OUTPUT
+          echo "$fields" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "issues<<EOF" >> $GITHUB_OUTPUT
+          echo "$issues" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create or get project
