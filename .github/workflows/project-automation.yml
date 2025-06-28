@@ -8,10 +8,7 @@ on:
     branches:
       - '**'
     paths:
-      - 'Dockerfile'
-      - '.github/workflows/ci-docker.yml'
-      - '.github/workflows/sonarcloud.yml'
-      - '.github/workflows/codeql-analysis'
+      - 'PROJECT.yaml'
       - '.github/workflows/project-automation.yml'
   workflow_run:
     workflows: ["ci-docker"]
