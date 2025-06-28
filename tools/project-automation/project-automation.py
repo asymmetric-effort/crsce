@@ -12,10 +12,11 @@ Reads PROJECT.yaml, then uses the `gh` CLI to:
   - add Issues to the Project and set field values
 """
 
-import subprocess
 import sys
-from pathlib import Path
+import json
 import yaml
+import subprocess
+from pathlib import Path
 
 
 def run(cmd: list[str]) -> str:
@@ -56,6 +57,14 @@ def find_or_create_project(meta: dict) -> str:
         "--format", "json"
     ])
     projects = yaml.safe_load(listing)
+    raw = run([
+        "gh", "project", "list", "--owner", owner, "--format", "json"
+    ])
+    try:
+        projects = json.loads(raw)
+    except json.JSONDecodeError:
+        projects = [json.loads(line) for line in raw.splitlines() if line.strip()]
+
     for obj in projects:
         if obj.get("title") == title:
             return obj["id"]
