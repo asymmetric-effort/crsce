@@ -16,9 +16,14 @@ import subprocess
 import sys
 from pathlib import Path
 import yaml
+
+
 def run(cmd: list[str]) -> str:
     """
-    Run a shell command, raise on error, and return its stdout.
+        Run a shell command, raise on error, and return its stdout.
+
+        :param cmd: list[str]
+        :return: str
     """
     result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True)
     return result.stdout.strip()
@@ -26,7 +31,10 @@ def run(cmd: list[str]) -> str:
 
 def load_project_definition(path: Path) -> dict:
     """
-    Load and parse PROJECT.yaml.
+        Load and parse PROJECT.yaml.
+
+        :param path: Path
+        :return dict
     """
     with path.open() as f:
         return yaml.safe_load(f)
@@ -34,8 +42,11 @@ def load_project_definition(path: Path) -> dict:
 
 def find_or_create_project(meta: dict) -> str:
     """
-    Find an existing project by title, or create it.
-    Returns the GraphQL project ID.
+        Find an existing project by title, or create it.
+        Returns the GraphQL project ID.
+
+        :param meta: dict
+        :return str
     """
     owner = meta["owner"]
     title = meta["title"]
@@ -61,7 +72,11 @@ def find_or_create_project(meta: dict) -> str:
 
 def ensure_fields(proj_id: str, fields: list[dict]) -> None:
     """
-    Create any missing custom fields on the project.
+        Create any missing custom fields on the project.
+
+        :param proj_id: str
+        :param fields: list[dict]
+        :return None
     """
     for fld in fields:
         name, typ = fld["name"], fld["type"]
@@ -77,10 +92,15 @@ def ensure_fields(proj_id: str, fields: list[dict]) -> None:
 
 def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
     """
-    For each issue spec:
-      - create Issue (if needed)
-      - add it to the Project
-      - set any field-values
+        For each issue spec:
+          - create Issue (if needed)
+          - add it to the Project
+          - set any field-values
+
+          :param proj_id: str
+          :param meta: dict
+          :param issues: list[dict]
+          :return None
     """
     owner = meta["owner"]
     repo = run(["gh", "repo", "view", "--json", "name", "--jq", ".name"])
@@ -114,23 +134,27 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
             ])
 
 
-def main():
-    project_def = load_project_definition(Path("PROJECT.yaml"))
-    meta = project_def["project"]
-    fields = project_def.get("fields", [])
-    issues = project_def.get("issues", [])
+def main() -> int:
+    """
+        main function
 
-    proj_id = find_or_create_project(meta)
-    ensure_fields(proj_id, fields)
-    sync_issues(proj_id, meta, issues)
-    print(f"Synced project {meta['title']} (ID={proj_id})")
+        :return: int (exit code)
+    """
+    try:
+        project_def = load_project_definition(Path("PROJECT.yaml"))
+        meta = project_def["project"]
+        fields = project_def.get("fields", [])
+        issues = project_def.get("issues", [])
+
+        proj_id = find_or_create_project(meta)
+        ensure_fields(proj_id, fields)
+        sync_issues(proj_id, meta, issues)
+        print(f"Synced project {meta['title']} (ID={proj_id})")
+        return 0
+    except Exception as e:
+        print(f"Error: {e}")
+        return 1
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except subprocess.CalledProcessError as e:
-        print(f"ERROR: Command `{e.cmd}` failed (exit {e.returncode})",
-              file=sys.stderr)
-
-        sys.exit(e.returncode)
+    sys.exit(main())
