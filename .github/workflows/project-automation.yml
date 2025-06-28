@@ -2,7 +2,6 @@
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 ---
 name: project-automation
-
 on:
   push:
     branches:
@@ -10,12 +9,10 @@ on:
     paths:
       - 'PROJECT.yaml'
       - '.github/workflows/project-automation.yml'
-
 permissions:
   contents: read
   packages: read
   repository-projects: write
-
 jobs:
   manage_project:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}

@@ -1,6 +1,5 @@
 # Dockerfile
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
-
 #
 # Base image
 #
@@ -29,7 +28,6 @@ RUN apt-get update -y && \
                 pymarkdown \
                 yamllint && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
 #
 # Project Automation Image
 #
@@ -44,7 +42,6 @@ RUN apt-get update -y && \
     gh --version
 
 ENTRYPOINT [ "python3","/opt/project-automation.py" ]
-
 #
 # C++ Builder Image
 #
