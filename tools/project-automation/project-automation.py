@@ -18,7 +18,8 @@ import yaml
 import subprocess
 from pathlib import Path
 
-GITHUB_CLI="/usr/local/bin/gh"
+GITHUB_CLI = "/usr/local/bin/gh"
+
 
 def run(cmd: list[str]) -> str:
     """
@@ -27,7 +28,7 @@ def run(cmd: list[str]) -> str:
         :param cmd: list[str]
         :return: str
     """
-    print("run() starting (cmd:{cmd})")
+    print(f"run() starting (cmd:{cmd})")
     result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True)
     return result.stdout.strip()
 
@@ -164,11 +165,15 @@ def main() -> int:
         project_def = load_project_definition(Path("PROJECT.yaml"))
         print("main(): load_project_definition() returned")
         meta = project_def["project"]
+        print(f"main(): meta={meta}")
         fields = project_def.get("fields", [])
+        print(f"main(): fields={fields}")
         issues = project_def.get("issues", [])
-
+        print(f"main(): issues={issues}")
         proj_id = find_or_create_project(meta)
+        print(f"main(): proj_id={proj_id}")
         ensure_fields(proj_id, fields)
+        print("main(): ensure_fields() returned")
         sync_issues(proj_id, meta, issues)
         print(f"Synced project {meta['title']} (ID={proj_id})")
         return 0
