@@ -15,7 +15,6 @@ permissions:
   repository-projects: write
 jobs:
   manage_project:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/${{ github.repository_owner }}/project_automation:${{ github.ref_name }}
