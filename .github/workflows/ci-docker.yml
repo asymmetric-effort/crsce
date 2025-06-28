@@ -10,6 +10,7 @@ on:
     paths:
       - 'Dockerfile'
       - '.github/workflows/ci-docker.yml'
+      - '.tools/**'
 jobs:
   ci-docker:
     permissions:

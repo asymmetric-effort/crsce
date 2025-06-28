@@ -7,13 +7,21 @@ on:
   push:
     branches:
       - '**'
-    paths-ignore:
-      - 'Dockerfile'
-      - '.tools/**'
-      - '.github/workflows/ci-docker.yml'
-      - '.github/workflows/sonarcloud.yml'
-      - '.github/workflows/codeql-analysis'
-      - '.github/workflows/project-automation.yml'
+    paths:
+      - '**'
+      - '.github/workflows/ci-builder.yml'
+      - '!Dockerfile'
+      - '!tools/**'
+      - '!tools/**/**'
+      - '!.github/**'
+
+#    paths-ignore:
+#      - 'Dockerfile'
+#      - '.tools/**'
+#      - '.github/workflows/ci-docker.yml'
+#      - '.github/workflows/sonarcloud.yml'
+#      - '.github/workflows/codeql-analysis'
+#      - '.github/workflows/project-automation.yml'
 
 jobs:
   ci-builder:
