@@ -5,7 +5,7 @@ project-automation.py
 
 Sync a GitHub Project with a PROJECT.yaml definition.
 
-Reads PROJECT.yaml, then uses the `gh` CLI to:
+Reads PROJECT.yaml, then uses the `/usr/local/bin/gh` CLI to:
   - create or find the Project
   - create any missing custom fields
   - create or update Issues
@@ -55,13 +55,13 @@ def find_or_create_project(meta: dict) -> str:
     owner = meta["owner"]
     title = meta["title"]
     listing = run([
-        "gh", "project", "list",
+        "/usr/local/bin/gh", "project", "list",
         "--owner", owner,
         "--format", "json"
     ])
     projects = yaml.safe_load(listing)
     raw = run([
-        "gh", "project", "list", "--owner", owner, "--format", "json"
+        "/usr/local/bin/gh", "project", "list", "--owner", owner, "--format", "json"
     ])
     try:
         projects = json.loads(raw)
@@ -74,7 +74,7 @@ def find_or_create_project(meta: dict) -> str:
 
     # create new
     out = run([
-        "gh", "project", "create",
+        "/usr/local/bin/gh", "project", "create",
         "--owner", owner,
         "--title", title,
         "--description", meta.get("description", ""),
@@ -100,7 +100,7 @@ def ensure_fields(proj_id: str, fields: list[dict]) -> None:
         # ignore errors if already exists
         subprocess.run(
             [
-                "gh", "project", "field-create", proj_id,
+                "/usr/local/bin/gh", "project", "field-create", proj_id,
                 "--name", name, "--type", typ
             ],
             check=False
@@ -122,11 +122,11 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
     """
     print("sync_issues() start. proj_id:{proj_id}, meta:{meta}, issues:{issues}")
     owner = meta["owner"]
-    repo = run(["gh", "repo", "view", "--json", "name", "--jq", ".name"])
+    repo = run(["/usr/local/bin/gh", "repo", "view", "--json", "name", "--jq", ".name"])
     for spec in issues:
         # create the GitHub Issue
         issue_out = run([
-            "gh", "issue", "create",
+            "/usr/local/bin/gh", "issue", "create",
             "--repo", f"{owner}/{repo}",
             "--title", spec["title"],
             "--body", spec.get("body", ""),
@@ -138,7 +138,7 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
 
         # add to project
         item_out = run([
-            "gh", "project", "item", "add", proj_id,
+            "/usr/local/bin/gh", "project", "item", "add", proj_id,
             "--issue", f"{owner}/{repo}#{num}",
             "--format", "json"
         ])
@@ -147,7 +147,7 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
         # set custom fields
         for field, val in spec.get("fields", {}).items():
             run([
-                "gh", "project", "field-value", "set", item_id,
+                "/usr/local/bin/gh", "project", "field-value", "set", item_id,
                 "--field", field,
                 "--value", val
             ])
