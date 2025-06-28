@@ -50,12 +50,14 @@ def find_or_create_project(meta: dict) -> str:
     """
     owner = meta["owner"]
     title = meta["title"]
-
-    # try to find
-    listing = run(["gh", "project", "list", "--owner", owner,
-                   "--json", "id,title"])
-    for obj in yaml.safe_load(listing):
-        if obj["title"] == title:
+    listing = run([
+        "gh", "project", "list",
+        "--owner", owner,
+        "--format", "json"
+    ])
+    projects = yaml.safe_load(listing)
+    for obj in projects:
+        if obj.get("title") == title:
             return obj["id"]
 
     # create new
