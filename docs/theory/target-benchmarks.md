@@ -12,7 +12,7 @@ The following table summarizes the compression rate and processing times per blo
 |        4096        |          92.58 %           |          0.5992           |            2455             |
 
 
-## Mathematical Rigor and Derivations
+## Supporting Math
 
 1. **Compression Rate**:
 
