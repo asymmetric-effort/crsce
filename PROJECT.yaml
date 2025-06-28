@@ -1,0 +1,31 @@
+# PROJECT.yaml
+project:
+  owner: sam-caldwell
+  title: CRSCE v1 Development
+  description: MVP Release project
+  public: false
+
+fields:
+  - name: Status
+    type: single_select
+    options: [“Todo”, “In Progress”, “Done”]
+  - name: Priority
+    type: single_select
+    options: [“Low”, “Med”, “High”]
+
+issues:
+  - title: “Implement CRSCE import”
+    body: “…acceptance criteria…”
+    labels: [enhancement]
+    assignee: sam-caldwell
+    fields:
+      Status: Todo
+      Priority: High
+
+  - title: “Write CRSCE spec”
+    body: “…”
+    labels: [documentation]
+    assignee: sam-caldwell
+    fields:
+      Status: Todo
+      Priority: Med
