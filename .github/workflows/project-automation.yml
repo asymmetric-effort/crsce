@@ -10,8 +10,12 @@ on:
       - 'PROJECT.yaml'
       - '.github/workflows/project-automation.yml'
 permissions:
+  checks: read
   contents: read
+  discussions: write
+  issues: write
   packages: read
+  pages: write
   repository-projects: write
 jobs:
   manage_project:
