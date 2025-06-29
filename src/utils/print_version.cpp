@@ -17,9 +17,11 @@
 #define PROJECT_VERSION "not_defined"
 #endif
 
-int print_version() {
-    const std::string project_name(PROJECT_NAME);
-    const std::string project_version(PROJECT_VERSION);
-    std::cout << "CRSCE " << project_name << " " << project_version << std::endl;
-    return EXIT_SUCCESS;
+namespace utils {
+    int print_version() {
+        const std::string project_name(PROJECT_NAME);
+        const std::string project_version(PROJECT_VERSION);
+        std::cout << "CRSCE " << project_name << " " << project_version << std::endl;
+        return EXIT_SUCCESS;
+    }
 }
