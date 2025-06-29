@@ -11,7 +11,7 @@
  * @brief return the temp directory (e.g., /tmp) based on operating system.
  * @return std::string
  */
-std::string get_tmp_dir() {
+std::string utils::get_tmp_dir() {
 #ifdef _WIN32
     char buffer[MAX_PATH];
     GetTempPathA(MAX_PATH, buffer);
