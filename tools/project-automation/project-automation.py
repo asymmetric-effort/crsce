@@ -69,8 +69,8 @@ def find_or_create_project(meta: dict) -> str:
 
     print(f"filter projects: {projects}")
     for obj in projects:
-        print(f"  title={title} of {obj}")
-        if obj.get("title") == title:
+        print(f"  title={title} of '{obj}'")
+        if type(obj) in [dict] and obj.get("title") == title:
             return obj["id"]
 
     # create new
