@@ -31,7 +31,7 @@ public:
     static int decompress();
 
     // cppcheck-suppress unusedStructMember
-    static constexpr size_t INPUT_BUFFER_SIZE = 1024 * 1024; // 1 MiB
+    static constexpr size_t INPUT_BUFFER_SIZE = 1048576; // 1 MiB = 1024^2
 
 protected:
     bool readInputBuffer(FileBuffer &buffer);
