@@ -123,18 +123,22 @@ def main() -> int:
         issues = extract_value(manifest, "issues", default_manifest["issues"], False)
 
         for field in fields:
-            field_name=field.get("name","")
-            field_type=field.get("type","")
-            if field_name=="" or field_type=="":
+            field_name = field.get("name", "")
+            field_type = field.get("type", "")
+            if field_name == "" or field_type == "":
                 raise ValueError("field name or type is empty")
             print(f"field {field_name} of type {field_type}")
             result = subprocess.run(
-                [GITHUB, "project", "field-create", 0, "--name", field_name, "--data-type", field_type],
+                [
+                    GITHUB, "project", "field-create",
+                    "--owner", owner,
+                    "--name", field_name,
+                    "--data-type", field_type
+                ],
                 check=True,
                 stdout=subprocess.PIPE, text=True
             ).stdout.strip()
             print(f"result:{result}")
-
 
             print(f"Sync project {title} (ID={proj_id})")
             sync_issues(proj_id, project, issues)
