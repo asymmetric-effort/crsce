@@ -75,7 +75,7 @@ def find_or_create_project(meta: dict) -> str:
             print(f"title ({title}) found")
             return obj["id"]
     print(f"find_or_create_project() done.")
-    raise exception("no project found")
+    raise Exception("no project found")
 
 
 def ensure_fields(proj_id: str, fields: list[dict]) -> None:
