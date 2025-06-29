@@ -57,7 +57,7 @@ bool run_compression_pattern(const TestPattern& pattern) {
     input.close();
 
     // Setup CRSCE and call compression
-    CRSCE compressor(input_filename, output_filename);
+    CRSCE compressor(input_filename, output_filename,512,1);
 
     if (const int result = compressor.compress(); result != EXIT_SUCCESS) {
         std::cerr << "[FAIL] CRSCE::compress() failed for pattern " << pattern.name << std::endl;

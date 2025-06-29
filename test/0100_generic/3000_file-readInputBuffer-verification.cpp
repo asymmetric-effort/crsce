@@ -21,7 +21,7 @@ int main() {
                   << "Generating random file."
                   << std::endl;
 
-        generate_random_file(input_test_file,test_file_size);
+        utils::generate_random_file(input_test_file,test_file_size);
 
         {
             Reader testCompressor(input_test_file, output_test_file);

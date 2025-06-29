@@ -31,7 +31,7 @@ bool generate_test_compression(const std::string &output_path) {
         input.put(0x00);
     input.close();
 
-    if (CRSCE compressor(input_path, output_path); compressor.compress() != EXIT_SUCCESS) {
+    if (CRSCE compressor(input_path, output_path,512,1); compressor.compress() != EXIT_SUCCESS) {
         std::cerr << "[FAIL] Compression failed during setup." << std::endl;
         return false;
     }

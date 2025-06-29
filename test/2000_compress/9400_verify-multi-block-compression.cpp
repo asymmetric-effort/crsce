@@ -13,8 +13,8 @@
 #include <cmath>
 
 // Create an input file with `blocks` worth of data (bytes padded)
-bool create_multi_block_file(const std::string& path, size_t blocks) {
-    std::string input_path = utils::generate_temp_filename("z3_input", "bin");
+bool create_multi_block_file(const std::string& path, const size_t blocks) {
+    const std::string input_path = utils::generate_temp_filename("z3_input", "bin");
     std::ofstream input(input_path, std::ios::binary);
     if (!input.is_open()) {
         std::cerr << "[FAIL] Could not open temp input file." << std::endl;
@@ -22,13 +22,13 @@ bool create_multi_block_file(const std::string& path, size_t blocks) {
     }
 
     // Write alternating pattern bytes
-    size_t bits = blocks * s * s;
-    size_t bytes = (bits + 7) / 8;  // pad up to full byte
+    const size_t bits = blocks * s * s;
+    const size_t bytes = (bits + 7) / 8;  // pad up to full byte
     for (size_t i = 0; i < bytes; ++i)
         input.put(0xAA);
     input.close();
 
-    CRSCE compressor(input_path, path);
+    CRSCE compressor(input_path, path,512,1);
     return (compressor.compress() == EXIT_SUCCESS);
 }
 
