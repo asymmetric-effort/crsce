@@ -15,19 +15,13 @@
 int utils::parse_args(const int argc,
                       const char* argv[],
                       const std::vector<Option>& opts) {
-
     const std::string program_name = get_program_name(argv);
 
     for (int i = 1; i < argc; ++i) {
         const std::string arg = argv[i];
         bool matched = false;
 
-        for (const auto& opt : opts) {
-            const auto& long_name  = opt.long_name;
-            const char  short_name = opt.short_name;
-            const auto  arg_type   = opt.arg_type;
-            const auto& handler    = opt.handler;
-
+        for (const auto& [long_name, short_name, arg_type, handler] : opts) {
             if (arg == long_name ||
                 (short_name && arg == std::string{"-"} + short_name)) {
                 matched = true;
@@ -35,9 +29,10 @@ int utils::parse_args(const int argc,
                 if (arg_type == ArgType::NoValue) {
                     // e.g. help/version: handler returns false to stop parsing
                     if (!handler("")) {
-                      return EXIT_SUCCESS;
+                        return EXIT_SUCCESS;
                     }
-                } else {
+                }
+                else {
                     // consume next token as the value
                     if (i + 1 >= argc) {
                         std::cerr << "Missing value for " << arg << "\n";
