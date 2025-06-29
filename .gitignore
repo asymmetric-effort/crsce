@@ -7,3 +7,7 @@ build/
 *\~\$*.docx
 
 .venv/
+
+cmake-build-debug
+cmake-build-default
+cmake-build-release
