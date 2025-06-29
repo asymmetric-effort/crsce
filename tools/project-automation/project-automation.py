@@ -90,6 +90,8 @@ def extract_value(source: dict, name: str, default_value: any = None, raise_on_d
 
 def get_project_id(project_name: str, owner: str) -> str:
     cmd = ["gh", "project", "list", "--owner", owner, "--format", "json"]
+    print(f"get_project_id(project_name'{project_name}', owner='{owner}'")
+    print(f"  get_project_id(): run cmd={cmd}")
     raw = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
     if raw.strip() == "":
         raise ValueError("empty result")
@@ -99,8 +101,8 @@ def get_project_id(project_name: str, owner: str) -> str:
     for project in project_list:
         this_project = project.get("title", "not_set")
         if this_project == project_name:
-            this_id=project.get("number",0)
-            if this_id==0:
+            this_id = project.get("number", 0)
+            if this_id == 0:
                 raise ValueError(f"missing project id number for {project_name}")
             return this_id
     return "0"
@@ -137,7 +139,7 @@ def main() -> int:
 
         owner = extract_value(project, "owner", "", True)
         title = extract_value(project, "title", "", True)
-        proj_id = get_project_id(owner,title)
+        proj_id = get_project_id(owner, title)
 
         fields = extract_value(manifest, "fields", default_manifest["fields"], False)
         issues = extract_value(manifest, "issues", default_manifest["issues"], False)
