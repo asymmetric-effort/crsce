@@ -3,7 +3,7 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "utils/parseArgs.h"
+#include "utils/print_usage.h"
 /**
  * @name terminate_and_show_usage
  * @brief terminate with the given exit code and print the program usage string.
@@ -12,6 +12,6 @@
  * @return int exit_code
  */
 int terminate_and_show_usage(const std::string& program_name, const int exit_code=EXIT_FAILURE){
-    printUsage(program_name);
+    print_usage(program_name);
     return exit_code;
 }

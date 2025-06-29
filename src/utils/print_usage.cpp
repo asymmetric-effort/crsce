@@ -1,15 +1,15 @@
 /**
- * @file src/utils/printUsage.cpp
+ * @file src/utils/print_usage.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "utils/printUsage.h"
+#include "utils/print_usage.h"
 
 #ifndef COPYRIGHT
 #define COPYRIGHT "not_defined"
 #endif
 
-int printUsage(const std::string &programName, const int exit_code) {
+int print_usage(const std::string &programName, const int exit_code) {
     const std::string copyright_string(COPYRIGHT);
     std::cout << "\n" << copyright_string << "\n"
             << "Usage: " << programName << " --in <inputfile> --out <outputfile>\n"

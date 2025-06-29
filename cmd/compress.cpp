@@ -3,8 +3,8 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 #include "CRSCE/CRSCE.h"
-#include "utils/printUsage.h"
-#include "utils/printVersion.h"
+#include "utils/print_usage.h"
+#include "utils/print_version.h"
 #include "utils/parseArgs.h"
 #include <filesystem>
 #include <cstdlib>
