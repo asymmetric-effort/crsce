@@ -29,8 +29,9 @@ def run(cmd: list[str]) -> str:
         :return: str
     """
     print(f"run() starting (cmd:{cmd})")
-    result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True)
-    return result.stdout.strip()
+    result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+    print(f"run() result: {result}")
+    return result
 
 
 def load_project_definition(path: Path) -> dict:
