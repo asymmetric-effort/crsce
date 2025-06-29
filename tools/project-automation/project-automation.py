@@ -72,21 +72,8 @@ def find_or_create_project(meta: dict) -> str:
         if type(obj) in [dict] and obj.get("title") == title:
             print(f"title ({title}) found")
             return obj["id"]
-    print(f"filtering done")
-
-    # create new
-    out = run([
-        GITHUB, "project", "create",
-        "--owner", owner,
-        "--title", title,
-        "--description", meta.get("description", ""),
-        "--public" if meta.get("public", False)
-        else "--format", "json"
-    ])
-    print(f"project create...done")
-    result = yaml.safe_load(out)["id"]
-    print(f"find_or_create_project() done. result:{result}")
-    return result
+    print(f"find_or_create_project() done.")
+    raise "no project found"
 
 
 def ensure_fields(proj_id: str, fields: list[dict]) -> None:
