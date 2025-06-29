@@ -29,21 +29,6 @@ RUN apt-get update -y && \
                 yamllint && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 #
-# Project Automation Image
-#
-FROM base AS project_automation
-
-COPY tools/project-automation/requirements.txt /opt/requirements.txt
-COPY tools/project-automation/project-automation.py /opt/project-automation.py
-
-RUN apt-get update -y && \
-    apt-get install gh -y && \
-    pip install --break-system-packages -r /opt/requirements.txt && \
-    which gh && \
-    gh --version
-
-ENTRYPOINT [ "python3","/opt/project-automation.py" ]
-#
 # C++ Builder Image
 #
 FROM base AS builder
