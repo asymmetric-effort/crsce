@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 
-int print_usage(const std::string& programName, const int exit_code=EXIT_SUCCESS);
+namespace utils {
+    int print_usage(const std::string& programName, const int exit_code=EXIT_SUCCESS);
+}
 
 #endif // UTILS_PRINT_USAGE_H
