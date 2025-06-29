@@ -13,7 +13,7 @@ int main() {
     Tester tester("utils::get_tmp_dir");
     namespace fs = std::filesystem;
 
-    std::string tmpDir = utils::get_tmp_dir();
+    const std::string tmpDir = utils::get_tmp_dir();
 
     // Common checks: non-empty and exists as directory
     tester.assertTrue(!tmpDir.empty(), "get_tmp_dir returns non-empty string");
