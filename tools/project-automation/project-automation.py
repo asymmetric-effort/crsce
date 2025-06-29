@@ -18,8 +18,6 @@ import yaml
 import subprocess
 from pathlib import Path
 
-GITHUB_CLI = "gh"
-
 
 def run(cmd: list[str]) -> str:
     """
@@ -57,14 +55,8 @@ def find_or_create_project(meta: dict) -> str:
     print(f"find_or_create_project(): {meta}")
     owner = meta["owner"]
     title = meta["title"]
-    listing = run([
-        GITHUB_CLI, "project", "list",
-        "--owner", owner,
-        "--format", "json"
-    ])
-    projects = yaml.safe_load(listing)
     raw = run([
-        GITHUB_CLI, "project", "list", "--owner", owner, "--format", "json"
+        "gh", "project", "list", "--owner", owner, "--format", "json"
     ])
     try:
         projects = json.loads(raw)
@@ -79,7 +71,7 @@ def find_or_create_project(meta: dict) -> str:
 
     # create new
     out = run([
-        GITHUB_CLI, "project", "create",
+        "gh", "project", "create",
         "--owner", owner,
         "--title", title,
         "--description", meta.get("description", ""),
@@ -105,7 +97,7 @@ def ensure_fields(proj_id: str, fields: list[dict]) -> None:
         # ignore errors if already exists
         subprocess.run(
             [
-                GITHUB_CLI, "project", "field-create", proj_id,
+                "gh", "project", "field-create", proj_id,
                 "--name", name, "--type", typ
             ],
             check=False
@@ -127,11 +119,11 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
     """
     print("sync_issues() start. proj_id:{proj_id}, meta:{meta}, issues:{issues}")
     owner = meta["owner"]
-    repo = run([GITHUB_CLI, "repo", "view", "--json", "name", "--jq", ".name"])
+    repo = run(["gh", "repo", "view", "--json", "name", "--jq", ".name"])
     for spec in issues:
         # create the GitHub Issue
         issue_out = run([
-            GITHUB_CLI, "issue", "create",
+            "gh", "issue", "create",
             "--repo", f"{owner}/{repo}",
             "--title", spec["title"],
             "--body", spec.get("body", ""),
@@ -143,7 +135,7 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
 
         # add to project
         item_out = run([
-            GITHUB_CLI, "project", "item", "add", proj_id,
+            "gh", "project", "item", "add", proj_id,
             "--issue", f"{owner}/{repo}#{num}",
             "--format", "json"
         ])
@@ -152,7 +144,7 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
         # set custom fields
         for field, val in spec.get("fields", {}).items():
             run([
-                GITHUB_CLI, "project", "field-value", "set", item_id,
+                "gh", "project", "field-value", "set", item_id,
                 "--field", field,
                 "--value", val
             ])
