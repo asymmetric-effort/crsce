@@ -10,10 +10,10 @@ project:
 
 fields:
   - name: Status
-    type: single_select
+    type: SINGLE_SELECT
     options: [ “Todo”, “In Progress”, “Done” ]
   - name: Priority
-    type: single_select
+    type: SINGLE_SELECT
     options: [ “Low”, “Med”, “High” ]
 
 issues:

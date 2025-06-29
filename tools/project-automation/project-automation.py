@@ -128,16 +128,16 @@ def main() -> int:
             if field_name == "" or field_type == "":
                 raise ValueError("field name or type is empty")
             print(f"field {field_name} of type {field_type}")
-            result = subprocess.run(
-                [
-                    GITHUB, "project", "field-create",
-                    "--owner", owner,
-                    "--name", field_name,
-                    "--data-type", field_type
-                ],
-                check=True,
-                stdout=subprocess.PIPE, text=True
-            ).stdout.strip()
+            cmd = [
+                GITHUB, "project", "field-create",
+                "--owner", owner,
+                "--name", field_name,
+                "--data-type", field_type
+            ]
+            if field_type == "SINGLE_SELECT":
+                cmd.append("--single-select-options")
+                cmd.append(fields.get("options", []))
+            result = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
             print(f"result:{result}")
 
             print(f"Sync project {title} (ID={proj_id})")
