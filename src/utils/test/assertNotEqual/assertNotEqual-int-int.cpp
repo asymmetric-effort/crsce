@@ -7,14 +7,14 @@
 
 /**
  * @name assertNotEqual
- * @brief asserts that a should equal b
- * @param a int
- * @param b int
+ * @brief asserts that lhs should not equal rhs
+ * @param lhs int
+ * @param rhs int
  * @param message std::string
  */
-void Tester::assertNotEqual(const int a,const int b, const std::string &message) {
-    if (a != b)
+void Tester::assertNotEqual(const int lhs, const int rhs, const std::string& message) {
+    if (lhs != rhs)
         pass(std::format("ok: {}", message));
     else
-        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
+        fail(std::format("assertNotEqual failed({} != {}): {}", lhs, rhs, message));
 }

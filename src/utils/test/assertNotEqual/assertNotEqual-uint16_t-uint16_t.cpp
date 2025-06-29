@@ -8,14 +8,14 @@
 
 /**
  * @name assertNotEqual
- * @brief asserts that a should equal b
- * @param a uint16_t
- * @param b uint16_t
+ * @brief asserts that lhs should equal rhs
+ * @param lhs uint16_t
+ * @param rhs uint16_t
  * @param message std::string
  */
-void Tester::assertNotEqual(uint16_t a, uint16_t b, const std::string& message) {
-    if (a != b)
+void Tester::assertNotEqual(const uint16_t lhs, const uint16_t rhs, const std::string& message) {
+    if (lhs != rhs)
         pass(std::format("ok: {}", message));
     else
-        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
+        fail(std::format("assertNotEqual failed({} != {}): {}", lhs, rhs, message));
 }

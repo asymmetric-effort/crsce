@@ -66,7 +66,7 @@ bool run_test_pattern(const std::string& label, bool (*bit_pattern)(size_t)) {
 
 bool pattern_all_zeroes(size_t) { return false; }
 bool pattern_all_ones(size_t) { return true; }
-bool pattern_alternating(size_t i) { return (i % 2 == 0); }
+bool pattern_alternating(const size_t i) { return (i % 2 == 0); }
 
 int main() {
     std::cout << "[INFO] verify-lhash2-store-and-hash starting..." << std::endl;

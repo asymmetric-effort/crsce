@@ -8,15 +8,15 @@
 #if SIZE_MAX != UINT64_MAX
 /**
  * @name assertEqual
- * @brief asserts that a should equal b
- * @param a uint64_t
- * @param b uint64_t
+ * @brief asserts that lhs should equal rhs
+ * @param lhs uint64_t
+ * @param rhs uint64_t
  * @param message std::string&
  */
-void Tester::assertEqual(uint64_t a, uint64_t b, const std::string& message) {
-    if (a == b)
+void Tester::assertNotEqual(uint64_t lhs, uint64_t rhs, const std::string &message); {
+    if (lhs == rhs)
         pass(std::format("ok: {}", message));
     else
-        fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
+        fail(std::format("assertEqual failed({} != {}): {}", lhs, rhs, message));
 }
 #endif

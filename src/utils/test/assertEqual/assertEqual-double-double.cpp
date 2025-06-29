@@ -7,13 +7,13 @@
 
 /**
  * @name assertEqual
- * @brief asserts that a should equal b
- * @param a Common::double
- * @param b Common::double
+ * @brief asserts that lhs should equal rhs
+ * @param lhs Common::double
+ * @param rhs Common::double
  * @param message std::string
  */
-void Tester::assertEqual(const double a, const double b, const std::string& message) {
-    if (constexpr double epsilon = 1e-9; std::abs(a - b) > epsilon) {
+void Tester::assertEqual(const double lhs, const double rhs, const std::string& message) {
+    if (constexpr double epsilon = 1e-9; std::abs(lhs - rhs) > epsilon) {
         fail("assertEqual<double> Failed: " + message);
     } else {
         pass(message);

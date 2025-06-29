@@ -7,7 +7,7 @@
 
 /**
  * @name assertNotNull
- * @brief asserts that a should equal b
+ * @brief asserts that lhs should equal rhs
  * @param ptr std::weak_ptr<void>
  * @param message std::string
  */

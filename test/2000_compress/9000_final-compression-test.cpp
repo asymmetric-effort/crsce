@@ -22,7 +22,7 @@
 #endif
 
 // Write pattern into a temporary input file, then call CRSCE::compress()
-bool run_compression_pattern(const TestPattern& pattern) {
+bool run_compression_pattern(const utils::TestPattern& pattern) {
     std::cout << "[INFO] Running compression pattern: " << pattern.name << std::endl;
 
     std::string input_filename = utils::generate_temp_filename("tmp_input", "bin");
@@ -82,10 +82,10 @@ bool run_compression_pattern(const TestPattern& pattern) {
 }
 
 int main() {
-    std::vector<TestPattern> patterns = {
-        {"All Zeros", all_zeros},
-        {"All Ones", all_ones},
-        {"Checkerboard", checkerboard}
+    std::vector<utils::TestPattern> patterns = {
+        {"All Zeros", utils::all_zeros},
+        {"All Ones", utils::all_ones},
+        {"Checkerboard", utils::checkerboard}
     };
 
     for (const auto& pattern : patterns) {

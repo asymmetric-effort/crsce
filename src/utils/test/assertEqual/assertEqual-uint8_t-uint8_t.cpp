@@ -7,14 +7,14 @@
 
 /**
  * @name assertEqual
- * @brief asserts that a should equal b
- * @param a uint8_t
- * @param b uint8_t
+ * @brief asserts that lhs should equal rhs
+ * @param lhs uint8_t
+ * @param rhs uint8_t
  * @param message std::string&
  */
-void Tester::assertEqual(uint8_t a, uint8_t b, const std::string& message) {
-    if (a == b)
+void Tester::assertEqual(uint8_t lhs, uint8_t rhs, const std::string& message) {
+    if (lhs == rhs)
         pass(std::format("ok: {}", message));
     else
-        fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
+        fail(std::format("assertEqual failed({} != {}): {}", lhs, rhs, message));
 }

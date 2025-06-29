@@ -8,14 +8,14 @@
 
 /**
  * @name assertEqual
- * @brief asserts that a should equal b
- * @param a size_t
- * @param b size_t
+ * @brief asserts that lhs should equal rhs
+ * @param lhs size_t
+ * @param rhs size_t
  * @param message std::string&
  */
-void Tester::assertEqual(size_t a, size_t b, const std::string &message) {
-    if (a == b)
+void Tester::assertEqual(size_t lhs, size_t rhs, const std::string &message) {
+    if (lhs == rhs)
         pass(std::format("ok: {}", message));
     else
-        fail(std::format("assertEqual failed({} != {}): {}", a, b, message));
+        fail(std::format("assertEqual failed({} != {}): {}", lhs, rhs, message));
 }

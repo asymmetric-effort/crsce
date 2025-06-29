@@ -8,15 +8,15 @@
 
 /**
  * @name assertNotEqual
- * @brief asserts that a should equal b
- * @param a double
- * @param b double
+ * @brief asserts that lhs should not equal rhs
+ * @param lhs double
+ * @param rhs double
  * @param message std::string
  */
-void Tester::assertNotEqual(const double a, const double b, const std::string& message) {
-    if (constexpr double epsilon = 1e-9; std::abs(a - b) > epsilon) {
+void Tester::assertNotEqual(const double lhs, const double rhs, const std::string& message) {
+    if (constexpr double epsilon = 1e-9; std::abs(lhs - rhs) > epsilon) {
         pass(message);
     } else {
-        fail(std::format("assertNotEqual failed({} != {}): {}", a, b, message));
+        fail(std::format("assertNotEqual failed({} != {}): {}", lhs, rhs, message));
     }
 }

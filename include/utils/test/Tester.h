@@ -66,151 +66,160 @@ public:
 
     /**
      * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a Common::double
-     * @param b Common::double
+     * @brief asserts that lhs should equal rhs
+     * @param lhs Common::double
+     * @param rhs Common::double
      * @param message std::string
      */
-    void assertEqual(double a, double b, const std::string &message);
+    void assertEqual(double lhs, double rhs, const std::string &message);
 
     /**
      * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a float
-     * @param b float
+     * @brief asserts that lhs should equal rhs
+     * @param lhs float
+     * @param rhs float
      * @param message std::string
      */
-    void assertEqual(float a, float b, const std::string &message);
-
-    /**
-     * @name assertEqual
-     * @brief assert that a != b.
-     * @param a char
-     * @param b char
-     * @param message std::string
-     */
-    void assertEqual(int a, int b, const std::string &message);
-
-    /**
-     * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a size_t
-     * @param b size_t
-     * @param message std::string
-     */
-    void assertEqual(size_t a, size_t b, const std::string &message);
+    void assertEqual(float lhs, float rhs, const std::string &message);
 
     /**
      * @name assertEqual
      * @brief assert that a != b.
-     * @param a uint8_t
-     * @param b uint8_t
+     * @param lhs char
+     * @param rhs char
      * @param message std::string
      */
-    void assertEqual(uint8_t a, uint8_t b, const std::string &message);
+    void assertEqual(const int lhs, const int rhs, const std::string &message);
 
     /**
      * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a uint16_t
-     * @param b uint16_t
+     * @brief asserts that lhs should equal rhs
+     * @param lhs size_t
+     * @param rhs size_t
      * @param message std::string
      */
-    void assertEqual(uint16_t a, uint16_t b, const std::string &message);
+    void assertEqual(const size_t lhs, const size_t rhs, const std::string &message);
+
+    /**
+     * @name assertEqual
+     * @brief assert that a != b.
+     * @param lhs uint8_t
+     * @param rhs uint8_t
+     * @param message std::string
+     */
+    void assertEqual(const uint8_t lhs, const uint8_t rhs, const std::string &message);
+
+    /**
+     * @name assertEqual
+     * @brief asserts that lhs should equal rhs
+     * @param lhs uint16_t
+     * @param rhs uint16_t
+     * @param message std::string
+     */
+    void assertEqual(const uint16_t lhs, const uint16_t rhs, const std::string &message);
 
 #if SIZE_MAX != UINT64_MAX
     /**
      * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a uint64_t
-     * @param b uint64_t
+     * @brief asserts that lhs should equal rhs
+     * @param lhs uint64_t
+     * @param rhs uint64_t
      * @param message std::string
      */
-    void assertEqual(uint64_t a, uint64_t b, const std::string &message);
+    void assertEqual(uint64_t lhs, uint64_t rhs, const std::string &message);
 #endif
 
     /**
      * @name assertEqual
-     * @brief asserts that a should equal b
-     * @param a uint32_t
-     * @param b uint32_t
+     * @brief asserts that lhs should equal rhs
+     * @param lhs uint32_t
+     * @param rhs uint32_t
      * @param message std::string
      */
-    void assertEqual(const uint32_t a, const uint32_t b, const std::string &message);
+    void assertEqual(const uint32_t lhs, const uint32_t rhs, const std::string &message);
+
+    /**
+     * @name assertEqual
+     * @brief asserts that lhs should equal rhs
+     * @param lhs std::string
+     * @param rhs std::string
+     * @param message std::string
+     */
+    void assertEqual(const std::string& lhs, const std::string& rhs, const std::string &message);
 
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a double
-     * @param b double
+     * @brief asserts that lhs should equal rhs
+     * @param lhs double
+     * @param rhs double
      * @param message std::string
      */
-    void assertNotEqual(double a, const double b, const std::string &message);
+    void assertNotEqual(double lhs, const double rhs, const std::string &message);
 
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a float
-     * @param b float
+     * @brief asserts that lhs should equal rhs
+     * @param lhs float
+     * @param rhs float
      * @param message std::string
      */
-    void assertNotEqual(float a, const float b, const std::string &message);
+    void assertNotEqual(const float lhs, const float rhs, const std::string &message);
 
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a int
-     * @param b int
+     * @brief asserts that lhs should equal rhs
+     * @param lhs int
+     * @param rhs int
      * @param message std::string
      */
-    void assertNotEqual(const int a, const int b, const std::string &message);
+    void assertNotEqual(const int lhs, const int rhs, const std::string &message);
 
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a size_t
-     * @param b size_t
+     * @brief asserts that lhs should equal rhs
+     * @param lhs size_t
+     * @param rhs size_t
      * @param message std::string
      */
-    void assertNotEqual(size_t a, size_t b, const std::string &message);
+    void assertNotEqual(const size_t lhs, const size_t rhs, const std::string &message);
 
     /**
      * @name assertNotEqual
      * @brief assert that a != b.
-     * @param a uint8_t
-     * @param b uint8_t
+     * @param lhs uint8_t
+     * @param rhs uint8_t
      * @param message std::string
      */
-    void assertNotEqual(uint8_t a, uint8_t b, const std::string &message);
+    void assertNotEqual(const uint8_t lhs, const uint8_t rhs, const std::string &message);
 
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a uint16_t
-     * @param b uint16_t
+     * @brief asserts that lhs should equal rhs
+     * @param lhs uint16_t
+     * @param rhs uint16_t
      * @param message std::string
      */
-    void assertNotEqual(uint16_t a, uint16_t b, const std::string &message);
+    void assertNotEqual(const uint16_t lhs, const uint16_t rhs, const std::string &message);
 
 #if SIZE_MAX != UINT64_MAX
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a uint64_t
-     * @param b uint64_t
+     * @brief asserts that lhs should equal rhs
+     * @param lhs uint64_t
+     * @param rhs uint64_t
      * @param message std::string
      */
-    void assertNotEqual(uint64_t a, uint64_t b, const std::string &message);
+    void assertNotEqual(uint64_t lhs, uint64_t rhs, const std::string &message);
 #endif
 
     /**
      * @name assertNotEqual
-     * @brief asserts that a should equal b
-     * @param a unsigned int
-     * @param b unsigned int
+     * @brief asserts that lhs should equal rhs
+     * @param lhs unsigned int
+     * @param rhs unsigned int
      * @param message std::string
      */
-    void assertNotEqual(unsigned a, unsigned b, const std::string &message);
+    void assertNotEqual(const unsigned lhs, const unsigned rhs, const std::string &message);
 
     /**
      * @name assertNotNull
@@ -318,7 +327,7 @@ public:
 
     /**
      * @name assertNotNull
-     * @brief asserts that a should equal b
+     * @brief asserts that lhs should equal rhs
      * @param ptr std::weak_ptr<void>
      * @param message std::string
      */

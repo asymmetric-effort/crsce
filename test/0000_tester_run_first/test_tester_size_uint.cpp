@@ -1,5 +1,5 @@
 /**
- * @file 0001_tester_size_uint.cpp
+ * @file test_tester_size_uint.cpp
  * @brief Verifies size_t and uint8_t/uint16_t/uint64_t overloads in Tester::assertEqual/assertNotEqual.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */

@@ -7,13 +7,13 @@
 
 /**
  * @name assertEqual
- * @brief asserts that a should equal b
- * @param a float
- * @param b float
+ * @brief asserts that lhs should equal rhs
+ * @param lhs float
+ * @param rhs float
  * @param message std::string
  */
-void Tester::assertEqual(const float a, const float b, const std::string& message) {
-    if (constexpr float epsilon = 1e-1f; std::abs(a - b) > epsilon) {
+void Tester::assertEqual(const float lhs, const float rhs, const std::string& message) {
+    if (constexpr float epsilon = 1e-1f; std::abs(lhs - rhs) > epsilon) {
         fail("assertEqual<float> Failed: " + message);
     } else {
         pass(message);

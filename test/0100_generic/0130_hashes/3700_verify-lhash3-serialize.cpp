@@ -27,7 +27,7 @@ public:
     }
 };
 
-bool run_lateral_hash_serialization_test(const std::string& name, PatternFn pattern) {
+bool run_lateral_hash_serialization_test(const std::string& name, const utils::PatternFn pattern) {
     std::cout << "[INFO] Running " << name << " test..." << std::endl;
 
     TestLHashMatrix matrix;
@@ -52,10 +52,10 @@ bool run_lateral_hash_serialization_test(const std::string& name, PatternFn patt
 }
 
 int main() {
-    std::vector<TestPattern> patterns = {
-        {"All Zeros", all_zeros},
-        {"All Ones", all_ones},
-        {"Checkerboard", checkerboard}
+    std::vector<utils::TestPattern> patterns = {
+        {"All Zeros", utils::all_zeros},
+        {"All Ones", utils::all_ones},
+        {"Checkerboard", utils::checkerboard}
     };
 
     bool all_passed = true;

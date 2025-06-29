@@ -10,7 +10,6 @@
 #include <fstream>
 #include <vector>
 #include <cstdlib>
-#include <cmath>
 
 // Create an input file with `blocks` worth of data (bytes padded)
 bool create_multi_block_file(const std::string& path, const size_t blocks) {

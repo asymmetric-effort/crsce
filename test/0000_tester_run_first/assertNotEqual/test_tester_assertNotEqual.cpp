@@ -1,5 +1,5 @@
 /**
- * @file tester_assertNotEqual.cpp
+ * @file test_tester_assertNotEqual.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  * @brief Unit test for Tester::assertNotEqual
  */
