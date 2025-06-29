@@ -18,7 +18,7 @@ import yaml
 import subprocess
 from pathlib import Path
 
-GITHUB="/usr/bin/gh"
+GITHUB = "/usr/bin/gh"
 
 
 def run(cmd: list[str]) -> str:
@@ -69,9 +69,10 @@ def find_or_create_project(meta: dict) -> str:
 
     print(f"filter projects: {projects}")
     for obj in projects:
-        print(f"  title={title} of '{obj}'")
         if type(obj) in [dict] and obj.get("title") == title:
+            print(f"title ({title}) found")
             return obj["id"]
+    print(f"filtering done")
 
     # create new
     out = run([
@@ -82,6 +83,7 @@ def find_or_create_project(meta: dict) -> str:
         "--public" if meta.get("public", False)
         else "--format", "json"
     ])
+    print(f"project create...done")
     result = yaml.safe_load(out)["id"]
     print(f"find_or_create_project() done. result:{result}")
     return result
