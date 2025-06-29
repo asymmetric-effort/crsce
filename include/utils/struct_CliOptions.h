@@ -42,6 +42,6 @@ namespace utils {
      * @name CliOptions
      * @brief a collection of command-line option (Utils::Option) descriptors
      */
-    using cliOptions = std::vector<Option>;
+    using CliOptions = std::vector<Option>;
 
 }

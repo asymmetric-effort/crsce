@@ -1,6 +1,6 @@
 /**
- * @file test/0100_generic/0110_utils/test_cliOptions.cpp
- * @brief Unit tests for utils::Option struct and cliOptions alias
+ * @file test/0100_generic/0110_utils/test_CliOptions.cpp
+ * @brief Unit tests for utils::Option struct and CliOptions alias
  * @copyright (c) 2025 Asymmetric Effort, LLC.
  */
 
@@ -12,14 +12,14 @@
 #include <string>
 
 int main() {
-    Tester tester("utils::Option and cliOptions");
+    Tester tester("utils::Option and CliOptions");
 
     using namespace utils;
 
-    // Verify cliOptions is alias for std::vector<Option>
+    // Verify CliOptions is alias for std::vector<Option>
     tester.assertTrue(
-        std::is_same_v<cliOptions, std::vector<Option>>,
-        "cliOptions is std::vector<Option>"
+        std::is_same_v<CliOptions, std::vector<Option>>,
+        "CliOptions is std::vector<Option>"
     );
 
     // Construct an Option instance and verify its fields
@@ -52,11 +52,11 @@ int main() {
     tester.assertTrue(handler_called && !result_nonempty,
                        "Option.handler returns false and called for non-empty val");
 
-    // Test cliOptions container usage
-    cliOptions opts;
+    // Test CliOptions container usage
+    CliOptions opts;
     opts.push_back(opt);
-    tester.assertTrue(opts.size() == 1, "cliOptions can contain Option instances");
-    tester.assertTrue(opts[0].long_name == "--test", "cliOptions stores Option correctly");
+    tester.assertTrue(opts.size() == 1, "CliOptions can contain Option instances");
+    tester.assertTrue(opts[0].long_name == "--test", "CliOptions stores Option correctly");
 
     tester.pass();
     return EXIT_SUCCESS;

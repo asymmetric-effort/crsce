@@ -12,6 +12,7 @@
 #include "utils/print_usage.h"
 #include "utils/print_version.h"
 #include "utils/is_valid_block_size.h"
+#include "utils/struct_CliOptions.h"
 #include "CRSCE/CRSCE.h"
 #include <filesystem>
 #include <iostream>

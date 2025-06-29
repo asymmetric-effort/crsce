@@ -6,6 +6,7 @@
 
 #include "utils/parse_args.h"
 #include "utils/print_usage.h"
+#include "utils/struct_CliOptions.h"
 #include <iostream>
 #include <filesystem>
 #include <string>
@@ -14,7 +15,7 @@
 
 int utils::parse_args(const int argc,
                       const char* argv[],
-                      const CliOption& opts) {
+                      const utils::CliOptions& opts) {
     const std::string program_name = get_program_name(argv);
 
     for (int i = 1; i < argc; ++i) {
