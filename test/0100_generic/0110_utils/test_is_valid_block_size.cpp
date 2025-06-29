@@ -4,7 +4,7 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC.
  */
 
-#include "utils/test_is_valid_block_size.h"
+#include "utils/is_valid_block_size.h"
 #include "utils/test/Tester.h"
 
 int main() {
