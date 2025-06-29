@@ -36,58 +36,6 @@ def run(cmd: list[str]) -> str:
     return result
 
 
-def find_or_create_project(meta: dict) -> str:
-    """
-        Find an existing project by title, or create it.
-        Returns the GraphQL project ID.
-
-        :param meta: dict
-        :return str
-    """
-    print(f"find_or_create_project(): {meta}")
-    owner = meta["owner"]
-    title = meta["title"]
-    raw = run([
-        GITHUB, "project", "list", "--owner", owner, "--format", "json"
-    ])
-    try:
-        projects = json.loads(raw)
-        print("find_or_create_project(): json.loads() returned")
-    except json.JSONDecodeError as e:
-        projects = [json.loads(line) for line in raw.splitlines() if line.strip()]
-        print("find_or_create_project(): json.loads() exception: {e}")
-
-    print(f"filter projects: {projects}")
-    for obj in projects:
-        if type(obj) in [dict] and obj.get("title") == title:
-            print(f"title ({title}) found")
-            return obj["id"]
-    print(f"find_or_create_project() done.")
-    raise Exception("no project found")
-
-
-def ensure_fields(proj_id: str, fields: list[dict]) -> None:
-    """
-        Create any missing custom fields on the project.
-
-        :param proj_id: str
-        :param fields: list[dict]
-        :return None
-    """
-    print(f"ensure_results() proj_id:{proj_id}, fields:{fields}")
-    for fld in fields:
-        name, typ = fld["name"], fld["type"]
-        # ignore errors if already exists
-        subprocess.run(
-            [
-                GITHUB, "project", "field-create", proj_id,
-                "--name", name, "--type", typ
-            ],
-            check=False
-        )
-    print("ensure_fields() done")
-
-
 def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
     """
         For each issue spec:
@@ -171,12 +119,25 @@ def main() -> int:
         owner = extract_value(project, "owner", "", True)
         title = extract_value(project, "title", "", True)
 
-        fields = extract_value(manifest,"fields", default_manifest["fields"], False)
-        issues = extract_value(manifest,"issues", default_manifest["issues"], False)
+        fields = extract_value(manifest, "fields", default_manifest["fields"], False)
+        issues = extract_value(manifest, "issues", default_manifest["issues"], False)
 
-        print(f"Sync project {title} (ID={proj_id})")
-        sync_issues(proj_id, project, issues)
-        print(f"Synced project {title} (ID={proj_id})")
+        for field in fields:
+            field_name=field.get("name","")
+            field_type=field.get("type","")
+            if field_name=="" or field_type=="":
+                raise ValueError("field name or type is empty")
+            result = subprocess.run(
+                [GITHUB, "project", "field-create", proj_id, "--name", field_name, "--type", field_type],
+                check=True,
+                stdout=subprocess.PIPE, text=True
+            ).stdout.strip()
+            print(f"result:{result}")
+
+
+            print(f"Sync project {title} (ID={proj_id})")
+            sync_issues(proj_id, project, issues)
+            print(f"Synced project {title} (ID={proj_id})")
 
         return 0
     except Exception as e:
