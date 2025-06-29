@@ -40,9 +40,9 @@ int main() {
 
     // Cleanup
     std::error_code ec;
-    remove(tmp1, ec);
-    if (exists(tmp3)) remove(tmp3, ec);
-    if (exists(tmp2)) remove(tmp2, ec);
+    std::filesystem::remove(tmp1, ec);
+    if (exists(tmp3)) std::filesystem::remove(tmp3, ec);
+    if (exists(tmp2)) std::filesystem::remove(tmp2, ec);
 
     tester.pass();
     return EXIT_SUCCESS;
