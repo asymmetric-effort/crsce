@@ -25,8 +25,8 @@
 bool run_compression_pattern(const TestPattern& pattern) {
     std::cout << "[INFO] Running compression pattern: " << pattern.name << std::endl;
 
-    std::string input_filename = generate_temp_filename("tmp_input", "bin");
-    std::string output_filename = generate_temp_filename("tmp_output", "crsce");
+    std::string input_filename = utils::generate_temp_filename("tmp_input", "bin");
+    std::string output_filename = utils::generate_temp_filename("tmp_output", "crsce");
     std::ofstream input(input_filename, std::ios::binary);
 
     if (!input.is_open()) {

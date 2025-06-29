@@ -14,7 +14,7 @@
 
 // Create an input file with `blocks` worth of data (bytes padded)
 bool create_multi_block_file(const std::string& path, size_t blocks) {
-    std::string input_path = generate_temp_filename("z3_input", "bin");
+    std::string input_path = utils::generate_temp_filename("z3_input", "bin");
     std::ofstream input(input_path, std::ios::binary);
     if (!input.is_open()) {
         std::cerr << "[FAIL] Could not open temp input file." << std::endl;
@@ -72,7 +72,7 @@ int main() {
         const size_t total_bits = bytes * 8;
         const size_t expected = (total_bits + (s*s) - 1) / (s*s);
 
-        std::string output_path = generate_temp_filename("z3_output", "crsce");
+        std::string output_path = utils::generate_temp_filename("z3_output", "crsce");
         std::cout << "[INFO] Testing " << blocks << " block(s)... (expecting " << expected << ")" << std::endl;
         if (!create_multi_block_file(output_path, blocks)) {
             std::cerr << "[FAIL] Compression failed for " << blocks << " block(s)." << std::endl;

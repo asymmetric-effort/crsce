@@ -17,7 +17,7 @@
 
 
 bool generate_test_compression(const std::string &output_path) {
-    std::string input_path = generate_temp_filename("z2_input", "bin");
+    std::string input_path = utils::generate_temp_filename("z2_input", "bin");
 
     // Create all-zero test input block (s x s bits = 32640+1 bits → 4080 bytes)
     std::ofstream input(input_path, std::ios::binary);
@@ -109,7 +109,7 @@ int main(const int argc, const char *argv[]) {
     if (argc == 2) {
         filepath = argv[1];
     } else {
-        filepath = generate_temp_filename("z2_output", "crsce");
+        filepath = utils::generate_temp_filename("z2_output", "crsce");
         std::cerr << "[INFO] No file specified. Generating test file at: " << filepath << std::endl;
         if (!generate_test_compression(filepath)) return EXIT_FAILURE;
     }
