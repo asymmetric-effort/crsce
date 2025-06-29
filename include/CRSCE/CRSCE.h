@@ -22,7 +22,8 @@
 
 class CRSCE {
 public:
-    explicit CRSCE(const std::string &inputFile, const std::string &outputFile);
+    explicit CRSCE(const std::string& inputFile, const std::string& outputFile, const size_t block_size,
+                   const size_t concurrency);
 
     ~CRSCE();
 
@@ -34,18 +35,20 @@ public:
     static constexpr size_t INPUT_BUFFER_SIZE = 1048576; // 1 MiB = 1024^2
 
 protected:
-    bool readInputBuffer(FileBuffer &buffer);
+    bool readInputBuffer(FileBuffer& buffer);
 
 private:
     std::ifstream inputStream;
     std::ofstream outputStream;
+    size_t block_size;
+    size_t concurrency;
 
     static void increment_sums(bool bit_value, CrossSumIndex r, CrossSumIndex c,
-                               LateralSumMatrix &LSM, VerticalSumMatrix &VSM, DiagonalSumMatrix &XSM,
-                               AntidiagonalSumMatrix &DSM, LHashMatrix &LHASH);
+                               LateralSumMatrix& LSM, VerticalSumMatrix& VSM, DiagonalSumMatrix& XSM,
+                               AntidiagonalSumMatrix& DSM, LHashMatrix& LHASH);
 
-    void serialize_output(const LateralSumMatrix &LSM, const VerticalSumMatrix &VSM, const DiagonalSumMatrix &XSM,
-                          const AntidiagonalSumMatrix &DSM, const LHashMatrix &LHASH);
+    void serialize_output(const LateralSumMatrix& LSM, const VerticalSumMatrix& VSM, const DiagonalSumMatrix& XSM,
+                          const AntidiagonalSumMatrix& DSM, const LHashMatrix& LHASH);
 };
 
 #endif // CRSCE_H
