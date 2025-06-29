@@ -9,6 +9,8 @@ on:
     paths:
       - 'PROJECT.yaml'
       - '.github/workflows/project-automation.yml'
+      - 'tools/project-automation/project-automation.py'
+
 permissions:
   checks: read
   contents: read
