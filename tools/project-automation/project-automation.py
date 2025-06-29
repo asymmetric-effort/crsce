@@ -62,10 +62,12 @@ def find_or_create_project(meta: dict) -> str:
     ])
     try:
         projects = json.loads(raw)
-    except json.JSONDecodeError:
+        print("find_or_create_project(): json.loads() returned")
+    except json.JSONDecodeError as e:
         projects = [json.loads(line) for line in raw.splitlines() if line.strip()]
+        print("find_or_create_project(): json.loads() exception: {e}")
 
-    print(f"projects: {projects}")
+    print(f"filter projects: {projects}")
     for obj in projects:
         print(f"  title={title} of {obj}")
         if obj.get("title") == title:
