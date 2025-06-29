@@ -15,8 +15,8 @@ int main() {
 
     using namespace std::filesystem;
 
-    constexpr std::string prefix("generate_temp_filename_test");
-    constexpr std::string extension(".txt");
+    const std::string prefix = "generate_temp_filename_test";
+    const std::string extension = ".txt";
     // Generate two filenames and ensure they are distinct and non-existing
     std::string tmp1 = utils::generate_temp_filename(prefix, extension);
     std::string tmp2 = utils::generate_temp_filename(prefix, extension);
