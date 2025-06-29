@@ -40,8 +40,7 @@ jobs:
         run: |
           pip3 install -r tools/project-automation/requirements.txt
           pip3 freeze
-      - name: Sync Project
-        run: |
           echo "gh cli: $(which gh)"
-          source venv/bin/activate && \
+          source venv/bin/activate
+          pip freeze
           python3 tools/project-automation/project-automation.py
