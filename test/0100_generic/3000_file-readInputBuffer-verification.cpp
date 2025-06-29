@@ -5,7 +5,7 @@
 
 #include <string>
 #include "CRSCE/Reader.h"
-#include "utils/compareFiles.h"
+#include "utils/compare_files.h"
 #include "utils/generateRandomFile.h"
 
 namespace fs = std::filesystem;
@@ -31,7 +31,7 @@ int main() {
             }
         }
 
-        if (compareFiles(input_test_file, output_test_file)) {
+        if (compare_files(input_test_file, output_test_file)) {
             std::cout << "[PASS] Files are identical." << std::endl;
             return EXIT_SUCCESS;
         } else {

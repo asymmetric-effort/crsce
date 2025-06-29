@@ -1,10 +1,10 @@
 /**
- * @file test/0100_generic/0110_utils/test_compareFiles.cpp
- * @brief Unit tests for utils::compareFiles()
+ * @file test/0100_generic/0110_utils/test_compare_files.cpp
+ * @brief Unit tests for utils::compare_files()
  * @copyright (c) 2025 Asymmetric Effort, LLC.
  */
 
-#include "utils/compareFiles.h"
+#include "utils/compare_files.h"
 #include "utils/test/Tester.h"
 #include <fstream>
 #include <random>
@@ -13,7 +13,7 @@
 #include <cstdlib>
 
 int main() {
-    Tester tester("utils::compareFiles");
+    Tester tester("utils::compare_files");
 
     const std::string fileA = "fileA.bin";
     const std::string fileB = "fileB.bin";
@@ -51,11 +51,11 @@ int main() {
     }
 
     // Happy path: A vs B
-    tester.assertTrue(compareFiles(fileA, fileB), "fileA and fileB match");
+    tester.assertTrue(compare_files(fileA, fileB), "fileA and fileB match");
     // Different size: A vs C
-    tester.assertFalse(compareFiles(fileA, fileC), "fileA and fileC differ in size");
+    tester.assertFalse(compare_files(fileA, fileC), "fileA and fileC differ in size");
     // Same size different content: A vs D
-    tester.assertFalse(compareFiles(fileA, fileD), "fileA and fileD differ in content");
+    tester.assertFalse(compare_files(fileA, fileD), "fileA and fileD differ in content");
 
     // Cleanup
     std::filesystem::remove(fileA);

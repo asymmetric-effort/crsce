@@ -1,21 +1,21 @@
 /**
- * @file utils/compareFiles.cpp
+ * @file utils/compare_files.cpp
  * @brief compare two files.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#include "utils/compareFiles.h"
+#include "utils/compare_files.h"
 #include <fstream>  // for std::ifstream
 #include <cstring>  // for std::memcmp
 
 /**
- * @name compareFiles
+ * @name compare_files
  * @brief Byte‐level comparison of two files.
  * @param lhs_file Path to the first file.
  * @param rhs_file Path to the second file.
  * @return true if files exist and have identical contents; false otherwise.
  */
-bool compareFiles(const std::string& lhs_file, const std::string& rhs_file) {
+bool compare_files(const std::string& lhs_file, const std::string& rhs_file) {
     std::ifstream lhs_stream(lhs_file, std::ios::binary);
     std::ifstream rhs_stream(rhs_file, std::ios::binary);
 
