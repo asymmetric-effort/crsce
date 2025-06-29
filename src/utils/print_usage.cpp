@@ -8,10 +8,10 @@
 #ifndef COPYRIGHT
 #define COPYRIGHT "not_defined"
 #endif
-
-int print_usage(const std::string &programName, const int exit_code) {
-    const std::string copyright_string(COPYRIGHT);
-    std::cout << "\n" << copyright_string << "\n"
+namespace utils {
+    int print_usage(const std::string& programName, const int exit_code) {
+        const std::string copyright_string(COPYRIGHT);
+        std::cout << "\n" << copyright_string << "\n"
             << "Usage: " << programName << " --in <inputfile> --out <outputfile>\n"
             << "Options:\n"
             << "  --in <inputfile>     specify input file (required)\n"
@@ -19,5 +19,6 @@ int print_usage(const std::string &programName, const int exit_code) {
             << "  --help        Show this help message\n"
             << "  --version     Show program version\n"
             << std::endl;
-    return exit_code;
+        return exit_code;
+    }
 }
