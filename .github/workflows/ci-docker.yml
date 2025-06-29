@@ -10,7 +10,6 @@ on:
     paths:
       - 'Dockerfile'
       - '.github/workflows/ci-docker.yml'
-      - '!tools/project-automation/project-automation.py'
 jobs:
   ci-docker:
     permissions:
