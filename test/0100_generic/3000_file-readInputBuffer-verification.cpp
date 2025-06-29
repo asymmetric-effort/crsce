@@ -6,7 +6,7 @@
 #include <string>
 #include "CRSCE/Reader.h"
 #include "utils/compare_files.h"
-#include "utils/generateRandomFile.h"
+#include "utils/generate_random_file.h"
 
 namespace fs = std::filesystem;
 
@@ -21,7 +21,7 @@ int main() {
                   << "Generating random file."
                   << std::endl;
 
-        generateRandomFile(input_test_file,test_file_size);
+        generate_random_file(input_test_file,test_file_size);
 
         {
             Reader testCompressor(input_test_file, output_test_file);
