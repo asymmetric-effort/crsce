@@ -128,7 +128,7 @@ def main() -> int:
             if field_name=="" or field_type=="":
                 raise ValueError("field name or type is empty")
             result = subprocess.run(
-                [GITHUB, "project", "field-create", proj_id, "--name", field_name, "--type", field_type],
+                [GITHUB, "project", "field-create", proj_id, "--name", field_name, "--data-type", field_type],
                 check=True,
                 stdout=subprocess.PIPE, text=True
             ).stdout.strip()
