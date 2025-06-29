@@ -18,7 +18,7 @@ import yaml
 import subprocess
 from pathlib import Path
 
-GITHUB_CLI = "/usr/local/bin/gh"
+GITHUB_CLI = "gh"
 
 
 def run(cmd: list[str]) -> str:
