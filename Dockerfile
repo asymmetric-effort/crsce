@@ -39,6 +39,7 @@ COPY tools/project-automation/project-automation.py /opt/project-automation.py
 RUN apt-get update -y && \
     apt-get install gh -y && \
     pip install --break-system-packages -r /opt/requirements.txt && \
+    which gh && \
     gh --version
 
 ENTRYPOINT [ "python3","/opt/project-automation.py" ]
