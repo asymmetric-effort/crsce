@@ -13,7 +13,7 @@ namespace utils {
      * @name get_program_name
      * @brief Returns the program's basename from argv[0].
      * @param argv Array of C-style argument strings from main().
-     * @return The program name (basename of argv[0]) or "program" if unavailable.
+     * @return The program name (basename of argv[0]) or "undefined" if unavailable.
      */
     inline std::string get_program_name(const char* argv[]) {
         if (argv && argv[0]) {
