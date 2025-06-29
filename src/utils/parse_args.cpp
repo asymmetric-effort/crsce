@@ -13,9 +13,7 @@
 
 #include "utils/get_program_name.h"
 
-int utils::parse_args(const int argc,
-                      const char* argv[],
-                      const utils::CliOptions& opts) {
+int utils::parse_args(const int argc, const char* argv[], const utils::CliOptions& opts) {
     const std::string program_name = get_program_name(argv);
 
     for (int i = 1; i < argc; ++i) {

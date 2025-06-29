@@ -29,22 +29,22 @@ int main(const int argc, const char* argv[]) {
     const utils::CliOptions options = {
         {
             "--help", 'h', utils::ArgType::NoValue,
-            [&](auto) {
+            [&argv](auto) {
                 utils::print_usage(utils::get_program_name(argv));
                 return false;
             }
         },
         {
             "--version", 'v', utils::ArgType::NoValue,
-            [&](auto) {
+            [](auto) {
                 utils::print_version();
                 return false;
             }
         },
         {
             "--in", 'i', utils::ArgType::RequiredValue,
-            [&](auto v) {
-                inFile = v;
+            [&inFile](auto argument_value) {
+                inFile = argument_value;
                 if (inFile.empty()) {
                     std::cerr << "Error: --in is required.\n";
                     return false;
@@ -58,8 +58,8 @@ int main(const int argc, const char* argv[]) {
         },
         {
             "--out", 'o', utils::ArgType::RequiredValue,
-            [&](auto v) {
-                outFile = v;
+            [&outFile](auto argument_value) {
+                outFile = argument_value;
                 if (outFile.empty()) {
                     std::cerr << "Error: --out is required.\n";
                     return false;
@@ -73,8 +73,8 @@ int main(const int argc, const char* argv[]) {
         },
         {
             "--block-size", 's', utils::ArgType::RequiredValue,
-            [&](auto v) {
-                block_size = std::stoul(v);
+            [&block_size](auto argument_value) {
+                block_size = std::stoul(argument_value);
                 if (utils::is_valid_block_size(block_size))
                     return true;
                 std::cerr << "Error: --block-size is invalid.\n"
@@ -84,8 +84,8 @@ int main(const int argc, const char* argv[]) {
         },
         {
             "--concurrency", 'c', utils::ArgType::RequiredValue,
-            [&](auto v) {
-                concurrency = std::stoul(v);
+            [&concurrency](auto argument_value) {
+                concurrency = std::stoul(argument_value);
                 if (concurrency < min_concurrency || concurrency > max_concurrency) {
                     std::cerr << "Error: --concurrency is invalid. "
                         << "It must be between "
