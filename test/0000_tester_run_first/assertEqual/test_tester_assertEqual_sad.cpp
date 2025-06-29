@@ -81,5 +81,7 @@ int main() {
             "string lhs should equal rhs (expect failure)");
     });
 
+    tester.pass();
+
     return tester.getFailCount() > 0 ? EXIT_FAILURE : EXIT_SUCCESS;
 }
