@@ -5,36 +5,46 @@
  */
 
 #include "utils/compareFiles.h"
+#include <fstream>  // for std::ifstream
+#include <cstring>  // for std::memcmp
 
 /**
  * @name compareFiles
- * @brief byte-level comparison of two files
- * @param file1
- * @param file2
- * @return bool
+ * @brief Byte‐level comparison of two files.
+ * @param lhs_file Path to the first file.
+ * @param rhs_file Path to the second file.
+ * @return true if files exist and have identical contents; false otherwise.
  */
-bool compareFiles(const std::string& file1, const std::string& file2) {
-    std::ifstream ifs1(file1, std::ios::binary);
-    std::ifstream ifs2(file2, std::ios::binary);
+bool compareFiles(const std::string& lhs_file, const std::string& rhs_file) {
+    std::ifstream lhs_stream(lhs_file, std::ios::binary);
+    std::ifstream rhs_stream(rhs_file, std::ios::binary);
 
-    if (!ifs1.is_open() || !ifs2.is_open()) {
+    if (!lhs_stream.is_open() || !rhs_stream.is_open()) {
         return false;
     }
 
-    char buf1[4096];
-    char buf2[4096];
+    constexpr std::size_t BufferSize = 4096;
+    char lhs_buffer[BufferSize];
+    char rhs_buffer[BufferSize];
 
-    while (!ifs1.eof() && !ifs2.eof()) {
-        ifs1.read(buf1, sizeof(buf1));
-        ifs2.read(buf2, sizeof(buf2));
+    while (true) {
+        lhs_stream.read(lhs_buffer, BufferSize);
+        rhs_stream.read(rhs_buffer, BufferSize);
 
-        std::streamsize bytesRead1 = ifs1.gcount();
-        std::streamsize bytesRead2 = ifs2.gcount();
+        std::streamsize lhs_read = lhs_stream.gcount();
+        std::streamsize rhs_read = rhs_stream.gcount();
 
-        if (bytesRead1 != bytesRead2 || std::memcmp(buf1, buf2, bytesRead1) != 0) {
+        if (lhs_read != rhs_read) {
+            return false;
+        }
+        if (lhs_read == 0) {
+            // both streams reached EOF simultaneously
+            break;
+        }
+        if (std::memcmp(lhs_buffer, rhs_buffer, static_cast<std::size_t>(lhs_read)) != 0) {
             return false;
         }
     }
 
-    return ifs1.eof() && ifs2.eof();
+    return true;
 }
