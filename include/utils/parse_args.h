@@ -12,19 +12,46 @@
 #include <string>
 
 namespace utils {
-
-    enum class ArgType { NoValue, RequiredValue };
-
-    struct Option {
-        std::string long_name;          // e.g. "--in"
-        char        short_name;         // e.g. 'i', or 0 if none
-        ArgType     arg_type;           // NoValue vs. RequiredValue
-        std::function<bool(const std::string&)> handler;
-        // returns true on success; false => print usage & early-exit
+    /**
+     * @enum ArgType
+     * @brief Enumerated type used to indicate whether an argument should be followed by a value or not.
+     */
+    enum class ArgType {
+        NoValue,
+        RequiredValue
     };
 
     /**
-     * @name parse_args
+     * @struct Option
+     * @brief Create reusable structure used to define cli arguments for parse_args.
+     */
+    struct Option {
+        /**
+         * @name long_name
+         * @brief cli argument using --long pattern
+         */
+        std::string long_name;
+        /**
+         * @name short_name
+         * @brief cli argument using -a short pattern.  It is null (0x00) if no short argument is specified.
+         */
+        char short_name;
+        /**
+         * @name arg_type
+         * @brief enumerated type representing whether or not the argument has a value
+         */
+        ArgType arg_type; // NoValue vs. RequiredValue
+        /**
+         * @name handler
+         * @brief A function used to process an argument when discovered. See parse_args().
+         * @param std::string represents the evaluated value
+         * @returns bool returns true on success; false => print usage & early-exit
+         */
+        std::function<bool(const std::string&)> handler;
+    };
+
+    /**
+     * @function parse_args
      * @brief Generic argument parser over a user-supplied Option list.
      *
      * @param argc   From main().
@@ -38,6 +65,4 @@ namespace utils {
                    const char* argv[],
                    const char* prog,
                    const std::vector<Option>& opts);
-    }  // namespace utils
-
-}  // namespace utils
+} // namespace utils
