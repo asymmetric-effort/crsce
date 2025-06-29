@@ -122,6 +122,7 @@ def main() -> int:
         fields = extract_value(manifest, "fields", default_manifest["fields"], False)
         issues = extract_value(manifest, "issues", default_manifest["issues"], False)
 
+        print(f"adding field to project {proj_id}")
         for field in fields:
             field_name = field.get("name", "")
             field_type = field.get("type", "")
@@ -130,6 +131,7 @@ def main() -> int:
             print(f"field {field_name} of type {field_type}")
             cmd = [
                 GITHUB, "project", "field-create",
+                proj_id,
                 "--owner", owner,
                 "--name", field_name,
                 "--data-type", field_type
