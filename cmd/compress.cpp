@@ -25,7 +25,7 @@ int main(const int argc, const char* argv[]) {
     size_t concurrency = 1; // the number of concurrent blocks to be processed at one time.
     constexpr uint32_t min_concurrency{1}; //The minimum number of blocks to process at a given time.
     constexpr uint32_t max_concurrency{1024}; //The maximum number of blocks ot process at a given time.
-    const std::vector<utils::Option> options = {
+    const utils::CliOptions options = {
         {
             "--help", 'h', utils::ArgType::NoValue,
             [&](auto) {

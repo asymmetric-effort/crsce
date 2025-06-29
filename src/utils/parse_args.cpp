@@ -14,16 +14,16 @@
 
 int utils::parse_args(const int argc,
                       const char* argv[],
-                      const std::vector<Option>& opts) {
+                      const CliOption& opts) {
     const std::string program_name = get_program_name(argv);
 
     for (int i = 1; i < argc; ++i) {
-        const std::string arg = argv[i];
+        const std::string this_argument = argv[i];
         bool matched = false;
 
         for (const auto& [long_name, short_name, arg_type, handler] : opts) {
-            if (arg == long_name ||
-                (short_name && arg == std::string{"-"} + short_name)) {
+            if (this_argument == long_name ||
+                (short_name && this_argument == std::string{"-"} + short_name)) {
                 matched = true;
 
                 if (arg_type == ArgType::NoValue) {
@@ -35,12 +35,11 @@ int utils::parse_args(const int argc,
                 else {
                     // consume next token as the value
                     if (i + 1 >= argc) {
-                        std::cerr << "Missing value for " << arg << "\n";
+                        std::cerr << "Missing value for " << this_argument << "\n";
                         print_usage(program_name);
                         return EXIT_FAILURE;
                     }
-                    const std::string val = argv[++i];
-                    if (!handler(val)) {
+                    if (const std::string val = argv[++i]; !handler(val)) {
                         print_usage(program_name);
                         return EXIT_FAILURE;
                     }
@@ -50,7 +49,7 @@ int utils::parse_args(const int argc,
         }
 
         if (!matched) {
-            std::cerr << "Unknown option: " << arg << "\n";
+            std::cerr << "Unknown option: " << this_argument << "\n";
             print_usage(program_name);
             return EXIT_FAILURE;
         }
