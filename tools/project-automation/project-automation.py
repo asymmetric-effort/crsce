@@ -127,6 +127,7 @@ def main() -> int:
             field_type=field.get("type","")
             if field_name=="" or field_type=="":
                 raise ValueError("field name or type is empty")
+            print(f"field {field_name} of type {field_type}")
             result = subprocess.run(
                 [GITHUB, "project", "field-create", 0, "--name", field_name, "--data-type", field_type],
                 check=True,
