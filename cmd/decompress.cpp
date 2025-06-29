@@ -5,37 +5,35 @@
 #include "CRSCE/CRSCE.h"
 #include "utils/print_usage.h"
 #include "utils/print_version.h"
-#include "utils/parseArgs.h"
+#include "utils/parse_args.h"
 #include <filesystem>
 #include <cstdlib>
 #include <iostream>
 #include <string>
 #include <exception>
 
-namespace fs = std::filesystem;
-
 int main(const int argc, const char **argv) {
-    try {
-        std::string inputFile;
-        std::string outputFile;
+    // try {
+        // std::string inputFile;
+        // std::string outputFile;
 
-        if (const int exit_code=parse_args(argc, argv, inputFile, outputFile); exit_code!=EXIT_SUCCESS)
-          return exit_code;
+        // if (const int exit_code=parse_args(argc, argv, inputFile, outputFile); exit_code!=EXIT_SUCCESS)
+          // return exit_code;
 
-        CRSCE decompressor(inputFile, outputFile);
+        // CRSCE decompressor(inputFile, outputFile);
 
-        if (const int result = decompressor.decompress();result == 0) {
-            std::cout << "Decompression completed successfully." << std::endl;
+        // if (const int result = decompressor.decompress();result == 0) {
+            // std::cout << "Decompression completed successfully." << std::endl;
             return EXIT_SUCCESS;
-        } else {
-            std::cerr << "Decompression failed with error code " << result << "." << std::endl;
-            return EXIT_FAILURE;
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Unhandled exception: " << e.what() << std::endl;
-        return EXIT_FAILURE;
-    } catch (...) {
-        std::cerr << "Unhandled unknown exception occurred." << std::endl;
-        return EXIT_FAILURE;
-    }
+        // } else {
+            // std::cerr << "Decompression failed with error code " << result << "." << std::endl;
+            // return EXIT_FAILURE;
+        // }
+    // } catch (const std::exception& e) {
+        // std::cerr << "Unhandled exception: " << e.what() << std::endl;
+        // return EXIT_FAILURE;
+    // } catch (...) {
+        // std::cerr << "Unhandled unknown exception occurred." << std::endl;
+        // return EXIT_FAILURE;
+    // }
 }
