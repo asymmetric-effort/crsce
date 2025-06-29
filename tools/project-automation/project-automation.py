@@ -81,6 +81,31 @@ def sync_issues(proj_id: str, meta: dict, issues: list[dict]) -> None:
             ])
 
 
+def extract_value(source: dict, name: str, default_value: any = None, raise_on_default: bool = False) -> any:
+    value = source.get(name, default_value)
+    if raise_on_default and value == default_value:
+        raise ValueError(f"{name} is missing value")
+    return value
+
+
+def get_project_id(project_name: str, owner: str) -> str:
+    cmd = ["gh", "project", "list", "--owner", owner, "--format", "json"]
+    raw = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+    if raw.strip() == "":
+        raise ValueError("empty result")
+    project_list = json.loads(raw).get("projects", [])
+    if type(project_list) is not list:
+        raise ValueError("missing project_list")
+    for project in project_list:
+        this_project = project.get("title", "not_set")
+        if this_project == project_name:
+            this_id=project.get("number",0)
+            if this_id==0:
+                raise ValueError(f"missing project id number for {project_name}")
+            return this_id
+    return "0"
+
+
 def main() -> int:
     """
         main function
@@ -100,12 +125,6 @@ def main() -> int:
         "title": [{}]
     }
 
-    def extract_value(source: dict, name: str, default_value: any = None, raise_on_default: bool = False) -> any:
-        value = source.get(name, default_value)
-        if raise_on_default and value == default_value:
-            raise ValueError(f"{name} is missing value")
-        return value
-
     try:
         project_manifest = Path("PROJECT.yaml")
         print(f"load_project_definition() path={project_manifest}")
@@ -115,9 +134,10 @@ def main() -> int:
         print(f"yaml loaded {len(manifest)}")
 
         project = extract_value(manifest, "project", default_manifest["project"], False)
-        proj_id = extract_value(project, "id", "", True)
+
         owner = extract_value(project, "owner", "", True)
         title = extract_value(project, "title", "", True)
+        proj_id = get_project_id(owner,title)
 
         fields = extract_value(manifest, "fields", default_manifest["fields"], False)
         issues = extract_value(manifest, "issues", default_manifest["issues"], False)
