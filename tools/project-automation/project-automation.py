@@ -36,18 +36,6 @@ def run(cmd: list[str]) -> str:
     return result
 
 
-def load_project_definition(path: Path) -> dict:
-    """
-        Load and parse PROJECT.yaml.
-
-        :param path: Path
-        :return dict
-    """
-    print(f"load_project_definition() path={path}")
-    with path.open() as f:
-        return yaml.safe_load(f)
-
-
 def find_or_create_project(meta: dict) -> str:
     """
         Find an existing project by title, or create it.
@@ -151,21 +139,45 @@ def main() -> int:
 
         :return: int (exit code)
     """
+    default_manifest = {
+        "project": {
+            "id": "not_set",
+            "owner": "not_set",
+            "title": "not_set",
+            "description": "not_set",
+            "public": False
+        },
+        "fields": [{}],
+        "issues": [{}],
+        "title": [{}]
+    }
+
+    def extract_value(source: dict, name: str, default_value: any = None, raise_on_default: bool = False) -> any:
+        value = source.get(name, default_value)
+        if raise_on_default and value == default_value:
+            raise ValueError(f"{name} is missing value")
+        return value
+
     try:
-        project_def = load_project_definition(Path("PROJECT.yaml"))
-        print("main(): load_project_definition() returned")
-        meta = project_def["project"]
-        print(f"main(): meta={meta}")
-        fields = project_def.get("fields", [])
-        print(f"main(): fields={fields}")
-        issues = project_def.get("issues", [])
-        print(f"main(): issues={issues}")
-        proj_id = find_or_create_project(meta)
-        print(f"main(): proj_id={proj_id}")
-        ensure_fields(proj_id, fields)
-        print("main(): ensure_fields() returned")
-        sync_issues(proj_id, meta, issues)
-        print(f"Synced project {meta['title']} (ID={proj_id})")
+        project_manifest = Path("PROJECT.yaml")
+        print(f"load_project_definition() path={project_manifest}")
+        manifest: dict
+        with project_manifest.open() as f:
+            manifest = yaml.safe_load(f)
+        print(f"yaml loaded {len(manifest)}")
+
+        project = extract_value(manifest, "project", default_manifest["project"], False)
+        proj_id = extract_value(project, "id", "", True)
+        owner = extract_value(project, "owner", "", True)
+        title = extract_value(project, "title", "", True)
+
+        fields = extract_value(manifest,"fields", default_manifest["fields"], False)
+        issues = extract_value(manifest,"issues", default_manifest["issues"], False)
+
+        print(f"Sync project {title} (ID={proj_id})")
+        sync_issues(proj_id, project, issues)
+        print(f"Synced project {title} (ID={proj_id})")
+
         return 0
     except Exception as e:
         print(f"Error: {e}")

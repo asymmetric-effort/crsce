@@ -2,6 +2,7 @@
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 project:
+  id: PVT_kwDOA9zs8c4A8pGE
   owner: asymmetric-effort
   title: CRSCE v1 Development
   description: MVP Release project
@@ -10,15 +11,15 @@ project:
 fields:
   - name: Status
     type: single_select
-    options: [“Todo”, “In Progress”, “Done”]
+    options: [ “Todo”, “In Progress”, “Done” ]
   - name: Priority
     type: single_select
-    options: [“Low”, “Med”, “High”]
+    options: [ “Low”, “Med”, “High” ]
 
 issues:
   - title: “Implement CRSCE import”
     body: “…acceptance criteria…”
-    labels: [enhancement]
+    labels: [ enhancement ]
     assignee: sam-caldwell
     fields:
       Status: Todo
@@ -26,7 +27,7 @@ issues:
 
   - title: “Write CRSCE spec”
     body: “…”
-    labels: [documentation]
+    labels: [ documentation ]
     assignee: sam-caldwell
     fields:
       Status: Todo
