@@ -9,7 +9,7 @@
 #include <cstddef>
 #include <string>
 
-// Matrix dimensions
+// Matrix dimensions : ToDo these should be configurable by CLI
 constexpr size_t s = 512 - 1; // 511
 constexpr size_t max_index = s - 1; // 510
 constexpr size_t b = 9; // ceil(log2(s + 1))
