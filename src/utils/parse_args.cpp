@@ -1,45 +1,65 @@
 /**
  * @file src/utils/parse_args.cpp
- * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ * @brief Implements utils::parse_args().
+ * @copyright (c) 2025 Asymmetric Effort, LLC.
  */
 
 #include "utils/parse_args.h"
-#include "utils/terminate_and_show_usage.h"
+#include "utils/print_usage.h"
+#include <iostream>
+#include <filesystem>
+#include <string>
 
+#include "utils/get_program_name.h"
 
-
-int utils::parse_args(int argc,
+int utils::parse_args(const int argc,
                       const char* argv[],
-                      const char* prog,
                       const std::vector<Option>& opts) {
+
+    const std::string program_name = get_program_name(argv);
+
     for (int i = 1; i < argc; ++i) {
-        std::string arg = argv[i];
+        const std::string arg = argv[i];
         bool matched = false;
-        for (auto const& opt : opts) {
-            if (arg == opt.long_name || (opt.short_name && arg == std::string{"-"} + opt.short_name)) {
+
+        for (const auto& opt : opts) {
+            const auto& long_name  = opt.long_name;
+            const char  short_name = opt.short_name;
+            const auto  arg_type   = opt.arg_type;
+            const auto& handler    = opt.handler;
+
+            if (arg == long_name ||
+                (short_name && arg == std::string{"-"} + short_name)) {
                 matched = true;
-                // no‐value flag?
-                if (opt.arg_type == ArgType::NoValue) {
-                    if (!opt.handler("")) return EXIT_SUCCESS;  // help/version
+
+                if (arg_type == ArgType::NoValue) {
+                    // e.g. help/version: handler returns false to stop parsing
+                    if (!handler("")) {
+                      return EXIT_SUCCESS;
+                    }
                 } else {
-                    if (++i >= argc) {
+                    // consume next token as the value
+                    if (i + 1 >= argc) {
                         std::cerr << "Missing value for " << arg << "\n";
-                        print_usage(prog);
+                        print_usage(program_name);
                         return EXIT_FAILURE;
                     }
-                    if (!opt.handler(argv[i])) {
-                        print_usage(prog);
+                    const std::string val = argv[++i];
+                    if (!handler(val)) {
+                        print_usage(program_name);
                         return EXIT_FAILURE;
                     }
                 }
                 break;
             }
         }
+
         if (!matched) {
             std::cerr << "Unknown option: " << arg << "\n";
-            print_usage(prog);
+            print_usage(program_name);
             return EXIT_FAILURE;
         }
     }
+
     return EXIT_SUCCESS;
 }
