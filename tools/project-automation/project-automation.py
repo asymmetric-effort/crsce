@@ -139,7 +139,7 @@ def main() -> int:
 
         owner = extract_value(project, "owner", "", True)
         title = extract_value(project, "title", "", True)
-        proj_id = get_project_id(owner, title)
+        proj_id = get_project_id(title,owner)
 
         fields = extract_value(manifest, "fields", default_manifest["fields"], False)
         issues = extract_value(manifest, "issues", default_manifest["issues"], False)
