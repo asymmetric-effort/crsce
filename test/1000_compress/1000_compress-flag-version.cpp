@@ -24,7 +24,7 @@ std::string exec(const char* cmd) {
     std::string result;
     result.reserve(1024);
 
-    const auto pipe = std::unique_ptr<FILE, decltype(&pclose)>{ popen(cmd, "r"), pclose };
+    const auto pipe = std::unique_ptr<FILE, decltype(&pclose)>{ popen(cmd, "r"), &pclose };
     if (!pipe) {
         throw std::runtime_error("popen() failed!");
     }
