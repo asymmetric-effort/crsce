@@ -20,8 +20,8 @@
 #include "utils/get_program_name.h"
 
 int main(const int argc, const char* argv[]) {
-    std::string inFile; // filename of the uncompressed input
-    std::string outFile; // filename to which compressed output will be written
+    std::filesystem::path inFile; // filename of the uncompressed input
+    std::filesystem::path outFile; // filename to which compressed output will be written
     uint32_t block_size = 512; // this is the s-value of the compressor
     size_t concurrency = 1; // the number of concurrent blocks to be processed at one time.
     constexpr uint32_t min_concurrency{1}; //The minimum number of blocks to process at a given time.
@@ -32,14 +32,16 @@ int main(const int argc, const char* argv[]) {
             [&argv](auto) {
                 utils::print_usage(utils::get_program_name(argv));
                 return false;
-            }
+            },
+            utils::ProcessingStyle::Terminate,
         },
         {
             "--version", 'v', utils::ArgType::NoValue,
             [](auto) {
                 utils::print_version();
                 return false;
-            }
+            },
+            utils::ProcessingStyle::Terminate,
         },
         {
             "--in", 'i', utils::ArgType::RequiredValue,
@@ -54,7 +56,8 @@ int main(const int argc, const char* argv[]) {
                     return false;
                 }
                 return true;
-            }
+            },
+            utils::ProcessingStyle::HasValue,
         },
         {
             "--out", 'o', utils::ArgType::RequiredValue,
@@ -69,7 +72,8 @@ int main(const int argc, const char* argv[]) {
                     return false;
                 }
                 return true;
-            }
+            },
+            utils::ProcessingStyle::HasValue,
         },
         {
             "--block-size", 's', utils::ArgType::RequiredValue,
@@ -80,7 +84,8 @@ int main(const int argc, const char* argv[]) {
                 std::cerr << "Error: --block-size is invalid.\n"
                     << "See CRSCE documentation for valid block size values.";
                 return false;
-            }
+            },
+            utils::ProcessingStyle::HasValue,
         },
         {
             "--concurrency", 'c', utils::ArgType::RequiredValue,
@@ -94,7 +99,8 @@ int main(const int argc, const char* argv[]) {
                     return false;
                 }
                 return true;
-            }
+            },
+            utils::ProcessingStyle::HasValue,
         }
     };
 
@@ -104,13 +110,6 @@ int main(const int argc, const char* argv[]) {
      */
     if (utils::parse_args(argc, argv, options) != EXIT_SUCCESS)
         return EXIT_FAILURE;
-
-    // 3) Validate required flags
-    if (inFile.empty() || outFile.empty()) {
-        std::cerr << "Error: --in and --out are required.\n";
-        utils::print_usage(utils::get_program_name(argv));
-        return EXIT_FAILURE;
-    }
 
     /**
      * Run the compressor, passing in block_size and concurrency

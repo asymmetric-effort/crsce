@@ -1,5 +1,6 @@
 /**
-* @file include/utils/enum_ArgType.h
+ * @file include/utils/enum_ArgType.h
+ * @brief Enumerated type used to indicate whether an argument should be followed by a value or not.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 #pragma once

@@ -13,6 +13,10 @@
 
 #include "utils/get_program_name.h"
 
+inline bool match_args(const std::string& this_argument, const std::string& long_arg, const char short_arg) {
+    return this_argument == long_arg || (short_arg && this_argument == std::string{"-"} + short_arg);
+}
+
 int utils::parse_args(const int argc, const char* argv[], const utils::CliOptions& opts) {
     const std::string program_name = get_program_name(argv);
 
@@ -20,25 +24,21 @@ int utils::parse_args(const int argc, const char* argv[], const utils::CliOption
         const std::string this_argument = argv[i];
         bool matched = false;
 
-        for (const auto& [long_name, short_name, arg_type, handler] : opts) {
-            if (this_argument == long_name ||
-                (short_name && this_argument == std::string{"-"} + short_name)) {
-                matched = true;
-
-                if (arg_type == ArgType::NoValue) {
-                    // e.g. help/version: handler returns false to stop parsing
-                    if (!handler("")) {
-                        return EXIT_SUCCESS;
-                    }
-                }
-                else {
-                    // consume next token as the value
+        // ReSharper disable once CppUseStructuredBinding
+        for (const auto& opt : opts) {
+            if (matched = match_args(this_argument, opt.long_name, opt.short_name); matched) {
+                if (opt.processing_style == utils::ProcessingStyle::Terminate)
+                    return !opt.handler("");
+                if (opt.arg_type == ArgType::NoValue) {
+                    if (!opt.handler("")) return EXIT_FAILURE;
+                } else {
                     if (i + 1 >= argc) {
+                        // consume next token as the value
                         std::cerr << "Missing value for " << this_argument << "\n";
                         print_usage(program_name);
                         return EXIT_FAILURE;
                     }
-                    if (const std::string val = argv[++i]; !handler(val)) {
+                    if (const std::string val = argv[++i]; !opt.handler(val)) {
                         print_usage(program_name);
                         return EXIT_FAILURE;
                     }
@@ -46,7 +46,6 @@ int utils::parse_args(const int argc, const char* argv[], const utils::CliOption
                 break;
             }
         }
-
         if (!matched) {
             std::cerr << "Unknown option: " << this_argument << "\n";
             print_usage(program_name);

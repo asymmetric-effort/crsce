@@ -5,6 +5,7 @@
 #pragma once
 
 #include "utils/enum_ArgType.h"
+#include "utils/enum_ProcessingStyle.h"
 #include <functional>
 #include <string>
 
@@ -36,6 +37,12 @@ namespace utils {
          * @returns bool returns true on success; false => print usage & early-exit
          */
         std::function<bool(const std::string&)> handler;
+        /**
+         * @name terminal
+         * @brief Indicates a terminal argument. If it exists, it will cause program execution to terminate.
+         *        The default is false.
+         */
+        ProcessingStyle processing_style = utils::ProcessingStyle::Terminate;
     };
 
     /**
@@ -43,5 +50,4 @@ namespace utils {
      * @brief a collection of command-line option (Utils::Option) descriptors
      */
     using CliOptions = std::vector<Option>;
-
 }
