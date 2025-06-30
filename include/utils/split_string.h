@@ -15,14 +15,18 @@ namespace utils {
      * @brief Splits `s` on each occurrence of `delim` and returns the parts.
      * @param s     The input string to split.
      * @param delim The character to split on.
-     * @return A vector of substrings (empty substrings are included if delimiters are consecutive or at ends).
+     * @return A vector of substrings (empty substrings included for consecutive delimiters or at ends).
      */
-    inline std::vector<std::string> split_string(const std::string& s, char delim) {
+    inline std::vector<std::string> split_string(const std::string& s, const char delim) {
         std::vector<std::string> parts;
         std::string item;
         std::istringstream stream(s);
         while (std::getline(stream, item, delim)) {
             parts.push_back(item);
+        }
+        // If the last character is a delimiter, add an empty element to represent trailing empty token
+        if (!s.empty() && s.back() == delim) {
+            parts.push_back(std::string{});
         }
         return parts;
     }
