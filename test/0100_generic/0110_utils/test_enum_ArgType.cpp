@@ -27,6 +27,10 @@ int main() {
         static_cast<int>(utils::ArgType::RequiredValue) == 1,
         "ArgType::RequiredValue has underlying value 1"
     );
+    tester.assertTrue(
+    static_cast<int>(utils::ArgType::Terminate) == 2,
+    "ArgType::Terminate has underlying value 2"
+);
 
     // Verify size is as expected (1 byte or larger)
     tester.assertTrue(

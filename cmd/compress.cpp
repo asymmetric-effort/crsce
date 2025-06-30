@@ -22,26 +22,27 @@
 int main(const int argc, const char* argv[]) {
     std::filesystem::path inFile; // filename of the uncompressed input
     std::filesystem::path outFile; // filename to which compressed output will be written
+
     uint32_t block_size = 512; // this is the s-value of the compressor
     size_t concurrency = 1; // the number of concurrent blocks to be processed at one time.
+
     constexpr uint32_t min_concurrency{1}; //The minimum number of blocks to process at a given time.
     constexpr uint32_t max_concurrency{1024}; //The maximum number of blocks ot process at a given time.
+
     const utils::CliOptions options = {
         {
-            "--help", 'h', utils::ArgType::NoValue,
+            "--help", 'h', utils::ArgType::Terminate,
             [&argv](auto) {
                 utils::print_usage(utils::get_program_name(argv));
                 return false;
             },
-            utils::ProcessingStyle::Terminate,
         },
         {
-            "--version", 'v', utils::ArgType::NoValue,
+            "--version", 'v', utils::ArgType::Terminate,
             [](auto) {
                 utils::print_version();
                 return false;
             },
-            utils::ProcessingStyle::Terminate,
         },
         {
             "--in", 'i', utils::ArgType::RequiredValue,
@@ -57,7 +58,6 @@ int main(const int argc, const char* argv[]) {
                 }
                 return true;
             },
-            utils::ProcessingStyle::HasValue,
         },
         {
             "--out", 'o', utils::ArgType::RequiredValue,
@@ -73,7 +73,6 @@ int main(const int argc, const char* argv[]) {
                 }
                 return true;
             },
-            utils::ProcessingStyle::HasValue,
         },
         {
             "--block-size", 's', utils::ArgType::RequiredValue,
@@ -85,7 +84,6 @@ int main(const int argc, const char* argv[]) {
                     << "See CRSCE documentation for valid block size values.";
                 return false;
             },
-            utils::ProcessingStyle::HasValue,
         },
         {
             "--concurrency", 'c', utils::ArgType::RequiredValue,
@@ -100,7 +98,6 @@ int main(const int argc, const char* argv[]) {
                 }
                 return true;
             },
-            utils::ProcessingStyle::HasValue,
         }
     };
 
@@ -119,13 +116,11 @@ int main(const int argc, const char* argv[]) {
         if (const int rc = compressor.compress(); rc == 0) {
             std::cout << "Compression completed successfully.\n";
             return EXIT_SUCCESS;
-        }
-        else {
+        } else {
             std::cerr << "Compression failed with error code " << rc << ".\n";
             return EXIT_FAILURE;
         }
-    }
-    catch (const std::exception& e) {
+    } catch (const std::exception& e) {
         std::cerr << "Unhandled exception: " << e.what() << "\n";
         return EXIT_FAILURE;
     } catch (...) {
