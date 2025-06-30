@@ -6,17 +6,21 @@
 
 #include "utils/parse_args.h"
 #include "utils/print_usage.h"
+#include "utils/get_program_name.h"
 #include "utils/struct_CliOptions.h"
+#include "utils/match_args.h"
 #include <iostream>
 #include <filesystem>
 #include <string>
 
-#include "utils/get_program_name.h"
-
-inline bool match_args(const std::string& this_argument, const std::string& long_arg, const char short_arg) {
-    return this_argument == long_arg || (short_arg && this_argument == std::string{"-"} + short_arg);
-}
-
+/**
+ * @name parse_args
+ * @brief parse commandline arguments and update the caller's state via the handler functions.
+ * @param argc const int
+ * @param argv const argument string array
+ * @param opts commandline argument option descriptor vector
+ * @return int exit code (0: success, non-zero: error)
+ */
 int utils::parse_args(const int argc, const char* argv[], const utils::CliOptions& opts) {
     const std::string program_name = get_program_name(argv);
 
