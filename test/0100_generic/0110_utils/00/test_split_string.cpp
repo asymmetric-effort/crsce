@@ -35,7 +35,7 @@ int main() {
 
     [&tester]()-> void {
         tester.debug("Delimiter at ends");
-        const std::string s = ",x,";
+        const std::string s(",x,");
         const auto v = split_string(s, ',');
         tester.assertTrue(v.size() == 3, "Delimiter at ends yields empty tokens");
         tester.assertTrue(v[0].empty() && v[1] == "x" && v[2].empty(), "Empty tokens at both ends");
@@ -44,7 +44,7 @@ int main() {
 
     [&tester]()-> void {
         tester.debug("No delimiter");
-        const std::string s = "hello";
+        const std::string s("hello");
         const auto v = split_string(s, ',');
         tester.assertTrue(v.size() == 1, "No delimiter yields one token");
         tester.assertTrue(v[0] == "hello", "Token matches original string");
@@ -55,8 +55,7 @@ int main() {
         tester.debug("Empty string");
         const std::string s;
         const auto v = split_string(s, ',');
-        tester.assertTrue(v.size() == 1, "Empty string yields one empty token");
-        tester.assertTrue(v[0].empty(), "Token is empty string");
+        tester.assertTrue(v.empty(),"expect empty result");
         tester.pass();
     }();
     return EXIT_SUCCESS;

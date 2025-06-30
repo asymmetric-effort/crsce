@@ -18,6 +18,9 @@ namespace utils {
      * @return A vector of substrings (empty substrings included for consecutive delimiters or at ends).
      */
     inline std::vector<std::string> split_string(const std::string& s, const char delim) {
+        if (s.empty()) {
+            return std::vector<std::string>();
+        }
         std::vector<std::string> parts;
         std::string item;
         std::istringstream stream(s);
