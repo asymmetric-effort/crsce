@@ -1,5 +1,5 @@
 /**
- * @file test/0100_generic/0110_utils/test_CliOptions.cpp
+ * @file test/0200_cli/0210_compress/Compress-flag-usage.cpp
  * @brief Unit tests for utils::Option struct and CliOptions alias
  * @copyright (c) 2025 Asymmetric Effort, LLC.
  */
@@ -10,9 +10,10 @@
 #include <type_traits>
 #include <vector>
 #include <string>
+#include "utils/exec.h"
 
 int main() {
-    Tester tester("utils::Option and CliOptions");
+    Tester tester("test/0200_cli/0210_compress/Compress-flag-usage.cpp");
 
     using namespace utils;
 

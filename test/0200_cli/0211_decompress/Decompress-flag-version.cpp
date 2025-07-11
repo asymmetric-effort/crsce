@@ -1,5 +1,5 @@
 /**
- * @file 1000_compress-flag-version.cpp
+ * @file test/0200_cli/0211_decompress/Decompress-flag-version.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
@@ -10,6 +10,8 @@
 #include <array>
 #include <memory>
 #include <stdexcept>
+#include "utils/exec.h"
+#include "utils/test/Tester.h"
 
 #ifndef PROJECT_VERSION
 #define PROJECT_VERSION "not_defined"
@@ -17,25 +19,8 @@
 
 constexpr auto target_binary = "build/bin/compress";
 
-// Helper function to execute a command and capture stdout
-std::string exec(const char* cmd) {
-    std::array<char, 128> buffer;
-    std::string result;
-    const std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
-    if (!pipe) {
-        throw std::runtime_error("popen() failed!");
-    }
-    while (!feof(pipe.get())) {
-        // read up to buffer.size() bytes
-        if (const size_t n = fread(buffer.data(), 1, buffer.size(), pipe.get()); n > 0) {
-            // explicitly copy exactly n bytes
-            result.append(buffer.data(), n);
-        }
-    }
-    return result;
-}
-
 int main() {
+    Tester tester("test/0200_cli/0211_decompress/Decompress-flag-version.cpp");
     try {
 
         const std::string project_name = PROJECT_NAME;
@@ -49,7 +34,7 @@ int main() {
 
         const std::string expected = "CRSCE " + project_name + " " + project_version;
 
-        if (std::string output = exec((std::string(target_binary) + " --version").c_str()); output.find(expected) != std::string::npos) {
+        if (const std::string output = utils::exec((std::string(target_binary) + " --version").c_str()); output.find(expected) != std::string::npos) {
             std::cout << "[PASS] --version output correct: " << output;
             return EXIT_SUCCESS;
         } else {

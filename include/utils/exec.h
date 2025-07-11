@@ -16,7 +16,7 @@ namespace utils {
      * @return std::string
      */
     static std::string exec(const std::string& cmd) {
-        std::array<char, 256> buffer;
+        std::array<char, 256> buffer{};
         std::string result;
         const std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), &pclose);
         if (!pipe) throw std::runtime_error("popen() failed!");

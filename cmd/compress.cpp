@@ -87,7 +87,7 @@ int main(const int argc, const char* argv[]) {
         },
         {
             "--concurrency", 'c', utils::ArgType::RequiredValue,
-            [&concurrency](auto argument_value) {
+            [&concurrency](const auto& argument_value) {
                 concurrency = std::stoul(argument_value);
                 if (concurrency < min_concurrency || concurrency > max_concurrency) {
                     std::cerr << "Error: --concurrency is invalid. "
