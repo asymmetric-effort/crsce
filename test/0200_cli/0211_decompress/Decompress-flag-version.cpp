@@ -17,32 +17,30 @@
 #define PROJECT_VERSION "not_defined"
 #endif
 
-constexpr auto target_binary = "build/bin/compress";
+constexpr auto target_binary = "build/bin/decompress";
 
 int main() {
-    Tester tester("test/0200_cli/0211_decompress/Decompress-flag-version.cpp");
+    Tester tester("test/0200_cli/0210_decompress/Compress-flag-version.cpp");
     try {
-
         const std::string project_name = PROJECT_NAME;
         const std::string project_version = PROJECT_VERSION;
-
         if (project_version == "not_defined") {
-            std::cout << "[FAIL] Cmake does not define PROJECT_VERSION. Got '"
-                      << PROJECT_VERSION <<"'" << std::endl;
-            return EXIT_FAILURE;
+            throw std::format("[FAIL] Cmake does not define PROJECT_VERSION. Got '%s'",PROJECT_VERSION);
         }
 
         const std::string expected = "CRSCE " + project_name + " " + project_version;
 
-        if (const std::string output = utils::exec((std::string(target_binary) + " --version").c_str()); output.find(expected) != std::string::npos) {
+        if (const std::string output = utils::exec(std::string(target_binary) + " --version");
+            output.find(expected) != std::string::npos) {
             std::cout << "[PASS] --version output correct: " << output;
+            tester.pass();
             return EXIT_SUCCESS;
-        } else {
-            std::cerr << "[FAIL] Expected '" << expected << "' but got: " << output;
-            return EXIT_FAILURE;
-        }
+            } else {
+                throw std::format("[FAIL] Expected '%s' but got '%s'", expected, output);
+                return EXIT_FAILURE;
+            }
     } catch (const std::exception& e) {
-        std::cerr << "[ERROR] Exception occurred: " << e.what() << std::endl;
+        tester.fail(std::format("[ERROR] Exception occurred: %s", e.what()));
         return EXIT_FAILURE;
     }
 }
