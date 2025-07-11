@@ -112,6 +112,8 @@ int main(const int argc, const char* argv[]) {
      * Run the compressor, passing in block_size and concurrency
      */
     try {
+        if (inFile.empty()) throw std::invalid_argument("Input file must be provided. Use -h for help");
+        if (outFile.empty()) throw std::invalid_argument("Output file must be provided. Use -h for help");
         CRSCE compressor(inFile, outFile, block_size, concurrency);
         if (const int rc = compressor.compress(); rc == 0) {
             std::cout << "Compression completed successfully.\n";
@@ -120,6 +122,9 @@ int main(const int argc, const char* argv[]) {
             std::cerr << "Compression failed with error code " << rc << ".\n";
             return EXIT_FAILURE;
         }
+    } catch (const std::invalid_argument& e){
+        std::cerr << e.what() << '\n';
+        return EXIT_FAILURE;
     } catch (const std::exception& e) {
         std::cerr << "Unhandled exception: " << e.what() << "\n";
         return EXIT_FAILURE;

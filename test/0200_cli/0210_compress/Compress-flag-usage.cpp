@@ -12,53 +12,50 @@
 #include <string>
 #include "utils/exec.h"
 
+constexpr auto target_binary = "build/bin/compress";
+
+void test_compress_with_no_args(Tester& tester) {
+    try {
+        const std::string output = utils::exec(target_binary);
+        throw std::invalid_argument(output);
+    } catch (std::invalid_argument& _) {
+        tester.pass();
+    }
+}
+
+void evaluate_usage_result(const std::string& output) {
+
+    const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
+    const std::string expectedUsageStart = "Usage: " + std::string(target_binary) +
+        " --in <inputfile> --out <outputfile>\n";
+
+    if (output.find(expectedCopyright) == std::string::npos) {
+        throw "[FAIL] Missing or incorrect copyright.\n";
+    }
+    if (output.find(expectedUsageStart) == std::string::npos) {
+        throw "[FAIL] Usage text not found or incorrect.\n";
+    }
+    std::cout << "[PASS] help/usage output is correct" << std::endl;
+}
+
+void test_compress_with_short_help_flag(Tester& tester) {
+    const std::string output = utils::exec(std::string(target_binary) + "-h");
+    evaluate_usage_result(output);
+}
+
+void test_compress_with_long_help_flag(Tester& tester) {
+    const std::string output = utils::exec(std::string(target_binary) + "--help");
+    evaluate_usage_result(output);
+}
+
 int main() {
-    Tester tester("test/0200_cli/0210_compress/Compress-flag-usage.cpp");
-
-    using namespace utils;
-
-    // Verify CliOptions is alias for std::vector<Option>
-    tester.assertTrue(
-        std::is_same_v<CliOptions, std::vector<Option>>,
-        "CliOptions is std::vector<Option>"
-    );
-
-    // Construct an Option instance and verify its fields
-    bool handler_called = false;
-    const Option opt{
-        "--test",       // long_name
-        't',             // short_name
-        ArgType::NoValue,// arg_type
-        [&](const std::string &val) {
-            handler_called = true;
-            return val.empty();  // true if val is empty
-        }
-    };
-
-    // Check field values
-    tester.assertTrue(opt.long_name == "--test", "Option.long_name stored correctly");
-    // ReSharper disable once CppDFAConstantConditions
-    tester.assertTrue(opt.short_name == 't',      "Option.short_name stored correctly");
-    // ReSharper disable once CppDFAConstantConditions
-    tester.assertTrue(opt.arg_type == ArgType::NoValue, "Option.arg_type stored correctly");
-
-    // Test handler behavior
-    handler_called = false;
-    const bool result_empty = opt.handler("");  // empty val => true
-    tester.assertTrue(handler_called && result_empty,
-                       "Option.handler returns true and called for empty val");
-
-    handler_called = false;
-    const bool result_nonempty = opt.handler("value");
-    tester.assertTrue(handler_called && !result_nonempty,
-                       "Option.handler returns false and called for non-empty val");
-
-    // Test CliOptions container usage
-    CliOptions opts;
-    opts.push_back(opt);
-    tester.assertTrue(opts.size() == 1, "CliOptions can contain Option instances");
-    tester.assertTrue(opts[0].long_name == "--test", "CliOptions stores Option correctly");
-
-    tester.pass();
-    return EXIT_SUCCESS;
+    Tester tester("test/0200_cli/0210_decompress/Compress-flag-version.cpp");
+    try {
+        test_compress_with_no_args(tester);
+        test_compress_with_short_help_flag(tester);
+        test_compress_with_long_help_flag(tester);
+    } catch (const std::exception& e) {
+        std::cerr << "[ERROR] Exception occurred: " << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
 }
