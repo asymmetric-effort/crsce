@@ -6,6 +6,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/concurrency.cmake")
 configure_concurrency()
 
 if(APPLE)
+    include("cmake/bootstrap-brew-deps.cmake")
     include("cmake/apple-llvm-homebrew.cmake")
 else ()
 
