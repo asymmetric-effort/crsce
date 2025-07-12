@@ -7,8 +7,6 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <array>
-#include <memory>
 #include <stdexcept>
 #include "utils/exec.h"
 #include "utils/test/Tester.h"
@@ -29,32 +27,33 @@ void test_compress_with_no_args(Tester& tester) {
 }
 
 void evaluate_usage_result(const std::string& output) {
-
-    const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
-    const std::string expectedUsageStart = "Usage: " + std::string(target_binary) +
-        " --in <inputfile> --out <outputfile>\n";
-
-    if (output.find(expectedCopyright) == std::string::npos) {
-        throw "[FAIL] Missing or incorrect copyright.\n";
+    const std::string expectedOutput = std::string(COPYRIGHT) + "\n" +
+        "Usage: " + std::string(target_binary) + " --in <inputfile> --out <outputfile>\n" +
+        "Options:\n" +
+        "--in <inputfile>     specify input file (required)\n" +
+        "--out <outputfile>   specify output file (required)\n" +
+        "--help        Show this help message\n" +
+        "--version     Show program version\n\n";
+    std::cout << "compare expected output" << std::endl;
+    if (expectedOutput.compare(output)) {
+        std::cout << "[PASS] help/usage output is correct" << std::endl;
+        return;
     }
-    if (output.find(expectedUsageStart) == std::string::npos) {
-        throw "[FAIL] Usage text not found or incorrect.\n";
-    }
-    std::cout << "[PASS] help/usage output is correct" << std::endl;
+    throw std::runtime_error("[FAIL] Usage text not found or incorrect.\n");
 }
 
-void test_compress_with_short_help_flag(Tester& tester) {
-    const std::string output = utils::exec(std::string(target_binary) + "-h");
+void test_compress_with_short_help_flag(const Tester& tester) {
+    const std::string output = utils::exec(std::string(target_binary) + " -h");
     evaluate_usage_result(output);
 }
 
-void test_compress_with_long_help_flag(Tester& tester) {
-    const std::string output = utils::exec(std::string(target_binary) + "--help");
+void test_compress_with_long_help_flag(const Tester& tester) {
+    const std::string output = utils::exec(std::string(target_binary) + " --help");
     evaluate_usage_result(output);
 }
 
 int main() {
-    Tester tester("test/0200_cli/0210_decompress/Compress-flag-version.cpp");
+    Tester tester("test/0200_cli/0210_decompress/Decompress-flag-usage.cpp");
     try {
         test_compress_with_no_args(tester);
         test_compress_with_short_help_flag(tester);

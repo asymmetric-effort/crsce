@@ -4,18 +4,16 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC.
  */
 
-#include "utils/enum_ArgType.h"
-#include "utils/struct_CliOptions.h"
 #include "utils/test/Tester.h"
-#include <type_traits>
-#include <vector>
 #include <string>
 #include "utils/exec.h"
 
 constexpr auto target_binary = "build/bin/compress";
 
 void test_compress_with_no_args(Tester& tester) {
+    tester.debug("test_compress_with_no_args");
     try {
+        std::cerr << "test_compress_with_no_args() starting" << std::endl;
         const std::string output = utils::exec(target_binary);
         throw std::invalid_argument(output);
     } catch (std::invalid_argument& _) {
@@ -25,32 +23,38 @@ void test_compress_with_no_args(Tester& tester) {
 
 void evaluate_usage_result(const std::string& output) {
 
-    const std::string expectedCopyright = std::string(COPYRIGHT) + "\n";
-    const std::string expectedUsageStart = "Usage: " + std::string(target_binary) +
-        " --in <inputfile> --out <outputfile>\n";
-
-    if (output.find(expectedCopyright) == std::string::npos) {
-        throw "[FAIL] Missing or incorrect copyright.\n";
+    std::cerr << "evaluate_usage_result() starting (" << output << ")" << std::endl;
+    const std::string expectedOutput = std::string(COPYRIGHT) + "\n" +
+        "Usage: " + std::string(target_binary) + " --in <inputfile> --out <outputfile>\n" +
+        "Options:\n" +
+        "--in <inputfile>     specify input file (required)\n" +
+        "--out <outputfile>   specify output file (required)\n" +
+        "--help        Show this help message\n" +
+        "--version     Show program version\n\n";
+    std::cout << "compare expected output" << std::endl;
+    if (expectedOutput.compare(output)) {
+        std::cout << "[PASS] help/usage output is correct" << std::endl;
+        return;
     }
-    if (output.find(expectedUsageStart) == std::string::npos) {
-        throw "[FAIL] Usage text not found or incorrect.\n";
-    }
-    std::cout << "[PASS] help/usage output is correct" << std::endl;
+    throw std::runtime_error("[FAIL] Usage text not found or incorrect.\n");
 }
 
-void test_compress_with_short_help_flag(Tester& tester) {
-    const std::string output = utils::exec(std::string(target_binary) + "-h");
+void test_compress_with_short_help_flag(const Tester& tester) {
+    std::cerr << "test_compress_with_short_help_flag() starting" << std::endl;
+    const std::string output = utils::exec(std::string(target_binary) + " -h");
     evaluate_usage_result(output);
 }
 
-void test_compress_with_long_help_flag(Tester& tester) {
-    const std::string output = utils::exec(std::string(target_binary) + "--help");
+void test_compress_with_long_help_flag(const Tester& tester) {
+    std::cerr << "test_compress_with_long_help_flag() starting" << std::endl;
+    const std::string output = utils::exec(std::string(target_binary) + " --help");
     evaluate_usage_result(output);
 }
 
 int main() {
-    Tester tester("test/0200_cli/0210_decompress/Compress-flag-version.cpp");
+    Tester tester("test/0200_cli/0210_decompress/Compress-flag-usage.cpp");
     try {
+        tester.debug("starting tests...");
         test_compress_with_no_args(tester);
         test_compress_with_short_help_flag(tester);
         test_compress_with_long_help_flag(tester);
