@@ -2,7 +2,7 @@
 # (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
 
 # List of required tools to check and install
-set(REQUIRED_TOOLS ninja ccache llvm gcc)
+set(REQUIRED_TOOLS ninja ccache llvm gcc openssl@3 yamllint jsonlint)
 
 foreach(tool IN LISTS REQUIRED_TOOLS)
     # Check if the tool exists
