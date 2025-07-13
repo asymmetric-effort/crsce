@@ -8,6 +8,8 @@
 #include "utils/Exceptions/InvalidHashLength.h"
 
 /**
+ * @name deserialize
+ * @class CrossSum
  * @brief Deserializes the CrossSum content from the input stream.
  *        Unpacks each of the s elements, each b bits wide, into the internal data array.
  *
