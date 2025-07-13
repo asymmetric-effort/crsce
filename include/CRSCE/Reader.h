@@ -3,9 +3,7 @@
  * @brief Declare the CRSCE reader class which will read raw data to support our tests.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
-
-#ifndef CRSCE_READER_H
-#define CRSCE_READER_H
+#pragma once
 
 #include "CRSCE/FileBuffer.h"
 #include <fstream>
@@ -45,5 +43,3 @@ private:
     std::ifstream inputStream;
     std::ofstream outputStream;
 };
-
-#endif //CRSCE_READER_H

@@ -6,11 +6,6 @@
 #pragma once
 
 #include <fstream>
-#include <iostream>
-#include <random>
-#include <vector>
-#include <cstring>
-#include <filesystem>
 
 namespace utils {
     /**
@@ -19,5 +14,5 @@ namespace utils {
      * @param filename
      * @param file_size
      */
-    void generate_random_file(const std::string& filename, const int file_size);
+    void generate_random_file(const std::string& filename, int file_size);
 }

@@ -3,9 +3,7 @@
  * @brief declare the Diagonal (dsm) matrix class
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
-
-#ifndef CRSCE_VERTICAL_SUM_MATRIX_H
-#define CRSCE_VERTICAL_SUM_MATRIX_H
+#pragma once
 
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSum.h"
@@ -24,6 +22,3 @@ public:
     void increment(CrossSumIndex _, CrossSumIndex c) override;
 
 };
-
-#endif // CRSCE_VERTICAL_SUM_MATRIX_H
-

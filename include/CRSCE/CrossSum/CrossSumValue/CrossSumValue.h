@@ -4,8 +4,7 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#ifndef CRSCE_CROSSSUM_VALUE_H
-#define CRSCE_CROSSSUM_VALUE_H
+#pragma once
 
 #include "CRSCE/constants/constants.h"
 #include <bitset>
@@ -28,5 +27,3 @@ private:
     // cppcheck-suppress unusedStructMember
     std::bitset<b> bits{};
 };
-
-#endif // CRSCE_CROSSSUM_VALUE_H

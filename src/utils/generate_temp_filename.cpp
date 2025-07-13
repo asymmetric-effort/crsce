@@ -8,6 +8,7 @@
 #include "utils/get_tmp_dir.h"
 #include <random>
 #include <sstream>
+#include <iostream>
 
 namespace utils {
     /**

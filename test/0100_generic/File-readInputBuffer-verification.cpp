@@ -1,9 +1,10 @@
 /**
- * @file 3000_file-readInputBuffer-verification.cpp
+ * @file 0100_generic/File-readInputBuffer-verification.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
 #include <string>
+#include <iostream>
 #include "CRSCE/Reader.h"
 #include "utils/compare_files.h"
 #include "utils/generate_random_file.h"
@@ -34,10 +35,9 @@ int main() {
         if (compare_files(input_test_file, output_test_file)) {
             std::cout << "[PASS] Files are identical." << std::endl;
             return EXIT_SUCCESS;
-        } else {
-            std::cerr << "[FAIL] Files are different." << std::endl;
-            return EXIT_FAILURE;
         }
+        std::cerr << "[FAIL] Files are different." << std::endl;
+        return EXIT_FAILURE;
 
     } catch (const std::exception& e) {
         std::cerr << "[ERROR] Exception occurred: " << e.what() << std::endl;

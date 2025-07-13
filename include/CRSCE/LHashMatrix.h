@@ -7,9 +7,7 @@
  *       the hashing algorithm as it is received rather than buffer a row.  This should then
  *       allow the row-termination point to finalize the remaining calculation.
  */
-
-#ifndef CRSCE_LHASHMATRIX_H
-#define CRSCE_LHASHMATRIX_H
+#pragma once
 
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/FileBuffer.h"
@@ -64,5 +62,3 @@ private:
     // SHA256 hashes per row
     mutable std::array<std::string, s> row_hash_data{};  // zero-initialize all positions
 };
-
-#endif // CRSCE_LHASHMATRIX_H

@@ -14,9 +14,7 @@
  * - Values must only be interpreted using the MemoryTracker API.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
-
-#ifndef COMMON_ABSTRACTPTR_H_
-#define COMMON_ABSTRACTPTR_H_
+#pragma once
 
 #include <cstdint>
 
@@ -25,5 +23,3 @@ namespace Common {
     using AbstractPtr = size_t;
 
 } // namespace Common
-
-#endif //COMMON_ABSTRACTPTR_H_

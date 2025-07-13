@@ -4,8 +4,7 @@
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 
-#ifndef CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
-#define CRSCE_ANTIDIAGONAL_SUM_MATRIX_H
+#pragma once
 
 #include "CRSCE/CrossSum/CrossSum.h"
 
@@ -24,5 +23,3 @@ public:
 
     [[nodiscard]] static CrossSumIndex transform(CrossSumIndex r, CrossSumIndex c);
 };
-
-#endif // CRSCE_ANTIDIAGONAL_SUM_MATRIX_H

@@ -3,8 +3,7 @@
  * @brief defines CRSCE constants
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
-#ifndef CRSCE_CONSTANTS_H
-#define CRSCE_CONSTANTS_H
+#pragma once
 
 #include <cstddef>
 #include <string>
@@ -16,5 +15,3 @@ constexpr size_t b = 9; // ceil(log2(s + 1))
 
 // File header
 const std::string HEADER = "CRSCE";
-
-#endif // CRSCE_CONSTANTS_H

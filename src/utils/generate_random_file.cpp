@@ -5,6 +5,8 @@
  */
 
 #include "utils/generate_random_file.h"
+#include <iostream>
+#include <random>
 
 /**
  * @name generate_random_file

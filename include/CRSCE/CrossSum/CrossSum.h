@@ -3,9 +3,7 @@
  * @brief Declare the pure virtual CrossSum parent class for LSM, VSM, DSM and XSM.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
-
-#ifndef CRSCE_CROSSSUM_H
-#define CRSCE_CROSSSUM_H
+#pragma once
 
 #include "CRSCE/constants/constants.h"
 #include "CRSCE/CrossSum/CrossSumIndex/CrossSumIndex.h"
@@ -44,5 +42,3 @@ private:
     // cppcheck-suppress unusedStructMember
     std::vector<CrossSumValue> data = std::vector<CrossSumValue>(s); /* Initialize vector with 'size' (s) elements all zeroed. */
 };
-
-#endif // CRSCE_CROSSSUM_H

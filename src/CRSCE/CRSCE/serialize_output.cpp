@@ -6,8 +6,11 @@
 
 #include "CRSCE/CRSCE.h"
 
-void CRSCE::serialize_output(const LateralSumMatrix &LSM, const VerticalSumMatrix &VSM, const DiagonalSumMatrix &XSM,
-                             const AntidiagonalSumMatrix &DSM, const LHashMatrix &LHASH) {
+void CRSCE::serialize_output(const LateralSumMatrix &LSM,
+                             const VerticalSumMatrix &VSM,
+                             const DiagonalSumMatrix &XSM,
+                             const AntidiagonalSumMatrix &DSM,
+                             const LHashMatrix &LHASH) {
 
     // Serialize all five matrices for this block
     LHASH.serialize(outputStream);
