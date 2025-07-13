@@ -22,11 +22,13 @@ public:
     explicit CrossSum(CrossSum &&) noexcept = delete;
     CrossSum &operator=(const CrossSum &) = delete;
     CrossSum &operator=(CrossSum &&) noexcept = delete;
+
     /**
      * @name destructor
      * @brief default destructor
      */
     virtual ~CrossSum();
+
     /**
      * @name get
      * @brief return a given cross sum value
@@ -76,6 +78,7 @@ protected:
     virtual std::vector<CrossSumValue> &storage() {
         return data;
     }
+
     /**
      * @name storage
      * @brief return a vector of CrossSumValue (underlying storage)
@@ -86,6 +89,7 @@ protected:
     }
 
 private:
+
     /**
      * @name data
      * @brief Initialize vector with 'size' (s) elements all zeroed.
