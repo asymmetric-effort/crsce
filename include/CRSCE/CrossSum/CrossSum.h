@@ -27,7 +27,9 @@ public:
      * @name destructor
      * @brief default destructor
      */
-    virtual ~CrossSum();
+    virtual ~CrossSum(){
+        data.clear();
+    }
 
     /**
      * @name get
@@ -95,5 +97,5 @@ private:
      * @brief Initialize vector with 'size' (s) elements all zeroed.
      */
     // cppcheck-suppress unusedStructMember
-    std::vector<CrossSumValue> data = std::vector<CrossSumValue>(s);
+    mutable std::vector<CrossSumValue> data = std::vector<CrossSumValue>(s);
 };
