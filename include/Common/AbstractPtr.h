@@ -19,7 +19,11 @@
 #include <cstdint>
 
 namespace Common {
-
+    /**
+     * @name AbstractPtr
+     * @brief This was originally added for a GPU abstraction effort we have abandoned.  I'm keeping this here because
+     *        I may resurrect that project in time.
+     */
     using AbstractPtr = size_t;
 
 } // namespace Common
