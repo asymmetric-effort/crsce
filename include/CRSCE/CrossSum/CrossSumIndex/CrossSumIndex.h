@@ -6,11 +6,21 @@
 
 #pragma once
 
-#include "CRSCE/constants/constants.h"
-#include <stdexcept>
 #include <cstdint>
 
-// we should never have a cross sum index greater than s==512.
+/**
+ * @name CrossSumIndex
+ * @brief we should never have a cross sum index greater than s-1 (max_index).
+ */
 using CrossSumIndex = uint16_t;
 
-void bounds_check(CrossSumIndex index);
+/**
+ * @name bounds_check
+ * @brief Verify the given index is not out of bounds
+ * @param index CrossSumIndex
+ */
+inline void bounds_check(const CrossSumIndex index) {
+    if (index > max_index) {
+        throw std::overflow_error("Index out of bounds");
+    }
+}
