@@ -32,6 +32,7 @@ public:
 
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;
+    void deserialize(std::istream& is) const;
 
     /**
      * @brief If the current block has fewer than s×s bits, pad the rest with zeros.
