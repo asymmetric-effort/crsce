@@ -1,5 +1,5 @@
 /**
- * @file include/CRSCE/CrossSum/CrossSum.set.cpp
+ * @file include/CRSCE/CrossSum/CrossSum/set.cpp
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
  */
 

@@ -1,5 +1,5 @@
 /**
- * @file include/CRSCE/CrossSum.h
+ * @file include/CRSCE/CrossSum/CrossSum.h
  * @brief Declare the pure virtual CrossSum parent class for LSM, VSM,
  *        DSM and XSM.
  * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>

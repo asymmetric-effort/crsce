@@ -9,11 +9,10 @@
 #include "CRSCE/constants/constants.h"
 #include <bitset>
 #include <cstdint>
-#include <stdexcept>
 
 class CrossSumValue {
 public:
-    CrossSumValue();
+    CrossSumValue() = default;
     explicit CrossSumValue(uint16_t value);
 
     [[nodiscard]] uint16_t to_uint16() const;

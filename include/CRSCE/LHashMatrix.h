@@ -28,7 +28,7 @@ public:
     // Constructor assumes CRSCE s-value
     LHashMatrix() = default;
 
-    virtual ~LHashMatrix();
+    virtual ~LHashMatrix() = default;
 
     void push(CrossSumIndex r, CrossSumIndex c, bool bit_value);
     void serialize(std::ostream& os) const;

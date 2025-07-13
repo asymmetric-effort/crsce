@@ -1,10 +1,11 @@
-// file: src/CRSCE/CRSCE/decompress.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/CRSCE/CRSCE/decompress.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include "CRSCE/CRSCE.h"
 #include <iostream>
 #include <stdexcept>
-#include <cmath>
 
 #include "CRSCE/constants/constants.h"
 
@@ -30,7 +31,6 @@ int CRSCE::decompress() {
     if (s != 512) {
         throw std::runtime_error("[CRSCE] Unsupported block size. Only s=512 supported.");
     }
-    const auto b = static_cast<uint8_t>(std::ceil(std::log2(s)));
 
     // --- 3) Read block count
     uint32_t blockCount = 0;

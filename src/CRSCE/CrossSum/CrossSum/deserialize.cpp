@@ -1,8 +1,9 @@
-// file: src/CRSCE/CrossSum/deserialize.cpp
-// (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+/**
+ * @file src/CRSCE/CrossSum/CrossSum/deserialize.cpp
+ * @copyright (c) 2025 Asymmetric Effort, LLC. <scaldwell@asymmetric-effort.com>
+ */
 
 #include <istream>
-#include <cstdint>
 
 #include "CRSCE/CrossSum/CrossSum.h"
 #include "utils/Exceptions/InvalidHashLength.h"
