@@ -5,6 +5,7 @@
 
 #include "CRSCE/LHashMatrix.h"
 #include "utils/Exceptions/InvalidHashLength.h"
+#include "CRSCE/crypto/SHA256.h"
 
 /**
  * @name serialize

@@ -5,6 +5,8 @@
 
 #include "CRSCE/LHashMatrix.h"
 #include <array>
+#include "CRSCE/crypto/SHA256.h"
+#include <vector>
 
 void LHashMatrix::hash_and_store(const CrossSumIndex row_index) const {
     std::array<uint8_t, 64> row_bytes{}; // 512 bits = 64 bytes

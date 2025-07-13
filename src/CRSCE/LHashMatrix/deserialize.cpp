@@ -4,6 +4,7 @@
  */
 
 #include "CRSCE/LHashMatrix.h"
+#include "CRSCE/crypto/SHA256.h"
 #include "utils/Exceptions/InvalidHashLength.h"
 
 /**
