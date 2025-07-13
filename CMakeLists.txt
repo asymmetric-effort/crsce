@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.27.4)
 include("cmake/prerequisites.cmake")
-
+include("cmake/load-openssl.cmake")
 project(crsce VERSION 1.0.0)
 set(COPYRIGHT "(c) 2025 Asymmetric Effort, LLC.  All Rights Reserved.")
 
